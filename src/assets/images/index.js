@@ -1,0 +1,9 @@
+export { default as heroCoconut } from './coconut-and-palm-leaf.jpg';
+export { default as brandStoryPhoto } from './coconut-palm-plantation.jpg';
+export { default as vcoJars } from './virgin-coconut-oil-jars.jpg';
+export { default as syrupJar } from './coconut-syrup-jar.jpg';
+export { default as soapPlain } from './coconut-oil-soap.jpg';
+export { default as soapCastor } from './coconut-oil-soap-with-castor-oil.jpg';
+export { default as vco900 } from './virgin-coconut-oil-900ml-glass-jar.jpg';
+export { default as vco450 } from './virgin-coconut-oil-450ml-glass-jar.jpg';
+export { default as vco125 } from './virgin-coconut-oil-125ml-glass-jar.jpg';
