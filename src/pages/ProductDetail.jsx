@@ -31,8 +31,8 @@ const usageItems = [
 export default function ProductDetail() {
   return (
     <>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20, padding: '32px 24px' }}>
-        <div style={{ flex: '0 0 220px' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20, padding: '32px var(--gutter)', maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
+        <div style={{ flex: '0 0 var(--hero-img-width)' }}>
           <img
             src={vco450}
             alt="Virgin Coconut Oil, 450ml glass jar"
@@ -59,33 +59,39 @@ export default function ProductDetail() {
 
       <CertStrip showRecycle={false} />
 
-      <div style={{ padding: '32px 24px 0' }}>
-        <SectionHeading style={{ margin: '0 0 16px' }}>Highlights</SectionHeading>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-          {highlights.map((h) => (
-            <PillTag key={h}>{h}</PillTag>
-          ))}
+      <div style={{ padding: '32px var(--gutter) 0' }}>
+        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
+          <SectionHeading style={{ margin: '0 0 16px' }}>Highlights</SectionHeading>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            {highlights.map((h) => (
+              <PillTag key={h}>{h}</PillTag>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div style={{ padding: '28px 24px 0' }}>
-        <SectionHeading style={{ margin: '0 0 16px' }}>Ways to use</SectionHeading>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-          {usageItems.map(({ icon, label }) => (
-            <IconChip key={label} icon={icon}>
-              {label}
-            </IconChip>
-          ))}
+      <div style={{ padding: '28px var(--gutter) 0' }}>
+        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
+          <SectionHeading style={{ margin: '0 0 16px' }}>Ways to use</SectionHeading>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+            {usageItems.map(({ icon, label }) => (
+              <IconChip key={label} icon={icon}>
+                {label}
+              </IconChip>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div style={{ padding: '28px 24px 32px' }}>
-        <SectionHeading style={{ margin: '0 0 12px' }}>Storage</SectionHeading>
-        <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', lineHeight: 1.7, margin: 0 }}>
-          Store in a cool, dry place.
-          <br />
-          Store away from sunlight.
-        </p>
+      <div style={{ padding: '28px var(--gutter) 32px' }}>
+        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
+          <SectionHeading style={{ margin: '0 0 12px' }}>Storage</SectionHeading>
+          <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', lineHeight: 1.7, margin: 0 }}>
+            Store in a cool, dry place.
+            <br />
+            Store away from sunlight.
+          </p>
+        </div>
       </div>
     </>
   );

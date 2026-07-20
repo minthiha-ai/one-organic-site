@@ -11,7 +11,7 @@ export default function VariantCard({ image, alt, label, description }) {
       <div
         style={{
           background: 'var(--color-tint)',
-          height: 170,
+          height: 'var(--variant-img-height)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

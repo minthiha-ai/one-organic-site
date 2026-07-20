@@ -12,7 +12,7 @@ export default function Header() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '16px 24px',
+        padding: '16px var(--gutter)',
         borderBottom: '0.5px solid var(--color-border)',
       }}
     >

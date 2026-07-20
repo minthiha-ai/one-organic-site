@@ -25,9 +25,45 @@
   --font-script: 'Caveat', cursive;
   --font-sans: 'Inter', sans-serif;
 
-  /* Layout */
+  /* Layout (responsive — mobile values here, overridden at breakpoints below) */
   --page-max-width: 680px;
+  --gutter: 24px;
+  --content-max-width: 720px;
+  --card-max-width: 220px;
+  --card-img-height: 120px;
+  --variant-img-height: 170px;
+  --hero-img-width: 220px;
+  --hero-title-size: 28px;
+  --grid-max-width: none;
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-pill: 20px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  :root {
+    --page-max-width: 900px;
+    --gutter: 40px;
+    --card-max-width: 260px;
+    --card-img-height: 140px;
+    --variant-img-height: 200px;
+    --hero-img-width: 280px;
+    --hero-title-size: 32px;
+    --grid-max-width: 860px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+  :root {
+    --page-max-width: 1200px;
+    --gutter: 56px;
+    --card-max-width: 300px;
+    --card-img-height: 160px;
+    --variant-img-height: 220px;
+    --hero-img-width: 340px;
+    --hero-title-size: 40px;
+    --grid-max-width: 1000px;
+  }
 }

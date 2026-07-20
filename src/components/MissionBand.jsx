@@ -4,12 +4,12 @@ export default function MissionBand() {
       style={{
         background: 'var(--color-dark-band)',
         color: 'var(--color-dark-band-text)',
-        padding: '28px 24px',
+        padding: '28px var(--gutter)',
         textAlign: 'center',
       }}
     >
       <i className="ti ti-recycle" style={{ fontSize: 22, color: 'var(--color-accent)' }} aria-hidden="true" />
-      <p style={{ fontFamily: 'var(--font-serif)', fontSize: 17, fontWeight: 600, margin: '10px 0 8px' }}>
+      <p style={{ fontFamily: 'var(--font-serif)', fontSize: 17, fontWeight: 600, margin: '10px auto 8px', maxWidth: 480 }}>
         Care for environment. Care for community.
       </p>
       <p

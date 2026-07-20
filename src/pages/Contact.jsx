@@ -5,13 +5,13 @@ import EyebrowLabel from '../components/EyebrowLabel.jsx';
 
 export default function Contact() {
   return (
-    <>
-      <div style={{ padding: '32px 24px 8px' }}>
+    <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
+      <div style={{ padding: '32px var(--gutter) 8px' }}>
         <ScriptText size={20} style={{ margin: '0 0 4px' }}>say hello</ScriptText>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 24, fontWeight: 600, margin: 0 }}>Contact</h1>
       </div>
 
-      <div style={{ padding: '12px 24px 8px' }}>
+      <div style={{ padding: '12px var(--gutter) 8px' }}>
         <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', lineHeight: 1.6, margin: '0 0 20px' }}>
           Questions about our products, wholesale, or an order? Send a message and we'll get back to you.
         </p>
@@ -22,7 +22,7 @@ export default function Contact() {
         <Button to="#">Send message</Button>
       </div>
 
-      <div style={{ padding: '28px 24px 32px', marginTop: 16, borderTop: '0.5px solid var(--color-border)' }}>
+      <div style={{ padding: '28px var(--gutter) 32px', marginTop: 16, borderTop: '0.5px solid var(--color-border)' }}>
         <EyebrowLabel style={{ margin: '20px 0 12px' }}>Get in touch</EyebrowLabel>
         <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '0 0 8px' }}>
           <i className="ti ti-mail" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} aria-hidden="true" />
@@ -37,6 +37,6 @@ export default function Contact() {
           Address to be provided
         </p>
       </div>
-    </>
+    </div>
   );
 }

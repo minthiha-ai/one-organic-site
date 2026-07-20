@@ -7,7 +7,7 @@ export default function CertStrip({ showRecycle = true }) {
         display: 'flex',
         alignItems: 'center',
         gap: 24,
-        padding: '10px 24px',
+        padding: '10px var(--gutter)',
         background: 'var(--color-tint)',
         borderTop: '0.5px solid var(--color-border)',
         borderBottom: '0.5px solid var(--color-border)',

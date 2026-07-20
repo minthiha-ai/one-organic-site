@@ -5,13 +5,13 @@ import { vcoJars, syrupJar, soapPlain, soapCastor } from '../assets/images/index
 
 export default function Shop() {
   return (
-    <>
-      <div style={{ padding: '32px 24px 8px' }}>
+    <div style={{ maxWidth: 'var(--grid-max-width)', margin: '0 auto' }}>
+      <div style={{ padding: '32px var(--gutter) 8px' }}>
         <ScriptText size={20} style={{ margin: '0 0 4px' }}>the collection</ScriptText>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 24, fontWeight: 600, margin: 0 }}>Shop</h1>
       </div>
 
-      <div style={{ padding: '24px 24px 8px' }}>
+      <div style={{ padding: '24px var(--gutter) 8px' }}>
         <EyebrowLabel>Coconut Oil</EyebrowLabel>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
           <ProductCard
@@ -25,7 +25,7 @@ export default function Shop() {
         </div>
       </div>
 
-      <div style={{ padding: '24px 24px 8px' }}>
+      <div style={{ padding: '24px var(--gutter) 8px' }}>
         <EyebrowLabel>Coconut Syrup</EyebrowLabel>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
           <ProductCard
@@ -39,7 +39,7 @@ export default function Shop() {
         </div>
       </div>
 
-      <div style={{ padding: '24px 24px 32px' }}>
+      <div style={{ padding: '24px var(--gutter) 32px' }}>
         <EyebrowLabel>Bath &amp; Body</EyebrowLabel>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
           <ProductCard
@@ -60,6 +60,6 @@ export default function Shop() {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }

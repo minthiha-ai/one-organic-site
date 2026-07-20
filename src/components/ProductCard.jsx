@@ -7,7 +7,7 @@ export default function ProductCard({ image, alt, name, tagline, tags, to, flex 
       to={to}
       style={{
         flex: flex ?? '1 1 180px',
-        maxWidth: 220,
+        maxWidth: 'var(--card-max-width)',
         textDecoration: 'none',
         color: 'inherit',
         border: '0.5px solid var(--color-border)',
@@ -23,7 +23,7 @@ export default function ProductCard({ image, alt, name, tagline, tags, to, flex 
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          height: 120,
+          height: 'var(--card-img-height)',
         }}
       >
         <img

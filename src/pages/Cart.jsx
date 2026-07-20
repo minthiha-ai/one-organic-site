@@ -4,12 +4,12 @@ import { vco450, syrupJar, soapPlain } from '../assets/images/index.js';
 
 export default function Cart() {
   return (
-    <>
-      <div style={{ padding: '32px 24px 8px' }}>
+    <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
+      <div style={{ padding: '32px var(--gutter) 8px' }}>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 24, fontWeight: 600, margin: 0 }}>Your Cart</h1>
       </div>
 
-      <div style={{ padding: '8px 24px' }}>
+      <div style={{ padding: '8px var(--gutter)' }}>
         <CartLineItem
           image={vco450}
           alt="Virgin Coconut Oil, 450ml jar"
@@ -36,7 +36,7 @@ export default function Cart() {
         />
       </div>
 
-      <div style={{ padding: '20px 24px 32px' }}>
+      <div style={{ padding: '20px var(--gutter) 32px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, color: 'var(--color-text)', margin: '0 0 6px' }}>
           <span>Subtotal</span>
           <span style={{ fontWeight: 500 }}>$41.96</span>
@@ -46,6 +46,6 @@ export default function Cart() {
         </p>
         <Button to="/checkout" block>Proceed to checkout</Button>
       </div>
-    </>
+    </div>
   );
 }

@@ -6,12 +6,12 @@ import Button from '../components/Button.jsx';
 
 export default function Checkout() {
   return (
-    <>
-      <div style={{ padding: '32px 24px 8px' }}>
+    <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
+      <div style={{ padding: '32px var(--gutter) 8px' }}>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 24, fontWeight: 600, margin: 0 }}>Checkout</h1>
       </div>
 
-      <div style={{ padding: '16px 24px 8px' }}>
+      <div style={{ padding: '16px var(--gutter) 8px' }}>
         <EyebrowLabel>Contact &amp; shipping</EyebrowLabel>
         <FormField label="Full name" placeholder="Jane Doe" />
         <FormField label="Email" type="email" placeholder="jane@example.com" />
@@ -25,7 +25,7 @@ export default function Checkout() {
 
       <div
         style={{
-          padding: '24px 24px',
+          padding: '24px var(--gutter)',
           background: 'var(--color-tint)',
           borderTop: '0.5px solid var(--color-border)',
           borderBottom: '0.5px solid var(--color-border)',
@@ -42,15 +42,15 @@ export default function Checkout() {
         </div>
       </div>
 
-      <div style={{ padding: '24px 24px 8px' }}>
+      <div style={{ padding: '24px var(--gutter) 8px' }}>
         <EyebrowLabel>Payment method</EyebrowLabel>
         <PaymentOption icon="ti-credit-card" label="Credit / Debit Card" checked />
         <PaymentOption icon="ti-cash" label="Cash on Delivery" />
       </div>
 
-      <div style={{ padding: '16px 24px 32px' }}>
+      <div style={{ padding: '16px var(--gutter) 32px' }}>
         <Button to="#" block>Place order</Button>
       </div>
-    </>
+    </div>
   );
 }
