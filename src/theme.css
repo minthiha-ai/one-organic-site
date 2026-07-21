@@ -20,6 +20,9 @@
   /* Card surface (slightly lighter than the tinted section background) */
   --color-card-bg: #FCFAF7;
 
+  /* Warm accent wash — a mid-tone moment distinct from the neutral tint */
+  --color-accent-wash: #F0E1CC;
+
   /* Fonts */
   --font-serif: 'Playfair Display', serif;
   --font-script: 'Caveat', cursive;

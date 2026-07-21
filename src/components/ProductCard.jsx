@@ -1,25 +1,24 @@
 import { Link } from 'react-router-dom';
 import PillTag from './PillTag.jsx';
 
-export default function ProductCard({ image, alt, name, tagline, tags, to, flex }) {
+export default function ProductCard({ image, alt, name, tagline, price, tags, to, flex }) {
   return (
     <Link
       to={to}
+      className="oo-product-card"
       style={{
         flex: flex ?? '1 1 180px',
         maxWidth: 'var(--card-max-width)',
         textDecoration: 'none',
         color: 'inherit',
-        border: '0.5px solid var(--color-border)',
         borderRadius: 'var(--radius-md)',
         overflow: 'hidden',
         display: 'block',
-        background: 'var(--color-card-bg)',
+        background: 'var(--color-tint)',
       }}
     >
       <div
         style={{
-          background: 'var(--color-tint)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -45,6 +44,11 @@ export default function ProductCard({ image, alt, name, tagline, tags, to, flex 
         >
           {tagline}
         </p>
+        {price != null && (
+          <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--color-text)', margin: '0 0 8px' }}>
+            ${price.toFixed(2)}
+          </p>
+        )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, margin: '0 0 10px' }}>
           {tags.map((tag) => (
             <PillTag key={tag}>{tag}</PillTag>

@@ -3,14 +3,12 @@ export default function VariantCard({ image, alt, label, description }) {
     <div
       style={{
         background: 'var(--color-card-bg)',
-        border: '0.5px solid var(--color-border)',
         borderRadius: 'var(--radius-md)',
         overflow: 'hidden',
       }}
     >
       <div
         style={{
-          background: 'var(--color-tint)',
           height: 'var(--variant-img-height)',
           display: 'flex',
           alignItems: 'center',

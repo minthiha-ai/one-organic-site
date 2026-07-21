@@ -26,3 +26,11 @@ input,
 textarea {
   font-family: inherit;
 }
+
+.oo-product-card {
+  transition: box-shadow 0.15s ease;
+}
+
+.oo-product-card:hover {
+  box-shadow: 0 2px 10px rgba(62, 62, 63, 0.12);
+}

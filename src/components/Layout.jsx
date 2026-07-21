@@ -9,9 +9,6 @@ export default function Layout() {
         fontFamily: 'var(--font-sans)',
         background: 'var(--color-bg)',
         color: 'var(--color-text)',
-        maxWidth: 'var(--page-max-width)',
-        margin: '0 auto',
-        border: '0.5px solid var(--color-border)',
       }}
     >
       <Header />

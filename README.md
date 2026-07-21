@@ -20,7 +20,6 @@ This project was converted from a set of static, single-file HTML mockups (with 
 | `/product/virgin-coconut-oil` | Product detail (Virgin Coconut Oil) |
 | `/cart` | Cart |
 | `/checkout` | Checkout |
-| `/our-story` | Our Story / About |
 | `/contact` | Contact |
 
 ## Stack

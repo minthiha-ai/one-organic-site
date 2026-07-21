@@ -1,3 +1,4 @@
+import { useParams, Link, Navigate } from 'react-router-dom';
 import CertStrip from '../components/CertStrip.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import EyebrowLabel from '../components/EyebrowLabel.jsx';
@@ -6,52 +7,49 @@ import PillTag from '../components/PillTag.jsx';
 import IconChip from '../components/IconChip.jsx';
 import SizeOption from '../components/SizeOption.jsx';
 import Button from '../components/Button.jsx';
-import { vco450 } from '../assets/images/index.js';
-
-const highlights = [
-  'Low Moisture & High Purity',
-  'Fast Absorption Into Skin',
-  'High MC',
-  'High Lauric Acid',
-  'Cold Pressed',
-  'Centrifuge Extraction',
-  'Gluten Free',
-  'Vegan',
-];
-
-const usageItems = [
-  { icon: 'ti-flame', label: 'Healthy Cooking Oil' },
-  { icon: 'ti-droplet', label: 'Skin & Hair Moisturizer' },
-  { icon: 'ti-leaf', label: 'Keto Diet Essential' },
-  { icon: 'ti-massage', label: 'Massage Oil' },
-  { icon: 'ti-sparkles', label: 'Make Up Remover' },
-  { icon: 'ti-dental', label: 'Oil Pulling For Oral Health' },
-];
+import { getProductBySlug, getSiblings } from '../data/products.js';
 
 export default function ProductDetail() {
+  const { slug } = useParams();
+  const product = getProductBySlug(slug);
+
+  if (!product) {
+    return <Navigate to="/shop" replace />;
+  }
+
+  const siblings = getSiblings(product);
+
   return (
     <>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20, padding: '32px var(--gutter)', maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
-        <div style={{ flex: '0 0 var(--hero-img-width)' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', gap: 20, padding: '32px var(--gutter)', maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>
+        <div style={{ flex: '1 1 var(--hero-img-width)', maxWidth: 380 }}>
           <img
-            src={vco450}
-            alt="Virgin Coconut Oil, 450ml glass jar"
+            src={product.image}
+            alt={product.alt}
             style={{ width: '100%', display: 'block', borderRadius: 4 }}
           />
         </div>
-        <div style={{ flex: 1 }}>
-          <ScriptText size={18} style={{ margin: '0 0 4px' }}>one of earth's greatest gifts to mankind</ScriptText>
+        <div style={{ flex: '1 1 240px', minWidth: 0 }}>
+          <ScriptText size={18} style={{ margin: '0 0 4px' }}>{product.scriptEyebrow}</ScriptText>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 23, fontWeight: 600, margin: '0 0 10px', lineHeight: 1.25 }}>
-            Virgin Coconut Oil
+            {product.name}
           </h1>
-          <p style={{ fontSize: 19, fontWeight: 500, color: 'var(--color-text)', margin: '0 0 18px' }}>$14.99</p>
+          <p style={{ fontSize: 19, fontWeight: 500, color: 'var(--color-text)', margin: '0 0 18px' }}>
+            ${product.price.toFixed(2)}
+          </p>
 
-          <EyebrowLabel style={{ margin: '0 0 8px' }}>Size</EyebrowLabel>
-          <div style={{ display: 'flex', gap: 8, margin: '0 0 22px' }}>
-            <SizeOption label="125ml" />
-            <SizeOption label="450ml" selected />
-            <SizeOption label="900ml" />
-          </div>
+          {siblings.length > 1 && (
+            <>
+              <EyebrowLabel style={{ margin: '0 0 8px' }}>Options</EyebrowLabel>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, margin: '0 0 22px' }}>
+                {siblings.map((sibling) => (
+                  <Link key={sibling.slug} to={`/product/${sibling.slug}`} style={{ textDecoration: 'none' }}>
+                    <SizeOption label={sibling.optionLabel} selected={sibling.slug === product.slug} />
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
 
           <Button to="/cart">Add to cart</Button>
         </div>
@@ -59,39 +57,36 @@ export default function ProductDetail() {
 
       <CertStrip showRecycle={false} />
 
-      <div style={{ padding: '32px var(--gutter) 0' }}>
-        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
-          <SectionHeading style={{ margin: '0 0 16px' }}>Highlights</SectionHeading>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-            {highlights.map((h) => (
-              <PillTag key={h}>{h}</PillTag>
-            ))}
-          </div>
+      <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '32px var(--gutter) 0' }}>
+        <SectionHeading style={{ margin: '0 0 16px' }}>Highlights</SectionHeading>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+          {product.highlights.map((h) => (
+            <PillTag key={h}>{h}</PillTag>
+          ))}
         </div>
       </div>
 
-      <div style={{ padding: '28px var(--gutter) 0' }}>
-        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
-          <SectionHeading style={{ margin: '0 0 16px' }}>Ways to use</SectionHeading>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-            {usageItems.map(({ icon, label }) => (
-              <IconChip key={label} icon={icon}>
-                {label}
-              </IconChip>
-            ))}
-          </div>
+      <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '28px var(--gutter) 0' }}>
+        <SectionHeading style={{ margin: '0 0 16px' }}>Ways to use</SectionHeading>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+          {product.usageItems.map(({ icon, label }) => (
+            <IconChip key={label} icon={icon}>
+              {label}
+            </IconChip>
+          ))}
         </div>
       </div>
 
-      <div style={{ padding: '28px var(--gutter) 32px' }}>
-        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
-          <SectionHeading style={{ margin: '0 0 12px' }}>Storage</SectionHeading>
-          <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', lineHeight: 1.7, margin: 0 }}>
-            Store in a cool, dry place.
-            <br />
-            Store away from sunlight.
-          </p>
-        </div>
+      <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '28px var(--gutter) 32px' }}>
+        <SectionHeading style={{ margin: '0 0 12px' }}>Storage</SectionHeading>
+        <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', lineHeight: 1.7, margin: 0 }}>
+          {product.storage.map((line, i) => (
+            <span key={line}>
+              {line}
+              {i < product.storage.length - 1 && <br />}
+            </span>
+          ))}
+        </p>
       </div>
     </>
   );
