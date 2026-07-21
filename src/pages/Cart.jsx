@@ -5,7 +5,7 @@ import { vco450, syrupJar, soapPlain } from '../assets/images/index.js';
 export default function Cart() {
   return (
     <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>
-      <div style={{ maxWidth: 'var(--content-max-width)' }}>
+      <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
         <div style={{ padding: '32px var(--gutter) 8px' }}>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 24, fontWeight: 600, margin: 0 }}>Your Cart</h1>
         </div>

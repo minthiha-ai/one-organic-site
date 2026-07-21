@@ -8,13 +8,13 @@ export default function Checkout() {
   return (
     <>
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '32px var(--gutter) 8px' }}>
-        <div style={{ maxWidth: 'var(--content-max-width)' }}>
+        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 24, fontWeight: 600, margin: 0 }}>Checkout</h1>
         </div>
       </div>
 
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '16px var(--gutter) 8px' }}>
-        <div style={{ maxWidth: 'var(--content-max-width)' }}>
+        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
           <EyebrowLabel>Contact &amp; shipping</EyebrowLabel>
           <FormField label="Full name" placeholder="Jane Doe" />
           <FormField label="Email" type="email" placeholder="jane@example.com" />
@@ -35,7 +35,7 @@ export default function Checkout() {
         }}
       >
         <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '24px var(--gutter)' }}>
-          <div style={{ maxWidth: 'var(--content-max-width)' }}>
+          <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
             <EyebrowLabel>Order summary</EyebrowLabel>
             <SummaryLine label="Virgin Coconut Oil — 450ml × 1" price="14.99" />
             <SummaryLine label="Coconut Syrup — 600g × 1" price="12.99" />
@@ -50,7 +50,7 @@ export default function Checkout() {
       </div>
 
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '24px var(--gutter) 8px' }}>
-        <div style={{ maxWidth: 'var(--content-max-width)' }}>
+        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
           <EyebrowLabel>Payment method</EyebrowLabel>
           <PaymentOption icon="ti-credit-card" label="Credit / Debit Card" checked />
           <PaymentOption icon="ti-cash" label="Cash on Delivery" />
@@ -58,7 +58,7 @@ export default function Checkout() {
       </div>
 
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '16px var(--gutter) 32px' }}>
-        <div style={{ maxWidth: 'var(--content-max-width)' }}>
+        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
           <Button to="#" block>Place order</Button>
         </div>
       </div>
