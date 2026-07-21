@@ -2,10 +2,13 @@ export default function MissionBand() {
   return (
     <div
       style={{
+        maxWidth: 'var(--page-max-width)',
+        margin: '32px auto',
         background: 'var(--color-dark-band)',
         color: 'var(--color-dark-band-text)',
         padding: '28px var(--gutter)',
         textAlign: 'center',
+        borderRadius: 'var(--radius-md)',
       }}
     >
       <i className="ti ti-recycle" style={{ fontSize: 22, color: 'var(--color-accent)' }} aria-hidden="true" />

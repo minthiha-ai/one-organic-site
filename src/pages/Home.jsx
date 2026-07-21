@@ -5,6 +5,7 @@ import SectionHeading from '../components/SectionHeading.jsx';
 import ScriptText from '../components/ScriptText.jsx';
 import UsageGroup from '../components/UsageGroup.jsx';
 import MissionBand from '../components/MissionBand.jsx';
+import TrustBadge from '../components/TrustBadge.jsx';
 import Button from '../components/Button.jsx';
 import { heroCoconut, brandStoryPhoto, vcoJars, syrupJar, soapPlain, vco900, vco450, vco125, coconutBodyButter } from '../assets/images/index.js';
 
@@ -31,19 +32,35 @@ export default function Home() {
           </p>
           <Button to="/shop">Shop the collection</Button>
         </div>
-        <div style={{ flex: `1 1 var(--hero-img-width)`, maxWidth: 420, aspectRatio: '4 / 5', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-          <img
-            src={heroCoconut}
-            alt="A freshly husked coconut resting on stone, palm trees in the background"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        <div style={{ flex: `1 1 var(--hero-img-width)`, maxWidth: 420, position: 'relative' }}>
+          <div
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              transform: 'translate(14px, 14px)',
+              background: 'var(--color-accent-wash)',
+              borderRadius: 'var(--radius-md)',
+            }}
           />
+          <div style={{ position: 'relative', aspectRatio: '4 / 5', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+            <img
+              src={heroCoconut}
+              alt="A freshly husked coconut resting on stone, palm trees in the background"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            <div style={{ position: 'absolute', left: 12, bottom: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <TrustBadge icon="ti-leaf">100% Organic</TrustBadge>
+              <TrustBadge icon="ti-droplet">Cold-Pressed</TrustBadge>
+            </div>
+          </div>
         </div>
       </div>
 
       <CertStrip />
 
       {/* Brand story */}
-      <div style={{ position: 'relative', overflow: 'hidden', borderBottom: '0.5px solid var(--color-border)' }}>
+      <div style={{ maxWidth: 'var(--page-max-width)', margin: '32px auto', position: 'relative', overflow: 'hidden', borderRadius: 'var(--radius-md)' }}>
         <img
           src={brandStoryPhoto}
           alt="Sunlight filtering through a coconut palm frond"
@@ -125,48 +142,56 @@ export default function Home() {
       {/* Virgin Coconut Oil spotlight */}
       <div
         style={{
+          maxWidth: 'var(--page-max-width)',
+          margin: '32px auto',
           background: 'var(--color-tint)',
-          borderTop: '0.5px solid var(--color-border)',
-          borderBottom: '0.5px solid var(--color-border)',
+          border: '0.5px solid var(--color-border)',
+          borderRadius: 'var(--radius-md)',
+          padding: '32px var(--gutter)',
         }}
       >
-        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '32px var(--gutter)' }}>
-          <ScriptText size={20} style={{ margin: '0 0 4px', textAlign: 'center' }}>
-            earth's greatest gift to mankind
-          </ScriptText>
-          <SectionHeading style={{ textAlign: 'center' }}>Virgin Coconut Oil</SectionHeading>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0,1fr))', gap: 12 }}>
-            <VariantCard image={vco900} alt="Virgin Coconut Oil, 900ml glass jar" label="900ml" description="Glass jar" />
-            <VariantCard image={vco450} alt="Virgin Coconut Oil, 450ml glass jar" label="450ml" description="Glass jar" />
-            <VariantCard image={vco125} alt="Virgin Coconut Oil, 125ml glass jar" label="125ml" description="Glass jar" />
-          </div>
+        <ScriptText size={20} style={{ margin: '0 0 4px', textAlign: 'center' }}>
+          earth's greatest gift to mankind
+        </ScriptText>
+        <SectionHeading style={{ textAlign: 'center' }}>Virgin Coconut Oil</SectionHeading>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0,1fr))', gap: 12 }}>
+          <VariantCard image={vco900} alt="Virgin Coconut Oil, 900ml glass jar" label="900ml" description="Glass jar" />
+          <VariantCard image={vco450} alt="Virgin Coconut Oil, 450ml glass jar" label="450ml" description="Glass jar" />
+          <VariantCard image={vco125} alt="Virgin Coconut Oil, 125ml glass jar" label="125ml" description="Glass jar" />
         </div>
       </div>
 
       {/* Ways to use */}
-      <div style={{ background: 'var(--color-tint)', borderTop: '0.5px solid var(--color-border)' }}>
-        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '32px var(--gutter)' }}>
-          <SectionHeading>Ways to use</SectionHeading>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px 64px' }}>
-            <UsageGroup
-              label="Virgin Coconut Oil"
-              style={{ flex: '1 1 280px' }}
-              items={[
-                { icon: 'ti-flame', label: 'Healthy cooking oil' },
-                { icon: 'ti-droplet', label: 'Skin & hair moisturizer' },
-                { icon: 'ti-massage', label: 'Massage oil' },
-                { icon: 'ti-dental', label: 'Oil pulling' },
-              ]}
-            />
-            <UsageGroup
-              label="Coconut Syrup"
-              style={{ flex: '1 1 280px' }}
-              items={[
-                { icon: 'ti-cup', label: 'Honey alternative' },
-                { icon: 'ti-bread', label: 'Bread spread' },
-              ]}
-            />
-          </div>
+      <div
+        style={{
+          maxWidth: 'var(--page-max-width)',
+          margin: '32px auto',
+          background: 'var(--color-tint)',
+          border: '0.5px solid var(--color-border)',
+          borderRadius: 'var(--radius-md)',
+          padding: '32px var(--gutter)',
+        }}
+      >
+        <SectionHeading>Ways to use</SectionHeading>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px 64px' }}>
+          <UsageGroup
+            label="Virgin Coconut Oil"
+            style={{ flex: '1 1 280px' }}
+            items={[
+              { icon: 'ti-flame', label: 'Healthy cooking oil' },
+              { icon: 'ti-droplet', label: 'Skin & hair moisturizer' },
+              { icon: 'ti-massage', label: 'Massage oil' },
+              { icon: 'ti-dental', label: 'Oil pulling' },
+            ]}
+          />
+          <UsageGroup
+            label="Coconut Syrup"
+            style={{ flex: '1 1 280px' }}
+            items={[
+              { icon: 'ti-cup', label: 'Honey alternative' },
+              { icon: 'ti-bread', label: 'Bread spread' },
+            ]}
+          />
         </div>
       </div>
 

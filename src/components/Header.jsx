@@ -7,7 +7,7 @@ const navLinkStyle = {
 
 export default function Header() {
   return (
-    <div style={{ borderBottom: '0.5px solid var(--color-border)' }}>
+    <div style={{ position: 'relative', boxShadow: '0 2px 12px rgba(38,32,20,0.06)' }}>
       <div
         style={{
           display: 'flex',
@@ -21,11 +21,27 @@ export default function Header() {
         <Link
           to="/"
           style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
             fontFamily: 'var(--font-serif)',
             fontSize: 20,
             textDecoration: 'none',
           }}
         >
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 28,
+              height: 28,
+              borderRadius: '50%',
+              background: 'var(--color-accent-wash)',
+            }}
+          >
+            <i className="ti ti-leaf" style={{ fontSize: 15, color: 'var(--color-accent)' }} aria-hidden="true" />
+          </span>
           <span style={{ color: 'var(--color-text)' }}>one</span>
           <span
             style={{

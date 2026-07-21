@@ -29,22 +29,23 @@ export default function Checkout() {
 
       <div
         style={{
+          maxWidth: 'var(--page-max-width)',
+          margin: '24px auto',
           background: 'var(--color-tint)',
-          borderTop: '0.5px solid var(--color-border)',
-          borderBottom: '0.5px solid var(--color-border)',
+          border: '0.5px solid var(--color-border)',
+          borderRadius: 'var(--radius-md)',
+          padding: '24px var(--gutter)',
         }}
       >
-        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '24px var(--gutter)' }}>
-          <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
-            <EyebrowLabel>Order summary</EyebrowLabel>
-            <SummaryLine label="Virgin Coconut Oil — 450ml × 1" price="14.99" />
-            <SummaryLine label="Coconut Syrup — 600g × 1" price="12.99" />
-            <SummaryLine label="Coconut Oil Soap — Just Coconut Oil × 2" price="13.98" />
-            <div style={{ borderTop: '0.5px solid var(--color-border)', marginTop: 8, paddingTop: 12 }}>
-              <SummaryLine label="Subtotal" price="41.96" size={13} />
-              <SummaryLine label="Shipping" price="4.00" size={13} />
-              <SummaryLine label="Total" price="45.96" size={15} weight={600} color="var(--color-text)" style={{ marginTop: 8, marginBottom: 0 }} />
-            </div>
+        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
+          <EyebrowLabel>Order summary</EyebrowLabel>
+          <SummaryLine label="Virgin Coconut Oil — 450ml × 1" price="14.99" />
+          <SummaryLine label="Coconut Syrup — 600g × 1" price="12.99" />
+          <SummaryLine label="Coconut Oil Soap — Just Coconut Oil × 2" price="13.98" />
+          <div style={{ borderTop: '0.5px solid var(--color-border)', marginTop: 8, paddingTop: 12 }}>
+            <SummaryLine label="Subtotal" price="41.96" size={13} />
+            <SummaryLine label="Shipping" price="4.00" size={13} />
+            <SummaryLine label="Total" price="45.96" size={15} weight={600} color="var(--color-text)" style={{ marginTop: 8, marginBottom: 0 }} />
           </div>
         </div>
       </div>
