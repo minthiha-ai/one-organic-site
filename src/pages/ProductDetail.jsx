@@ -22,12 +22,24 @@ export default function ProductDetail() {
   return (
     <>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', gap: 20, padding: '32px var(--gutter)', maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>
-        <div style={{ flex: '1 1 var(--hero-img-width)', maxWidth: 380 }}>
-          <img
-            src={product.image}
-            alt={product.alt}
-            style={{ width: '100%', display: 'block', borderRadius: 4 }}
-          />
+        <div style={{ flex: '1 1 var(--hero-img-width)', maxWidth: 420 }}>
+          <div
+            style={{
+              aspectRatio: '4 / 5',
+              borderRadius: 'var(--radius-md)',
+              overflow: 'hidden',
+              background: 'var(--color-tint)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <img
+              src={product.image}
+              alt={product.alt}
+              style={{ maxWidth: '75%', maxHeight: '75%', objectFit: 'contain' }}
+            />
+          </div>
         </div>
         <div style={{ flex: '1 1 240px', minWidth: 0 }}>
           <ScriptText size={18} style={{ margin: '0 0 4px' }}>{product.scriptEyebrow}</ScriptText>
@@ -57,27 +69,32 @@ export default function ProductDetail() {
 
       <CertStrip showRecycle={false} />
 
-      <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '32px var(--gutter) 0' }}>
+      <div
+        style={{
+          maxWidth: 'var(--page-max-width)',
+          margin: '32px auto',
+          background: 'var(--color-bg)',
+          border: '0.5px solid var(--color-border)',
+          borderRadius: 'var(--radius-md)',
+          padding: '32px var(--gutter)',
+        }}
+      >
         <SectionHeading style={{ margin: '0 0 16px' }}>Highlights</SectionHeading>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 28 }}>
           {product.highlights.map((h) => (
             <PillTag key={h}>{h}</PillTag>
           ))}
         </div>
-      </div>
 
-      <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '28px var(--gutter) 0' }}>
         <SectionHeading style={{ margin: '0 0 16px' }}>Ways to use</SectionHeading>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 28 }}>
           {product.usageItems.map(({ icon, label }) => (
             <IconChip key={label} icon={icon}>
               {label}
             </IconChip>
           ))}
         </div>
-      </div>
 
-      <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '28px var(--gutter) 32px' }}>
         <SectionHeading style={{ margin: '0 0 12px' }}>Storage</SectionHeading>
         <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', lineHeight: 1.7, margin: 0 }}>
           {product.storage.map((line, i) => (
