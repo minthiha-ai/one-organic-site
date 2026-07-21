@@ -6,7 +6,7 @@ import ScriptText from '../components/ScriptText.jsx';
 import UsageGroup from '../components/UsageGroup.jsx';
 import MissionBand from '../components/MissionBand.jsx';
 import Button from '../components/Button.jsx';
-import { heroCoconut, brandStoryPhoto, vcoJars, syrupJar, soapPlain, vco900, vco450, vco125 } from '../assets/images/index.js';
+import { heroCoconut, brandStoryPhoto, vcoJars, syrupJar, soapPlain, vco900, vco450, vco125, coconutBodyButter } from '../assets/images/index.js';
 
 export default function Home() {
   return (
@@ -82,7 +82,7 @@ export default function Home() {
       {/* Our products */}
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '32px var(--gutter)' }}>
         <SectionHeading>Our products</SectionHeading>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0,1fr))', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
           <ProductCard
             image={vcoJars}
             alt="Virgin Coconut Oil jars"
@@ -109,6 +109,15 @@ export default function Home() {
             price={6.99}
             tags={['No SLS', 'No Preservatives', 'Handcrafted']}
             to="/product/soap-plain"
+          />
+          <ProductCard
+            image={coconutBodyButter}
+            alt="Whipped coconut body butter, scooped from an open jar"
+            name="Coconut Body Butter"
+            tagline="Deep moisture for dry skin"
+            price={12.99}
+            tags={['Whipped', 'No Parabens', 'Vegan']}
+            to="/product/body-butter"
           />
         </div>
       </div>

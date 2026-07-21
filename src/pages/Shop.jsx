@@ -55,7 +55,7 @@ export default function Shop() {
 
   return (
     <div>
-      <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '32px var(--gutter) 8px' }}>
+      <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '32px var(--gutter) 8px', textAlign: 'center' }}>
         <ScriptText size={20} style={{ margin: '0 0 4px' }}>the collection</ScriptText>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 24, fontWeight: 600, margin: 0 }}>Shop</h1>
       </div>

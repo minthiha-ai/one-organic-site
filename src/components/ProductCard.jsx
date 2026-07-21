@@ -8,7 +8,8 @@ export default function ProductCard({ image, alt, name, tagline, price, tags, to
       className="oo-product-card"
       style={{
         flex: flex ?? '1 1 180px',
-        maxWidth: 'var(--card-max-width)',
+        width: '100%',
+        boxSizing: 'border-box',
         textDecoration: 'none',
         color: 'inherit',
         borderRadius: 'var(--radius-md)',
