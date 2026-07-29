@@ -6,11 +6,6 @@ import ProductDetail from './pages/ProductDetail.jsx';
 import Cart from './pages/Cart.jsx';
 import Checkout from './pages/Checkout.jsx';
 import Contact from './pages/Contact.jsx';
-import LayoutA from './drafts/a/LayoutA.jsx';
-import HomeA from './drafts/a/HomeA.jsx';
-import LayoutB from './drafts/b/LayoutB.jsx';
-import HomeB from './drafts/b/HomeB.jsx';
-import ShopB from './drafts/b/ShopB.jsx';
 
 export default function App() {
   return (
@@ -24,13 +19,35 @@ export default function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
-        <Route path="/draft-a" element={<LayoutA />}>
-          <Route index element={<HomeA />} />
+        <Route
+          path="/preview-white"
+          element={
+            <Layout
+              bgOverride="#FFFFFF"
+              homeTo="/preview-white"
+              shopTo="/preview-white/shop"
+              switchTo="/preview-cream"
+              switchLabel="Cream bg"
+            />
+          }
+        >
+          <Route index element={<Home />} />
           <Route path="shop" element={<Shop />} />
         </Route>
-        <Route path="/draft-b" element={<LayoutB />}>
-          <Route index element={<HomeB />} />
-          <Route path="shop" element={<ShopB />} />
+        <Route
+          path="/preview-cream"
+          element={
+            <Layout
+              bgOverride="#FCFAF7"
+              homeTo="/preview-cream"
+              shopTo="/preview-cream/shop"
+              switchTo="/preview-white"
+              switchLabel="White bg"
+            />
+          }
+        >
+          <Route index element={<Home />} />
+          <Route path="shop" element={<Shop />} />
         </Route>
       </Routes>
     </BrowserRouter>
