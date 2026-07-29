@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { logoDark } from '../assets/brand/index.js';
 
 const linkStyle = {
   display: 'block',
@@ -22,12 +23,7 @@ export default function Footer() {
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '40px var(--gutter) 24px' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32 }}>
           <div style={{ flex: '2 1 220px' }}>
-            <div style={{ fontFamily: 'var(--font-serif)', fontSize: 18, margin: '0 0 10px' }}>
-              one
-              <span style={{ fontFamily: 'var(--font-script)', color: 'var(--color-accent-light)', fontSize: 21 }}>
-                organic
-              </span>
-            </div>
+            <img src={logoDark} alt="One Organic" style={{ height: 26, width: 'auto', display: 'block', margin: '0 0 12px' }} />
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', lineHeight: 1.6, margin: 0, maxWidth: 280 }}>
               Organic coconut oil, syrup, and soap — cold-pressed and handcrafted in small batches.
             </p>

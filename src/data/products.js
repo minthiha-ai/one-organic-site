@@ -1,4 +1,13 @@
-import { vco900, vco450, vco125, vcoJars, syrupJar, coconutSugar, soapPlain, soapCastor, coconutBodyButter } from '../assets/images/index.js';
+import {
+  vco900,
+  vco450,
+  vco125,
+  syrupJar,
+  soapPlain,
+  soapCastor,
+  soapShea,
+  soapCharcoal,
+} from '../assets/images/index.js';
 
 const vcoHighlights = [
   'Low Moisture & High Purity',
@@ -22,50 +31,24 @@ const vcoUsage = [
 
 const vcoStorage = ['Store in a cool, dry place.', 'Store away from sunlight.'];
 
-const syrupHighlights = [
-  'Unrefined',
-  'From the Coconut Flower',
-  'Low Glycemic Index',
-  'Rich in Minerals',
-  'Vegan',
-  'Gluten Free',
-];
+const syrupHighlights = ['Low Glycemic Index: 35', 'Gluten Free', 'Vegan', 'High in Minerals', 'Mild Sweet Taste'];
 
 const syrupUsage = [
-  { icon: 'ti-cup', label: 'Honey Alternative' },
-  { icon: 'ti-bread', label: 'Bread Spread' },
-  { icon: 'ti-leaf', label: 'Baking Sugar Substitute' },
+  { icon: 'ti-cup', label: 'Sweetener for Beverages' },
+  { icon: 'ti-bread', label: 'Baking' },
+  { icon: 'ti-leaf', label: 'Honey Alternative' },
 ];
 
-const syrupStorage = ['Store in a cool, dry place.', 'Refrigerate after opening.'];
+const syrupStorage = ['Refrigerate after opening.'];
 
-const sugarHighlights = ['Unrefined', 'From the Coconut Palm', 'Low Glycemic Index', 'Rich in Minerals', 'Vegan', 'Gluten Free'];
-
-const sugarUsage = [
-  { icon: 'ti-cup', label: 'Coffee & Tea Sweetener' },
-  { icon: 'ti-bread', label: 'Baking Sugar Substitute' },
-  { icon: 'ti-leaf', label: '1:1 Sugar Replacement' },
-];
-
-const sugarStorage = ['Store in a cool, dry place.', 'Keep tightly sealed.'];
-
-const soapHighlights = ['No SLS', 'No Preservatives', 'Handcrafted', 'Cold Process', 'Palm-Free', 'Vegan'];
+const soapHighlightsBase = ['No SLS', 'No SLES', 'No Sulphates', 'No Preservatives', 'No Fragrances', 'Handcrafted'];
 
 const soapUsage = [
   { icon: 'ti-droplet', label: 'Face & Body Wash' },
   { icon: 'ti-sparkles', label: 'Gentle Exfoliation' },
 ];
 
-const soapStorage = ['Store in a dry soap dish between uses.', 'Keep away from direct water flow.'];
-
-const bodyButterHighlights = ['Whipped Texture', 'Deep Moisturizing', 'No Parabens', 'No Synthetic Fragrance', 'Vegan', 'Cruelty-Free'];
-
-const bodyButterUsage = [
-  { icon: 'ti-droplet', label: 'Deep Moisturizer' },
-  { icon: 'ti-massage', label: 'After-Shower Massage' },
-];
-
-const bodyButterStorage = ['Store in a cool, dry place.', 'Avoid direct sunlight to preserve texture.'];
+const soapStorage = ['Store in cool, dry place.', 'Cut bar in half and keep dry between uses to prolong its life.'];
 
 export const products = [
   {
@@ -117,39 +100,7 @@ export const products = [
     storage: vcoStorage,
   },
   {
-    slug: 'vco-gift-set',
-    sizeGroup: 'vco',
-    category: 'Coconut Oil',
-    name: 'Virgin Coconut Oil',
-    optionLabel: 'Gift Set (3 Sizes)',
-    tagline: 'All three sizes, one gift',
-    scriptEyebrow: "one of earth's greatest gifts to mankind",
-    price: 39.99,
-    image: vcoJars,
-    alt: 'Virgin Coconut Oil gift set with 125ml, 450ml, and 900ml glass jars',
-    tags: ['Gift Set', 'Cold Pressed', 'Vegan & GF'],
-    highlights: vcoHighlights,
-    usageItems: vcoUsage,
-    storage: vcoStorage,
-  },
-  {
-    slug: 'syrup-300',
-    sizeGroup: 'syrup',
-    category: 'Coconut Syrup',
-    name: 'Coconut Syrup',
-    optionLabel: '300g',
-    tagline: 'One of the most nutritious sugars',
-    scriptEyebrow: 'one of the most nutritious sugars',
-    price: 8.99,
-    image: syrupJar,
-    alt: 'Coconut Syrup jar',
-    tags: ['Low GI: 35', 'Vegan & GF'],
-    highlights: syrupHighlights,
-    usageItems: syrupUsage,
-    storage: syrupStorage,
-  },
-  {
-    slug: 'syrup-600',
+    slug: 'coconut-syrup',
     sizeGroup: 'syrup',
     category: 'Coconut Syrup',
     name: 'Coconut Syrup',
@@ -159,42 +110,10 @@ export const products = [
     price: 12.99,
     image: syrupJar,
     alt: 'Coconut Syrup jar',
-    tags: ['Most Popular', 'Low GI: 35', 'Vegan & GF'],
+    tags: ['Low GI: 35', 'High in Minerals', 'Vegan & GF'],
     highlights: syrupHighlights,
     usageItems: syrupUsage,
     storage: syrupStorage,
-  },
-  {
-    slug: 'syrup-1kg',
-    sizeGroup: 'syrup',
-    category: 'Coconut Syrup',
-    name: 'Coconut Syrup',
-    optionLabel: '1kg',
-    tagline: 'One of the most nutritious sugars',
-    scriptEyebrow: 'one of the most nutritious sugars',
-    price: 19.99,
-    image: syrupJar,
-    alt: 'Coconut Syrup jar',
-    tags: ['Family Size', 'Low GI: 35', 'Vegan & GF'],
-    highlights: syrupHighlights,
-    usageItems: syrupUsage,
-    storage: syrupStorage,
-  },
-  {
-    slug: 'coconut-sugar',
-    sizeGroup: 'sugar',
-    category: 'Coconut Syrup',
-    name: 'Coconut Sugar',
-    optionLabel: '350g',
-    tagline: 'Natural, low-GI sweetener straight from the palm',
-    scriptEyebrow: 'one of the most nutritious sugars',
-    price: 9.99,
-    image: coconutSugar,
-    alt: 'Granulated coconut sugar in a jar',
-    tags: ['Unrefined', 'Low GI', 'Vegan & GF'],
-    highlights: sugarHighlights,
-    usageItems: sugarUsage,
-    storage: sugarStorage,
   },
   {
     slug: 'soap-plain',
@@ -207,8 +126,8 @@ export const products = [
     price: 6.99,
     image: soapPlain,
     alt: 'Coconut Oil Soap - Just Coconut Oil',
-    tags: ['No SLS', 'No Preservatives', 'Handcrafted'],
-    highlights: soapHighlights,
+    tags: ['Antibacterial', 'Oily/Normal Skin', 'Heavy Duty Cleansing'],
+    highlights: ['Heavy Duty Daily Cleansing', 'Antibacterial', ...soapHighlightsBase],
     usageItems: soapUsage,
     storage: soapStorage,
   },
@@ -223,42 +142,42 @@ export const products = [
     price: 7.99,
     image: soapCastor,
     alt: 'Coconut Oil Soap - With Castor Oil',
-    tags: ['No SLS', 'No Preservatives', 'Handcrafted'],
-    highlights: soapHighlights,
+    tags: ['Hydrating', 'Detoxifies', 'Normal/Dry Skin'],
+    highlights: ['Hydrates & Soothes Skin', 'Detoxifies', ...soapHighlightsBase],
     usageItems: soapUsage,
     storage: soapStorage,
   },
   {
-    slug: 'soap-value',
+    slug: 'soap-shea',
     sizeGroup: 'soap',
     category: 'Bath & Body',
     name: 'Coconut Oil Soap',
-    optionLabel: 'Value Bar (150g)',
-    tagline: 'Just Coconut Oil, Value Bar',
+    optionLabel: 'With Shea Butter',
+    tagline: 'With Shea Butter',
     scriptEyebrow: 'love yourself, love earth',
-    price: 9.99,
-    image: soapPlain,
-    alt: 'Coconut Oil Soap - Value Bar, 150g',
-    tags: ['No SLS', 'No Preservatives', 'Handcrafted'],
-    highlights: soapHighlights,
+    price: 7.99,
+    image: soapShea,
+    alt: 'Coconut Oil Soap - With Shea Butter',
+    tags: ['Hydrating', 'Anti-Inflammatory', 'Dry Skin'],
+    highlights: ['Hydrates & Soothes Skin', 'Anti-Inflammatory', ...soapHighlightsBase],
     usageItems: soapUsage,
     storage: soapStorage,
   },
   {
-    slug: 'body-butter',
-    sizeGroup: 'bodycare',
+    slug: 'soap-charcoal',
+    sizeGroup: 'soap',
     category: 'Bath & Body',
-    name: 'Coconut Body Butter',
-    optionLabel: '100g',
-    tagline: 'Deep moisture for dry skin',
+    name: 'Coconut Oil Soap',
+    optionLabel: 'With Charcoal Powder',
+    tagline: 'With Charcoal Powder',
     scriptEyebrow: 'love yourself, love earth',
-    price: 12.99,
-    image: coconutBodyButter,
-    alt: 'Whipped coconut body butter, scooped from an open jar',
-    tags: ['Whipped', 'No Parabens', 'Vegan'],
-    highlights: bodyButterHighlights,
-    usageItems: bodyButterUsage,
-    storage: bodyButterStorage,
+    price: 7.99,
+    image: soapCharcoal,
+    alt: 'Coconut Oil Soap - With Charcoal Powder',
+    tags: ['Detoxifying', 'Draws Out Impurities', 'Oily/Normal Skin'],
+    highlights: ['Deeply Detoxifying', 'Draws Out Impurities', ...soapHighlightsBase],
+    usageItems: soapUsage,
+    storage: soapStorage,
   },
 ];
 

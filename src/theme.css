@@ -1,21 +1,21 @@
 :root {
-  /* Core palette */
+  /* Core palette — sampled from the real One Organic logo (brown #58392a / amber #c87815) */
   --color-bg: #FCFAF7;
-  --color-text: #3e3e3f;
-  --color-accent: #b2947c;
+  --color-text: #58392a;
+  --color-accent: #c87815;
   --color-tint: #F5F1EA;
   --color-border: #E8E1D5;
-  --color-secondary-text: #5f5349;
+  --color-secondary-text: #796054;
 
-  /* Dark band (Mission band / Brand story overlay) */
-  --color-dark-band: #3e3e3f;
+  /* Dark band (Mission band / Brand story overlay) — darkened brand brown, not neutral gray */
+  --color-dark-band: #271912;
   --color-dark-band-text: #F7F1E7;
   --color-dark-band-text-secondary: #cabfa9;
 
   /* Accessible text variants of the accent (see contrast fixes) */
-  --color-label: #7a5f47;       /* buttons, "Shop ->" links, uppercase eyebrow/category labels */
-  --color-muted: #78654f;       /* footer text, secondary muted copy (replaces old #8c7a68) */
-  --color-accent-light: #d4b99e; /* script accent text on the dark Brand story photo overlay */
+  --color-label: #6c5043;       /* buttons, "Shop ->" links, uppercase eyebrow/category labels */
+  --color-muted: #796054;       /* footer text, secondary muted copy */
+  --color-accent-light: #dba766; /* script accent text on the dark Brand story photo overlay */
 
   /* Card surface (slightly lighter than the tinted section background) */
   --color-card-bg: #FCFAF7;

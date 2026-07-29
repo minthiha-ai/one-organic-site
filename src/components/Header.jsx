@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { logoLight } from '../assets/brand/index.js';
 
 const navLinkStyle = {
   color: 'var(--color-text)',
@@ -18,40 +19,8 @@ export default function Header() {
           padding: '16px var(--gutter)',
         }}
       >
-        <Link
-          to="/"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            fontFamily: 'var(--font-serif)',
-            fontSize: 20,
-            textDecoration: 'none',
-          }}
-        >
-          <span
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: 28,
-              height: 28,
-              borderRadius: '50%',
-              background: 'var(--color-accent-wash)',
-            }}
-          >
-            <i className="ti ti-leaf" style={{ fontSize: 15, color: 'var(--color-accent)' }} aria-hidden="true" />
-          </span>
-          <span style={{ color: 'var(--color-text)' }}>one</span>
-          <span
-            style={{
-              fontFamily: 'var(--font-script)',
-              color: 'var(--color-accent)',
-              fontSize: 24,
-            }}
-          >
-            organic
-          </span>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', lineHeight: 0 }}>
+          <img src={logoLight} alt="One Organic" style={{ height: 30, width: 'auto', display: 'block' }} />
         </Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 20, fontSize: 13 }}>
