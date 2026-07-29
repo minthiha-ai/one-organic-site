@@ -17,7 +17,7 @@ const headingStyle = {
   margin: '0 0 12px',
 };
 
-export default function Footer() {
+export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
   return (
     <div style={{ background: 'var(--color-dark-band)', color: 'var(--color-dark-band-text)' }}>
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '40px var(--gutter) 24px' }}>
@@ -31,8 +31,8 @@ export default function Footer() {
 
           <div style={{ flex: '1 1 140px' }}>
             <p style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Shop</p>
-            <Link to="/" style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Home</Link>
-            <Link to="/shop" style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>All Products</Link>
+            <Link to={homeTo} style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Home</Link>
+            <Link to={shopTo} style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>All Products</Link>
             <Link to="/cart" style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Cart</Link>
           </div>
 
