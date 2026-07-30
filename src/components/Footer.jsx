@@ -10,6 +10,7 @@ const linkStyle = {
 };
 
 const headingStyle = {
+  fontFamily: 'var(--font-label)',
   fontSize: 10,
   letterSpacing: '0.06em',
   textTransform: 'uppercase',

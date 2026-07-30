@@ -43,7 +43,7 @@ export default function ProductDetail() {
         </div>
         <div style={{ flex: '1 1 240px', minWidth: 0 }}>
           <ScriptText size={18} style={{ margin: '0 0 4px' }}>{product.scriptEyebrow}</ScriptText>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 23, fontWeight: 600, margin: '0 0 10px', lineHeight: 1.25 }}>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 23, fontWeight: 600, margin: '0 0 10px', lineHeight: 1.25 }}>
             {product.name}
           </h1>
           <p style={{ fontSize: 19, fontWeight: 500, color: 'var(--color-text)', margin: '0 0 18px' }}>
@@ -96,7 +96,7 @@ export default function ProductDetail() {
         </div>
 
         <SectionHeading style={{ margin: '0 0 12px' }}>Storage</SectionHeading>
-        <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', lineHeight: 1.7, margin: 0 }}>
+        <p style={{ fontFamily: 'var(--font-technical)', fontSize: 12, color: 'var(--color-secondary-text)', lineHeight: 1.7, margin: 0 }}>
           {product.storage.map((line, i) => (
             <span key={line}>
               {line}

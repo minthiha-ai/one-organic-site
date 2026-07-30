@@ -3,6 +3,7 @@ import VariantCard from '../components/VariantCard.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import ScriptText from '../components/ScriptText.jsx';
 import Button from '../components/Button.jsx';
+import MissionBand from '../components/MissionBand.jsx';
 import { products } from '../data/products.js';
 import { heroCoconut, brandStoryPhoto } from '../assets/images/index.js';
 
@@ -15,7 +16,7 @@ function ProductLine({ eyebrow, heading, intro, items, describe, shopHref }) {
     <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '40px var(--gutter)' }}>
       <ScriptText size={20} style={{ margin: '0 0 4px' }}>{eyebrow}</ScriptText>
       <SectionHeading style={{ margin: '0 0 10px' }}>{heading}</SectionHeading>
-      <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary-text)', margin: '0 0 24px', maxWidth: 560 }}>
+      <p style={{ fontFamily: 'var(--font-italic)', fontStyle: 'italic', fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary-text)', margin: '0 0 24px', maxWidth: 560 }}>
         {intro}
       </p>
       <div
@@ -56,7 +57,7 @@ export default function Home() {
           <ScriptText size={26} style={{ margin: '0 0 4px' }}>one earth, one life</ScriptText>
           <h1
             style={{
-              fontFamily: 'var(--font-serif)',
+              fontFamily: 'var(--font-heading)',
               fontSize: 'var(--hero-title-size)',
               fontWeight: 600,
               margin: '0 0 14px',
@@ -65,9 +66,18 @@ export default function Home() {
           >
             Interwoven &amp; Inseparable
           </h1>
-          <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary-text)', margin: '0 0 20px', maxWidth: 420 }}>
-            One Organic is committed to providing the finest organic coconut products to discerning consumers —
-            cold-pressed and handcrafted in small batches on Thailand's coastline.
+          <p
+            style={{
+              fontFamily: 'var(--font-italic)',
+              fontStyle: 'italic',
+              fontSize: 14,
+              lineHeight: 1.6,
+              color: 'var(--color-secondary-text)',
+              margin: '0 0 20px',
+              maxWidth: 420,
+            }}
+          >
+            It is a simple truth that the health of our Earth, and its People, are interwoven and inseparable.
           </p>
           <Button to="/shop">Shop the collection</Button>
         </div>
@@ -83,7 +93,7 @@ export default function Home() {
       <ProductLine
         eyebrow="one of earth's greatest gifts to mankind"
         heading="Virgin Coconut Oil"
-        intro="Cold-pressed and centrifuge-extracted from organic coconuts — low moisture, high purity, and high in lauric acid. The way nature intended."
+        intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid — fast-absorbing, gluten free, and vegan."
         items={vcoItems}
         describe={() => 'Glass jar'}
         shopHref="/shop?category=Coconut+Oil"
@@ -93,7 +103,7 @@ export default function Home() {
         <ProductLine
           eyebrow="one of the most nutritious sugars"
           heading="Coconut Syrup"
-          intro="Unrefined syrup tapped straight from the coconut flower — a low-glycemic, mineral-rich alternative to refined sugar."
+          intro="Low glycemic index, high in minerals, and mildly sweet — gluten free and vegan."
           items={syrupItems}
           describe={() => 'Glass jar'}
           shopHref="/shop?category=Coconut+Syrup"
@@ -104,7 +114,7 @@ export default function Home() {
         <ProductLine
           eyebrow="love yourself, love earth"
           heading="Coconut Oil Soap"
-          intro="Handcrafted in small batches from 100% organic cold-pressed virgin coconut oil — no SLS, no preservatives, no synthetic fragrance."
+          intro="Handcrafted from 100% organic cold-pressed virgin coconut oil — no SLS, no SLES, no sulphates, no preservatives, no fragrances."
           items={soapItems}
           describe={(p) => p.tags[0]}
           shopHref="/shop?category=Bath+%26+Body"
@@ -133,7 +143,7 @@ export default function Home() {
           </ScriptText>
           <h2
             style={{
-              fontFamily: 'var(--font-serif)',
+              fontFamily: 'var(--font-heading)',
               fontSize: 19,
               fontWeight: 600,
               margin: '0 auto 12px',
@@ -144,11 +154,23 @@ export default function Home() {
           >
             Providing the finest organic coconut products to discerning consumers.
           </h2>
-          <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', margin: '0 auto', lineHeight: 1.6, maxWidth: 420 }}>
+          <p
+            style={{
+              fontFamily: 'var(--font-italic)',
+              fontStyle: 'italic',
+              fontSize: 13,
+              color: 'var(--color-dark-band-text-secondary)',
+              margin: '0 auto',
+              lineHeight: 1.6,
+              maxWidth: 420,
+            }}
+          >
             Let's work together to build a healthy and sustainable tomorrow.
           </p>
         </div>
       </div>
+
+      <MissionBand />
     </>
   );
 }

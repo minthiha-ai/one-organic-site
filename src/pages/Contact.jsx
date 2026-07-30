@@ -9,7 +9,7 @@ export default function Contact() {
       <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
         <div style={{ padding: '32px var(--gutter) 8px' }}>
           <ScriptText size={20} style={{ margin: '0 0 4px' }}>say hello</ScriptText>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 24, fontWeight: 600, margin: 0 }}>Contact</h1>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 24, fontWeight: 600, margin: 0 }}>Contact</h1>
         </div>
 
         <div style={{ padding: '12px var(--gutter) 8px' }}>

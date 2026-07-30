@@ -36,7 +36,7 @@ export default function ProductCard({ image, alt, name, tagline, price, tags, to
         <p style={{ fontSize: 13, fontWeight: 500, margin: '0 0 4px' }}>{name}</p>
         <p
           style={{
-            fontFamily: 'var(--font-serif)',
+            fontFamily: 'var(--font-heading)',
             fontStyle: 'italic',
             fontSize: 11,
             color: 'var(--color-accent)',

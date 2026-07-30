@@ -23,10 +23,14 @@
   /* Warm accent wash — a mid-tone moment distinct from the neutral tint */
   --color-accent-wash: #F0E1CC;
 
-  /* Fonts */
-  --font-serif: 'Playfair Display', serif;
-  --font-script: 'Caveat', cursive;
-  --font-sans: 'Inter', sans-serif;
+  /* Fonts — matched to the brochure's font sheet (free equivalents where the original is commercial/system-only) */
+  --font-heading: 'Fredoka', sans-serif;       /* brochure: Heaven Matters Personal Use (product headers) */
+  --font-script: 'Caveat', cursive;            /* brochure: Dyno (script eyebrows) */
+  --font-sans: 'Inter', sans-serif;            /* brochure: Sukhumvit Set (body/list copy) */
+  --font-italic: Arial, Helvetica, sans-serif; /* brochure: Arial Italic (intro paragraphs) */
+  --font-label: 'Archivo', sans-serif;         /* brochure: Helvetica (uppercase labels/headers) */
+  --font-statement: 'Anton', sans-serif;       /* brochure: Cheap Pine (bold statement type) */
+  --font-technical: 'Courier Prime', monospace; /* brochure: American Typewriter (technical/storage copy) */
 
   /* Layout (responsive — mobile values here, overridden at breakpoints below) */
   --page-max-width: 680px;

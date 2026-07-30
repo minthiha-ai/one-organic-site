@@ -16,7 +16,7 @@ function TextTab({ label, active, onClick }) {
       type="button"
       onClick={onClick}
       style={{
-        fontFamily: 'inherit',
+        fontFamily: 'var(--font-label)',
         fontSize: 11,
         letterSpacing: '0.06em',
         textTransform: 'uppercase',
@@ -62,10 +62,10 @@ export default function Shop() {
   return (
     <div>
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '48px var(--gutter) 24px', textAlign: 'center' }}>
-        <p style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-label)', margin: '0 0 10px' }}>
+        <p style={{ fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-label)', margin: '0 0 10px' }}>
           The Collection
         </p>
-        <h1 style={{ fontFamily: 'var(--font-serif)', fontWeight: 600, fontSize: 24, margin: 0 }}>Shop</h1>
+        <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 24, margin: 0 }}>Shop</h1>
       </div>
 
       <div
@@ -131,7 +131,7 @@ export default function Shop() {
           key={group.category}
           style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: i === grouped.length - 1 ? '32px var(--gutter) 48px' : '32px var(--gutter) 8px' }}
         >
-          <p style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-label)', margin: '0 0 18px' }}>
+          <p style={{ fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-label)', margin: '0 0 18px' }}>
             {group.category}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '32px 24px' }}>

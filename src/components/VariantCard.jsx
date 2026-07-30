@@ -20,6 +20,7 @@ export default function VariantCard({ image, alt, label, description }) {
       <div style={{ padding: 12 }}>
         <p
           style={{
+            fontFamily: 'var(--font-label)',
             fontSize: 10,
             letterSpacing: '0.06em',
             textTransform: 'uppercase',
