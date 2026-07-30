@@ -1,37 +1,117 @@
 import CertStrip from '../components/CertStrip.jsx';
-import VariantCard from '../components/VariantCard.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import ScriptText from '../components/ScriptText.jsx';
 import Button from '../components/Button.jsx';
 import MissionBand from '../components/MissionBand.jsx';
+import PillTag from '../components/PillTag.jsx';
+import IconChip from '../components/IconChip.jsx';
 import { products } from '../data/products.js';
 import { heroCoconut, brandStoryPhoto } from '../assets/images/index.js';
+import { usdaSeal, euSeal } from '../assets/brand/index.js';
 
 const vcoItems = products.filter((p) => p.sizeGroup === 'vco');
 const syrupItems = products.filter((p) => p.sizeGroup === 'syrup');
 const soapItems = products.filter((p) => p.sizeGroup === 'soap');
 
-function ProductLine({ eyebrow, heading, intro, items, describe, shopHref }) {
+const sizeOf = (label) => parseFloat(label) || 0;
+const vcoShelf = [...vcoItems].sort((a, b) => sizeOf(b.optionLabel) - sizeOf(a.optionLabel));
+
+const soapHighlights = ['No SLS', 'No SLES', 'No Sulphates', 'No Preservatives', 'No Fragrances', 'Handcrafted'];
+const soapUsage = [
+  { icon: 'ti-droplet', label: 'Face & Body Wash' },
+  { icon: 'ti-sparkles', label: 'Gentle Exfoliation' },
+];
+
+function CertBadges({ showEu = true }) {
   return (
-    <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '40px var(--gutter)' }}>
-      <ScriptText size={20} style={{ margin: '0 0 4px' }}>{eyebrow}</ScriptText>
-      <SectionHeading style={{ margin: '0 0 10px' }}>{heading}</SectionHeading>
-      <p style={{ fontFamily: 'var(--font-italic)', fontStyle: 'italic', fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary-text)', margin: '0 0 24px', maxWidth: 560 }}>
-        {intro}
-      </p>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
-          gap: 12,
-          marginBottom: 20,
-        }}
-      >
-        {items.map((p) => (
-          <VariantCard key={p.slug} image={p.image} alt={p.alt} label={p.optionLabel} description={describe(p)} />
-        ))}
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+      <img src={usdaSeal} alt="USDA Organic certified" style={{ height: 40, width: 'auto' }} />
+      {showEu && <img src={euSeal} alt="EU Organic certified" style={{ height: 26, width: 'auto', borderRadius: 3 }} />}
+    </div>
+  );
+}
+
+function ProductShelf({ items, heights, gap = 28, maxItemWidth = 130 }) {
+  return (
+    <div
+      style={{
+        background: 'var(--color-tint)',
+        borderRadius: 'var(--radius-md)',
+        padding: '28px 20px 20px',
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        gap,
+        flexWrap: 'wrap',
+        minHeight: 220,
+      }}
+    >
+      {items.map((p, i) => (
+        <div key={p.slug} style={{ textAlign: 'center' }}>
+          <img src={p.image} alt={p.alt} style={{ height: heights[i] ?? heights[heights.length - 1], width: 'auto', maxWidth: maxItemWidth, objectFit: 'contain', display: 'block', margin: '0 auto' }} />
+          <p
+            style={{
+              fontFamily: 'var(--font-label)',
+              fontSize: 10,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: 'var(--color-label)',
+              margin: '10px 0 0',
+              maxWidth: Math.max(maxItemWidth, 76),
+            }}
+          >
+            {p.optionLabel}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ProductLine({ eyebrow, heading, intro, shelf, highlights, usage, shopHref, showEu }) {
+  return (
+    <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '56px var(--gutter)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 20, marginBottom: 32 }}>
+        <div style={{ maxWidth: 560 }}>
+          <ScriptText size={20} style={{ margin: '0 0 4px' }}>{eyebrow}</ScriptText>
+          <SectionHeading style={{ margin: '0 0 10px' }}>{heading}</SectionHeading>
+          <p style={{ fontFamily: 'var(--font-italic)', fontStyle: 'italic', fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary-text)', margin: 0 }}>
+            {intro}
+          </p>
+        </div>
+        <CertBadges showEu={showEu} />
       </div>
-      <Button to={shopHref} style={{ background: 'transparent', color: 'var(--color-label)', border: '0.5px solid var(--color-border)', padding: '10px 20px' }}>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 36, alignItems: 'start' }}>
+        {shelf}
+
+        <div>
+          <p style={{ fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-label)', margin: '0 0 12px' }}>
+            Highlights
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 24 }}>
+            {highlights.map((h) => (
+              <PillTag key={h}>{h}</PillTag>
+            ))}
+          </div>
+
+          <p style={{ fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-label)', margin: '0 0 12px' }}>
+            Ways to use
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {usage.map(({ icon, label }) => (
+              <IconChip key={label} icon={icon}>
+                {label}
+              </IconChip>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <Button
+        to={shopHref}
+        style={{ marginTop: 32, background: 'transparent', color: 'var(--color-label)', border: '0.5px solid var(--color-border)', padding: '10px 20px' }}
+      >
         Shop {heading} →
       </Button>
     </div>
@@ -94,9 +174,11 @@ export default function Home() {
         eyebrow="one of earth's greatest gifts to mankind"
         heading="Virgin Coconut Oil"
         intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid — fast-absorbing, gluten free, and vegan."
-        items={vcoItems}
-        describe={() => 'Glass jar'}
+        shelf={<ProductShelf items={vcoShelf} heights={[190, 160, 120]} />}
+        highlights={vcoItems[0].highlights}
+        usage={vcoItems[0].usageItems}
         shopHref="/shop?category=Coconut+Oil"
+        showEu
       />
 
       <div style={{ borderTop: '0.5px solid var(--color-border)' }}>
@@ -104,9 +186,11 @@ export default function Home() {
           eyebrow="one of the most nutritious sugars"
           heading="Coconut Syrup"
           intro="Low glycemic index, high in minerals, and mildly sweet — gluten free and vegan."
-          items={syrupItems}
-          describe={() => 'Glass jar'}
+          shelf={<ProductShelf items={syrupItems} heights={[180]} />}
+          highlights={syrupItems[0].highlights}
+          usage={syrupItems[0].usageItems}
           shopHref="/shop?category=Coconut+Syrup"
+          showEu
         />
       </div>
 
@@ -115,9 +199,11 @@ export default function Home() {
           eyebrow="love yourself, love earth"
           heading="Coconut Oil Soap"
           intro="Handcrafted from 100% organic cold-pressed virgin coconut oil — no SLS, no SLES, no sulphates, no preservatives, no fragrances."
-          items={soapItems}
-          describe={(p) => p.tags[0]}
+          shelf={<ProductShelf items={soapItems} heights={[110, 110, 110, 110]} gap={16} maxItemWidth={88} />}
+          highlights={soapHighlights}
+          usage={soapUsage}
           shopHref="/shop?category=Bath+%26+Body"
+          showEu={false}
         />
       </div>
 
