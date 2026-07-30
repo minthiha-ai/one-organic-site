@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { logoLight } from '../assets/brand/index.js';
 
 const navLinkStyle = {
@@ -7,6 +7,9 @@ const navLinkStyle = {
 };
 
 export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switchLabel }) {
+  const location = useLocation();
+  const isLanding = location.pathname === homeTo;
+
   return (
     <div style={{ boxShadow: '0 2px 12px rgba(38,32,20,0.06)' }}>
       <div
@@ -25,33 +28,39 @@ export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switc
           <img src={logoLight} alt="One Organic" style={{ height: 30, width: 'auto', display: 'block' }} />
         </Link>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 20, fontSize: 13 }}>
-          <Link to={shopTo} style={navLinkStyle}>Shop</Link>
-          <Link to="/contact" style={navLinkStyle}>Contact</Link>
-          <Link to="/cart" style={{ textDecoration: 'none', lineHeight: 0 }}>
-            <i
-              className="ti ti-shopping-bag"
-              style={{ fontSize: 18, color: 'var(--color-text)' }}
-              aria-hidden="true"
-            />
-          </Link>
-          {switchTo && (
-            <Link
-              to={switchTo}
-              style={{
-                fontSize: 11,
-                color: 'var(--color-label)',
-                background: 'var(--color-accent-wash)',
-                padding: '5px 10px',
-                borderRadius: 'var(--radius-pill)',
-                textDecoration: 'none',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {switchLabel} →
-            </Link>
-          )}
-        </div>
+        {(!isLanding || switchTo) && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 20, fontSize: 13 }}>
+            {!isLanding && (
+              <>
+                <Link to={shopTo} style={navLinkStyle}>Shop</Link>
+                <Link to="/contact" style={navLinkStyle}>Contact</Link>
+                <Link to="/cart" style={{ textDecoration: 'none', lineHeight: 0 }}>
+                  <i
+                    className="ti ti-shopping-bag"
+                    style={{ fontSize: 18, color: 'var(--color-text)' }}
+                    aria-hidden="true"
+                  />
+                </Link>
+              </>
+            )}
+            {switchTo && (
+              <Link
+                to={switchTo}
+                style={{
+                  fontSize: 11,
+                  color: 'var(--color-label)',
+                  background: 'var(--color-accent-wash)',
+                  padding: '5px 10px',
+                  borderRadius: 'var(--radius-pill)',
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {switchLabel} →
+              </Link>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
