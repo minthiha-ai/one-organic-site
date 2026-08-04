@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import Home from './pages/Home.jsx';
+import Home2 from './pages/Home2.jsx';
 import Shop from './pages/Shop.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
 import Cart from './pages/Cart.jsx';
@@ -18,6 +19,20 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/contact" element={<Contact />} />
+        </Route>
+        <Route
+          path="/v2"
+          element={
+            <Layout
+              className="v2-page"
+              homeTo="/v2"
+              shopTo="/shop"
+              switchTo="/"
+              switchLabel="View v1"
+            />
+          }
+        >
+          <Route index element={<Home2 />} />
         </Route>
         <Route
           path="/preview-white"
