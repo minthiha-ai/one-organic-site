@@ -1,14 +1,16 @@
 import './Home2.css';
 import { products } from '../data/products.js';
-import { heroCoconut, brandStoryPhoto } from '../assets/images/index.js';
+import {
+  heroCoconut,
+  brandStoryPhoto,
+  stitchPlaceholderVco,
+  stitchPlaceholderSyrup,
+  stitchPlaceholderSoap,
+} from '../assets/images/index.js';
 import { usdaSeal, euSeal } from '../assets/brand/index.js';
 
 const vcoItems = products.filter((p) => p.sizeGroup === 'vco');
 const syrupItem = products.find((p) => p.sizeGroup === 'syrup');
-const soapItems = products.filter((p) => p.sizeGroup === 'soap');
-
-const sizeOf = (label) => parseFloat(label) || 0;
-const vcoShelf = [...vcoItems].sort((a, b) => sizeOf(b.optionLabel) - sizeOf(a.optionLabel));
 
 const soapHighlights = ['No SLS', 'No SLES', 'No Sulphates', 'No Preservatives', 'No Fragrances', 'Handcrafted'];
 const soapUsage = [
@@ -16,18 +18,11 @@ const soapUsage = [
   { icon: 'ti-sparkles', label: 'Gentle Exfoliation' },
 ];
 
-function ProductGroup({ items, heights, maxItemWidth = 180, gap = 'var(--sp-3)' }) {
+function ProductPhoto({ src, alt }) {
   return (
-    <div className="v2-panel v2-photo-square" style={{ gap, padding: 'var(--sp-4)' }}>
-      {items.map((p, i) => (
-        <img
-          key={p.slug}
-          src={p.image}
-          alt={p.alt}
-          className="v2-contain"
-          style={{ height: heights[i] ?? heights[heights.length - 1], width: 'auto', maxWidth: maxItemWidth }}
-        />
-      ))}
+    <div className="v2-panel v2-photo-square">
+      {/* TEMP placeholder — AI-generated (Google Stitch export), not final branding, swap for real photo */}
+      <img src={src} alt={alt} className="v2-cover" />
     </div>
   );
 }
@@ -94,7 +89,7 @@ export default function Home2() {
         eyebrow="one of earth's greatest gifts to mankind"
         heading="Virgin Coconut Oil"
         intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid — fast-absorbing, gluten free, and vegan."
-        media={<ProductGroup items={vcoShelf} heights={[260, 220, 170]} />}
+        media={<ProductPhoto src={stitchPlaceholderVco} alt="Three jars of Virgin Coconut Oil on a wooden countertop" />}
         highlights={vcoItems[0].highlights}
         usage={vcoItems[0].usageItems}
         shopHref="/shop?category=Coconut+Oil"
@@ -106,7 +101,7 @@ export default function Home2() {
         eyebrow="one of the most nutritious sugars"
         heading="Coconut Syrup"
         intro="Low glycemic index, high in minerals, and mildly sweet — gluten free and vegan."
-        media={<ProductGroup items={[syrupItem]} heights={[280]} maxItemWidth={220} />}
+        media={<ProductPhoto src={stitchPlaceholderSyrup} alt="Jar of Coconut Syrup on a wooden countertop" />}
         highlights={syrupItem.highlights}
         usage={syrupItem.usageItems}
         shopHref="/shop?category=Coconut+Syrup"
@@ -118,7 +113,7 @@ export default function Home2() {
         eyebrow="love yourself, love earth"
         heading="Coconut Oil Soap"
         intro="Handcrafted from 100% organic cold-pressed virgin coconut oil — no SLS, no SLES, no sulphates, no preservatives, no fragrances."
-        media={<ProductGroup items={soapItems} heights={[130, 130, 130, 130]} maxItemWidth={96} gap="var(--sp-2)" />}
+        media={<ProductPhoto src={stitchPlaceholderSoap} alt="Four bars of Coconut Oil Soap on a ceramic plate" />}
         highlights={soapHighlights}
         usage={soapUsage}
         shopHref="/shop?category=Bath+%26+Body"

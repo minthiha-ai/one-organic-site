@@ -31,14 +31,14 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           </div>
 
           <div style={{ flex: '1 1 140px' }}>
-            <p style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Shop</p>
+            <p className="v2-footer-label" style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Shop</p>
             <Link to={homeTo} style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Home</Link>
             <Link to={shopTo} style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>All Products</Link>
             <Link to="/cart" style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Cart</Link>
           </div>
 
           <div style={{ flex: '1 1 160px' }}>
-            <p style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Company</p>
+            <p className="v2-footer-label" style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Company</p>
             <Link to="/contact" style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Contact</Link>
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', margin: '0 0 8px' }}>
               hello@one-organic.com
@@ -49,7 +49,7 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           </div>
 
           <div style={{ flex: '1 1 220px' }}>
-            <p style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Stay in touch</p>
+            <p className="v2-footer-label" style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Stay in touch</p>
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', lineHeight: 1.6, margin: '0 0 12px' }}>
               Get news on new harvests and small-batch runs.
             </p>

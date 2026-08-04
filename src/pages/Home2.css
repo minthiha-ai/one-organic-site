@@ -146,6 +146,11 @@
   color: var(--color-accent-light);
 }
 
+/* Footer is shared with v1 — bump its 10px category labels only inside .v2-page */
+.v2-page .v2-footer-label {
+  font-size: 13px !important;
+}
+
 /* Buttons */
 .v2-btn {
   display: inline-flex;

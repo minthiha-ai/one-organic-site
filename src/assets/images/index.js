@@ -11,3 +11,9 @@ export { default as vco450 } from './virgin-coconut-oil-450ml-glass-jar.png';
 export { default as vco125 } from './virgin-coconut-oil-125ml-glass-jar.png';
 export { default as coconutSugar } from './coconut-sugar.jpg';
 export { default as coconutBodyButter } from './coconut-body-butter.jpg';
+
+// TEMP placeholders — AI-generated (Google Stitch export), not real One Organic product photography.
+// Used on /v2 only, until Stephen delivers real photos per Photography Spec for Stephen.md.
+export { default as stitchPlaceholderVco } from './stitch-placeholder-vco.jpg';
+export { default as stitchPlaceholderSyrup } from './stitch-placeholder-syrup.jpg';
+export { default as stitchPlaceholderSoap } from './stitch-placeholder-soap.jpg';
