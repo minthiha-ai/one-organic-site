@@ -1,13 +1,13 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { products, categories } from '../data/products.js';
+import { api } from '../lib/api.js';
 import CatalogCard from '../components/CatalogCard.jsx';
 
 const priceBuckets = [
   { key: 'all', label: 'All', test: () => true },
-  { key: 'under10', label: 'Under $10', test: (p) => p.price < 10 },
-  { key: '10to20', label: '$10–$20', test: (p) => p.price >= 10 && p.price <= 20 },
-  { key: 'over20', label: 'Over $20', test: (p) => p.price > 20 },
+  { key: 'under10', label: 'Under ฿10', test: (p) => p.price < 10 },
+  { key: '10to20', label: '฿10–฿20', test: (p) => p.price >= 10 && p.price <= 20 },
+  { key: 'over20', label: 'Over ฿20', test: (p) => p.price > 20 },
 ];
 
 function TextTab({ label, active, onClick }) {
@@ -38,25 +38,59 @@ export default function Shop() {
   const [searchParams] = useSearchParams();
   const initialCategory = searchParams.get('category');
 
+  const [categories, setCategories] = useState([]);
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState(
-    initialCategory && categories.includes(initialCategory) ? initialCategory : 'All'
-  );
+  const [category, setCategory] = useState(initialCategory ?? 'All');
   const [priceBucket, setPriceBucket] = useState('all');
+
+  useEffect(() => {
+    Promise.all([api.get('/categories'), api.get('/products')])
+      .then(([categoriesRes, productsRes]) => {
+        setCategories(categoriesRes.data);
+
+        // Flatten product -> variants into one catalog row per sellable SKU,
+        // matching the shop grid's existing per-size-card density.
+        const flattened = productsRes.data.flatMap((product) =>
+          product.variants.map((variant) => ({
+            key: `${product.slug}-${variant.id}`,
+            name:
+              product.category.slug === 'bath-body'
+                ? variant.option_label
+                : `${product.name} — ${variant.option_label}`,
+            image: variant.image_url,
+            alt: `${product.name} — ${variant.option_label}`,
+            price: variant.price,
+            categoryName: product.category.name,
+            categorySlug: product.category.slug,
+            to: `/product/${product.slug}?variant=${variant.id}`,
+          }))
+        );
+        setRows(flattened);
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     const bucket = priceBuckets.find((b) => b.key === priceBucket);
-    return products.filter((p) => {
-      if (category !== 'All' && p.category !== category) return false;
-      if (!bucket.test(p)) return false;
-      if (q && !`${p.name} ${p.tagline} ${p.optionLabel}`.toLowerCase().includes(q)) return false;
+    return rows.filter((row) => {
+      if (category !== 'All' && row.categorySlug !== category) return false;
+      if (!bucket.test(row)) return false;
+      if (q && !row.name.toLowerCase().includes(q)) return false;
       return true;
     });
-  }, [query, category, priceBucket]);
+  }, [rows, query, category, priceBucket]);
 
   const grouped = categories
-    .map((cat) => ({ category: cat, items: filtered.filter((p) => p.category === cat) }))
+    .map((cat) => ({
+      category: cat,
+      items: filtered.filter((row) => row.categorySlug === cat.slug),
+    }))
     .filter((group) => group.items.length > 0);
 
   return (
@@ -109,7 +143,7 @@ export default function Shop() {
           <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
             <TextTab label="All" active={category === 'All'} onClick={() => setCategory('All')} />
             {categories.map((cat) => (
-              <TextTab key={cat} label={cat} active={category === cat} onClick={() => setCategory(cat)} />
+              <TextTab key={cat.slug} label={cat.name} active={category === cat.slug} onClick={() => setCategory(cat.slug)} />
             ))}
           </div>
           <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
@@ -120,7 +154,21 @@ export default function Shop() {
         </div>
       </div>
 
-      {grouped.length === 0 && (
+      {loading && (
+        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '48px var(--gutter)', textAlign: 'center' }}>
+          <p style={{ fontSize: 14, color: 'var(--color-secondary-text)', margin: 0 }}>Loading…</p>
+        </div>
+      )}
+
+      {error && (
+        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '48px var(--gutter)', textAlign: 'center' }}>
+          <p style={{ fontSize: 14, color: 'var(--color-secondary-text)', margin: 0 }}>
+            Couldn&rsquo;t load the shop right now ({error}).
+          </p>
+        </div>
+      )}
+
+      {!loading && !error && grouped.length === 0 && (
         <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '48px var(--gutter)', textAlign: 'center' }}>
           <p style={{ fontSize: 14, color: 'var(--color-secondary-text)', margin: 0 }}>No products match your search.</p>
         </div>
@@ -128,21 +176,21 @@ export default function Shop() {
 
       {grouped.map((group, i) => (
         <div
-          key={group.category}
+          key={group.category.slug}
           style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: i === grouped.length - 1 ? '32px var(--gutter) 48px' : '32px var(--gutter) 8px' }}
         >
           <p style={{ fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-label)', margin: '0 0 18px' }}>
-            {group.category}
+            {group.category.name}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '32px 24px' }}>
-            {group.items.map((p) => (
+            {group.items.map((row) => (
               <CatalogCard
-                key={p.slug}
-                image={p.image}
-                alt={p.alt}
-                name={p.sizeGroup === 'soap' ? p.optionLabel : `${p.name} — ${p.optionLabel}`}
-                price={p.price}
-                to={`/product/${p.slug}`}
+                key={row.key}
+                image={row.image}
+                alt={row.alt}
+                name={row.name}
+                price={row.price}
+                to={row.to}
               />
             ))}
           </div>

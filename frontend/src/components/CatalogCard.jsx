@@ -21,7 +21,7 @@ export default function CatalogCard({ image, alt, name, price, to }) {
           {name}
         </span>
         <span style={{ fontSize: 12, color: 'var(--color-accent)', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>
-          ${price.toFixed(2)}
+          ฿{price.toFixed(2)}
         </span>
       </div>
     </Link>

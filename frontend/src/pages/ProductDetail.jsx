@@ -1,4 +1,5 @@
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, useSearchParams, Navigate } from 'react-router-dom';
 import CertStrip from '../components/CertStrip.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import EyebrowLabel from '../components/EyebrowLabel.jsx';
@@ -7,17 +8,70 @@ import PillTag from '../components/PillTag.jsx';
 import IconChip from '../components/IconChip.jsx';
 import SizeOption from '../components/SizeOption.jsx';
 import Button from '../components/Button.jsx';
-import { getProductBySlug, getSiblings } from '../data/products.js';
+import { api, ApiError } from '../lib/api.js';
+import { useCart } from '../context/CartContext.jsx';
 
 export default function ProductDetail() {
   const { slug } = useParams();
-  const product = getProductBySlug(slug);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { addItem } = useCart();
 
-  if (!product) {
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+  const [selectedVariantId, setSelectedVariantId] = useState(null);
+  const [justAdded, setJustAdded] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setNotFound(false);
+
+    api
+      .get(`/products/${slug}`)
+      .then((res) => {
+        setProduct(res.data);
+        const requested = Number(searchParams.get('variant'));
+        const initial =
+          res.data.variants.find((v) => v.id === requested) ??
+          res.data.default_variant ??
+          res.data.variants[0];
+        setSelectedVariantId(initial?.id ?? null);
+      })
+      .catch((err) => {
+        if (err instanceof ApiError && err.status === 404) {
+          setNotFound(true);
+        }
+      })
+      .finally(() => setLoading(false));
+    // Only refetch when the product itself changes — switching variant just
+    // updates local state and the URL, it doesn't need a new fetch.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
+
+  if (notFound) {
     return <Navigate to="/shop" replace />;
   }
 
-  const siblings = getSiblings(product);
+  if (loading || !product) {
+    return (
+      <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '64px var(--gutter)', textAlign: 'center' }}>
+        <p style={{ fontSize: 14, color: 'var(--color-secondary-text)' }}>Loading…</p>
+      </div>
+    );
+  }
+
+  const variant = product.variants.find((v) => v.id === selectedVariantId) ?? product.variants[0];
+
+  function selectVariant(id) {
+    setSelectedVariantId(id);
+    setSearchParams({ variant: id }, { replace: true });
+  }
+
+  function handleAddToCart() {
+    addItem(product, variant, 1);
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1800);
+  }
 
   return (
     <>
@@ -34,36 +88,49 @@ export default function ProductDetail() {
               justifyContent: 'center',
             }}
           >
-            <img
-              src={product.image}
-              alt={product.alt}
-              style={{ maxWidth: '75%', maxHeight: '75%', objectFit: 'contain' }}
-            />
+            {variant.image_url && (
+              <img
+                src={variant.image_url}
+                alt={`${product.name} — ${variant.option_label}`}
+                style={{ maxWidth: '75%', maxHeight: '75%', objectFit: 'contain' }}
+              />
+            )}
           </div>
         </div>
         <div style={{ flex: '1 1 240px', minWidth: 0 }}>
-          <ScriptText size={18} style={{ margin: '0 0 4px' }}>{product.scriptEyebrow}</ScriptText>
+          <ScriptText size={18} style={{ margin: '0 0 4px' }}>{product.script_eyebrow}</ScriptText>
           <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 23, fontWeight: 600, margin: '0 0 10px', lineHeight: 1.25 }}>
             {product.name}
           </h1>
           <p style={{ fontSize: 19, fontWeight: 500, color: 'var(--color-text)', margin: '0 0 18px' }}>
-            ${product.price.toFixed(2)}
+            ฿{variant.price.toFixed(2)}
           </p>
 
-          {siblings.length > 1 && (
+          {product.variants.length > 1 && (
             <>
               <EyebrowLabel style={{ margin: '0 0 8px' }}>Options</EyebrowLabel>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, margin: '0 0 22px' }}>
-                {siblings.map((sibling) => (
-                  <Link key={sibling.slug} to={`/product/${sibling.slug}`} style={{ textDecoration: 'none' }}>
-                    <SizeOption label={sibling.optionLabel} selected={sibling.slug === product.slug} />
-                  </Link>
+                {product.variants.map((v) => (
+                  <button
+                    key={v.id}
+                    type="button"
+                    onClick={() => selectVariant(v.id)}
+                    style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                  >
+                    <SizeOption label={v.option_label} selected={v.id === variant.id} />
+                  </button>
                 ))}
               </div>
             </>
           )}
 
-          <Button to="/cart">Add to cart</Button>
+          {!variant.in_stock && (
+            <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>Out of stock</p>
+          )}
+
+          <Button onClick={handleAddToCart} disabled={!variant.in_stock}>
+            {justAdded ? 'Added ✓' : 'Add to cart'}
+          </Button>
         </div>
       </div>
 
@@ -81,14 +148,14 @@ export default function ProductDetail() {
       >
         <SectionHeading style={{ margin: '0 0 16px' }}>Highlights</SectionHeading>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 28 }}>
-          {product.highlights.map((h) => (
+          {variant.highlights.map((h) => (
             <PillTag key={h}>{h}</PillTag>
           ))}
         </div>
 
         <SectionHeading style={{ margin: '0 0 16px' }}>Ways to use</SectionHeading>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 28 }}>
-          {product.usageItems.map(({ icon, label }) => (
+          {variant.usage_items.map(({ icon, label }) => (
             <IconChip key={label} icon={icon}>
               {label}
             </IconChip>
@@ -97,10 +164,10 @@ export default function ProductDetail() {
 
         <SectionHeading style={{ margin: '0 0 12px' }}>Storage</SectionHeading>
         <p style={{ fontFamily: 'var(--font-technical)', fontSize: 12, color: 'var(--color-secondary-text)', lineHeight: 1.7, margin: 0 }}>
-          {product.storage.map((line, i) => (
+          {variant.storage_instructions.map((line, i) => (
             <span key={line}>
               {line}
-              {i < product.storage.length - 1 && <br />}
+              {i < variant.storage_instructions.length - 1 && <br />}
             </span>
           ))}
         </p>

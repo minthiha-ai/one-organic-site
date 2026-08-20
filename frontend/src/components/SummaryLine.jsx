@@ -12,7 +12,7 @@ export default function SummaryLine({ label, price, size = 12, weight = 400, col
       }}
     >
       <span>{label}</span>
-      <span>${price}</span>
+      <span>฿{price}</span>
     </div>
   );
 }

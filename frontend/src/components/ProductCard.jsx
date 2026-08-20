@@ -47,7 +47,7 @@ export default function ProductCard({ image, alt, name, tagline, price, tags, to
         </p>
         {price != null && (
           <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--color-text)', margin: '0 0 8px' }}>
-            ${price.toFixed(2)}
+            ฿{price.toFixed(2)}
           </p>
         )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, margin: '0 0 10px' }}>

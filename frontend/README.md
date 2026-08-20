@@ -1,14 +1,20 @@
 # One Organic — Frontend
 
-React frontend for One Organic (Thailand) Co., Ltd., an organic coconut products brand. This started as a concept design mockup for client review and is now being wired up to the real backend in `../backend` (Laravel + Filament) — see the [root README](../README.md) for the full-platform picture.
+React frontend for One Organic (Thailand) Co., Ltd., an organic coconut products brand. Wired up to the real backend in `../backend` (Laravel + Filament) — see the [root README](../README.md) for the full-platform picture.
 
-**Current state (mid-migration):** product/cart/order data is still the static `src/data/products.js` file left over from the mockup phase. It's being replaced with real API calls to the Laravel backend. Until that lands:
+**Live and working against the real API:** Shop, product detail (with a functional size/variant switcher), cart (persisted to `localStorage`, real quantities/totals), and checkout (real guest orders, posted to `POST /api/checkout`) all read and write real backend data — nothing here is mock data or a non-functional form anymore.
 
-- Cart, checkout, and contact forms are non-functional — nothing submits or persists
-- "Add to cart", quantity steppers, and payment options are static UI, not wired to real state
-- Prices are illustrative placeholders
+**Known gap:** the `/` and `/v2` homepage marketing sections (product highlight spreads, hero copy) still read from the static `src/data/products.js` file rather than the API. Their layout is tightly coupled to that data shape (grouped shelf images, curated copy) — converting them is a deliberate follow-up, not a mechanical swap, so it's being done separately rather than rushed alongside the purchase-flow work. Shop/ProductDetail/Cart/Checkout — the actual money-moving path — are fully live.
 
 This project was converted from a set of static, single-file HTML mockups (with inline styles and base64-embedded images) into a proper Vite + React project, so it can be pushed to a repo and deployed to a shareable URL. The conversion was a **reorganization, not a redesign** — every page should look identical to the original HTML mockups.
+
+## Talking to the backend
+
+`src/lib/api.js` is a small fetch wrapper — base URL from `VITE_API_URL` (see `.env.example`), attaches a bearer token from `localStorage` when present, throws `ApiError` (with `.status` and `.errors`) on non-2xx responses.
+
+`src/context/CartContext.jsx` holds cart state (`localStorage`-persisted) keyed by `product_variant_id`. It only ever sends `{ product_variant_id, quantity }` to the backend at checkout — prices are never trusted client-side; the backend re-prices everything server-side.
+
+No login/register UI yet (backend fully supports it — see `backend/README.md`); checkout is guest-only for now, matching "guest checkout must work with zero friction" as the priority path.
 
 ## Pages
 
@@ -44,7 +50,10 @@ src/
 
 ## Running locally
 
+Needs the backend running too (see `../backend/README.md` — Herd, `http://one-organic-backend.test`).
+
 ```bash
+cp .env.example .env   # first time only
 npm install
 npm run dev
 ```

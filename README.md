@@ -21,13 +21,11 @@ Deployed on Vercel with **Root Directory** set to `frontend` (project settings, 
 
 ## Status
 
-- ✅ Frontend: concept design approved (v1 homepage + shop), v2 premium redesign in comparison
-- ✅ Backend: Laravel 12 + Filament v3 scaffolded, admin login working locally at http://one-organic-backend.test/admin
-- ✅ Domain model: Category/Product/ProductVariant/Customer/Address/Order/OrderItem, migrated and seeded with the real 8-SKU catalog
-- ✅ Filament admin: Products (+ variant images/pricing/stock/highlights), Orders (+ status workflow), Customers (+ addresses)
-- ✅ API: catalog browsing, customer auth, guest + authenticated checkout, order history/lookup, address book — 15 endpoints, curl-verified (see `backend/README.md`)
-- 🚧 Frontend still reads static `src/data/products.js`, not the backend API yet — next step
-- 🚧 Payments: not yet chosen (leaning Omise/Opn for Thai market — deferred)
+- ✅ Backend: Laravel 12 + Filament v3, full domain model, Filament admin, and a 15-endpoint REST API — all curl-verified (see `backend/README.md`)
+- ✅ Frontend purchase flow is live end-to-end against the real API: Shop → Product detail (real variant switcher) → Cart (persisted, real quantities/totals) → Checkout (real guest orders, verified in-browser and cross-checked against the backend after each step)
+- 🚧 Homepage marketing sections (`/`, `/v2`) still read static mockup data — deliberate follow-up, not yet started (see `frontend/README.md`)
+- 🚧 No login/register UI yet — backend supports customer accounts, checkout is guest-only for now
+- 🚧 Payments: not yet chosen (leaning Omise/Opn for Thai market — deferred); orders are created as `pending`, nothing is actually charged
 - 🚧 Hosting for backend: not yet chosen (building against local Herd for now)
 - ⚠️ Product prices are carried over from the mockup's placeholder values — not confirmed real THB pricing yet
 

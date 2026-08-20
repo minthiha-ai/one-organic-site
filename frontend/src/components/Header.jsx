@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { logoLight } from '../assets/brand/index.js';
+import { useCart } from '../context/CartContext.jsx';
 
 const navLinkStyle = {
   color: 'var(--color-text)',
@@ -9,6 +10,7 @@ const navLinkStyle = {
 export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switchLabel }) {
   const location = useLocation();
   const isLanding = location.pathname === homeTo;
+  const { count } = useCart();
 
   return (
     <div style={{ boxShadow: '0 2px 12px rgba(38,32,20,0.06)' }}>
@@ -34,12 +36,33 @@ export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switc
               <>
                 <Link to={shopTo} style={navLinkStyle}>Shop</Link>
                 <Link to="/contact" style={navLinkStyle}>Contact</Link>
-                <Link to="/cart" style={{ textDecoration: 'none', lineHeight: 0 }}>
+                <Link to="/cart" style={{ textDecoration: 'none', lineHeight: 0, position: 'relative', display: 'inline-flex' }}>
                   <i
                     className="ti ti-shopping-bag"
                     style={{ fontSize: 18, color: 'var(--color-text)' }}
                     aria-hidden="true"
                   />
+                  {count > 0 && (
+                    <span
+                      style={{
+                        position: 'absolute',
+                        top: -7,
+                        right: -9,
+                        minWidth: 15,
+                        height: 15,
+                        borderRadius: 999,
+                        background: 'var(--color-accent)',
+                        color: '#FFFFFF',
+                        fontSize: 9,
+                        fontWeight: 600,
+                        lineHeight: '15px',
+                        textAlign: 'center',
+                        padding: '0 3px',
+                      }}
+                    >
+                      {count}
+                    </span>
+                  )}
                 </Link>
               </>
             )}

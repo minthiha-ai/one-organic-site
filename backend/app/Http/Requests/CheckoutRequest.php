@@ -37,6 +37,10 @@ class CheckoutRequest extends FormRequest
             'shipping.postal_code' => ['required_without:address_id', 'string', 'max:32'],
             'shipping.country' => ['nullable', 'string', 'size:2'],
 
+            // Recorded for the admin's visibility only — no gateway is wired
+            // up yet, so this doesn't trigger any actual charge.
+            'payment_method' => ['nullable', 'string', 'max:50'],
+
             'notes' => ['nullable', 'string', 'max:1000'],
         ];
     }

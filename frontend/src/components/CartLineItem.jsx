@@ -1,4 +1,4 @@
-export default function CartLineItem({ image, alt, name, variant, qty, price }) {
+export default function CartLineItem({ image, alt, name, variant, qty, price, onIncrement, onDecrement, onRemove }) {
   return (
     <div
       style={{
@@ -21,7 +21,7 @@ export default function CartLineItem({ image, alt, name, variant, qty, price }) 
           overflow: 'hidden',
         }}
       >
-        <img src={image} alt={alt} style={{ maxWidth: '80%', maxHeight: '80%', objectFit: 'contain' }} />
+        {image && <img src={image} alt={alt} style={{ maxWidth: '80%', maxHeight: '80%', objectFit: 'contain' }} />}
       </div>
       <div style={{ flex: 1 }}>
         <p style={{ fontSize: 13, fontWeight: 500, margin: '0 0 2px' }}>{name}</p>
@@ -37,12 +37,33 @@ export default function CartLineItem({ image, alt, name, variant, qty, price }) 
           padding: '5px 10px',
         }}
       >
-        <i className="ti ti-minus" style={{ fontSize: 12, color: 'var(--color-secondary-text)' }} aria-hidden="true" />
+        <button
+          type="button"
+          onClick={onDecrement}
+          aria-label="Decrease quantity"
+          style={{ background: 'none', border: 'none', padding: 2, cursor: 'pointer', display: 'flex' }}
+        >
+          <i className="ti ti-minus" style={{ fontSize: 12, color: 'var(--color-secondary-text)' }} aria-hidden="true" />
+        </button>
         <span style={{ fontSize: 12, minWidth: 10, textAlign: 'center' }}>{qty}</span>
-        <i className="ti ti-plus" style={{ fontSize: 12, color: 'var(--color-secondary-text)' }} aria-hidden="true" />
+        <button
+          type="button"
+          onClick={onIncrement}
+          aria-label="Increase quantity"
+          style={{ background: 'none', border: 'none', padding: 2, cursor: 'pointer', display: 'flex' }}
+        >
+          <i className="ti ti-plus" style={{ fontSize: 12, color: 'var(--color-secondary-text)' }} aria-hidden="true" />
+        </button>
       </div>
-      <p style={{ fontSize: 13, fontWeight: 500, width: 52, textAlign: 'right', margin: 0 }}>${price}</p>
-      <i className="ti ti-trash" style={{ fontSize: 14, color: 'var(--color-muted)' }} aria-hidden="true" />
+      <p style={{ fontSize: 13, fontWeight: 500, width: 60, textAlign: 'right', margin: 0 }}>฿{price}</p>
+      <button
+        type="button"
+        onClick={onRemove}
+        aria-label="Remove item"
+        style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer', display: 'flex' }}
+      >
+        <i className="ti ti-trash" style={{ fontSize: 14, color: 'var(--color-muted)' }} aria-hidden="true" />
+      </button>
     </div>
   );
 }

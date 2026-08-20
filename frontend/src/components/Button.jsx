@@ -14,8 +14,13 @@ const baseStyle = {
   fontFamily: 'inherit',
 };
 
-export default function Button({ to, onClick, children, style, block = false }) {
-  const merged = { ...baseStyle, ...(block ? { display: 'block', textAlign: 'center', width: '100%', boxSizing: 'border-box' } : {}), ...style };
+export default function Button({ to, onClick, children, style, block = false, disabled = false, type = 'button' }) {
+  const merged = {
+    ...baseStyle,
+    ...(block ? { display: 'block', textAlign: 'center', width: '100%', boxSizing: 'border-box' } : {}),
+    ...(disabled ? { opacity: 0.5, cursor: 'not-allowed' } : {}),
+    ...style,
+  };
 
   if (to) {
     return (
@@ -26,7 +31,7 @@ export default function Button({ to, onClick, children, style, block = false }) 
   }
 
   return (
-    <button type="button" onClick={onClick} style={merged}>
+    <button type={type} onClick={onClick} disabled={disabled} style={merged}>
       {children}
     </button>
   );

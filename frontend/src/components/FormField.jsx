@@ -17,11 +17,19 @@ const labelStyle = {
   margin: '0 0 4px',
 };
 
-export function FormField({ label, type = 'text', placeholder, style }) {
+export function FormField({ label, type = 'text', placeholder, style, name, value, onChange, required }) {
   return (
     <div style={style ?? { margin: '0 0 12px' }}>
       <label style={labelStyle}>{label}</label>
-      <input type={type} placeholder={placeholder} style={inputStyle} />
+      <input
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        required={required}
+        style={inputStyle}
+      />
     </div>
   );
 }

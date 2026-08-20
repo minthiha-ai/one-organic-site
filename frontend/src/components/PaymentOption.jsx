@@ -1,4 +1,4 @@
-export default function PaymentOption({ icon, label, checked = false }) {
+export default function PaymentOption({ icon, label, value, checked = false, onChange }) {
   return (
     <label
       style={{
@@ -12,7 +12,14 @@ export default function PaymentOption({ icon, label, checked = false }) {
         margin: '0 0 10px',
       }}
     >
-      <input type="radio" name="payment" defaultChecked={checked} style={{ accentColor: 'var(--color-accent)' }} />
+      <input
+        type="radio"
+        name="payment"
+        value={value}
+        checked={checked}
+        onChange={onChange}
+        style={{ accentColor: 'var(--color-accent)' }}
+      />
       <i className={`ti ${icon}`} style={{ fontSize: 16, color: 'var(--color-accent)' }} aria-hidden="true" />
       <span style={{ fontSize: 13, color: 'var(--color-text)' }}>{label}</span>
     </label>

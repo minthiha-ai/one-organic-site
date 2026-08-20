@@ -83,6 +83,7 @@ class CheckoutController extends Controller
                 'shipping_state' => $shipping['state'] ?? null,
                 'shipping_postal_code' => $shipping['postal_code'],
                 'shipping_country' => $shipping['country'] ?? 'TH',
+                'payment_method' => $request->input('payment_method'),
                 'notes' => $request->input('notes'),
             ]);
 
