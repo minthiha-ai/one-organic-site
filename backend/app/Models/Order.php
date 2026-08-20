@@ -63,6 +63,11 @@ class Order extends Model
         });
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'order_number';
+    }
+
     public static function generateOrderNumber(): string
     {
         do {
