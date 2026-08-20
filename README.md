@@ -22,7 +22,9 @@ Deployed on Vercel with **Root Directory** set to `frontend` (project settings, 
 ## Status
 
 - ✅ Frontend: concept design approved (v1 homepage + shop), v2 premium redesign in comparison
-- 🚧 Backend: not yet scaffolded
+- ✅ Backend: Laravel 12 + Filament v3 scaffolded, admin login working locally at http://one-organic-backend.test/admin
+- 🚧 Domain models (Products, Categories, Orders, Customers) — not yet built
+- 🚧 API for the frontend to consume — not yet built
 - 🚧 Payments: not yet chosen (leaning Omise/Opn for Thai market — deferred)
 - 🚧 Hosting for backend: not yet chosen (building against local Herd for now)
 
