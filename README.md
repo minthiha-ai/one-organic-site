@@ -25,8 +25,8 @@ Deployed on Vercel with **Root Directory** set to `frontend` (project settings, 
 - ✅ Backend: Laravel 12 + Filament v3 scaffolded, admin login working locally at http://one-organic-backend.test/admin
 - ✅ Domain model: Category/Product/ProductVariant/Customer/Address/Order/OrderItem, migrated and seeded with the real 8-SKU catalog
 - ✅ Filament admin: Products (+ variant images/pricing/stock/highlights), Orders (+ status workflow), Customers (+ addresses)
-- 🚧 API for the frontend to consume — not yet built (Sanctum installed, not wired to routes)
-- 🚧 Frontend still reads static `src/data/products.js`, not the backend
+- ✅ API: catalog browsing, customer auth, guest + authenticated checkout, order history/lookup, address book — 15 endpoints, curl-verified (see `backend/README.md`)
+- 🚧 Frontend still reads static `src/data/products.js`, not the backend API yet — next step
 - 🚧 Payments: not yet chosen (leaning Omise/Opn for Thai market — deferred)
 - 🚧 Hosting for backend: not yet chosen (building against local Herd for now)
 - ⚠️ Product prices are carried over from the mockup's placeholder values — not confirmed real THB pricing yet
