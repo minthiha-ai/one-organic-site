@@ -6,15 +6,12 @@ import MissionBand from '../components/MissionBand.jsx';
 import PillTag from '../components/PillTag.jsx';
 import IconChip from '../components/IconChip.jsx';
 import { products } from '../data/products.js';
-import { heroCoconut, brandStoryPhoto } from '../assets/images/index.js';
+import { heroCoconut, brandStoryPhoto, vcoJars } from '../assets/images/index.js';
 import { usdaSeal, euSeal } from '../assets/brand/index.js';
 
 const vcoItems = products.filter((p) => p.sizeGroup === 'vco');
 const syrupItems = products.filter((p) => p.sizeGroup === 'syrup');
 const soapItems = products.filter((p) => p.sizeGroup === 'soap');
-
-const sizeOf = (label) => parseFloat(label) || 0;
-const vcoShelf = [...vcoItems].sort((a, b) => sizeOf(b.optionLabel) - sizeOf(a.optionLabel));
 
 const soapHighlights = ['No SLS', 'No SLES', 'No Sulphates', 'No Preservatives', 'No Fragrances', 'Handcrafted'];
 const soapUsage = [
@@ -27,6 +24,30 @@ function CertBadges({ showEu = true }) {
     <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
       <img src={usdaSeal} alt="USDA Organic certified" style={{ height: 40, width: 'auto' }} />
       {showEu && <img src={euSeal} alt="EU Organic certified" style={{ height: 26, width: 'auto', borderRadius: 3 }} />}
+    </div>
+  );
+}
+
+const PRODUCT_HERO_HEIGHT = 380;
+
+function ProductHero({ image, alt }) {
+  return (
+    <div
+      style={{
+        background: 'var(--color-tint)',
+        borderRadius: 'var(--radius-md)',
+        padding: '20px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: PRODUCT_HERO_HEIGHT,
+      }}
+    >
+      <img
+        src={image}
+        alt={alt}
+        style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', objectFit: 'contain', display: 'block' }}
+      />
     </div>
   );
 }
@@ -68,7 +89,7 @@ function ProductShelf({ items, heights, gap = 28, maxItemWidth = 130 }) {
   );
 }
 
-function ProductLine({ eyebrow, heading, intro, shelf, highlights, usage, shopHref, showEu }) {
+function ProductLine({ eyebrow, heading, intro, shelf, highlights, usage, showEu }) {
   return (
     <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '56px var(--gutter)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 20, marginBottom: 32 }}>
@@ -82,7 +103,7 @@ function ProductLine({ eyebrow, heading, intro, shelf, highlights, usage, shopHr
         <CertBadges showEu={showEu} />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 36, alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 36, alignItems: 'center' }}>
         {shelf}
 
         <div>
@@ -107,13 +128,6 @@ function ProductLine({ eyebrow, heading, intro, shelf, highlights, usage, shopHr
           </div>
         </div>
       </div>
-
-      <Button
-        to={shopHref}
-        style={{ marginTop: 32, background: 'transparent', color: 'var(--color-label)', border: '0.5px solid var(--color-border)', padding: '10px 20px' }}
-      >
-        Shop {heading} →
-      </Button>
     </div>
   );
 }
@@ -174,10 +188,9 @@ export default function Home() {
         eyebrow="one of earth's greatest gifts to mankind"
         heading="Virgin Coconut Oil"
         intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid — fast-absorbing, gluten free, and vegan."
-        shelf={<ProductShelf items={vcoShelf} heights={[190, 160, 120]} />}
+        shelf={<ProductHero image={vcoJars} alt="Virgin Coconut Oil, 900ml, 450ml, and 125ml glass jars" />}
         highlights={vcoItems[0].highlights}
         usage={vcoItems[0].usageItems}
-        shopHref="/shop?category=Coconut+Oil"
         showEu
       />
 
@@ -186,10 +199,9 @@ export default function Home() {
           eyebrow="one of the most nutritious sugars"
           heading="Coconut Syrup"
           intro="Low glycemic index, high in minerals, and mildly sweet — gluten free and vegan."
-          shelf={<ProductShelf items={syrupItems} heights={[180]} />}
+          shelf={<ProductHero image={syrupItems[0].image} alt={syrupItems[0].alt} />}
           highlights={syrupItems[0].highlights}
           usage={syrupItems[0].usageItems}
-          shopHref="/shop?category=Coconut+Syrup"
           showEu
         />
       </div>
@@ -202,7 +214,6 @@ export default function Home() {
           shelf={<ProductShelf items={soapItems} heights={[110, 110, 110, 110]} gap={16} maxItemWidth={88} />}
           highlights={soapHighlights}
           usage={soapUsage}
-          shopHref="/shop?category=Bath+%26+Body"
           showEu={false}
         />
       </div>
