@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CheckoutController;
+use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,9 @@ Route::post('/checkout', [CheckoutController::class, 'store']);
 
 // Guest order lookup (order number + email, no account needed)
 Route::post('/orders/lookup', [OrderController::class, 'lookup']);
+
+// Public contact form
+Route::post('/contact', [ContactController::class, 'store']);
 
 // Customer-only
 Route::middleware('auth:sanctum')->group(function () {

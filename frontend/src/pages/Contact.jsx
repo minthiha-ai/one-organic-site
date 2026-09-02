@@ -1,9 +1,34 @@
+import { useState } from 'react';
 import ScriptText from '../components/ScriptText.jsx';
 import { FormField, TextAreaField } from '../components/FormField.jsx';
 import Button from '../components/Button.jsx';
 import EyebrowLabel from '../components/EyebrowLabel.jsx';
+import { api, ApiError } from '../lib/api.js';
 
 export default function Contact() {
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [errorMessage, setErrorMessage] = useState('');
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus('sending');
+    setErrorMessage('');
+
+    try {
+      await api.post('/contact', form, { auth: false });
+      setForm({ name: '', email: '', message: '' });
+      setStatus('sent');
+    } catch (err) {
+      setStatus('error');
+      setErrorMessage(err instanceof ApiError ? err.message : 'Something went wrong. Please try again.');
+    }
+  }
+
   return (
     <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>
       <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
@@ -17,10 +42,25 @@ export default function Contact() {
             Questions about our products, wholesale, or an order? Send a message and we'll get back to you.
           </p>
 
-          <FormField label="Name" placeholder="Jane Doe" />
-          <FormField label="Email" type="email" placeholder="jane@example.com" />
-          <TextAreaField label="Message" placeholder="How can we help?" />
-          <Button to="#">Send message</Button>
+          {status === 'sent' ? (
+            <p style={{ fontSize: 13, color: 'var(--color-text)', margin: '0 0 12px' }}>
+              Thanks — your message is on its way. We'll get back to you soon.
+            </p>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <FormField label="Name" name="name" placeholder="Jane Doe" value={form.name} onChange={handleChange} required />
+              <FormField label="Email" type="email" name="email" placeholder="jane@example.com" value={form.email} onChange={handleChange} required />
+              <TextAreaField label="Message" name="message" placeholder="How can we help?" value={form.message} onChange={handleChange} required />
+
+              {status === 'error' && (
+                <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>{errorMessage}</p>
+              )}
+
+              <Button type="submit" disabled={status === 'sending'}>
+                {status === 'sending' ? 'Sending…' : 'Send message'}
+              </Button>
+            </form>
+          )}
         </div>
 
         <div style={{ padding: '28px var(--gutter) 32px', marginTop: 16, borderTop: '0.5px solid var(--color-border)' }}>
@@ -28,10 +68,6 @@ export default function Contact() {
           <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '0 0 8px' }}>
             <i className="ti ti-mail" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} aria-hidden="true" />
             hello@one-organic.com
-          </p>
-          <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '0 0 8px' }}>
-            <i className="ti ti-phone" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} aria-hidden="true" />
-            +66 XX XXX XXXX
           </p>
           <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: 0 }}>
             <i className="ti ti-map-pin" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} aria-hidden="true" />

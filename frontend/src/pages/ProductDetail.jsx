@@ -162,8 +162,8 @@ export default function ProductDetail() {
           ))}
         </div>
 
-        <SectionHeading style={{ margin: '0 0 12px' }}>Storage</SectionHeading>
-        <p style={{ fontFamily: 'var(--font-technical)', fontSize: 12, color: 'var(--color-secondary-text)', lineHeight: 1.7, margin: 0 }}>
+        <SectionHeading style={{ margin: variant.lather ? '0 0 28px' : '0 0 12px' }}>Storage</SectionHeading>
+        <p style={{ fontFamily: 'var(--font-technical)', fontSize: 12, color: 'var(--color-secondary-text)', lineHeight: 1.7, margin: variant.lather ? '-16px 0 0' : 0 }}>
           {variant.storage_instructions.map((line, i) => (
             <span key={line}>
               {line}
@@ -171,6 +171,40 @@ export default function ProductDetail() {
             </span>
           ))}
         </p>
+
+        {variant.lather && (
+          <>
+            <SectionHeading style={{ margin: '28px 0 16px' }}>Soap Details</SectionHeading>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+              <tbody>
+                <tr>
+                  <td style={{ padding: '8px 0', color: 'var(--color-label)', fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase', width: '40%', verticalAlign: 'top' }}>
+                    Lather
+                  </td>
+                  <td style={{ padding: '8px 0', color: 'var(--color-text)' }}>{variant.lather}</td>
+                </tr>
+                <tr style={{ borderTop: '0.5px solid var(--color-border)' }}>
+                  <td style={{ padding: '8px 0', color: 'var(--color-label)', fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase', verticalAlign: 'top' }}>
+                    Skin Type
+                  </td>
+                  <td style={{ padding: '8px 0', color: 'var(--color-text)' }}>{variant.skin_type}</td>
+                </tr>
+                <tr style={{ borderTop: '0.5px solid var(--color-border)' }}>
+                  <td style={{ padding: '8px 0', color: 'var(--color-label)', fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase', verticalAlign: 'top' }}>
+                    Moisturizing Strength
+                  </td>
+                  <td style={{ padding: '8px 0', color: 'var(--color-text)' }}>{variant.moisturizing_strength}</td>
+                </tr>
+                <tr style={{ borderTop: '0.5px solid var(--color-border)' }}>
+                  <td style={{ padding: '8px 0', color: 'var(--color-label)', fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase', verticalAlign: 'top' }}>
+                    Ingredients
+                  </td>
+                  <td style={{ padding: '8px 0', color: 'var(--color-text)' }}>{variant.ingredients}</td>
+                </tr>
+              </tbody>
+            </table>
+          </>
+        )}
       </div>
     </>
   );

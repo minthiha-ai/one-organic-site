@@ -115,4 +115,7 @@ return [
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
+    // Where the public Contact form's messages are delivered.
+    'contact_recipient' => env('MAIL_CONTACT_RECIPIENT', 'hello@one-organic.com'),
+
 ];

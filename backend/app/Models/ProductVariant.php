@@ -25,6 +25,10 @@ class ProductVariant extends Model implements HasMedia
         'highlights',
         'usage_items',
         'storage_instructions',
+        'lather',
+        'skin_type',
+        'moisturizing_strength',
+        'ingredients',
         'is_active',
     ];
 

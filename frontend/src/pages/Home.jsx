@@ -2,7 +2,6 @@ import CertStrip from '../components/CertStrip.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import ScriptText from '../components/ScriptText.jsx';
 import Button from '../components/Button.jsx';
-import MissionBand from '../components/MissionBand.jsx';
 import PillTag from '../components/PillTag.jsx';
 import IconChip from '../components/IconChip.jsx';
 import { products } from '../data/products.js';
@@ -89,7 +88,7 @@ function ProductShelf({ items, heights, gap = 28, maxItemWidth = 130 }) {
   );
 }
 
-function ProductLine({ eyebrow, heading, intro, shelf, highlights, usage, showEu }) {
+function ProductLine({ eyebrow, heading, intro, shelf, highlights, usage, note, showEu }) {
   return (
     <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '56px var(--gutter)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 20, marginBottom: 32 }}>
@@ -126,6 +125,12 @@ function ProductLine({ eyebrow, heading, intro, shelf, highlights, usage, showEu
               </IconChip>
             ))}
           </div>
+
+          {note && (
+            <p style={{ fontSize: 12, lineHeight: 1.6, color: 'var(--color-secondary-text)', margin: '20px 0 0' }}>
+              {note}
+            </p>
+          )}
         </div>
       </div>
     </div>
@@ -214,6 +219,7 @@ export default function Home() {
           shelf={<ProductShelf items={soapItems} heights={[110, 110, 110, 110]} gap={16} maxItemWidth={88} />}
           highlights={soapHighlights}
           usage={soapUsage}
+          note="Sodium Hydroxide is used in the soap making process, but it no longer remains in the final soap."
           showEu={false}
         />
       </div>
@@ -266,8 +272,6 @@ export default function Home() {
           </p>
         </div>
       </div>
-
-      <MissionBand />
     </>
   );
 }

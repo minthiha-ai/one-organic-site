@@ -23,6 +23,10 @@ class ProductVariantResource extends JsonResource
             'highlights' => $this->highlights ?? [],
             'usage_items' => $this->usage_items ?? [],
             'storage_instructions' => $this->storage_instructions ?? [],
+            'lather' => $this->lather,
+            'skin_type' => $this->skin_type,
+            'moisturizing_strength' => $this->moisturizing_strength,
+            'ingredients' => $this->ingredients,
         ];
     }
 }

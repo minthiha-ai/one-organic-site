@@ -34,11 +34,19 @@ export function FormField({ label, type = 'text', placeholder, style, name, valu
   );
 }
 
-export function TextAreaField({ label, placeholder, rows = 4 }) {
+export function TextAreaField({ label, placeholder, rows = 4, name, value, onChange, required }) {
   return (
     <div style={{ margin: '0 0 12px' }}>
       <label style={labelStyle}>{label}</label>
-      <textarea rows={rows} placeholder={placeholder} style={{ ...inputStyle, resize: 'vertical' }} />
+      <textarea
+        rows={rows}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        required={required}
+        style={{ ...inputStyle, resize: 'vertical' }}
+      />
     </div>
   );
 }

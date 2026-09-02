@@ -171,6 +171,10 @@ class CatalogSeeder extends Seeder
             'highlights' => [...['Heavy Duty Daily Cleansing', 'Antibacterial'], ...$base],
             'usage_items' => $usage,
             'storage_instructions' => $storage,
+            'lather' => 'Strong: 5/5',
+            'skin_type' => 'Oily / Normal',
+            'moisturizing_strength' => 'Light: 2/5',
+            'ingredients' => 'Organic Virgin Coconut Oil, Water, Sodium Hydroxide',
         ], 'coconut-oil-soap.png');
 
         $this->makeVariant($product, [
@@ -182,6 +186,10 @@ class CatalogSeeder extends Seeder
             'highlights' => [...['Hydrates & Soothes Skin', 'Detoxifies'], ...$base],
             'usage_items' => $usage,
             'storage_instructions' => $storage,
+            'lather' => 'High: 4/5',
+            'skin_type' => 'Normal / Dry',
+            'moisturizing_strength' => 'High: 4/5',
+            'ingredients' => 'Organic Virgin Coconut Oil, Castor Oil, Water, Sodium Hydroxide',
         ], 'coconut-oil-soap-with-castor-oil.png');
 
         $this->makeVariant($product, [
@@ -193,6 +201,10 @@ class CatalogSeeder extends Seeder
             'highlights' => [...['Hydrates & Soothes Skin', 'Anti-Inflammatory'], ...$base],
             'usage_items' => $usage,
             'storage_instructions' => $storage,
+            'lather' => 'High: 4/5',
+            'skin_type' => 'Dry to Normal',
+            'moisturizing_strength' => 'High: 4/5',
+            'ingredients' => 'Organic Virgin Coconut Oil, Shea Butter Fruit, Water, Sodium Hydroxide',
         ], 'coconut-oil-soap-with-shea-butter.jpg');
 
         $this->makeVariant($product, [
@@ -204,6 +216,10 @@ class CatalogSeeder extends Seeder
             'highlights' => [...['Deeply Detoxifying', 'Draws Out Impurities'], ...$base],
             'usage_items' => $usage,
             'storage_instructions' => $storage,
+            'lather' => 'Moderate: 3/5',
+            'skin_type' => 'Oily / Normal',
+            'moisturizing_strength' => 'Moderate: 3/5',
+            'ingredients' => 'Organic Virgin Coconut Oil, Bamboo Powder Charcoal Powder, Water, Sodium Hydroxide',
         ], 'coconut-oil-soap-with-charcoal.jpg');
     }
 

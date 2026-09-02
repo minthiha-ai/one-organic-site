@@ -130,6 +130,10 @@ export const products = [
     highlights: ['Heavy Duty Daily Cleansing', 'Antibacterial', ...soapHighlightsBase],
     usageItems: soapUsage,
     storage: soapStorage,
+    lather: 'Strong: 5/5',
+    skinType: 'Oily / Normal',
+    moisturizingStrength: 'Light: 2/5',
+    ingredients: 'Organic Virgin Coconut Oil, Water, Sodium Hydroxide',
   },
   {
     slug: 'soap-castor',
@@ -146,6 +150,10 @@ export const products = [
     highlights: ['Hydrates & Soothes Skin', 'Detoxifies', ...soapHighlightsBase],
     usageItems: soapUsage,
     storage: soapStorage,
+    lather: 'High: 4/5',
+    skinType: 'Normal / Dry',
+    moisturizingStrength: 'High: 4/5',
+    ingredients: 'Organic Virgin Coconut Oil, Castor Oil, Water, Sodium Hydroxide',
   },
   {
     slug: 'soap-shea',
@@ -162,6 +170,10 @@ export const products = [
     highlights: ['Hydrates & Soothes Skin', 'Anti-Inflammatory', ...soapHighlightsBase],
     usageItems: soapUsage,
     storage: soapStorage,
+    lather: 'High: 4/5',
+    skinType: 'Dry to Normal',
+    moisturizingStrength: 'High: 4/5',
+    ingredients: 'Organic Virgin Coconut Oil, Shea Butter Fruit, Water, Sodium Hydroxide',
   },
   {
     slug: 'soap-charcoal',
@@ -178,6 +190,10 @@ export const products = [
     highlights: ['Deeply Detoxifying', 'Draws Out Impurities', ...soapHighlightsBase],
     usageItems: soapUsage,
     storage: soapStorage,
+    lather: 'Moderate: 3/5',
+    skinType: 'Oily / Normal',
+    moisturizingStrength: 'Moderate: 3/5',
+    ingredients: 'Organic Virgin Coconut Oil, Bamboo Powder Charcoal Powder, Water, Sodium Hydroxide',
   },
 ];
 

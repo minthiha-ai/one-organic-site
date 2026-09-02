@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { logoDark } from '../assets/brand/index.js';
+import { footerCareForEnvironment } from '../assets/images/index.js';
 
 const linkStyle = {
   display: 'block',
@@ -20,7 +21,14 @@ const headingStyle = {
 
 export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
   return (
-    <div style={{ background: 'var(--color-dark-band)', color: 'var(--color-dark-band-text)' }}>
+    <div>
+      <img
+        src={footerCareForEnvironment}
+        alt="Illustration of a tree, birds, a recycling symbol, and a family celebrating outdoors, captioned Care for Environment, Care for Community"
+        style={{ width: '100%', maxWidth: 'var(--page-max-width)', height: 'auto', display: 'block', margin: '0 auto' }}
+      />
+
+      <div style={{ background: 'var(--color-dark-band)', color: 'var(--color-dark-band-text)' }}>
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '40px var(--gutter) 24px' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32 }}>
           <div style={{ flex: '2 1 220px' }}>
@@ -40,11 +48,8 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           <div style={{ flex: '1 1 160px' }}>
             <p className="v2-footer-label" style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Company</p>
             <Link to="/contact" style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Contact</Link>
-            <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', margin: '0 0 8px' }}>
-              hello@one-organic.com
-            </p>
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', margin: 0 }}>
-              +66 XX XXX XXXX
+              hello@one-organic.com
             </p>
           </div>
 
@@ -110,6 +115,7 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           <span>© 2026 One Organic (Thailand) Co., Ltd.</span>
           <span>one-organic.com</span>
         </div>
+      </div>
       </div>
     </div>
   );
