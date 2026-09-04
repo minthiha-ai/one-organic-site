@@ -29,7 +29,7 @@ jobs:
             cd ~/repositories/one-organic-platform
             git pull origin master
             cd backend
-            composer install --no-dev --optimize-autoloader --no-interaction
+            /opt/cpanel/composer/bin/composer install --no-dev --optimize-autoloader --no-interaction
             php artisan migrate --force
             php artisan filament:clear-cached-components
             php artisan optimize:clear
