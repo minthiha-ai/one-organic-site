@@ -1,0 +1,30 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "backend/**"
+      - ".github/workflows/deploy-backend.yml"
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Bluehost via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: box2414.bluehost.com
+          username: iyzcoomy
+          key: ${{ secrets.BLUEHOST_DEPLOY_KEY }}
+          port: 22
+          script: |
+            set -e
+            cd ~/repositories/one-organic-platform
+            git pull origin master
+            cd backend
+            composer install --no-dev --optimize-autoloader --no-interaction
+            php artisan migrate --force
+            php artisan filament:clear-cached-components
+            php artisan optimize:clear
