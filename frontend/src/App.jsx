@@ -7,6 +7,12 @@ import ProductDetail from './pages/ProductDetail.jsx';
 import Cart from './pages/Cart.jsx';
 import Checkout from './pages/Checkout.jsx';
 import Contact from './pages/Contact.jsx';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
+import Account from './pages/Account.jsx';
+import OrderDetail from './pages/OrderDetail.jsx';
+import Addresses from './pages/Addresses.jsx';
+import RequireAuth, { GuestOnly } from './components/RequireAuth.jsx';
 
 export default function App() {
   return (
@@ -19,6 +25,11 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<GuestOnly><Login /></GuestOnly>} />
+          <Route path="/register" element={<GuestOnly><Register /></GuestOnly>} />
+          <Route path="/account" element={<RequireAuth><Account /></RequireAuth>} />
+          <Route path="/account/orders/:orderNumber" element={<RequireAuth><OrderDetail /></RequireAuth>} />
+          <Route path="/account/addresses" element={<RequireAuth><Addresses /></RequireAuth>} />
         </Route>
         <Route
           path="/v2"

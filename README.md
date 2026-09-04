@@ -21,13 +21,19 @@ Deployed on Vercel with **Root Directory** set to `frontend` (project settings, 
 
 ## Status
 
-- ✅ Backend: Laravel 12 + Filament v3, full domain model, Filament admin, and a 15-endpoint REST API — all curl-verified (see `backend/README.md`)
-- ✅ Frontend purchase flow is live end-to-end against the real API: Shop → Product detail (real variant switcher) → Cart (persisted, real quantities/totals) → Checkout (real guest orders, verified in-browser and cross-checked against the backend after each step)
-- 🚧 Homepage marketing sections (`/`, `/v2`) still read static mockup data — deliberate follow-up, not yet started (see `frontend/README.md`)
-- 🚧 No login/register UI yet — backend supports customer accounts, checkout is guest-only for now
+_Last confirmed against the actual codebase/deployment: Sep 4, 2026 — see `../Projects/01-One Organic/Status.md` for the full client-facing breakdown._
+
+- ✅ Backend: Laravel 12 + Filament v3, full domain model, Filament admin, and a 17-endpoint REST API — deployed and live in production at `api.one-organic.com` (Bluehost, SSL active)
+- ✅ Frontend purchase flow is live end-to-end against the real production API: Shop → Product detail (real variant switcher, incl. soap technical details) → Cart (persisted, real quantities/totals) → Checkout (real guest orders, verified in-browser and cross-checked against the backend after each step)
+- ✅ Customer accounts: login/register, order history, order detail, saved addresses — all real, wired to the backend. Checkout now offers a saved address for logged-in customers; guest checkout unchanged.
+- ✅ Admin sales dashboard: revenue/order stats, orders-over-time chart, top products — live on `/admin`, verified against seeded test data
+- ✅ Contact form sends real email — recipient is `min@one-organic.com` for now (temporary, was `hello@`)
+- ✅ Frontend deployed to Vercel, pointed at the production backend (not local Herd)
+- 🚧 Homepage marketing sections (`/`, `/v2`) still read static mockup data — two competing directions, no final pick made yet
 - 🚧 Payments: not yet chosen (leaning Omise/Opn for Thai market — deferred); orders are created as `pending`, nothing is actually charged
-- 🚧 Hosting for backend: not yet chosen (building against local Herd for now)
 - ⚠️ Product prices are carried over from the mockup's placeholder values — not confirmed real THB pricing yet
+- ⚠️ `one-organic.com` root domain still points at the live Wix site — DNS cutover paused pending Stephen's confirmation it's safe to retire
+- ⚠️ The production MySQL password was pasted in full into a chat session during the original Bluehost setup — still needs rotating
 
 ## Vercel note
 

@@ -49,7 +49,7 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
             <p className="v2-footer-label" style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Company</p>
             <Link to="/contact" style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Contact</Link>
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', margin: 0 }}>
-              hello@one-organic.com
+              min@one-organic.com
             </p>
           </div>
 

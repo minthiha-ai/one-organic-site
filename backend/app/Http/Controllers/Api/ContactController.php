@@ -12,7 +12,7 @@ class ContactController extends Controller
 {
     public function store(ContactRequest $request): JsonResponse
     {
-        Mail::to(config('mail.contact_recipient', 'hello@one-organic.com'))
+        Mail::to(config('mail.contact_recipient', 'min@one-organic.com'))
             ->send(new ContactMessageMail(
                 senderName: $request->string('name'),
                 senderEmail: $request->string('email'),

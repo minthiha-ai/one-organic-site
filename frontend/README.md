@@ -14,7 +14,7 @@ This project was converted from a set of static, single-file HTML mockups (with 
 
 `src/context/CartContext.jsx` holds cart state (`localStorage`-persisted) keyed by `product_variant_id`. It only ever sends `{ product_variant_id, quantity }` to the backend at checkout — prices are never trusted client-side; the backend re-prices everything server-side.
 
-No login/register UI yet (backend fully supports it — see `backend/README.md`); checkout is guest-only for now, matching "guest checkout must work with zero friction" as the priority path.
+`src/context/AuthContext.jsx` holds customer auth state the same way (`localStorage`-persisted, mirrors `CartContext`'s shape) — a bearer token via `lib/api.js`, plus the customer record. `src/components/RequireAuth.jsx` guards `/account*` routes (redirects to `/login`); its paired `GuestOnly` export keeps logged-in customers off `/login`/`/register`. Checkout still works fully as a guest — logged-in customers additionally get their info prefilled and can pick a saved address instead of retyping it.
 
 ## Pages
 
@@ -26,6 +26,11 @@ No login/register UI yet (backend fully supports it — see `backend/README.md`)
 | `/cart` | Cart |
 | `/checkout` | Checkout |
 | `/contact` | Contact |
+| `/login` | Login |
+| `/register` | Register |
+| `/account` | Order history (requires login) |
+| `/account/orders/:orderNumber` | Order detail (requires login) |
+| `/account/addresses` | Saved addresses (requires login) |
 
 ## Stack
 

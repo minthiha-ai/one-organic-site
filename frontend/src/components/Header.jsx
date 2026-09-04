@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { logoLight } from '../assets/brand/index.js';
 import { useCart } from '../context/CartContext.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 
 const navLinkStyle = {
   color: 'var(--color-text)',
@@ -11,6 +12,7 @@ export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switc
   const location = useLocation();
   const isLanding = location.pathname === homeTo;
   const { count } = useCart();
+  const { isAuthenticated } = useAuth();
 
   return (
     <div style={{ boxShadow: '0 2px 12px rgba(38,32,20,0.06)' }}>
@@ -36,6 +38,13 @@ export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switc
               <>
                 <Link to={shopTo} style={navLinkStyle}>Shop</Link>
                 <Link to="/contact" style={navLinkStyle}>Contact</Link>
+                {isAuthenticated ? (
+                  <Link to="/account" style={{ textDecoration: 'none', lineHeight: 0, display: 'inline-flex' }}>
+                    <i className="ti ti-user-circle" style={{ fontSize: 18, color: 'var(--color-text)' }} aria-hidden="true" />
+                  </Link>
+                ) : (
+                  <Link to="/login" style={navLinkStyle}>Login</Link>
+                )}
                 <Link to="/cart" style={{ textDecoration: 'none', lineHeight: 0, position: 'relative', display: 'inline-flex' }}>
                   <i
                     className="ti ti-shopping-bag"
