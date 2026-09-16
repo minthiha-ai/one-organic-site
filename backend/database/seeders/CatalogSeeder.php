@@ -24,23 +24,20 @@ class CatalogSeeder extends Seeder
     {
         $this->frontendImages = base_path('../frontend/src/assets/images');
 
-        $coconutOil = Category::create([
-            'name' => 'Coconut Oil',
-            'slug' => 'coconut-oil',
-            'sort_order' => 1,
-        ]);
+        $coconutOil = Category::updateOrCreate(
+            ['slug' => 'coconut-oil'],
+            ['name' => 'Coconut Oil', 'sort_order' => 1]
+        );
 
-        $coconutSyrup = Category::create([
-            'name' => 'Coconut Syrup',
-            'slug' => 'coconut-syrup',
-            'sort_order' => 2,
-        ]);
+        $coconutSyrup = Category::updateOrCreate(
+            ['slug' => 'coconut-syrup'],
+            ['name' => 'Coconut Syrup', 'sort_order' => 2]
+        );
 
-        $bathAndBody = Category::create([
-            'name' => 'Bath & Body',
-            'slug' => 'bath-body',
-            'sort_order' => 3,
-        ]);
+        $bathAndBody = Category::updateOrCreate(
+            ['slug' => 'bath-body'],
+            ['name' => 'Bath & Body', 'sort_order' => 3]
+        );
 
         $this->seedVirginCoconutOil($coconutOil);
         $this->seedCoconutSyrup($coconutSyrup);
@@ -49,14 +46,16 @@ class CatalogSeeder extends Seeder
 
     protected function seedVirginCoconutOil(Category $category): void
     {
-        $product = Product::create([
-            'category_id' => $category->id,
-            'name' => 'Virgin Coconut Oil',
-            'slug' => 'virgin-coconut-oil',
-            'script_eyebrow' => "one of earth's greatest gifts to mankind",
-            'tagline' => "Earth's greatest gift to mankind",
-            'sort_order' => 1,
-        ]);
+        $product = Product::updateOrCreate(
+            ['slug' => 'virgin-coconut-oil'],
+            [
+                'category_id' => $category->id,
+                'name' => 'Virgin Coconut Oil',
+                'script_eyebrow' => "one of earth's greatest gifts to mankind",
+                'tagline' => "Earth's greatest gift to mankind",
+                'sort_order' => 1,
+            ]
+        );
 
         $highlights = [
             'Low Moisture & High Purity',
@@ -117,14 +116,16 @@ class CatalogSeeder extends Seeder
 
     protected function seedCoconutSyrup(Category $category): void
     {
-        $product = Product::create([
-            'category_id' => $category->id,
-            'name' => 'Coconut Syrup',
-            'slug' => 'coconut-syrup',
-            'script_eyebrow' => 'one of the most nutritious sugars',
-            'tagline' => 'One of the most nutritious sugars',
-            'sort_order' => 2,
-        ]);
+        $product = Product::updateOrCreate(
+            ['slug' => 'coconut-syrup'],
+            [
+                'category_id' => $category->id,
+                'name' => 'Coconut Syrup',
+                'script_eyebrow' => 'one of the most nutritious sugars',
+                'tagline' => 'One of the most nutritious sugars',
+                'sort_order' => 2,
+            ]
+        );
 
         $this->makeVariant($product, [
             'sku' => 'OO-SYR-600',
@@ -145,14 +146,16 @@ class CatalogSeeder extends Seeder
 
     protected function seedCoconutOilSoap(Category $category): void
     {
-        $product = Product::create([
-            'category_id' => $category->id,
-            'name' => 'Coconut Oil Soap',
-            'slug' => 'coconut-oil-soap',
-            'script_eyebrow' => 'love yourself, love earth',
-            'tagline' => 'Handcrafted bar soap, four ways',
-            'sort_order' => 3,
-        ]);
+        $product = Product::updateOrCreate(
+            ['slug' => 'coconut-oil-soap'],
+            [
+                'category_id' => $category->id,
+                'name' => 'Coconut Oil Soap',
+                'script_eyebrow' => 'love yourself, love earth',
+                'tagline' => 'Handcrafted bar soap, four ways',
+                'sort_order' => 3,
+            ]
+        );
 
         $base = ['No SLS', 'No SLES', 'No Sulphates', 'No Preservatives', 'No Fragrances', 'Handcrafted'];
         $usage = [
@@ -225,16 +228,19 @@ class CatalogSeeder extends Seeder
 
     protected function makeVariant(Product $product, array $attributes, string $imageFilename): ProductVariant
     {
-        $variant = ProductVariant::create([
-            'product_id' => $product->id,
-            'stock_quantity' => 100,
-            'is_active' => true,
-            ...$attributes,
-        ]);
+        $variant = ProductVariant::updateOrCreate(
+            ['sku' => $attributes['sku']],
+            [
+                'product_id' => $product->id,
+                'stock_quantity' => 100,
+                'is_active' => true,
+                ...$attributes,
+            ]
+        );
 
         $imagePath = $this->frontendImages.'/'.$imageFilename;
 
-        if (is_file($imagePath)) {
+        if (is_file($imagePath) && ! $variant->getFirstMedia('image')) {
             $variant->addMedia($imagePath)
                 ->preservingOriginal()
                 ->toMediaCollection('image');
