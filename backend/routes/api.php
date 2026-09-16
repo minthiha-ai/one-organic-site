@@ -6,7 +6,9 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\Webhooks\XenditWebhookController;
 use Illuminate\Support\Facades\Route;
 
 // Public catalog
@@ -31,8 +33,19 @@ Route::post('/checkout', [CheckoutController::class, 'store']);
 // Guest order lookup (order number + email, no account needed)
 Route::post('/orders/lookup', [OrderController::class, 'lookup']);
 
+// Payment actions on one order — same order_number + email guest-access
+// model as the lookup above, since this is guest checkout's actual payment
+// step (see PaymentController::verifyOwnership for why).
+Route::post('/orders/{order:order_number}/payments/card', [PaymentController::class, 'createCardSession']);
+Route::post('/orders/{order:order_number}/payments/promptpay', [PaymentController::class, 'createPromptPay']);
+Route::post('/orders/{order:order_number}/payment-status', [PaymentController::class, 'status']);
+
 // Public contact form
 Route::post('/contact', [ContactController::class, 'store']);
+
+// Xendit webhook — authenticated by its own x-callback-token header, not
+// Sanctum. See XenditWebhookController::verifyToken.
+Route::post('/webhooks/xendit', [XenditWebhookController::class, 'handle']);
 
 // Customer-only
 Route::middleware('auth:sanctum')->group(function () {

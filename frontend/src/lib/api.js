@@ -25,6 +25,10 @@ export class ApiError extends Error {
 async function request(path, { method = 'GET', body, auth = true } = {}) {
   const headers = {
     Accept: 'application/json',
+    // Harmless against any real server — only matters when API_URL points at
+    // an ngrok tunnel (local HTTPS testing for Xendit Components), where it
+    // skips ngrok's free-tier browser-warning interstitial.
+    'ngrok-skip-browser-warning': 'true',
   };
 
   if (body !== undefined) {

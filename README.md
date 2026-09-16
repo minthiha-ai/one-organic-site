@@ -21,7 +21,7 @@ Deployed on Vercel with **Root Directory** set to `frontend` (project settings, 
 
 ## Status
 
-_Last confirmed against the actual codebase/deployment: 26.09.04 — see `../Projects/01-One Organic/Status.md` for the full client-facing breakdown._
+_Last confirmed against the actual codebase/deployment: 26.09.16 — see `../Projects/01-One Organic/Status.md` for the full client-facing breakdown._
 
 - ✅ Backend: Laravel 12 + Filament v3, full domain model, Filament admin, and a 17-endpoint REST API — deployed and live in production at `api.one-organic.com` (Bluehost, SSL active)
 - ✅ Frontend purchase flow is live end-to-end against the real production API: Shop → Product detail (real variant switcher, incl. soap technical details) → Cart (persisted, real quantities/totals) → Checkout (real guest orders, verified in-browser and cross-checked against the backend after each step)
@@ -31,8 +31,8 @@ _Last confirmed against the actual codebase/deployment: 26.09.04 — see `../Pro
 - ✅ Frontend deployed to Vercel, pointed at the production backend (not local Herd)
 - ✅ Backend deploys are automated: pushing to `master` with changes under `backend/` triggers `.github/workflows/deploy-backend.yml`, which SSHes into Bluehost and runs the pull/composer/migrate/cache-clear sequence — no manual SSH needed for routine backend updates
 - ✅ Production MySQL password rotated (was briefly exposed during initial setup)
+- ✅ Payments: card + PromptPay QR via Xendit, built and verified end-to-end against Xendit's sandbox (real webhook payloads captured from Xendit's own dashboard, real reconciliation test with a payment the webhook never saw) — see **Payments (Xendit)** below. Not yet live: needs live API keys swapped in once Xendit's KYC review clears (status not confirmed here — check with Stephen)
 - 🚧 Homepage marketing sections (`/`, `/v2`) still read static mockup data — two competing directions, no final pick made yet
-- 🚧 Payments: not yet chosen (leaning Omise/Opn for Thai market — deferred); orders are created as `pending`, nothing is actually charged
 - ⚠️ Product prices are carried over from the mockup's placeholder values — not confirmed real THB pricing yet
 - ⚠️ `one-organic.com` root domain still points at the live Wix site — DNS cutover paused pending Stephen's confirmation it's safe to retire
 
@@ -52,3 +52,11 @@ Two separate, narrowly-scoped SSH keys make this work, deliberately kept apart f
 If either key is ever compromised, only that one narrow capability needs revoking — not a personal credential.
 
 The deploy script itself, in order: `git pull origin master` → `composer install --no-dev --optimize-autoloader` (called via its absolute path, `/opt/cpanel/composer/bin/composer` — non-interactive SSH sessions on Bluehost's jailshell don't source the profile script that puts `composer` on `PATH`) → `php artisan migrate --force` → `php artisan filament:clear-cached-components` → `php artisan optimize:clear`.
+
+## Payments (Xendit)
+
+Card and PromptPay QR, both built against Xendit's Sessions/Components API (`app/Services/XenditClient.php`) rather than their classic API — this account's keys reject the classic tokenization flow outright, confirmed by calling it directly and bypassing all app code. Cards use `xendit-components-web` (npm) to mount Xendit's own hosted card fields client-side; PromptPay renders a QR client-side from the raw `qr_string` Xendit returns (via the `qrcode` npm package).
+
+A `payments` table tracks each attempt (`app/Models/Payment.php`) separately from `orders`, since either method can be retried after expiry. Three things confirm a payment, in order of preference: the customer's browser event (`session-complete`), Xendit's webhook (`POST /api/webhooks/xendit`, verified via `x-callback-token`), and a scheduled reconciliation command (`payments:reconcile`, needs a Bluehost cron entry for `php artisan schedule:run` to actually fire) that re-checks anything still `pending` past its own expiry directly against Xendit, in case the webhook never arrived. All three funnel through the same idempotent `app/Services/PaymentStatusUpdater.php`, so whichever one lands first wins and the others are safe no-ops.
+
+**Local testing needs an HTTPS tunnel** — Xendit's card Components reject `http://localhost` outright. Run `ngrok http 5173` (frontend) and `ngrok http 8001` (backend, since an HTTPS page can't call a plain-HTTP API), then set `FRONTEND_URL` and `VITE_API_URL`/`CORS_ALLOWED_ORIGINS` to the tunnel URLs. `vite.config.js` already has `server.allowedHosts: true` for this.

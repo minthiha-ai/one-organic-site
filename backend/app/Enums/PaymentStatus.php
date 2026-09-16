@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Enums;
+
+enum PaymentStatus: string
+{
+    case Pending = 'pending';
+    case Succeeded = 'succeeded';
+    case Failed = 'failed';
+    case Expired = 'expired';
+
+    public function isTerminal(): bool
+    {
+        return $this !== self::Pending;
+    }
+}

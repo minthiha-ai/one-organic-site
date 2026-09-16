@@ -35,4 +35,15 @@ return [
         ],
     ],
 
+    'xendit' => [
+        'secret_key' => env('XENDIT_SECRET_KEY'),
+        'webhook_verification_token' => env('XENDIT_WEBHOOK_VERIFICATION_TOKEN'),
+        // Flips the whole integration to live mode via env only — no code change.
+        'is_production' => env('XENDIT_IS_PRODUCTION', false),
+        // Card Sessions require an allowlisted HTTPS origin for the Components
+        // embed. Defaults to FRONTEND_URL; override for local dev with an
+        // https tunnel (ngrok etc.) since Components rejects http origins.
+        'components_origin' => env('XENDIT_COMPONENTS_ORIGIN', env('FRONTEND_URL')),
+    ],
+
 ];

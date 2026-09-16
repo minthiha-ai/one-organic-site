@@ -32,6 +32,7 @@ class OrderResource extends JsonResource
                 'country' => $this->shipping_country,
             ],
             'items' => OrderItemResource::collection($this->whenLoaded('items')),
+            'latest_payment' => $this->whenLoaded('latestPayment', fn () => $this->latestPayment ? new PaymentResource($this->latestPayment) : null),
             'created_at' => $this->created_at?->toIso8601String(),
             'paid_at' => $this->paid_at?->toIso8601String(),
             'shipped_at' => $this->shipped_at?->toIso8601String(),

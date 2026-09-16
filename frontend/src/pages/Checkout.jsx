@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import EyebrowLabel from '../components/EyebrowLabel.jsx';
 import { FormField } from '../components/FormField.jsx';
 import SummaryLine from '../components/SummaryLine.jsx';
 import PaymentOption from '../components/PaymentOption.jsx';
 import Button from '../components/Button.jsx';
 import { api, ApiError } from '../lib/api.js';
+import { storeOrderEmail } from '../lib/orderSession.js';
 import { useCart } from '../context/CartContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -19,6 +20,7 @@ const emptyForm = {
 };
 
 export default function Checkout() {
+  const navigate = useNavigate();
   const { items, subtotal, clear } = useCart();
   const { isAuthenticated, customer } = useAuth();
 
@@ -30,7 +32,6 @@ export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [order, setOrder] = useState(null);
 
   const [addresses, setAddresses] = useState([]);
   const [selectedAddressId, setSelectedAddressId] = useState(null); // null = enter address manually
@@ -81,8 +82,10 @@ export default function Checkout() {
         payment_method: paymentMethod,
       });
 
+      const placedOrder = result.data;
+      storeOrderEmail(placedOrder.order_number, placedOrder.guest_email);
       clear();
-      setOrder(result.data);
+      navigate(`/order/${placedOrder.order_number}`);
     } catch (err) {
       if (err instanceof ApiError) {
         const firstError = Object.values(err.errors)[0]?.[0];
@@ -93,22 +96,6 @@ export default function Checkout() {
     } finally {
       setSubmitting(false);
     }
-  }
-
-  if (order) {
-    return (
-      <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto', padding: '64px var(--gutter)', textAlign: 'center' }}>
-        <i className="ti ti-circle-check" style={{ fontSize: 40, color: 'var(--color-accent)' }} aria-hidden="true" />
-        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 22, fontWeight: 600, margin: '16px 0 8px' }}>Order placed</h1>
-        <p style={{ fontSize: 14, color: 'var(--color-secondary-text)', margin: '0 0 4px' }}>
-          Order number <strong style={{ color: 'var(--color-text)' }}>{order.order_number}</strong>
-        </p>
-        <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '0 0 28px' }}>
-          A confirmation has been sent to {order.guest_email}. Total: ฿{order.total.toFixed(2)}.
-        </p>
-        <Button to="/shop">Continue shopping</Button>
-      </div>
-    );
   }
 
   if (items.length === 0) {
@@ -206,7 +193,7 @@ export default function Checkout() {
           <EyebrowLabel>Payment method</EyebrowLabel>
           <PaymentOption
             icon="ti-credit-card"
-            label="Credit / Debit Card"
+            label="Pay online now (Card or PromptPay)"
             value="card"
             checked={paymentMethod === 'card'}
             onChange={() => setPaymentMethod('card')}
@@ -219,7 +206,9 @@ export default function Checkout() {
             onChange={() => setPaymentMethod('cod')}
           />
           <p style={{ fontSize: 11, color: 'var(--color-muted)', margin: '4px 0 0' }}>
-            Online payment isn&rsquo;t wired up yet — orders are recorded as pending and Stephen will follow up to arrange payment.
+            {paymentMethod === 'card'
+              ? "You'll choose between card and PromptPay on the next page."
+              : 'Your order will be marked pending — no payment is collected online for Cash on Delivery.'}
           </p>
         </div>
       </div>
