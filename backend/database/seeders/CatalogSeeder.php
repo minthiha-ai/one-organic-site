@@ -262,15 +262,23 @@ class CatalogSeeder extends Seeder
 
     protected function makeVariant(Product $product, array $attributes, string $imageFilename): ProductVariant
     {
-        $variant = ProductVariant::updateOrCreate(
-            ['sku' => $attributes['sku']],
-            [
+        // stock_quantity is deliberately only set on first create, never on
+        // an update — once real orders/inventory adjustments exist, a
+        // reseed (e.g. to fix a price or add a highlight) must not stomp
+        // the real stock count back to this seeder's placeholder value.
+        $variant = ProductVariant::where('sku', $attributes['sku'])->first();
+
+        if ($variant) {
+            $variant->fill(['product_id' => $product->id, 'is_active' => true, ...$attributes]);
+            $variant->save();
+        } else {
+            $variant = ProductVariant::create([
                 'product_id' => $product->id,
                 'stock_quantity' => 100,
                 'is_active' => true,
                 ...$attributes,
-            ]
-        );
+            ]);
+        }
 
         $imagePath = $this->frontendImages.'/'.$imageFilename;
 
