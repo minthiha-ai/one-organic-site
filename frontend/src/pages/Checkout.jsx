@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import EyebrowLabel from '../components/EyebrowLabel.jsx';
 import { FormField } from '../components/FormField.jsx';
@@ -35,6 +35,15 @@ export default function Checkout() {
 
   const [addresses, setAddresses] = useState([]);
   const [selectedAddressId, setSelectedAddressId] = useState(null); // null = enter address manually
+
+  // `navigate()` updates window.location synchronously, but React Router's
+  // own matched-route state lags a render behind — so Checkout can render
+  // one more time (cart already cleared, route still "us") before the swap
+  // to /order/:orderNumber commits. Without this, that extra render hits
+  // the empty-cart guard below and clobbers the pending navigation with a
+  // replace to /cart. Confirmed live: real orders were created but every
+  // customer landed on an empty cart with no confirmation.
+  const orderPlacedRef = useRef(false);
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -84,8 +93,9 @@ export default function Checkout() {
 
       const placedOrder = result.data;
       storeOrderEmail(placedOrder.order_number, placedOrder.guest_email);
-      clear();
+      orderPlacedRef.current = true;
       navigate(`/order/${placedOrder.order_number}`);
+      clear();
     } catch (err) {
       if (err instanceof ApiError) {
         const firstError = Object.values(err.errors)[0]?.[0];
@@ -98,7 +108,7 @@ export default function Checkout() {
     }
   }
 
-  if (items.length === 0) {
+  if (items.length === 0 && !orderPlacedRef.current) {
     return <Navigate to="/cart" replace />;
   }
 
