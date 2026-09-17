@@ -1,11 +1,13 @@
 name: Deploy Backend
 
+# Manual-only as of 2026-09-17: Bluehost is blocking inbound SSH from
+# GitHub Actions' runner IPs at the network edge (still open with Bluehost
+# support — see the Backend CI/CD section in README for the current status).
+# Routine deploys now happen via backend/bin/deploy.sh, run on a schedule by
+# a Bluehost cron job that pulls from GitHub itself (outbound only). This
+# workflow stays available as a manual fallback — e.g. once the firewall
+# issue is resolved, or to force a deploy without waiting for the next tick.
 on:
-  push:
-    branches: [master]
-    paths:
-      - "backend/**"
-      - ".github/workflows/deploy-backend.yml"
   workflow_dispatch: {}
 
 jobs:

@@ -42,16 +42,20 @@ This repo was restructured from a single-app layout (frontend files at repo root
 
 ## Backend CI/CD
 
-`.github/workflows/deploy-backend.yml` auto-deploys the backend to Bluehost on every push to `master` that touches `backend/` (or the workflow file itself). It can also be triggered manually from the Actions tab (`workflow_dispatch`).
+**Current status (2026-09-17): deploys are pull-based via cron, not push-triggered.** Bluehost is blocking inbound SSH from GitHub Actions' runner IPs at the network edge — connections reset during the SSH key exchange itself, before authentication is even attempted. Confirmed it isn't cPanel's own IP Blocker (empty) and CSF isn't exposed on this shared-hosting plan, so it's happening upstream of anything visible in cPanel. Open with Bluehost support; unresolved as of this writing.
 
-Two separate, narrowly-scoped SSH keys make this work, deliberately kept apart from any personal key:
+**Routine deploys:** `backend/bin/deploy.sh`, run every few minutes by a Bluehost cron job (`cPanel → Cron Jobs`). It `git pull`s from GitHub itself — outbound only, using the server's own existing `~/.ssh/github_deploy_key` — and only runs composer/migrate/cache-clear if that pull actually moved `HEAD`. A lockfile (`~/deploy.lock`) prevents overlapping runs. Deploy history lives in whatever log file the cron entry redirects to (e.g. `~/deploy.log`) — there's no more per-push GitHub Actions run to check, so nothing pings you if a deploy fails; check the log directly.
 
-- **`BLUEHOST_DEPLOY_KEY`** (GitHub Actions secret) — lets the workflow SSH *into* Bluehost as `iyzcoomy@box2414.bluehost.com`. Uses the runner's native OpenSSH client via `webfactory/ssh-agent`, not `appleboy/ssh-action` — that action's bundled Go SSH client doesn't share a key-exchange algorithm with Bluehost's sshd.
-- **`~/.ssh/github_deploy_key`** (lives only on the Bluehost server, configured in the server's `~/.ssh/config` for `Host github.com`) — a read-only GitHub deploy key that lets the server itself `git pull` from this private repo over SSH non-interactively (the repo's `origin` remote on the server is SSH, not HTTPS, for this reason).
+**Manual/fallback deploy:** `.github/workflows/deploy-backend.yml` still exists but is `workflow_dispatch`-only now (no more auto-trigger on push, since it can't reach the server). Trigger it by hand from the Actions tab — useful once the firewall issue clears, or to force an inbound-SSH deploy attempt without waiting for cron.
+
+Two separate, narrowly-scoped SSH keys, deliberately kept apart from any personal key:
+
+- **`BLUEHOST_DEPLOY_KEY`** (GitHub Actions secret) — lets the manual workflow SSH *into* Bluehost as `iyzcoomy@box2414.bluehost.com`. Uses the runner's native OpenSSH client via `webfactory/ssh-agent`, not `appleboy/ssh-action` — that action's bundled Go SSH client doesn't share a key-exchange algorithm with Bluehost's sshd. This is the direction currently blocked.
+- **`~/.ssh/github_deploy_key`** (lives only on the Bluehost server, configured in the server's `~/.ssh/config` for `Host github.com`) — a read-only GitHub deploy key that lets the server itself `git pull` from this private repo over SSH non-interactively (the repo's `origin` remote on the server is SSH, not HTTPS, for this reason). This is the direction both deploy paths actually rely on now, and it isn't affected by the inbound block.
 
 If either key is ever compromised, only that one narrow capability needs revoking — not a personal credential.
 
-The deploy script itself, in order: `git pull origin master` → `composer install --no-dev --optimize-autoloader` (called via its absolute path, `/opt/cpanel/composer/bin/composer` — non-interactive SSH sessions on Bluehost's jailshell don't source the profile script that puts `composer` on `PATH`) → `php artisan migrate --force` → `php artisan filament:clear-cached-components` → `php artisan optimize:clear`.
+The deploy steps themselves, in order (same in both paths): `git pull origin master` → `composer install --no-dev --optimize-autoloader` (called via its absolute path, `/opt/cpanel/composer/bin/composer` — non-interactive SSH/cron sessions on Bluehost's jailshell don't source the profile script that puts `composer` on `PATH`) → `php artisan migrate --force` → `php artisan filament:clear-cached-components` → `php artisan optimize:clear`.
 
 ## Payments (Xendit)
 
