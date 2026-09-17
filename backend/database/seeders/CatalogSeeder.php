@@ -12,9 +12,17 @@ use Illuminate\Database\Seeder;
  * frontend/src/data/products.js so the admin panel starts populated with
  * the actual One Organic lineup rather than placeholder data.
  *
- * Prices carried over from products.js are illustrative mockup values
- * (originally in a $ placeholder, stored here as-is under THB) — NOT
- * confirmed real retail pricing. Flag for Stephen to confirm before launch.
+ * Pricing, wholesale price, barcode, and registration numbers are the
+ * official figures from the 26.08.31 price list (resolved 26.09.17) —
+ * see Phase 0.1 of the implementation plan. Wholesale uses the list's
+ * flat 30% GP rate (wholesale = 70% of SRP), which superseded the older
+ * 25% trade-discount rate used in earlier documents.
+ *
+ * VCO and syrup carry an อย (fda_registration_number) — a food-product
+ * registration shared across a whole product line's sizes. Soap carries
+ * a เลขที่จดแจ้ง (cosmetic_declaration_number) instead — a different,
+ * per-SKU registration scheme. Deliberately kept in separate columns,
+ * not conflated.
  */
 class CatalogSeeder extends Seeder
 {
@@ -79,10 +87,15 @@ class CatalogSeeder extends Seeder
 
         $storage = ['Store in a cool, dry place.', 'Store away from sunlight.'];
 
+        $vcoFdaNumber = 'อย 70-2-01450-6-0114';
+
         $this->makeVariant($product, [
             'sku' => 'OO-VCO-450',
             'option_label' => '450ml',
-            'price' => 14.99,
+            'price' => 390.00,
+            'wholesale_price' => 273.00,
+            'barcode' => '0730945251648',
+            'fda_registration_number' => $vcoFdaNumber,
             'sort_order' => 1,
             'is_default' => true,
             'tags' => ['Most Popular', 'Cold Pressed', 'Vegan & GF'],
@@ -94,7 +107,10 @@ class CatalogSeeder extends Seeder
         $this->makeVariant($product, [
             'sku' => 'OO-VCO-900',
             'option_label' => '900ml',
-            'price' => 24.99,
+            'price' => 650.00,
+            'wholesale_price' => 455.00,
+            'barcode' => '0730945251662',
+            'fda_registration_number' => $vcoFdaNumber,
             'sort_order' => 2,
             'tags' => ['Family Size', 'Cold Pressed', 'Vegan & GF'],
             'highlights' => $highlights,
@@ -105,7 +121,10 @@ class CatalogSeeder extends Seeder
         $this->makeVariant($product, [
             'sku' => 'OO-VCO-125',
             'option_label' => '125ml',
-            'price' => 6.99,
+            'price' => 180.00,
+            'wholesale_price' => 126.00,
+            'barcode' => '0730945251655',
+            'fda_registration_number' => $vcoFdaNumber,
             'sort_order' => 3,
             'tags' => ['Travel Size', 'Cold Pressed', 'Vegan & GF'],
             'highlights' => $highlights,
@@ -130,7 +149,10 @@ class CatalogSeeder extends Seeder
         $this->makeVariant($product, [
             'sku' => 'OO-SYR-600',
             'option_label' => '600g',
-            'price' => 12.99,
+            'price' => 290.00,
+            'wholesale_price' => 203.00,
+            'barcode' => '0730945251679',
+            'fda_registration_number' => 'อย 70-2-01450-6-0116',
             'sort_order' => 1,
             'is_default' => true,
             'tags' => ['Low GI: 35', 'High in Minerals', 'Vegan & GF'],
@@ -167,7 +189,10 @@ class CatalogSeeder extends Seeder
         $this->makeVariant($product, [
             'sku' => 'OO-SOAP-PLAIN',
             'option_label' => 'Just Coconut Oil',
-            'price' => 6.99,
+            'price' => 150.00,
+            'wholesale_price' => 105.00,
+            'barcode' => '0730945252133',
+            'cosmetic_declaration_number' => '12-1-6800027486',
             'sort_order' => 1,
             'is_default' => true,
             'tags' => ['Antibacterial', 'Oily/Normal Skin', 'Heavy Duty Cleansing'],
@@ -183,7 +208,10 @@ class CatalogSeeder extends Seeder
         $this->makeVariant($product, [
             'sku' => 'OO-SOAP-CASTOR',
             'option_label' => 'With Castor Oil',
-            'price' => 7.99,
+            'price' => 180.00,
+            'wholesale_price' => 126.00,
+            'barcode' => '0730945252140',
+            'cosmetic_declaration_number' => '12-1-6800027484',
             'sort_order' => 2,
             'tags' => ['Hydrating', 'Detoxifies', 'Normal/Dry Skin'],
             'highlights' => [...['Hydrates & Soothes Skin', 'Detoxifies'], ...$base],
@@ -198,7 +226,10 @@ class CatalogSeeder extends Seeder
         $this->makeVariant($product, [
             'sku' => 'OO-SOAP-SHEA',
             'option_label' => 'With Shea Butter',
-            'price' => 7.99,
+            'price' => 180.00,
+            'wholesale_price' => 126.00,
+            'barcode' => '0730945252157',
+            'cosmetic_declaration_number' => '12-1-6900015948',
             'sort_order' => 3,
             'tags' => ['Hydrating', 'Anti-Inflammatory', 'Dry Skin'],
             'highlights' => [...['Hydrates & Soothes Skin', 'Anti-Inflammatory'], ...$base],
@@ -213,7 +244,10 @@ class CatalogSeeder extends Seeder
         $this->makeVariant($product, [
             'sku' => 'OO-SOAP-CHARCOAL',
             'option_label' => 'With Charcoal Powder',
-            'price' => 7.99,
+            'price' => 180.00,
+            'wholesale_price' => 126.00,
+            'barcode' => '0730945252164',
+            'cosmetic_declaration_number' => '12-1-6900015961',
             'sort_order' => 4,
             'tags' => ['Detoxifying', 'Draws Out Impurities', 'Oily/Normal Skin'],
             'highlights' => [...['Deeply Detoxifying', 'Draws Out Impurities'], ...$base],

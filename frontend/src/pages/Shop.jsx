@@ -3,11 +3,14 @@ import { useSearchParams } from 'react-router-dom';
 import { api } from '../lib/api.js';
 import CatalogCard from '../components/CatalogCard.jsx';
 
+// Bands match the real THB pricing (฿150–650 across the catalog) resolved
+// in Phase 0.1 of the implementation plan — the old ฿10/20 bands were built
+// around mockup placeholder prices and no longer matched anything real.
 const priceBuckets = [
   { key: 'all', label: 'All', test: () => true },
-  { key: 'under10', label: 'Under ฿10', test: (p) => p.price < 10 },
-  { key: '10to20', label: '฿10–฿20', test: (p) => p.price >= 10 && p.price <= 20 },
-  { key: 'over20', label: 'Over ฿20', test: (p) => p.price > 20 },
+  { key: 'under200', label: 'Under ฿200', test: (p) => p.price < 200 },
+  { key: '200to500', label: '฿200–฿500', test: (p) => p.price >= 200 && p.price <= 500 },
+  { key: 'over500', label: 'Over ฿500', test: (p) => p.price > 500 },
 ];
 
 function TextTab({ label, active, onClick }) {

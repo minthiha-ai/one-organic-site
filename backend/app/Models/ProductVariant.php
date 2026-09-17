@@ -18,6 +18,10 @@ class ProductVariant extends Model implements HasMedia
         'option_label',
         'price',
         'compare_at_price',
+        'wholesale_price',
+        'barcode',
+        'fda_registration_number',
+        'cosmetic_declaration_number',
         'stock_quantity',
         'is_default',
         'sort_order',
@@ -35,6 +39,7 @@ class ProductVariant extends Model implements HasMedia
     protected $casts = [
         'price' => 'decimal:2',
         'compare_at_price' => 'decimal:2',
+        'wholesale_price' => 'decimal:2',
         'is_default' => 'boolean',
         'is_active' => 'boolean',
         'tags' => 'array',

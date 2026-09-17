@@ -34,6 +34,18 @@ class VariantsRelationManager extends RelationManager
                             ->numeric()
                             ->prefix('THB')
                             ->helperText('Optional — shown struck through, for sale pricing.'),
+                        Forms\Components\TextInput::make('wholesale_price')
+                            ->numeric()
+                            ->prefix('THB')
+                            ->helperText('Internal — never exposed on the storefront.'),
+                        Forms\Components\TextInput::make('barcode')
+                            ->unique(ignoreRecord: true),
+                        Forms\Components\TextInput::make('fda_registration_number')
+                            ->label('อย number')
+                            ->helperText('Food products (VCO, syrup). Usually shared across a whole product line\'s sizes.'),
+                        Forms\Components\TextInput::make('cosmetic_declaration_number')
+                            ->label('เลขที่จดแจ้ง (Declaration No.)')
+                            ->helperText('Cosmetic products (soap) — a different registration scheme from the อย number above.'),
                         Forms\Components\TextInput::make('stock_quantity')
                             ->numeric()
                             ->required()
@@ -94,6 +106,11 @@ class VariantsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('sku'),
                 Tables\Columns\TextColumn::make('price')
                     ->money('THB'),
+                Tables\Columns\TextColumn::make('wholesale_price')
+                    ->money('THB')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('barcode')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('stock_quantity')
                     ->label('Stock')
                     ->sortable(),
