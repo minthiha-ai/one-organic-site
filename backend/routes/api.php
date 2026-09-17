@@ -17,8 +17,10 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{product:slug}', [ProductController::class, 'show']);
 
 // Auth
-Route::post('/auth/register', [AuthController::class, 'register']);
-Route::post('/auth/login', [AuthController::class, 'login']);
+Route::middleware('throttle:auth')->group(function () {
+    Route::post('/auth/register', [AuthController::class, 'register']);
+    Route::post('/auth/login', [AuthController::class, 'login']);
+});
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout']);
     Route::get('/auth/me', [AuthController::class, 'me']);
@@ -28,24 +30,29 @@ Route::middleware('auth:sanctum')->group(function () {
 // must work with no token at all. The controller resolves the customer
 // itself via $request->user('sanctum'), which returns null (not a 401)
 // when no valid bearer token is present.
-Route::post('/checkout', [CheckoutController::class, 'store']);
+Route::middleware('throttle:checkout')->group(function () {
+    Route::post('/checkout', [CheckoutController::class, 'store']);
 
-// Guest order lookup (order number + email, no account needed)
-Route::post('/orders/lookup', [OrderController::class, 'lookup']);
+    // Payment actions on one order — same order_number + email guest-access
+    // model as the lookup below, since this is guest checkout's actual
+    // payment step (see PaymentController::verifyOwnership for why).
+    Route::post('/orders/{order:order_number}/payments/card', [PaymentController::class, 'createCardSession']);
+    Route::post('/orders/{order:order_number}/payments/promptpay', [PaymentController::class, 'createPromptPay']);
+});
 
-// Payment actions on one order — same order_number + email guest-access
-// model as the lookup above, since this is guest checkout's actual payment
-// step (see PaymentController::verifyOwnership for why).
-Route::post('/orders/{order:order_number}/payments/card', [PaymentController::class, 'createCardSession']);
-Route::post('/orders/{order:order_number}/payments/promptpay', [PaymentController::class, 'createPromptPay']);
-Route::post('/orders/{order:order_number}/payment-status', [PaymentController::class, 'status']);
+// Guest order lookup and payment-status both key off order_number + email
+// with no account needed — same enumeration risk, same limiter.
+Route::middleware('throttle:order-lookup')->group(function () {
+    Route::post('/orders/lookup', [OrderController::class, 'lookup']);
+    Route::post('/orders/{order:order_number}/payment-status', [PaymentController::class, 'status']);
+});
 
 // Public contact form
 Route::post('/contact', [ContactController::class, 'store']);
 
 // Xendit webhook — authenticated by its own x-callback-token header, not
 // Sanctum. See XenditWebhookController::verifyToken.
-Route::post('/webhooks/xendit', [XenditWebhookController::class, 'handle']);
+Route::middleware('throttle:webhook')->post('/webhooks/xendit', [XenditWebhookController::class, 'handle']);
 
 // Customer-only
 Route::middleware('auth:sanctum')->group(function () {

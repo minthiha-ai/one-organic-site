@@ -13,7 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Blanket floor for every api/* route via the named 'api' limiter
+        // (defined in AppServiceProvider) — routes needing a tighter or
+        // looser limit get an additional throttle:<name> middleware of
+        // their own directly in routes/api.php, which stacks on top.
+        $middleware->throttleApi();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
