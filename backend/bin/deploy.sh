@@ -25,8 +25,14 @@ fi
 
 echo "$(date -u +%FT%TZ): deploying $BEFORE -> $AFTER"
 cd backend
-/opt/cpanel/composer/bin/composer install --no-dev --optimize-autoloader --no-interaction
-php artisan migrate --force
-php artisan filament:clear-cached-components
-php artisan optimize:clear
+# Explicit CLI php binary for everything below — cron's PATH is more
+# restricted than an interactive SSH shell's, and composer's own shebang
+# resolving the wrong (CGI-mode) php here caused a real failed deploy on
+# 2026-09-17 ("Composer cannot be run safely on non-CLI SAPIs"). This is
+# the same binary already proven correct for cron in the schedule:run entry.
+PHP_BIN=/usr/local/bin/php
+"$PHP_BIN" /opt/cpanel/composer/bin/composer install --no-dev --optimize-autoloader --no-interaction
+"$PHP_BIN" artisan migrate --force
+"$PHP_BIN" artisan filament:clear-cached-components
+"$PHP_BIN" artisan optimize:clear
 echo "$(date -u +%FT%TZ): deploy complete"
