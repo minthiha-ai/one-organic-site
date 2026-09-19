@@ -8,7 +8,7 @@ use App\Http\Resources\OrderResource;
 use App\Models\Address;
 use App\Models\Order;
 use App\Models\ProductVariant;
-use App\Models\ShippingRate;
+use App\Services\ShippingQuoteService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -20,7 +20,13 @@ class CheckoutController extends Controller
 
         $shipping = $this->resolveShippingAddress($request, $customer);
 
-        $order = DB::transaction(function () use ($request, $customer, $shipping) {
+        // Computed before the transaction, deliberately — this calls out to
+        // SHIPPOP over HTTP (up to a 15s timeout), and that must never
+        // happen while holding the row locks the transaction takes on
+        // product_variants below.
+        $shippingCost = (new ShippingQuoteService)->quote($request->input('items'), $shipping);
+
+        $order = DB::transaction(function () use ($request, $customer, $shipping, $shippingCost) {
             // Lock the variant rows for the duration of the transaction so two
             // concurrent checkouts can't both oversell the last unit in stock.
             $variantIds = collect($request->input('items'))->pluck('product_variant_id');
@@ -60,13 +66,6 @@ class CheckoutController extends Controller
                 ];
             }
 
-            // Interim flat rate (Phase 0.5.5) — deliberately fails loudly
-            // (firstOrFail) rather than falling back to 0 if the table is
-            // ever empty, since silently charging ฿0 shipping again is
-            // exactly the bug this exists to prevent. Real per-order rates
-            // arrive with Phase 1.1's SHIPPOP/KEX integration; this table
-            // stays as its fallback path once that's live.
-            $shippingCost = (float) ShippingRate::where('is_active', true)->firstOrFail()->rate;
             $discountTotal = 0;
 
             $order = Order::create([

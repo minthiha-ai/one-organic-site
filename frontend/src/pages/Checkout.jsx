@@ -208,7 +208,7 @@ export default function Checkout() {
           ))}
           <div style={{ borderTop: '0.5px solid var(--color-border)', marginTop: 8, paddingTop: 12 }}>
             <SummaryLine label="Subtotal" price={subtotal.toFixed(2)} size={13} />
-            <SummaryLine label="Shipping" price={shippingRate != null ? shippingRate.toFixed(2) : '—'} size={13} />
+            <SummaryLine label="Shipping (estimated)" price={shippingRate != null ? shippingRate.toFixed(2) : '—'} size={13} />
             <SummaryLine
               label="Total"
               price={(subtotal + (shippingRate ?? 0)).toFixed(2)}
@@ -218,6 +218,9 @@ export default function Checkout() {
               style={{ marginTop: 8, marginBottom: 0 }}
             />
           </div>
+          <p style={{ fontSize: 11, color: 'var(--color-muted)', margin: '8px 0 0' }}>
+            Final shipping is calculated from your delivery address when you place the order — the total you're charged may differ slightly from this estimate.
+          </p>
         </div>
       </div>
 

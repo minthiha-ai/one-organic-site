@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 
@@ -64,5 +65,62 @@ class ShippopClient
         }
 
         return $body['data']['0'] ?? [];
+    }
+
+    /**
+     * SHIPPOP's own postcode reference data (POST {base_url}/postoffice/) —
+     * confirmed live: {status, data: {postoffice: [{id, name, postcode,
+     * latlong}]}}. `name` is a post-office/area name at roughly the Thai
+     * เขต/อำเภอ level (e.g. "พระโขนง" for postcode 10110) — used as the
+     * "state" field, and re-used for "district" too since the checkout
+     * form doesn't collect a real ตำบล/แขวง (see Phase 0.6). Confirmed
+     * empirically this still produces a valid, real KEX quote even though
+     * it's not the exact sub-district. Cached a day since this reference
+     * data changes rarely, and it's SHIPPOP's own account-scoped list
+     * (only ~47 entries in sandbox, Bangkok-focused) rather than a
+     * third-party dataset.
+     *
+     * @return array<int, array{id:int,name:string,postcode:string,latlong:string}>
+     */
+    public function getPostOffices(): array
+    {
+        return Cache::remember('shippop.postoffices', now()->addDay(), function () {
+            $response = $this->http()->asForm()->post($this->baseUrl().'/postoffice/', [
+                'api_key' => (string) config('services.shippop.api_key'),
+                'callback' => 'data',
+            ]);
+
+            $response->throw();
+
+            // Response is JSONP-wrapped ("data({...})"), not plain JSON —
+            // confirmed live, unlike every other SHIPPOP endpoint.
+            $body = json_decode(
+                preg_replace('/^\w+\((.*)\)$/s', '$1', $response->body()),
+                true
+            );
+
+            if (! ($body['status'] ?? false)) {
+                throw new RuntimeException('SHIPPOP post office lookup failed: '.$response->body());
+            }
+
+            return $body['data']['postoffice'] ?? [];
+        });
+    }
+
+    /**
+     * Best-effort district/state name for a postcode, from SHIPPOP's own
+     * reference data — null if not found (e.g. a postcode outside this
+     * account's coverage), so the caller can fall back to the flat rate
+     * rather than send SHIPPOP a request it's guaranteed to reject.
+     */
+    public function resolveAreaNameForPostcode(string $postcode): ?string
+    {
+        foreach ($this->getPostOffices() as $entry) {
+            if (($entry['postcode'] ?? null) === $postcode) {
+                return $entry['name'];
+            }
+        }
+
+        return null;
     }
 }
