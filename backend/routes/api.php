@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ShippingRateController;
 use App\Http\Controllers\Api\Webhooks\XenditWebhookController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{product:slug}', [ProductController::class, 'show']);
+
+// Lets the checkout page show the real shipping fee before placing the
+// order — same rate CheckoutController itself charges.
+Route::get('/shipping-rate', [ShippingRateController::class, 'current']);
 
 // Auth
 Route::middleware('throttle:auth')->group(function () {

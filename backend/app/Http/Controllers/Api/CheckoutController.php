@@ -8,6 +8,7 @@ use App\Http\Resources\OrderResource;
 use App\Models\Address;
 use App\Models\Order;
 use App\Models\ProductVariant;
+use App\Models\ShippingRate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -59,9 +60,13 @@ class CheckoutController extends Controller
                 ];
             }
 
-            // Shipping cost / discounts aren't wired to real logic yet — flat
-            // zero until a shipping-rate and coupon system are built.
-            $shippingCost = 0;
+            // Interim flat rate (Phase 0.5.5) — deliberately fails loudly
+            // (firstOrFail) rather than falling back to 0 if the table is
+            // ever empty, since silently charging ฿0 shipping again is
+            // exactly the bug this exists to prevent. Real per-order rates
+            // arrive with Phase 1.1's SHIPPOP/KEX integration; this table
+            // stays as its fallback path once that's live.
+            $shippingCost = (float) ShippingRate::where('is_active', true)->firstOrFail()->rate;
             $discountTotal = 0;
 
             $order = Order::create([

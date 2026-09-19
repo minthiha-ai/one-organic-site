@@ -36,6 +36,22 @@ export default function Checkout() {
   const [addresses, setAddresses] = useState([]);
   const [selectedAddressId, setSelectedAddressId] = useState(null); // null = enter address manually
 
+  // Real interim flat rate (Phase 0.5.5) — was hardcoded "0.00" here while
+  // the actual charge already included a real shipping fee, so the
+  // customer's pre-payment total silently understated what they'd pay.
+  const [shippingRate, setShippingRate] = useState(null);
+
+  useEffect(() => {
+    api
+      .get('/shipping-rate')
+      .then((res) => setShippingRate(res.data.rate))
+      .catch(() => {
+        // Left null — the summary just omits the shipping line rather than
+        // guessing a number; the actual charge is still correct either way
+        // since that comes from the server at order-creation time.
+      });
+  }, []);
+
   // `navigate()` updates window.location synchronously, but React Router's
   // own matched-route state lags a render behind — so Checkout can render
   // one more time (cart already cleared, route still "us") before the swap
@@ -192,8 +208,15 @@ export default function Checkout() {
           ))}
           <div style={{ borderTop: '0.5px solid var(--color-border)', marginTop: 8, paddingTop: 12 }}>
             <SummaryLine label="Subtotal" price={subtotal.toFixed(2)} size={13} />
-            <SummaryLine label="Shipping" price="0.00" size={13} />
-            <SummaryLine label="Total" price={subtotal.toFixed(2)} size={15} weight={600} color="var(--color-text)" style={{ marginTop: 8, marginBottom: 0 }} />
+            <SummaryLine label="Shipping" price={shippingRate != null ? shippingRate.toFixed(2) : '—'} size={13} />
+            <SummaryLine
+              label="Total"
+              price={(subtotal + (shippingRate ?? 0)).toFixed(2)}
+              size={15}
+              weight={600}
+              color="var(--color-text)"
+              style={{ marginTop: 8, marginBottom: 0 }}
+            />
           </div>
         </div>
       </div>
