@@ -46,6 +46,23 @@ class VariantsRelationManager extends RelationManager
                         Forms\Components\TextInput::make('cosmetic_declaration_number')
                             ->label('เลขที่จดแจ้ง (Declaration No.)')
                             ->helperText('Cosmetic products (soap) — a different registration scheme from the อย number above.'),
+                        Forms\Components\TextInput::make('weight_grams')
+                            ->label('Weight (g)')
+                            ->numeric()
+                            ->suffix('g')
+                            ->helperText('Packed weight (jar/bottle/wrapper included) — used for SHIPPOP rate lookups. Currently estimated pending real measurement.'),
+                        Forms\Components\TextInput::make('length_cm')
+                            ->label('Length (cm)')
+                            ->numeric()
+                            ->suffix('cm'),
+                        Forms\Components\TextInput::make('width_cm')
+                            ->label('Width (cm)')
+                            ->numeric()
+                            ->suffix('cm'),
+                        Forms\Components\TextInput::make('height_cm')
+                            ->label('Height (cm)')
+                            ->numeric()
+                            ->suffix('cm'),
                         Forms\Components\TextInput::make('stock_quantity')
                             ->numeric()
                             ->required()
@@ -110,6 +127,10 @@ class VariantsRelationManager extends RelationManager
                     ->money('THB')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('barcode')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('weight_grams')
+                    ->label('Weight')
+                    ->suffix('g')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('stock_quantity')
                     ->label('Stock')

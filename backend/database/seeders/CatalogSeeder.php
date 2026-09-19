@@ -23,6 +23,14 @@ use Illuminate\Database\Seeder;
  * a เลขที่จดแจ้ง (cosmetic_declaration_number) instead — a different,
  * per-SKU registration scheme. Deliberately kept in separate columns,
  * not conflated.
+ *
+ * weight_grams/length_cm/width_cm/height_cm (Phase 1.1, added 26.09.19)
+ * are ESTIMATES, not measurements — explicitly authorized by Stephen as
+ * an interim placeholder for wiring up SHIPPOP rate lookups, pending real
+ * numbers from the admin panel. VCO/syrup estimates are net content
+ * weight (VCO ≈ 0.92 g/ml) plus a rough glass-jar tare weight; soap is
+ * 100g content plus a light wrapper allowance. Do not treat these as
+ * confirmed shipping weights.
  */
 class CatalogSeeder extends Seeder
 {
@@ -96,6 +104,10 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 273.00,
             'barcode' => '0730945251648',
             'fda_registration_number' => $vcoFdaNumber,
+            'weight_grams' => 600, // ~414g oil (450ml * 0.92) + ~180g jar, estimated
+            'length_cm' => 9,
+            'width_cm' => 9,
+            'height_cm' => 16,
             'sort_order' => 1,
             'is_default' => true,
             'tags' => ['Most Popular', 'Cold Pressed', 'Vegan & GF'],
@@ -111,6 +123,10 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 455.00,
             'barcode' => '0730945251662',
             'fda_registration_number' => $vcoFdaNumber,
+            'weight_grams' => 1150, // ~828g oil (900ml * 0.92) + ~320g jar, estimated
+            'length_cm' => 11,
+            'width_cm' => 11,
+            'height_cm' => 20,
             'sort_order' => 2,
             'tags' => ['Family Size', 'Cold Pressed', 'Vegan & GF'],
             'highlights' => $highlights,
@@ -125,6 +141,10 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 126.00,
             'barcode' => '0730945251655',
             'fda_registration_number' => $vcoFdaNumber,
+            'weight_grams' => 200, // ~115g oil (125ml * 0.92) + ~80g jar, estimated
+            'length_cm' => 7,
+            'width_cm' => 7,
+            'height_cm' => 10,
             'sort_order' => 3,
             'tags' => ['Travel Size', 'Cold Pressed', 'Vegan & GF'],
             'highlights' => $highlights,
@@ -153,6 +173,10 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 203.00,
             'barcode' => '0730945251679',
             'fda_registration_number' => 'อย 70-2-01450-6-0116',
+            'weight_grams' => 830, // 600g content + ~230g jar, estimated
+            'length_cm' => 9,
+            'width_cm' => 9,
+            'height_cm' => 16,
             'sort_order' => 1,
             'is_default' => true,
             'tags' => ['Low GI: 35', 'High in Minerals', 'Vegan & GF'],
@@ -193,6 +217,10 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 105.00,
             'barcode' => '0730945252133',
             'cosmetic_declaration_number' => '12-1-6800027486',
+            'weight_grams' => 120, // 100g bar + ~20g wrapper, estimated
+            'length_cm' => 10,
+            'width_cm' => 7,
+            'height_cm' => 4,
             'sort_order' => 1,
             'is_default' => true,
             'tags' => ['Antibacterial', 'Oily/Normal Skin', 'Heavy Duty Cleansing'],
@@ -212,6 +240,10 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 126.00,
             'barcode' => '0730945252140',
             'cosmetic_declaration_number' => '12-1-6800027484',
+            'weight_grams' => 120, // 100g bar + ~20g wrapper, estimated
+            'length_cm' => 10,
+            'width_cm' => 7,
+            'height_cm' => 4,
             'sort_order' => 2,
             'tags' => ['Hydrating', 'Detoxifies', 'Normal/Dry Skin'],
             'highlights' => [...['Hydrates & Soothes Skin', 'Detoxifies'], ...$base],
@@ -230,6 +262,10 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 126.00,
             'barcode' => '0730945252157',
             'cosmetic_declaration_number' => '12-1-6900015948',
+            'weight_grams' => 120, // 100g bar + ~20g wrapper, estimated
+            'length_cm' => 10,
+            'width_cm' => 7,
+            'height_cm' => 4,
             'sort_order' => 3,
             'tags' => ['Hydrating', 'Anti-Inflammatory', 'Dry Skin'],
             'highlights' => [...['Hydrates & Soothes Skin', 'Anti-Inflammatory'], ...$base],
@@ -248,6 +284,10 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 126.00,
             'barcode' => '0730945252164',
             'cosmetic_declaration_number' => '12-1-6900015961',
+            'weight_grams' => 120, // 100g bar + ~20g wrapper, estimated
+            'length_cm' => 10,
+            'width_cm' => 7,
+            'height_cm' => 4,
             'sort_order' => 4,
             'tags' => ['Detoxifying', 'Draws Out Impurities', 'Oily/Normal Skin'],
             'highlights' => [...['Deeply Detoxifying', 'Draws Out Impurities'], ...$base],
