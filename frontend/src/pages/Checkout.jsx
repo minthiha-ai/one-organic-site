@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import EyebrowLabel from '../components/EyebrowLabel.jsx';
 import { FormField } from '../components/FormField.jsx';
 import SummaryLine from '../components/SummaryLine.jsx';
@@ -262,6 +262,11 @@ export default function Checkout() {
           <Button type="submit" block disabled={submitting}>
             {submitting ? 'Placing order…' : 'Place order'}
           </Button>
+          <p style={{ fontSize: 11, color: 'var(--color-muted)', margin: '10px 0 0', textAlign: 'center' }}>
+            By placing this order you agree to our{' '}
+            <Link to="/terms-of-service" style={{ color: 'inherit' }}>Terms of Service</Link> and{' '}
+            <Link to="/refund-policy" style={{ color: 'inherit' }}>Refund Policy</Link>.
+          </p>
         </div>
       </div>
     </form>

@@ -102,7 +102,7 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: 8,
+            gap: 16,
             alignItems: 'center',
             justifyContent: 'space-between',
             maxWidth: 'var(--page-max-width)',
@@ -113,6 +113,11 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           }}
         >
           <span>© 2026 One Organic (Thailand) Co., Ltd.</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+            <Link to="/privacy-policy" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy Policy</Link>
+            <Link to="/terms-of-service" style={{ color: 'inherit', textDecoration: 'none' }}>Terms of Service</Link>
+            <Link to="/refund-policy" style={{ color: 'inherit', textDecoration: 'none' }}>Refund Policy</Link>
+          </div>
           <span>one-organic.com</span>
         </div>
       </div>

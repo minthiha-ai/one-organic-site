@@ -8,6 +8,9 @@ import Cart from './pages/Cart.jsx';
 import Checkout from './pages/Checkout.jsx';
 import OrderConfirmation from './pages/OrderConfirmation.jsx';
 import Contact from './pages/Contact.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
+import TermsOfService from './pages/TermsOfService.jsx';
+import RefundPolicy from './pages/RefundPolicy.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Account from './pages/Account.jsx';
@@ -27,6 +30,9 @@ export default function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order/:orderNumber" element={<OrderConfirmation />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/login" element={<GuestOnly><Login /></GuestOnly>} />
           <Route path="/register" element={<GuestOnly><Register /></GuestOnly>} />
           <Route path="/account" element={<RequireAuth><Account /></RequireAuth>} />
