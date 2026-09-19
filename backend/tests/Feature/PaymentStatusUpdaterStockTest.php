@@ -13,11 +13,25 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Services\PaymentStatusUpdater;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class PaymentStatusUpdaterStockTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // markSucceeded() now also tries to book a SHIPPOP shipment
+        // (Phase 1.1 build step 3) — none of these tests are about that,
+        // so keep it fast/deterministic by faking it unreachable. The
+        // booking call is wrapped in try/catch in PaymentStatusUpdater, so
+        // this failing is expected and harmless here; ShippingBookingServiceTest
+        // covers the booking behavior itself.
+        Http::fake(['*' => Http::response(['status' => false], 500)]);
+    }
 
     protected function makeOrderWithOneItem(ProductVariant $variant, int $quantity = 2): Order
     {

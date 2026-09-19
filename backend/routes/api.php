@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ShippingRateController;
+use App\Http\Controllers\Api\Webhooks\ShippopWebhookController;
 use App\Http\Controllers\Api\Webhooks\XenditWebhookController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,11 @@ Route::post('/contact', [ContactController::class, 'store']);
 // Xendit webhook — authenticated by its own x-callback-token header, not
 // Sanctum. See XenditWebhookController::verifyToken.
 Route::middleware('throttle:webhook')->post('/webhooks/xendit', [XenditWebhookController::class, 'handle']);
+
+// SHIPPOP webhook — authenticated by the {token} path segment itself, not a
+// header (SHIPPOP has no self-service header/secret option). See
+// ShippopWebhookController::verifyToken.
+Route::middleware('throttle:webhook')->post('/webhooks/shippop/{token}', [ShippopWebhookController::class, 'handle']);
 
 // Customer-only
 Route::middleware('auth:sanctum')->group(function () {

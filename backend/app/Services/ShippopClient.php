@@ -123,4 +123,139 @@ class ShippopClient
 
         return null;
     }
+
+    /**
+     * POST {base_url}/booking/ — creates a pending shipment. With
+     * force_confirm=0 (the default, and what this always sends) the
+     * shipment is NOT yet sent to the courier and nothing is charged —
+     * that only happens on a separate confirm() call. This is deliberate:
+     * booking is safe to do automatically, confirm is not (see
+     * ShippingBookingService).
+     *
+     * $order is a single BOOKING DATA OBJECT: from/to/parcel (same shape
+     * as getRates()), courier_code, and optionally cod_amount, remark,
+     * meta, etc. Confirmed from SHIPPOP's docs example payload.
+     *
+     * @return array{purchase_id:int, total_price:float, item: array} item
+     *               is the first (only) entry of the response's per-line
+     *               BOOKING RESPONSE OBJECT — this only ever books one
+     *               parcel per order, so the array wrapping is collapsed
+     *               here rather than leaking SHIPPOP's numeric-index shape.
+     */
+    public function book(array $order): array
+    {
+        $payload = [
+            'api_key' => (string) config('services.shippop.api_key'),
+            'email' => (string) config('mail.from.address'),
+            'data' => [$order],
+            'force_confirm' => 0,
+        ];
+
+        $response = $this->http()->post($this->baseUrl().'/booking/', $payload);
+
+        $response->throw();
+
+        $body = $response->json();
+
+        if (! ($body['status'] ?? false)) {
+            throw new RuntimeException('SHIPPOP booking failed: '.json_encode($body));
+        }
+
+        $item = $body['data'][0] ?? null;
+
+        if (! $item || ! ($item['status'] ?? false)) {
+            throw new RuntimeException('SHIPPOP booking rejected: '.json_encode($item));
+        }
+
+        return [
+            'purchase_id' => $body['purchase_id'],
+            'total_price' => (float) ($body['total_price'] ?? 0),
+            'item' => $item,
+        ];
+    }
+
+    /**
+     * POST {base_url}/confirm/ — sends a previously-booked purchase to the
+     * courier. Irreversible per SHIPPOP's docs ("cannot edit all the
+     * information or cancel the purchase" afterward) — only ever called
+     * from an explicit admin action, never automatically.
+     *
+     * @return array<int, array{status:bool, courier_code:string, tracking_code:string, courier_tracking_code:string}>
+     */
+    public function confirm(int $purchaseId): array
+    {
+        $response = $this->http()->asForm()->post($this->baseUrl().'/confirm/', [
+            'api_key' => (string) config('services.shippop.api_key'),
+            'purchase_id' => $purchaseId,
+        ]);
+
+        $response->throw();
+
+        $body = $response->json();
+
+        if (! ($body['status'] ?? false)) {
+            throw new RuntimeException('SHIPPOP confirm failed: '.json_encode($body));
+        }
+
+        return $body['result'] ?? [];
+    }
+
+    /**
+     * POST {base_url}/cancel/ — only works on a booking that hasn't been
+     * confirmed yet (SHIPPOP's docs: confirm() makes a purchase
+     * uncancellable). Used to back out of a "Prepare shipment" click that
+     * shouldn't have happened, before it ever reaches the courier.
+     */
+    public function cancel(string $courierTrackingCode): void
+    {
+        $response = $this->http()->post($this->baseUrl().'/cancel/', [
+            'api_key' => (string) config('services.shippop.api_key'),
+            'courier_tracking_code' => $courierTrackingCode,
+        ]);
+
+        $response->throw();
+
+        $body = $response->json();
+
+        if (! ($body['status'] ?? false)) {
+            throw new RuntimeException('SHIPPOP cancel failed: '.json_encode($body));
+        }
+    }
+
+    /**
+     * POST {base_url}/label/ (type=pdf) — SHIPPOP does NOT host a label
+     * URL; every `type` (json/html/pdf) returns the label data/bytes
+     * directly in the response for the caller to render or store
+     * themselves. Confirmed live against the sandbox (26.09.19): type=pdf
+     * returns {status, pdf: "<base64>"} — not a URL, and not raw bytes
+     * either. type=json (tried first) returns structured label-template
+     * data instead of anything resembling a link. Returns the decoded PDF
+     * bytes; the caller is responsible for storing them somewhere with a
+     * real URL (see ShippingBookingService::confirm).
+     */
+    public function label(int $purchaseId): string
+    {
+        $response = $this->http()->post($this->baseUrl().'/label/', [
+            'api_key' => (string) config('services.shippop.api_key'),
+            'purchase_id' => $purchaseId,
+            'type' => 'pdf',
+            'size' => 'A4',
+        ]);
+
+        $response->throw();
+
+        $body = $response->json();
+
+        if (! ($body['status'] ?? false) || empty($body['pdf'])) {
+            throw new RuntimeException('SHIPPOP label fetch failed: '.json_encode($body));
+        }
+
+        $pdf = base64_decode($body['pdf'], true);
+
+        if ($pdf === false) {
+            throw new RuntimeException('SHIPPOP label response had unparseable base64 PDF data');
+        }
+
+        return $pdf;
+    }
 }

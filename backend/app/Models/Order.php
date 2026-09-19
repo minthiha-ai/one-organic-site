@@ -43,6 +43,12 @@ class Order extends Model
         'delivered_at',
         'cancelled_at',
         'stock_restored_at',
+        'shippop_purchase_id',
+        'shippop_tracking_code',
+        'courier_tracking_code',
+        'shipment_status',
+        'label_url',
+        'shipment_confirmed_at',
     ];
 
     protected $casts = [
@@ -57,6 +63,7 @@ class Order extends Model
         'delivered_at' => 'datetime',
         'cancelled_at' => 'datetime',
         'stock_restored_at' => 'datetime',
+        'shipment_confirmed_at' => 'datetime',
     ];
 
     protected static function booted(): void

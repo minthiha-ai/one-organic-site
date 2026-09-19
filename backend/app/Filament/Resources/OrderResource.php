@@ -83,6 +83,29 @@ class OrderResource extends Resource
                     ->columns(2)
                     ->collapsed(),
 
+                Forms\Components\Section::make('Shipment')
+                    ->description('Managed via the Prepare/Confirm/Cancel shipment actions above — not editable directly.')
+                    ->schema([
+                        Forms\Components\TextInput::make('shipment_status')
+                            ->label('SHIPPOP status')
+                            ->disabled()
+                            ->dehydrated(false),
+                        Forms\Components\TextInput::make('shippop_tracking_code')
+                            ->label('SHIPPOP tracking code')
+                            ->disabled()
+                            ->dehydrated(false),
+                        Forms\Components\TextInput::make('courier_tracking_code')
+                            ->label('KEX tracking code')
+                            ->disabled()
+                            ->dehydrated(false),
+                        Forms\Components\DateTimePicker::make('shipment_confirmed_at')
+                            ->disabled()
+                            ->dehydrated(false),
+                    ])
+                    ->columns(2)
+                    ->visible(fn (?Order $record) => $record?->shippop_purchase_id !== null)
+                    ->collapsible(),
+
                 Forms\Components\Textarea::make('notes')
                     ->columnSpanFull(),
             ]);

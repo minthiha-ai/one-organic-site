@@ -7,6 +7,8 @@ use App\Enums\PaymentStatus;
 use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 /**
  * The one place a Payment's status is allowed to change and an Order gets
@@ -52,6 +54,19 @@ class PaymentStatusUpdater
             'paid_at' => now(),
             'stock_restored_at' => null,
         ]);
+
+        // Booking is non-binding and not chargeable (force_confirm=0) — safe
+        // to do automatically. A failure here must never look like the
+        // payment itself failed; it's retryable from Filament, so this
+        // stays a warning, not a thrown exception.
+        try {
+            (new ShippingBookingService)->prepare($order);
+        } catch (Throwable $e) {
+            Log::warning('SHIPPOP shipment booking failed after payment success', [
+                'order' => $order->order_number,
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 
     public function markFailed(Payment $payment, array $rawResponse): void

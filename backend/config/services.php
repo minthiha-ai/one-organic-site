@@ -53,6 +53,14 @@ return [
         'base_url' => env('SHIPPOP_BASE_URL'),
         'api_key' => env('SHIPPOP_API_KEY'),
         'market_id' => env('SHIPPOP_MARKET_ID'),
+        // SHIPPOP has no self-service webhook signing secret — registering
+        // a webhook URL at all requires contacting their dev team directly
+        // (confirmed from their docs, 26.09.19). This token is our own
+        // interim safeguard: it's the unguessable path segment in the
+        // webhook URL itself, checked in ShippopWebhookController. Ask
+        // SHIPPOP for a real signing secret when registering the URL, and
+        // upgrade this if/when they provide one.
+        'webhook_token' => env('SHIPPOP_WEBHOOK_TOKEN'),
     ],
 
 ];
