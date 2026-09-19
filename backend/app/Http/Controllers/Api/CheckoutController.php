@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CheckoutRequest;
 use App\Http\Resources\OrderResource;
+use App\Mail\OrderConfirmationMail;
 use App\Models\Address;
 use App\Models\Order;
 use App\Models\ProductVariant;
 use App\Services\ShippingQuoteService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
 class CheckoutController extends Controller
@@ -46,7 +48,7 @@ class CheckoutController extends Controller
 
                 if (! $variant || ! $variant->is_active) {
                     throw ValidationException::withMessages([
-                        'items' => "One of the items in your cart is no longer available.",
+                        'items' => 'One of the items in your cart is no longer available.',
                     ]);
                 }
 
@@ -70,8 +72,8 @@ class CheckoutController extends Controller
 
             $order = Order::create([
                 'customer_id' => $customer?->id,
-                'guest_name' => $customer?->name ?? $request->string('guest_name'),
-                'guest_email' => $customer?->email ?? $request->string('guest_email'),
+                'guest_name' => $customer?->name ?? $request->input('guest_name'),
+                'guest_email' => $customer?->email ?? $request->input('guest_email'),
                 'guest_phone' => $customer?->phone ?? $request->input('guest_phone'),
                 'status' => 'pending',
                 'currency' => 'THB',
@@ -109,6 +111,15 @@ class CheckoutController extends Controller
 
             return $order;
         });
+
+        // Cash on Delivery has no "payment succeeded" moment to hook a
+        // confirmation off of — it's already the order — so it sends here
+        // rather than from PaymentStatusUpdater::markSucceeded(), which a
+        // COD order never reaches. Card/PromptPay orders confirm there
+        // instead, once payment actually completes.
+        if ($order->payment_method === 'cod') {
+            Mail::to($order->guest_email)->queue(new OrderConfirmationMail($order));
+        }
 
         return new OrderResource($order->load('items'));
     }

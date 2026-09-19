@@ -2,6 +2,10 @@
 
 return [
 
+    // Public frontend URL — used to link back to it from transactional emails
+    // (order confirmation) as well as Xendit's Card Sessions origin below.
+    'frontend_url' => env('FRONTEND_URL'),
+
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -43,7 +47,7 @@ return [
         // Card Sessions require an allowlisted HTTPS origin for the Components
         // embed. Defaults to FRONTEND_URL; override for local dev with an
         // https tunnel (ngrok etc.) since Components rejects http origins.
-        'components_origin' => env('XENDIT_COMPONENTS_ORIGIN', env('FRONTEND_URL')),
+        'components_origin' => env('XENDIT_COMPONENTS_ORIGIN', env('FRONTEND_URL')), // see 'frontend_url' above
     ],
 
     // Courier rate lookup / booking (Phase 1.1). Sandbox base URL is

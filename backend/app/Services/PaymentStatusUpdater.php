@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
+use App\Mail\OrderConfirmationMail;
 use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Throwable;
 
 /**
@@ -67,6 +69,13 @@ class PaymentStatusUpdater
                 'error' => $e->getMessage(),
             ]);
         }
+
+        // Card/PromptPay orders aren't "confirmed" from the customer's
+        // perspective until payment actually succeeds — this is that
+        // moment. Cash on Delivery orders queue their confirmation
+        // separately, straight from checkout, since they never reach this
+        // method (see CheckoutController::store).
+        Mail::to($order->guest_email)->queue(new OrderConfirmationMail($order));
     }
 
     public function markFailed(Payment $payment, array $rawResponse): void
