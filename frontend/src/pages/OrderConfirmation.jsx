@@ -220,6 +220,7 @@ export default function OrderConfirmation() {
 
   const payment = order.latest_payment;
   const isPaid = order.status === 'paid';
+  const isCod = order.payment_method === 'cod';
   const isExpiredQr = payment?.method === 'promptpay' && payment.status === 'pending' && payment.expires_at && new Date(payment.expires_at) < new Date();
   const isExpiredCard = payment?.method === 'card' && payment.status === 'pending' && payment.expires_at && new Date(payment.expires_at) < new Date();
   const lastAttemptFailed = payment?.status === 'failed';
@@ -234,6 +235,16 @@ export default function OrderConfirmation() {
           <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 22, fontWeight: 600, margin: '16px 0 8px' }}>Payment received</h1>
           <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '0 0 28px' }}>
             Total: ฿{order.total.toFixed(2)}. A confirmation has been sent to {order.guest_email}.
+          </p>
+          <Button to="/shop">Continue shopping</Button>
+        </div>
+      ) : isCod ? (
+        <div style={{ textAlign: 'center', padding: '32px 0' }}>
+          <i className="ti ti-truck-delivery" style={{ fontSize: 40, color: 'var(--color-accent)' }} aria-hidden="true" />
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 22, fontWeight: 600, margin: '16px 0 8px' }}>Order placed</h1>
+          <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '0 0 28px' }}>
+            Total: ฿{order.total.toFixed(2)}, payable in cash when your order is delivered. A confirmation has been sent to{' '}
+            {order.guest_email}.
           </p>
           <Button to="/shop">Continue shopping</Button>
         </div>
