@@ -46,4 +46,13 @@ return [
         'components_origin' => env('XENDIT_COMPONENTS_ORIGIN', env('FRONTEND_URL')),
     ],
 
+    // Courier rate lookup / booking (Phase 1.1). Sandbox base URL is
+    // https://mkpservice.shippop.dev, production https://mkpservice.shippop.com
+    // — same api_key auth scheme for both, just a different host + key.
+    'shippop' => [
+        'base_url' => env('SHIPPOP_BASE_URL'),
+        'api_key' => env('SHIPPOP_API_KEY'),
+        'market_id' => env('SHIPPOP_MARKET_ID'),
+    ],
+
 ];
