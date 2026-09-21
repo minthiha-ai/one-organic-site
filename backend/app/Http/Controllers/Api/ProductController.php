@@ -12,7 +12,11 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = Product::query()
-            ->with(['category', 'variants' => fn ($q) => $q->where('is_active', true)->orderBy('sort_order')])
+            ->with([
+                'category',
+                'variants' => fn ($q) => $q->where('is_active', true)->orderBy('sort_order'),
+                'variants.media',
+            ])
             ->where('is_active', true)
             ->when($request->filled('category'), function ($query) use ($request) {
                 $query->whereHas('category', fn ($q) => $q->where('slug', $request->string('category')));
@@ -32,7 +36,11 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product->load(['category', 'variants' => fn ($q) => $q->where('is_active', true)->orderBy('sort_order')]);
+        $product->load([
+            'category',
+            'variants' => fn ($q) => $q->where('is_active', true)->orderBy('sort_order'),
+            'variants.media',
+        ]);
 
         return new ProductResource($product);
     }

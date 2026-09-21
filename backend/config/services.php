@@ -61,10 +61,15 @@ return [
         // a webhook URL at all requires contacting their dev team directly
         // (confirmed from their docs, 26.09.19). This token is our own
         // interim safeguard: it's the unguessable path segment in the
-        // webhook URL itself, checked in ShippopWebhookController. Ask
-        // SHIPPOP for a real signing secret when registering the URL, and
-        // upgrade this if/when they provide one.
+        // webhook URL itself, checked in ShippopWebhookController.
         'webhook_token' => env('SHIPPOP_WEBHOOK_TOKEN'),
+
+        // Confirmed live by SHIPPOP's dev team (26.09.21): they now send
+        // this value on every webhook call as the X-Webhook-Secret header.
+        // Checked in addition to (not instead of) the URL token above — the
+        // already-registered webhook URL doesn't need to change for this,
+        // it's just a second thing that now has to match.
+        'webhook_secret' => env('SHIPPOP_WEBHOOK_SECRET'),
     ],
 
 ];

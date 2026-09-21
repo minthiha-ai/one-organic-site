@@ -10,16 +10,26 @@ abstract class ShippopWebhookTestCase extends TestCase
 {
     protected string $webhookToken = 'test-webhook-token';
 
+    protected string $webhookSecret = 'test-webhook-secret';
+
     protected function setUp(): void
     {
         parent::setUp();
 
-        config(['services.shippop.webhook_token' => $this->webhookToken]);
+        config([
+            'services.shippop.webhook_token' => $this->webhookToken,
+            'services.shippop.webhook_secret' => $this->webhookSecret,
+        ]);
     }
 
     protected function webhookUrl(): string
     {
         return '/api/webhooks/shippop/'.$this->webhookToken;
+    }
+
+    protected function webhookHeaders(): array
+    {
+        return ['X-Webhook-Secret' => $this->webhookSecret];
     }
 
     protected function makeOrderWithTrackingCode(string $trackingCode): Order

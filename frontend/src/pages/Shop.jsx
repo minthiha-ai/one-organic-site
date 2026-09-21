@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { api } from '../lib/api.js';
 import CatalogCard from '../components/CatalogCard.jsx';
+import CatalogCardSkeleton from '../components/CatalogCardSkeleton.jsx';
 
 // Bands match the real THB pricing (฿150–650 across the catalog) resolved
 // in Phase 0.1 of the implementation plan — the old ฿10/20 bands were built
@@ -158,8 +159,12 @@ export default function Shop() {
       </div>
 
       {loading && (
-        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '48px var(--gutter)', textAlign: 'center' }}>
-          <p style={{ fontSize: 14, color: 'var(--color-secondary-text)', margin: 0 }}>Loading…</p>
+        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '32px var(--gutter) 48px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '32px 24px' }}>
+            {Array.from({ length: 8 }, (_, i) => (
+              <CatalogCardSkeleton key={i} />
+            ))}
+          </div>
         </div>
       )}
 

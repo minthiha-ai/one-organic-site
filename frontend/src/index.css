@@ -35,6 +35,28 @@ textarea {
   box-shadow: 0 2px 10px rgba(62, 62, 63, 0.12);
 }
 
+@keyframes oo-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.oo-skeleton {
+  background: linear-gradient(90deg, var(--color-tint) 25%, var(--color-border) 50%, var(--color-tint) 75%);
+  background-size: 200% 100%;
+  animation: oo-shimmer 1.4s ease-in-out infinite;
+  border-radius: var(--radius-sm, 4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oo-skeleton {
+    animation: none;
+  }
+}
+
 .legal-content h2 {
   font-family: var(--font-heading);
   font-size: 16px;

@@ -21,6 +21,7 @@ export default function ProductDetail() {
   const [notFound, setNotFound] = useState(false);
   const [selectedVariantId, setSelectedVariantId] = useState(null);
   const [justAdded, setJustAdded] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     setLoading(true);
@@ -65,11 +66,17 @@ export default function ProductDetail() {
   function selectVariant(id) {
     setSelectedVariantId(id);
     setSearchParams({ variant: id }, { replace: true });
+    setQuantity(1);
+  }
+
+  function clampQuantity(next) {
+    return Math.max(1, Math.min(next, variant.stock_quantity));
   }
 
   function handleAddToCart() {
-    addItem(product, variant, 1);
+    addItem(product, variant, quantity);
     setJustAdded(true);
+    setQuantity(1);
     setTimeout(() => setJustAdded(false), 1800);
   }
 
@@ -126,6 +133,49 @@ export default function ProductDetail() {
 
           {!variant.in_stock && (
             <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>Out of stock</p>
+          )}
+          {variant.in_stock && variant.stock_quantity <= 5 && (
+            <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>
+              Only {variant.stock_quantity} left
+            </p>
+          )}
+          {variant.in_stock && variant.stock_quantity > 5 && (
+            <p style={{ fontSize: 12, color: 'var(--color-secondary-text)', margin: '0 0 12px' }}>In stock</p>
+          )}
+
+          {variant.in_stock && (
+            <div
+              style={{
+                display: 'flex',
+                width: 'fit-content',
+                alignItems: 'center',
+                gap: 10,
+                border: '0.5px solid var(--color-border)',
+                borderRadius: 'var(--radius-pill)',
+                padding: '5px 10px',
+                marginBottom: 16,
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => setQuantity((q) => clampQuantity(q - 1))}
+                disabled={quantity <= 1}
+                aria-label="Decrease quantity"
+                style={{ background: 'none', border: 'none', padding: 2, cursor: quantity <= 1 ? 'default' : 'pointer', display: 'flex', opacity: quantity <= 1 ? 0.4 : 1 }}
+              >
+                <i className="ti ti-minus" style={{ fontSize: 12, color: 'var(--color-secondary-text)' }} aria-hidden="true" />
+              </button>
+              <span style={{ fontSize: 13, minWidth: 16, textAlign: 'center' }}>{quantity}</span>
+              <button
+                type="button"
+                onClick={() => setQuantity((q) => clampQuantity(q + 1))}
+                disabled={quantity >= variant.stock_quantity}
+                aria-label="Increase quantity"
+                style={{ background: 'none', border: 'none', padding: 2, cursor: quantity >= variant.stock_quantity ? 'default' : 'pointer', display: 'flex', opacity: quantity >= variant.stock_quantity ? 0.4 : 1 }}
+              >
+                <i className="ti ti-plus" style={{ fontSize: 12, color: 'var(--color-secondary-text)' }} aria-hidden="true" />
+              </button>
+            </div>
           )}
 
           <Button onClick={handleAddToCart} disabled={!variant.in_stock}>

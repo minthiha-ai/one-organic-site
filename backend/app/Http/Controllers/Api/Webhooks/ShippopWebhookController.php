@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Log;
 /**
  * Receives SHIPPOP's shipment-status callbacks (Phase 1.1 build step 4).
  *
- * SHIPPOP has no self-service webhook registration and no documented
- * signing secret — their docs say registering a URL at all requires
- * contacting their dev team directly (26.09.19). Authenticated here by an
- * unguessable token in the URL path itself rather than a header, since a
- * custom header isn't available without that same manual contact. Ask for
- * a real signing secret when registering the URL, and prefer it over this
- * token if/when one exists.
+ * SHIPPOP has no self-service webhook registration — their docs say
+ * registering a URL at all requires contacting their dev team directly
+ * (26.09.19). Originally authenticated only by an unguessable token in the
+ * URL path, since a custom header wasn't available without that same
+ * manual contact. Their dev team has since (26.09.21) confirmed they send
+ * an X-Webhook-Secret header on every call, checked here in addition to
+ * the URL token, not instead of it — the already-registered URL keeps
+ * working unchanged, this just adds a second thing that has to match.
  *
  * Payload isn't guaranteed to be JSON (SHIPPOP's default is form-encoded
  * unless their dev team is asked otherwise) — $request->input() reads
@@ -29,6 +30,12 @@ class ShippopWebhookController extends Controller
     {
         if (! $this->verifyToken($token)) {
             Log::warning('SHIPPOP webhook rejected: invalid URL token');
+
+            return response()->json(['message' => 'Not found'], 404);
+        }
+
+        if (! $this->verifySecretHeader($request)) {
+            Log::warning('SHIPPOP webhook rejected: invalid or missing X-Webhook-Secret header');
 
             return response()->json(['message' => 'Not found'], 404);
         }
@@ -73,6 +80,14 @@ class ShippopWebhookController extends Controller
     protected function verifyToken(string $given): bool
     {
         $expected = (string) config('services.shippop.webhook_token');
+
+        return $expected !== '' && hash_equals($expected, $given);
+    }
+
+    protected function verifySecretHeader(Request $request): bool
+    {
+        $expected = (string) config('services.shippop.webhook_secret');
+        $given = (string) $request->header('X-Webhook-Secret');
 
         return $expected !== '' && hash_equals($expected, $given);
     }

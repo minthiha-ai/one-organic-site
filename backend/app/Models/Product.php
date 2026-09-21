@@ -50,9 +50,14 @@ class Product extends Model
     /**
      * The variant to show on catalog/listing views: the flagged default,
      * falling back to the first variant by sort order if none is flagged.
+     *
+     * Deliberately searches the already-loaded `variants` collection rather
+     * than the separate `defaultVariant` relation — callers always eager
+     * load `variants` (and `variants.media`, for image_url), so this stays
+     * a free in-memory lookup instead of an extra N+1 query per product.
      */
     public function displayVariant(): ?ProductVariant
     {
-        return $this->defaultVariant ?? $this->variants->first();
+        return $this->variants->firstWhere('is_default', true) ?? $this->variants->first();
     }
 }
