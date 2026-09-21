@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use App\Enums\PaymentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -49,6 +50,7 @@ class Order extends Model
         'shipment_status',
         'label_url',
         'shipment_confirmed_at',
+        'refunded_at',
     ];
 
     protected $casts = [
@@ -64,6 +66,7 @@ class Order extends Model
         'cancelled_at' => 'datetime',
         'stock_restored_at' => 'datetime',
         'shipment_confirmed_at' => 'datetime',
+        'refunded_at' => 'datetime',
     ];
 
     protected static function booted(): void
@@ -105,6 +108,19 @@ class Order extends Model
     public function latestPayment(): HasOne
     {
         return $this->hasOne(Payment::class)->latestOfMany();
+    }
+
+    /**
+     * The payment that actually collected money, if any — distinct from
+     * latestPayment(), which can be a failed/expired attempt. Needed for
+     * refunds: there's no point refunding a Pending or Failed payment.
+     */
+    public function successfulPayment(): ?Payment
+    {
+        return $this->payments()
+            ->where('status', PaymentStatus::Succeeded)
+            ->latest()
+            ->first();
     }
 
     public function recalculateTotals(): void

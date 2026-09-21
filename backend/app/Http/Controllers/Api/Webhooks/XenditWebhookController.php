@@ -50,7 +50,22 @@ class XenditWebhookController extends Controller
         $event = (string) ($payload['event'] ?? '');
         $updater = new PaymentStatusUpdater;
 
-        if (str_ends_with($event, '.completed') || str_ends_with($event, '.payment') || str_ends_with($event, '.succeeded')) {
+        if ($event === 'refund.succeeded') {
+            // Async completion of a refund the Filament action already
+            // requested (EditOrder::refundViaXendit) — a synchronous
+            // "SUCCEEDED" response there already calls markRefunded()
+            // directly, so this is mainly for refunds that settled
+            // asynchronously. No record of the admin's restore-stock
+            // choice survives to here, so this deliberately defaults to
+            // NOT restoring stock — safer than guessing, and stock can
+            // always be adjusted manually afterward. markRefunded()'s own
+            // idempotency guard makes this a no-op if the synchronous path
+            // already completed it.
+            $data = $payload['data'] ?? $payload;
+            $updater->markRefunded($payment->order, $payment, (float) ($data['amount'] ?? $payment->amount), false, $data);
+        } elseif ($event === 'refund.failed') {
+            Log::warning('Xendit refund failed', ['payment_id' => $payment->id, 'payload' => $payload]);
+        } elseif (str_ends_with($event, '.completed') || str_ends_with($event, '.payment') || str_ends_with($event, '.succeeded')) {
             $updater->markSucceeded($payment, $payload);
         } elseif (str_ends_with($event, '.failed')) {
             $updater->markFailed($payment, $payload);

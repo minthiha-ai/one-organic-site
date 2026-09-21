@@ -118,9 +118,9 @@ class PaymentStatusUpdater
      * both reach this for different sibling payments at nearly the same
      * time.
      *
-     * Deliberately not shared with a future refund flow without an
-     * explicit decision there (Phase 1.3) — whether a refund restores
-     * stock is a business call, not a technical default.
+     * Deliberately not shared with markRefunded() below — whether a
+     * refund restores stock is a per-refund choice there, not this
+     * method's fixed "always restore" behavior (see its own docblock).
      */
     private function restoreStock(Payment $payment): void
     {
@@ -134,6 +134,55 @@ class PaymentStatusUpdater
             $this->adjustStock($order, fn ($variant, $qty) => $variant->increment('stock_quantity', $qty));
 
             $order->update(['stock_restored_at' => now()]);
+        });
+    }
+
+    /**
+     * Marks an order — and its successful payment, if any — as refunded.
+     * Order-centric rather than Payment-centric, unlike markSucceeded/
+     * markFailed/markExpired: a Cash on Delivery order never has a Payment
+     * row at all (see CheckoutController::store), and its refund is just
+     * as real as a card refund even though there's nothing to call Xendit
+     * about. $payment is null for COD, and also for PromptPay — Xendit
+     * doesn't support refunding PromptPay at all (confirmed live,
+     * 26.09.20), so those go through this same method without ever
+     * touching Xendit, matching the published Refund Policy (manual bank
+     * transfer for both).
+     *
+     * $restoreStock is a per-refund choice, not a fixed policy — the
+     * Refund Policy only covers damaged/incorrect items, and whether the
+     * returned item is actually sellable again varies (truly damaged: no;
+     * wrong item shipped back: often yes). Whoever's processing the
+     * refund is in the best position to know which applies, not a global
+     * default (this is the decision flagged as open in restoreStock()'s
+     * docblock above, now made explicit per-refund instead of fixed).
+     */
+    public function markRefunded(Order $order, ?Payment $payment, float $amount, bool $restoreStock, array $rawResponse = []): void
+    {
+        DB::transaction(function () use ($order, $payment, $amount, $restoreStock, $rawResponse) {
+            $order = Order::query()->lockForUpdate()->find($order->id);
+
+            if (! $order || $order->status === OrderStatus::Refunded) {
+                return;
+            }
+
+            if ($payment) {
+                $payment->update([
+                    'status' => PaymentStatus::Refunded,
+                    'refunded_amount' => $amount,
+                    'refunded_at' => now(),
+                    'refund_reference' => $rawResponse['id'] ?? $payment->refund_reference,
+                ]);
+            }
+
+            if ($restoreStock) {
+                $this->adjustStock($order, fn ($variant, $qty) => $variant->increment('stock_quantity', $qty));
+            }
+
+            $order->update([
+                'status' => OrderStatus::Refunded,
+                'refunded_at' => now(),
+            ]);
         });
     }
 

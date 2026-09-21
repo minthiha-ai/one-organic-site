@@ -125,4 +125,41 @@ class XenditClient
     {
         return QRCode::get($qrId, '2022-07-31');
     }
+
+    /**
+     * Refund a card payment. Confirmed against Xendit's real docs
+     * (docs.xendit.co/apidocs/refund-payment-request, 26.09.21) rather than
+     * assumed: this is specifically the Sessions-product refund endpoint,
+     * keyed off payment_request_id (format "pr-...") — NOT the
+     * payment_session_id we store as gateway_reference. A completed card
+     * session's own webhook payload includes payment_request_id at
+     * data.payment_request_id, already captured in Payment.raw_response
+     * since markSucceeded() stores the whole webhook body — see
+     * Payment::paymentRequestId().
+     *
+     * PromptPay has no equivalent — confirmed live against this account's
+     * channel data (26.09.20) that Xendit doesn't support automated refunds
+     * for it at all, unlike Cards. Never call this for a PromptPay payment;
+     * refund it manually per the published Refund Policy instead.
+     *
+     * The synchronous response's own `status` is often already "SUCCEEDED"
+     * (confirmed in Xendit's own example response) but isn't guaranteed to
+     * be — a `refund.succeeded`/`refund.failed` webhook follows for cases
+     * that settle asynchronously, handled in XenditWebhookController.
+     *
+     * @return array Xendit's raw refund response — id ("rfd-..."), status,
+     *               payment_request_id, payment_id, amount, etc.
+     */
+    public function refundPayment(string $referenceId, string $paymentRequestId, float $amount, string $reason = 'REQUESTED_BY_CUSTOMER'): array
+    {
+        $response = $this->http()->post('https://api.xendit.co/refunds', [
+            'reference_id' => $referenceId,
+            'payment_request_id' => $paymentRequestId,
+            'currency' => 'THB',
+            'amount' => $amount,
+            'reason' => $reason,
+        ]);
+
+        return $response->throw()->json();
+    }
 }

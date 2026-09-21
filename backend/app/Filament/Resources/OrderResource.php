@@ -106,6 +106,22 @@ class OrderResource extends Resource
                     ->visible(fn (?Order $record) => $record?->shippop_purchase_id !== null)
                     ->collapsible(),
 
+                Forms\Components\Section::make('Refund')
+                    ->description('Managed via the Refund actions above — not editable directly.')
+                    ->schema([
+                        Forms\Components\DateTimePicker::make('refunded_at')
+                            ->disabled()
+                            ->dehydrated(false),
+                        Forms\Components\Placeholder::make('refunded_amount')
+                            ->label('Refunded amount')
+                            ->content(fn (?Order $record) => $record?->successfulPayment()?->refunded_amount !== null
+                                ? 'THB '.number_format((float) $record->successfulPayment()->refunded_amount, 2)
+                                : '—'),
+                    ])
+                    ->columns(2)
+                    ->visible(fn (?Order $record) => $record?->status === OrderStatus::Refunded)
+                    ->collapsible(),
+
                 Forms\Components\Textarea::make('notes')
                     ->columnSpanFull(),
             ]);
