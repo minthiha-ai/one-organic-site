@@ -139,4 +139,37 @@ class CheckoutShippingTest extends TestCase
         $response->assertJsonPath('data.shipping_cost', 27);
         $response->assertJsonPath('data.total', 127);
     }
+
+    public function test_checkout_quotes_shopee_xpress_instead_of_kerry_for_an_upcountry_postcode(): void
+    {
+        ShippingRate::create(['name' => 'Standard flat rate', 'rate' => 50, 'is_active' => true]);
+        $variant = $this->makeVariant();
+
+        Http::fake([
+            '*/postoffice/' => Http::response('data({"status":true,"data":{"postoffice":[{"id":1,"name":"เมืองเชียงใหม่","postcode":"50200","latlong":"0,0"}]}})', 200),
+            '*/pricelist/' => Http::response([
+                'status' => true,
+                'data' => [
+                    '0' => [
+                        'SPX' => [
+                            'courier_code' => 'SPX',
+                            'price' => '17',
+                            'available' => true,
+                            'courier_name' => 'Shopee Xpress',
+                        ],
+                    ],
+                ],
+            ], 200),
+        ]);
+
+        $payload = $this->checkoutPayload($variant);
+        $payload['shipping']['city'] = 'Chiang Mai';
+        $payload['shipping']['postal_code'] = '50200';
+
+        $response = $this->postJson('/api/checkout', $payload);
+
+        $response->assertStatus(201);
+        $response->assertJsonPath('data.shipping_cost', 17);
+        $response->assertJsonPath('data.total', 117);
+    }
 }

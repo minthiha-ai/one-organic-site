@@ -28,14 +28,14 @@ class ShippingBookingServiceTest extends TestCase
         Storage::fake('public');
     }
 
-    protected function fakePostOffice(): void
+    protected function fakePostOffice(string $postcode = '10110', string $name = 'พระโขนง'): void
     {
         Http::fake([
-            '*/postoffice/' => Http::response('data({"status":true,"data":{"postoffice":[{"id":1,"name":"พระโขนง","postcode":"10110","latlong":"0,0"}]}})', 200),
+            '*/postoffice/' => Http::response('data({"status":true,"data":{"postoffice":[{"id":1,"name":"'.$name.'","postcode":"'.$postcode.'","latlong":"0,0"}]}})', 200),
         ]);
     }
 
-    protected function makeOrder(string $paymentMethod = 'card'): Order
+    protected function makeOrder(string $paymentMethod = 'card', string $postcode = '10110'): Order
     {
         $category = Category::create(['name' => 'Test', 'slug' => 'test-'.uniqid()]);
         $product = Product::create(['category_id' => $category->id, 'name' => 'Test Product', 'slug' => 'test-product-'.uniqid()]);
@@ -63,7 +63,7 @@ class ShippingBookingServiceTest extends TestCase
             'shipping_phone' => '0800000000',
             'shipping_line1' => '123 Test Street',
             'shipping_city' => 'Bangkok',
-            'shipping_postal_code' => '10110',
+            'shipping_postal_code' => $postcode,
         ]);
 
         OrderItem::create([
@@ -105,6 +105,28 @@ class ShippingBookingServiceTest extends TestCase
         // Confirming is a separate, explicit step — prepare() alone must
         // never flip the order's own status.
         $this->assertSame(OrderStatus::Paid, $order->status);
+    }
+
+    public function test_prepare_books_shopee_xpress_instead_of_kerry_for_an_upcountry_order(): void
+    {
+        $this->fakePostOffice('50200', 'เมืองเชียงใหม่');
+        Http::fake([
+            '*/booking/' => Http::response([
+                'status' => true,
+                'purchase_id' => 556,
+                'total_price' => 17,
+                'data' => [['status' => true, 'tracking_code' => 'SP124', 'courier_tracking_code' => null]],
+            ], 200),
+        ]);
+
+        $order = $this->makeOrder(postcode: '50200');
+
+        (new ShippingBookingService)->prepare($order);
+
+        Http::assertSent(function ($request) {
+            return str_contains($request->url(), '/booking/')
+                && $request->data()['data'][0]['courier_code'] === 'SPX';
+        });
     }
 
     public function test_prepare_is_idempotent_once_already_booked(): void

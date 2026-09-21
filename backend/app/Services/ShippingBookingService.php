@@ -11,7 +11,8 @@ use Throwable;
 
 /**
  * Turns a paid (or COD, once an admin says it's ready) order into a real
- * SHIPPOP/KEX shipment — Phase 1.1 build steps 3/4.
+ * SHIPPOP shipment — Phase 1.1 build steps 3/4. Courier (Kerry Express vs.
+ * Shopee Xpress) is chosen by ShippopClient::courierCodeForPostcode.
  *
  * Deliberately split into two irreversibility tiers, per an explicit
  * decision on 26.09.19:
@@ -50,7 +51,7 @@ class ShippingBookingService
                 'tel' => $order->shipping_phone,
             ],
             'parcel' => array_merge(['name' => $order->order_number], ['weight' => $weightGrams], $dimensions),
-            'courier_code' => 'KRYX',
+            'courier_code' => $client->courierCodeForPostcode((string) $order->shipping_postal_code),
         ], $order->payment_method === 'cod' ? ['cod_amount' => (int) round((float) $order->total)] : []));
 
         $order->update([

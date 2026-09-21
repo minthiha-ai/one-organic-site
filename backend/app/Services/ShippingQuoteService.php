@@ -13,11 +13,13 @@ use Throwable;
  * used by CheckoutController so the number an order is actually charged
  * always comes from the same place.
  *
- * Tries a real SHIPPOP/KEX quote first (Phase 1.1); falls back to the
- * flat interim rate (Phase 0.5.5) on ANY failure — unresolvable postcode,
- * KEX unavailable for that route, SHIPPOP unreachable, etc. Checkout must
- * never fail just because a live courier API had a bad moment; the flat
- * rate exists specifically to be that fallback, per the plan.
+ * Tries a real SHIPPOP quote first (Phase 1.1); falls back to the flat
+ * interim rate (Phase 0.5.5) on ANY failure — unresolvable postcode, the
+ * chosen courier unavailable for that route, SHIPPOP unreachable, etc.
+ * Checkout must never fail just because a live courier API had a bad
+ * moment; the flat rate exists specifically to be that fallback, per the
+ * plan. Which courier gets quoted (Kerry Express vs. Shopee Xpress) is
+ * decided by ShippopClient::courierCodeForPostcode — see its docblock.
  *
  * Interim approximations, both deliberate and both worth revisiting:
  * - The checkout form only collects city + postal code, not real Thai
@@ -72,14 +74,15 @@ class ShippingQuoteService
 
         $parcel = array_merge(['name' => 'Order'], ['weight' => $weightGrams], $dimensions);
 
-        $rates = $shippop->getRates($from, $to, $parcel, 'KRYX');
-        $kex = $rates['KRYX'] ?? null;
+        $courierCode = $shippop->courierCodeForPostcode($postcode);
+        $rates = $shippop->getRates($from, $to, $parcel, $courierCode);
+        $courier = $rates[$courierCode] ?? null;
 
-        if (! $kex || ! ($kex['available'] ?? false)) {
-            throw new RuntimeException('KEX unavailable for this route: '.json_encode($kex));
+        if (! $courier || ! ($courier['available'] ?? false)) {
+            throw new RuntimeException("{$courierCode} unavailable for this route: ".json_encode($courier));
         }
 
-        return (float) $kex['price'];
+        return (float) $courier['price'];
     }
 
     protected function flatRate(): float

@@ -125,6 +125,25 @@ class ShippopClient
     }
 
     /**
+     * Decision made 26.09.21 against SHIPPOP's real VIP rate quotation (not
+     * sandbox pricing): Kerry Express only prices competitively within
+     * "BKK/GBKK" — Bangkok, Nonthaburi, Pathum Thani, Samut Prakan, per
+     * Kerry's own quoted rate card. Those four provinces' postcodes all
+     * start 10/11/12. Shopee Xpress prices flat nationwide and undercuts
+     * Kerry everywhere outside that area (e.g. ~1kg: ฿17 flat vs. Kerry's
+     * ฿25 upcountry), so it's the better default once outside BKK/GBKK.
+     * Single source of truth for courier choice — both the checkout-time
+     * quote and the actual post-payment booking call this, so a customer
+     * is never quoted one courier's price and booked on another's.
+     */
+    public function courierCodeForPostcode(string $postcode): string
+    {
+        $isBangkokMetro = preg_match('/^(10|11|12)/', $postcode) === 1;
+
+        return $isBangkokMetro ? 'KRYX' : 'SPX';
+    }
+
+    /**
      * POST {base_url}/booking/ — creates a pending shipment. With
      * force_confirm=0 (the default, and what this always sends) the
      * shipment is NOT yet sent to the courier and nothing is charged —
