@@ -10,12 +10,17 @@ export default function Layout({ bgOverride, homeTo, shopTo, switchTo, switchLab
         fontFamily: 'var(--font-sans)',
         background: 'var(--color-bg)',
         color: 'var(--color-text)',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
         ...(bgOverride ? { '--color-bg': bgOverride, '--color-card-bg': bgOverride } : {}),
         ...(themeOverride || {}),
       }}
     >
       <Header homeTo={homeTo} shopTo={shopTo} switchTo={switchTo} switchLabel={switchLabel} />
-      <Outlet />
+      <div style={{ flex: 1 }}>
+        <Outlet />
+      </div>
       <Footer homeTo={homeTo} shopTo={shopTo} />
     </div>
   );
