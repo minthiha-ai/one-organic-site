@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { logoDark } from '../assets/brand/index.js';
 import { footerCareForEnvironment } from '../assets/images/index.js';
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const linkStyle = {
   display: 'block',
@@ -22,6 +25,20 @@ const headingStyle = {
 export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
   const { pathname } = useLocation();
   const isHomepage = pathname === '/';
+
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterStatus, setNewsletterStatus] = useState('idle'); // idle | error | success
+
+  function handleNewsletterSubmit(e) {
+    e.preventDefault();
+    if (!EMAIL_PATTERN.test(newsletterEmail.trim())) {
+      setNewsletterStatus('error');
+      return;
+    }
+    // No newsletter backend/third-party list (e.g. Mailchimp) exists yet —
+    // this only validates client-side and shows a placeholder success state.
+    setNewsletterStatus('success');
+  }
 
   return (
     <div>
@@ -56,41 +73,59 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', lineHeight: 1.6, margin: '0 0 12px' }}>
               Get news on new harvests and small-batch runs.
             </p>
-            <div style={{ display: 'flex', gap: 8 }}>
-              <input
-                type="email"
-                placeholder="Email address"
-                style={{
-                  flex: 1,
-                  minWidth: 0,
-                  boxSizing: 'border-box',
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: 12,
-                  color: 'var(--color-dark-band-text)',
-                  padding: '9px 12px',
-                  border: '0.5px solid rgba(247,241,231,0.3)',
-                  borderRadius: 'var(--radius-sm)',
-                  background: 'rgba(247,241,231,0.06)',
-                }}
-              />
-              <button
-                type="button"
-                style={{
-                  fontFamily: 'inherit',
-                  fontSize: 12,
-                  fontWeight: 500,
-                  color: 'var(--color-dark-band)',
-                  background: 'var(--color-accent-light)',
-                  border: 'none',
-                  borderRadius: 'var(--radius-sm)',
-                  padding: '9px 14px',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                Subscribe
-              </button>
-            </div>
+            {newsletterStatus === 'success' ? (
+              <p style={{ fontSize: 13, color: 'var(--color-accent-light)', margin: 0 }}>
+                Thanks — you&rsquo;re on the list.
+              </p>
+            ) : (
+              <form onSubmit={handleNewsletterSubmit} noValidate>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <input
+                    type="email"
+                    value={newsletterEmail}
+                    onChange={(e) => {
+                      setNewsletterEmail(e.target.value);
+                      if (newsletterStatus === 'error') setNewsletterStatus('idle');
+                    }}
+                    placeholder="Email address"
+                    style={{
+                      flex: 1,
+                      minWidth: 0,
+                      boxSizing: 'border-box',
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: 12,
+                      color: 'var(--color-dark-band-text)',
+                      padding: '9px 12px',
+                      border: newsletterStatus === 'error' ? '0.5px solid #d98c6b' : '0.5px solid rgba(247,241,231,0.3)',
+                      borderRadius: 'var(--radius-sm)',
+                      background: 'rgba(247,241,231,0.06)',
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    style={{
+                      fontFamily: 'inherit',
+                      fontSize: 12,
+                      fontWeight: 500,
+                      color: 'var(--color-dark-band)',
+                      background: 'var(--color-accent-light)',
+                      border: 'none',
+                      borderRadius: 'var(--radius-sm)',
+                      padding: '9px 14px',
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    Subscribe
+                  </button>
+                </div>
+                {newsletterStatus === 'error' && (
+                  <p style={{ fontSize: 12, color: '#d98c6b', margin: '6px 0 0' }}>
+                    Enter a valid email address.
+                  </p>
+                )}
+              </form>
+            )}
           </div>
         </div>
       </div>
