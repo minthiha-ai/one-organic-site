@@ -48,7 +48,11 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           </div>
 
           <div style={{ flex: '1 1 160px' }}>
-            <p className="v2-footer-label" style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Company</p>
+            {/* Hardcoded, not var(--color-accent-light): that shared token
+                differs between the homepage's v2 scope and the site-wide
+                default, and this footer should look the same everywhere —
+                #d4b99e is the homepage's value. */}
+            <p className="v2-footer-label" style={{ ...headingStyle, color: '#d4b99e' }}>Company</p>
             <Link to="/contact" style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Contact</Link>
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', margin: 0 }}>
               hello@one-organic.com

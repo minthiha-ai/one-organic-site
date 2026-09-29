@@ -7,8 +7,10 @@
   --color-border: #E8E1D5;
   --color-secondary-text: #796054;
 
-  /* Dark band (Mission band / Brand story overlay) — darkened brand brown, not neutral gray */
-  --color-dark-band: #271912;
+  /* Dark band (Mission band / Brand story overlay). 26.09.30: matched to the
+     v2 homepage's neutral charcoal (was a darkened brand brown) so the
+     shared Footer renders the same color on every page, not just "/". */
+  --color-dark-band: #414142;
   --color-dark-band-text: #F7F1E7;
   --color-dark-band-text-secondary: #cabfa9;
 
