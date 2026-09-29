@@ -164,7 +164,10 @@ export default function Home2() {
     api
       .get('/products')
       .then((res) => setProducts(res.data))
-      .catch(() => setProducts([]))
+      .catch((err) => {
+        console.error('Failed to load homepage products:', err);
+        setProducts([]);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -218,7 +221,7 @@ export default function Home2() {
           eyebrow={syrup.script_eyebrow}
           heading="Coconut Syrup"
           intro="Low glycemic index, high in minerals, and mildly sweet — gluten free and vegan."
-          media={<ProductPhoto src={syrupV2} alt="Jar of Coconut Flower Syrup" ratio="3 / 5" />}
+          media={<ProductPhoto src={syrupV2} alt="Jar of Coconut Flower Syrup" ratio="3 / 3" />}
           highlights={syrup.default_variant.highlights}
           usage={syrup.default_variant.usage_items}
           shopHref="/shop?category=coconut-syrup"
@@ -233,7 +236,7 @@ export default function Home2() {
       {/* Cert strip */}
       <section className="v2-section-tight" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: 'var(--sp-5)', maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-          <img src={usdaSeal} alt="USDA Organic certified" style={{ height: 56, width: 'auto' }} />
+          <img src={usdaSeal} alt="USDA Organic certified" style={{ height: 46, width: 'auto' }} />
           <span className="v2-meta">USDA Organic certified</span>
         </span>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
@@ -241,13 +244,13 @@ export default function Home2() {
           <span className="v2-meta">EU Organic certified</span>
         </span>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
-          <i className="ti ti-recycle" style={{ fontSize: 26, color: 'var(--color-accent)' }} aria-hidden="true" />
+          <i className="ti ti-recycle" style={{ fontSize: 46, color: 'var(--color-accent)' }} aria-hidden="true" />
           <span className="v2-meta">Recycle or reuse</span>
         </span>
       </section>
 
       {/* Commitment banner — full-bleed brand photography */}
-      <section className="v2-photo-wide" style={{ position: 'relative', minHeight: 360 }}>
+      <section className="v2-photo-wide" style={{ position: 'relative', height: 260, width: '100%', overflow: 'hidden', marginBottom: 'var(--sp-6)' }}>
         <img
           src={brandStoryPhoto}
           alt="Sunlight filtering through a coconut palm frond"

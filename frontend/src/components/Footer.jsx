@@ -46,7 +46,7 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
         <img
           src={footerCareForEnvironment}
           alt="Illustration of a tree, birds, a recycling symbol, and a family celebrating outdoors, captioned Care for Environment, Care for Community"
-          style={{ width: '100%', maxWidth: 'var(--page-max-width)', height: 'auto', display: 'block', margin: '0 auto' }}
+          style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }}
         />
       )}
 
