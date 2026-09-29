@@ -13,6 +13,10 @@ dist-ssr
 *.local
 .env
 
+# Build-time snapshot fetched fresh by vite.config.js on every dev/build run
+# (see scripts/fetch-products.mjs) — never hand-edited, never stale in git.
+src/data/homepageProducts.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

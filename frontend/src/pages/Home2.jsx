@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
 import './Home2.css';
-import { api } from '../lib/api.js';
+import homepageProducts from '../data/homepageProducts.json';
 import {
   heroCoconut,
   brandStoryPhoto,
@@ -114,30 +113,6 @@ function SoapSection({ soap }) {
   );
 }
 
-function ProductSectionSkeleton({ tint, reverse }) {
-  return (
-    <section className="v2-section" style={tint ? { background: 'var(--color-tint)' } : undefined}>
-      <div className={`v2-row${reverse ? ' v2-reverse' : ''}`}>
-        <div>
-          <div className="oo-skeleton v2-photo-square" style={{ maxWidth: 420, margin: '0 auto', borderRadius: 'var(--radius-md)' }} />
-        </div>
-        <div>
-          <div className="oo-skeleton" style={{ width: 160, height: 16, marginBottom: 'var(--sp-2)' }} />
-          <div className="oo-skeleton" style={{ width: 220, height: 32, marginBottom: 'var(--sp-3)' }} />
-          <div className="oo-skeleton" style={{ width: '90%', height: 14, marginBottom: 8 }} />
-          <div className="oo-skeleton" style={{ width: '70%', height: 14, marginBottom: 'var(--sp-4)' }} />
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sp-2)', marginBottom: 'var(--sp-5)' }}>
-            {[90, 110, 80, 100].map((w, i) => (
-              <div key={i} className="oo-skeleton" style={{ width: w, height: 30, borderRadius: 'var(--radius-pill)' }} />
-            ))}
-          </div>
-          <div className="oo-skeleton" style={{ width: 200, height: 48, borderRadius: 'var(--radius-sm)' }} />
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function ProductSection({ eyebrow, heading, intro, media, highlights, usage, shopHref, shopLabel, reverse, tint }) {
   return (
     <section className="v2-section" style={tint ? { background: 'var(--color-tint)' } : undefined}>
@@ -178,23 +153,13 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
 }
 
 export default function Home2() {
-  const [products, setProducts] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    api
-      .get('/products')
-      .then((res) => setProducts(res.data))
-      .catch((err) => {
-        console.error('Failed to load homepage products:', err);
-        setProducts([]);
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  const vco = products?.find((p) => p.category.slug === 'coconut-oil');
-  const syrup = products?.find((p) => p.category.slug === 'coconut-syrup');
-  const soap = products?.find((p) => p.category.slug === 'bath-body');
+  // homepageProducts is a build-time snapshot (scripts/fetch-products.mjs,
+  // wired into vite.config.js) that already failed the build if any of
+  // these three categories were missing, so no loading/error state is
+  // needed here the way a runtime fetch would require.
+  const vco = homepageProducts.find((p) => p.category.slug === 'coconut-oil');
+  const syrup = homepageProducts.find((p) => p.category.slug === 'coconut-syrup');
+  const soap = homepageProducts.find((p) => p.category.slug === 'bath-body');
 
   return (
     <>
@@ -221,38 +186,31 @@ export default function Home2() {
         </div>
       </section>
 
-      {loading && <ProductSectionSkeleton tint />}
-      {!loading && vco && (
-        <ProductSection
-          eyebrow={vco.script_eyebrow}
-          heading="Virgin Coconut Oil"
-          intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid. Fast-absorbing, gluten free, and vegan."
-          media={<ProductPhoto src={vcoJarsV2} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" ratio="3 / 2" />}
-          highlights={vco.default_variant.highlights}
-          usage={vco.default_variant.usage_items}
-          shopHref="/shop?category=coconut-oil"
-          shopLabel="Shop Virgin Coconut Oil"
-          tint
-        />
-      )}
+      <ProductSection
+        eyebrow={vco.script_eyebrow}
+        heading="Virgin Coconut Oil"
+        intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid. Fast-absorbing, gluten free, and vegan."
+        media={<ProductPhoto src={vcoJarsV2} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" ratio="3 / 2" />}
+        highlights={vco.default_variant.highlights}
+        usage={vco.default_variant.usage_items}
+        shopHref="/shop?category=coconut-oil"
+        shopLabel="Shop Virgin Coconut Oil"
+        tint
+      />
 
-      {loading && <ProductSectionSkeleton reverse />}
-      {!loading && syrup && (
-        <ProductSection
-          eyebrow={syrup.script_eyebrow}
-          heading="Coconut Syrup"
-          intro="Low glycemic index, high in minerals, and mildly sweet. Gluten free and vegan."
-          media={<ProductPhoto src={syrupV2} alt="Jar of Coconut Flower Syrup" ratio="3 / 3" />}
-          highlights={syrup.default_variant.highlights}
-          usage={syrup.default_variant.usage_items}
-          shopHref="/shop?category=coconut-syrup"
-          shopLabel="Shop Coconut Syrup"
-          reverse
-        />
-      )}
+      <ProductSection
+        eyebrow={syrup.script_eyebrow}
+        heading="Coconut Syrup"
+        intro="Low glycemic index, high in minerals, and mildly sweet. Gluten free and vegan."
+        media={<ProductPhoto src={syrupV2} alt="Jar of Coconut Flower Syrup" ratio="3 / 3" />}
+        highlights={syrup.default_variant.highlights}
+        usage={syrup.default_variant.usage_items}
+        shopHref="/shop?category=coconut-syrup"
+        shopLabel="Shop Coconut Syrup"
+        reverse
+      />
 
-      {loading && <ProductSectionSkeleton tint />}
-      {!loading && soap && <SoapSection soap={soap} />}
+      <SoapSection soap={soap} />
 
       {/* Cert strip */}
       <section className="v2-section-tight v2-cert-strip">
