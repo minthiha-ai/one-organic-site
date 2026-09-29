@@ -28,7 +28,7 @@
   --sp-8: 128px;
 }
 
-/* Section rhythm: 40-48px mobile -> 64px tablet -> 96px desktop */
+/* Section rhythm: 40-48px mobile -> 64px tablet -> 72px desktop */
 .v2-section {
   padding: var(--sp-5) var(--gutter);
 }
@@ -36,7 +36,10 @@
   .v2-section { padding: var(--sp-6) var(--gutter); }
 }
 @media (min-width: 1200px) {
-  .v2-section { padding: var(--sp-7) var(--gutter); }
+  /* 72px, not --sp-7 (96px) — too much dead air once the column fix above
+     already tightens the desktop layout. One-off literal, not worth a new
+     named spacing token for a single usage. */
+  .v2-section { padding: 72px var(--gutter); }
 }
 
 .v2-section-tight {
@@ -251,8 +254,20 @@
   min-width: 0;
   width: 100%;
 }
+
+/* Golden-ratio split (1.618:1) favoring the media column — a rigid 50/50
+   split left the media column wider than the maxWidth-capped image inside
+   it, reading as dead space rather than intentional padding. Capped so the
+   media column itself doesn't grow absurd on ultra-wide screens; the image
+   now fills its column instead of floating inside it. */
+.v2-row-media {
+  max-width: 560px;
+}
 @media (min-width: 900px) {
-  .v2-row > * {
+  .v2-row-media {
+    flex: 1.618 1 0;
+  }
+  .v2-row-text {
     flex: 1 1 0;
   }
 }

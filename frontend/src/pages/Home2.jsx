@@ -39,7 +39,7 @@ const highlightIcon = {
 
 function ProductPhoto({ src, alt, ratio = '1 / 1' }) {
   return (
-    <div className="v2-panel" style={{ aspectRatio: ratio, maxWidth: 420, margin: '0 auto' }}>
+    <div className="v2-panel" style={{ aspectRatio: ratio, margin: '0 auto' }}>
       <img src={src} alt={alt} className="v2-contain" />
     </div>
   );
@@ -71,6 +71,13 @@ function SoapVariantCard({ variant, ratio }) {
       <p className="v2-meta" style={{ lineHeight: 1.5 }}>
         {soapDifferentiator[variant.option_label]}
       </p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 6 }}>
+        {variant.highlights.slice(0, 2).map((h) => (
+          <span key={h} className="v2-tag" style={{ minWidth: 0, fontSize: 11, padding: '4px 10px' }}>
+            {h}
+          </span>
+        ))}
+      </div>
     </a>
   );
 }
@@ -88,7 +95,7 @@ function SoapSection({ soap }) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 220px))',
             gap: 'var(--sp-4) var(--sp-3)',
             textAlign: 'left',
             marginBottom: 'var(--sp-5)',
@@ -117,8 +124,8 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
   return (
     <section className="v2-section" style={tint ? { background: 'var(--color-tint)' } : undefined}>
       <div className={`v2-row${reverse ? ' v2-reverse' : ''}`}>
-        <div>{media}</div>
-        <div>
+        <div className="v2-row-media">{media}</div>
+        <div className="v2-row-text">
           <p className="v2-script" style={{ marginBottom: 'var(--sp-1)' }}>{eyebrow}</p>
           <h2 className="v2-h2" style={{ marginBottom: 'var(--sp-3)' }}>{heading}</h2>
           <p className="v2-intro" style={{ marginBottom: 'var(--sp-4)', maxWidth: 480 }}>{intro}</p>
@@ -171,7 +178,7 @@ export default function Home2() {
       {/* Hero */}
       <section className="v2-section" style={{ paddingBottom: 'var(--sp-6)' }}>
         <div className="v2-row">
-          <div>
+          <div className="v2-row-text">
             <p className="v2-script" style={{ marginBottom: 'var(--sp-2)' }}>one earth, one life</p>
             <h1 className="v2-h1" style={{ marginBottom: 'var(--sp-4)' }}>Interwoven &amp; Inseparable</h1>
             <p className="v2-intro" style={{ marginBottom: 'var(--sp-5)', maxWidth: 460 }}>
@@ -179,8 +186,8 @@ export default function Home2() {
             </p>
           </div>
           <div
-            className="v2-photo-portrait"
-            style={{ maxWidth: 420, margin: '0 auto', borderRadius: 'var(--radius-md)', overflow: 'hidden', boxShadow: '0 20px 48px rgba(62,62,63,0.16)' }}
+            className="v2-photo-portrait v2-row-media"
+            style={{ margin: '0 auto', borderRadius: 'var(--radius-md)', overflow: 'hidden', boxShadow: '0 20px 48px rgba(62,62,63,0.16)' }}
           >
             <img
               src={heroCoconut}
