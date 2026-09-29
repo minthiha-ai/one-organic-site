@@ -304,6 +304,10 @@
   .v2-tag-row .v2-tag {
     min-width: 0;
     width: 100%;
+    /* Fixed height (measured from the longest 2-line label at 375px) so
+       every pill matches regardless of whether its own text wraps — grid
+       row-stretch only equalizes height within a row, not across rows. */
+    height: 50px;
     white-space: normal;
     text-align: center;
   }
