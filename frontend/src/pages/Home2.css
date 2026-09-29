@@ -258,9 +258,14 @@
 }
 
 /* Tags */
+/* min-width measured from the longest real label on the homepage —
+   "Oil Pulling For Oral Health" (VCO Ways to Use) — rendered at 212px
+   with this padding/font, +6px safety margin. Keeps every pill on the
+   homepage the same width regardless of its own text length. */
 .v2-tag {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   font-family: var(--font-sans);
   font-size: 13px;
@@ -268,6 +273,8 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
   padding: 8px 16px;
+  min-width: 218px;
+  white-space: nowrap;
   background: var(--color-bg);
   transition: border-color 200ms ease, background-color 200ms ease;
 }
