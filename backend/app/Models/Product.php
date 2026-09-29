@@ -19,6 +19,7 @@ class Product extends Model
         'script_eyebrow',
         'tagline',
         'description',
+        'shopee_url',
         'sort_order',
         'is_active',
     ];

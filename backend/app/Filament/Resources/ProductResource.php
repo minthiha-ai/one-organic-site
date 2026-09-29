@@ -45,6 +45,11 @@ class ProductResource extends Resource
                             ->helperText('Short marketing line, e.g. "Cold-pressed and centrifuge-extracted...".'),
                         Forms\Components\Textarea::make('description')
                             ->columnSpanFull(),
+                        Forms\Components\TextInput::make('shopee_url')
+                            ->label('Shopee URL')
+                            ->url()
+                            ->helperText('Used when no variant has its own Shopee link set.')
+                            ->columnSpanFull(),
                         Forms\Components\TextInput::make('sort_order')
                             ->required()
                             ->numeric()

@@ -16,6 +16,7 @@ class ProductResource extends JsonResource
             'script_eyebrow' => $this->script_eyebrow,
             'tagline' => $this->tagline,
             'description' => $this->description,
+            'shopee_url' => $this->shopee_url,
             'category' => new CategoryResource($this->whenLoaded('category')),
             'price_from' => $this->whenLoaded('variants', fn () => (float) $this->variants->min('price')),
             'default_variant' => $this->whenLoaded('variants', fn () => new ProductVariantResource($this->displayVariant())),

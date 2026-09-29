@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
 import { logoLight } from '../assets/brand/index.js';
-import { useCart } from '../context/CartContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 
 const navLinkStyle = {
@@ -11,7 +10,6 @@ const navLinkStyle = {
 export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switchLabel }) {
   const location = useLocation();
   const isLanding = location.pathname === homeTo;
-  const { count } = useCart();
   const { isAuthenticated } = useAuth();
 
   return (
@@ -45,34 +43,6 @@ export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switc
                 ) : (
                   <Link to="/login" style={navLinkStyle}>Login</Link>
                 )}
-                <Link to="/cart" style={{ textDecoration: 'none', lineHeight: 0, position: 'relative', display: 'inline-flex' }}>
-                  <i
-                    className="ti ti-shopping-bag"
-                    style={{ fontSize: 18, color: 'var(--color-text)' }}
-                    aria-hidden="true"
-                  />
-                  {count > 0 && (
-                    <span
-                      style={{
-                        position: 'absolute',
-                        top: -7,
-                        right: -9,
-                        minWidth: 15,
-                        height: 15,
-                        borderRadius: 999,
-                        background: 'var(--color-accent)',
-                        color: '#FFFFFF',
-                        fontSize: 9,
-                        fontWeight: 600,
-                        lineHeight: '15px',
-                        textAlign: 'center',
-                        padding: '0 3px',
-                      }}
-                    >
-                      {count}
-                    </span>
-                  )}
-                </Link>
               </>
             )}
             {switchTo && (

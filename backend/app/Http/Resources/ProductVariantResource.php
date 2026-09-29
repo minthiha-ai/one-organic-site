@@ -15,6 +15,7 @@ class ProductVariantResource extends JsonResource
             'option_label' => $this->option_label,
             'price' => (float) $this->price,
             'compare_at_price' => $this->compare_at_price !== null ? (float) $this->compare_at_price : null,
+            'shopee_url' => $this->shopee_url,
             'in_stock' => $this->inStock(),
             'stock_quantity' => $this->stock_quantity,
             'is_default' => $this->is_default,

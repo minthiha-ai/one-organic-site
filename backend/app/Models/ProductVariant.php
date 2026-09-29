@@ -18,6 +18,7 @@ class ProductVariant extends Model implements HasMedia
         'option_label',
         'price',
         'compare_at_price',
+        'shopee_url',
         'wholesale_price',
         'barcode',
         'fda_registration_number',

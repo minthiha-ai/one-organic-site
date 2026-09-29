@@ -34,6 +34,10 @@ class VariantsRelationManager extends RelationManager
                             ->numeric()
                             ->prefix('THB')
                             ->helperText('Optional — shown struck through, for sale pricing.'),
+                        Forms\Components\TextInput::make('shopee_url')
+                            ->label('Shopee URL')
+                            ->url()
+                            ->helperText('Leave blank to fall back to the product\'s Shopee link.'),
                         Forms\Components\TextInput::make('wholesale_price')
                             ->numeric()
                             ->prefix('THB')
