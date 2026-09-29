@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react';
 import './Home2.css';
-import { products } from '../data/products.js';
+import { api } from '../lib/api.js';
 import {
   heroCoconut,
   brandStoryPhoto,
@@ -8,15 +9,6 @@ import {
   soapPlain,
 } from '../assets/images/index.js';
 import { usdaSeal, euSeal } from '../assets/brand/index.js';
-
-const vcoItems = products.filter((p) => p.sizeGroup === 'vco');
-const syrupItem = products.find((p) => p.sizeGroup === 'syrup');
-
-const soapHighlights = ['No SLS', 'No SLES', 'No Sulphates', 'No Preservatives', 'No Fragrances', 'Handcrafted'];
-const soapUsage = [
-  { icon: 'ti-droplet', label: 'Face & Body Wash' },
-  { icon: 'ti-sparkles', label: 'Gentle Exfoliation' },
-];
 
 function ProductPhoto({ src, alt }) {
   return (
@@ -61,6 +53,19 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
 }
 
 export default function Home2() {
+  const [products, setProducts] = useState(null);
+
+  useEffect(() => {
+    api
+      .get('/products')
+      .then((res) => setProducts(res.data))
+      .catch(() => setProducts([]));
+  }, []);
+
+  const vco = products?.find((p) => p.category.slug === 'coconut-oil');
+  const syrup = products?.find((p) => p.category.slug === 'coconut-syrup');
+  const soap = products?.find((p) => p.category.slug === 'bath-body');
+
   return (
     <>
       {/* Hero */}
@@ -84,41 +89,47 @@ export default function Home2() {
         </div>
       </section>
 
-      <ProductSection
-        eyebrow="one of earth's greatest gifts to mankind"
-        heading="Virgin Coconut Oil"
-        intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid — fast-absorbing, gluten free, and vegan."
-        media={<ProductPhoto src={vcoJars} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" />}
-        highlights={vcoItems[0].highlights}
-        usage={vcoItems[0].usageItems}
-        shopHref="/shop?category=Coconut+Oil"
-        shopLabel="Shop Virgin Coconut Oil"
-        tint
-      />
+      {vco && (
+        <ProductSection
+          eyebrow={vco.script_eyebrow}
+          heading="Virgin Coconut Oil"
+          intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid — fast-absorbing, gluten free, and vegan."
+          media={<ProductPhoto src={vcoJars} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" />}
+          highlights={vco.default_variant.highlights}
+          usage={vco.default_variant.usage_items}
+          shopHref="/shop?category=coconut-oil"
+          shopLabel="Shop Virgin Coconut Oil"
+          tint
+        />
+      )}
 
-      <ProductSection
-        eyebrow="one of the most nutritious sugars"
-        heading="Coconut Syrup"
-        intro="Low glycemic index, high in minerals, and mildly sweet — gluten free and vegan."
-        media={<ProductPhoto src={syrupJar} alt="Jar of Coconut Flower Syrup" />}
-        highlights={syrupItem.highlights}
-        usage={syrupItem.usageItems}
-        shopHref="/shop?category=Coconut+Syrup"
-        shopLabel="Shop Coconut Syrup"
-        reverse
-      />
+      {syrup && (
+        <ProductSection
+          eyebrow={syrup.script_eyebrow}
+          heading="Coconut Syrup"
+          intro="Low glycemic index, high in minerals, and mildly sweet — gluten free and vegan."
+          media={<ProductPhoto src={syrupJar} alt="Jar of Coconut Flower Syrup" />}
+          highlights={syrup.default_variant.highlights}
+          usage={syrup.default_variant.usage_items}
+          shopHref="/shop?category=coconut-syrup"
+          shopLabel="Shop Coconut Syrup"
+          reverse
+        />
+      )}
 
-      <ProductSection
-        eyebrow="love yourself, love earth"
-        heading="Coconut Oil Soap"
-        intro="Handcrafted from 100% organic cold-pressed virgin coconut oil — no SLS, no SLES, no sulphates, no preservatives, no fragrances."
-        media={<ProductPhoto src={soapPlain} alt="Coconut Oil Soap Bar box and bar" />}
-        highlights={soapHighlights}
-        usage={soapUsage}
-        shopHref="/shop?category=Bath+%26+Body"
-        shopLabel="Shop Coconut Oil Soap"
-        tint
-      />
+      {soap && (
+        <ProductSection
+          eyebrow={soap.script_eyebrow}
+          heading="Coconut Oil Soap"
+          intro="Handcrafted from 100% organic cold-pressed virgin coconut oil — no SLS, no SLES, no sulphates, no preservatives, no fragrances."
+          media={<ProductPhoto src={soapPlain} alt="Coconut Oil Soap Bar box and bar" />}
+          highlights={soap.default_variant.highlights}
+          usage={soap.default_variant.usage_items}
+          shopHref="/shop?category=bath-body"
+          shopLabel="Shop Coconut Oil Soap"
+          tint
+        />
+      )}
 
       {/* Cert strip */}
       <section className="v2-section-tight" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: 'var(--sp-5)', maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>

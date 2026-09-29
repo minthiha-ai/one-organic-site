@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import Home from './pages/Home.jsx';
 import Home2 from './pages/Home2.jsx';
@@ -22,8 +22,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Layout className="v2-page" homeTo="/" shopTo="/shop" />}>
+          <Route index element={<Home2 />} />
+        </Route>
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/product/:slug" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
@@ -39,20 +41,7 @@ export default function App() {
           <Route path="/account/orders/:orderNumber" element={<RequireAuth><OrderDetail /></RequireAuth>} />
           <Route path="/account/addresses" element={<RequireAuth><Addresses /></RequireAuth>} />
         </Route>
-        <Route
-          path="/v2"
-          element={
-            <Layout
-              className="v2-page"
-              homeTo="/v2"
-              shopTo="/shop"
-              switchTo="/"
-              switchLabel="View v1"
-            />
-          }
-        >
-          <Route index element={<Home2 />} />
-        </Route>
+        <Route path="/v2" element={<Navigate to="/" replace />} />
         <Route
           path="/preview-white"
           element={
