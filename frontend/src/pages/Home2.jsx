@@ -47,6 +47,30 @@ function SoapGrid({ variants }) {
   );
 }
 
+function ProductSectionSkeleton({ tint, reverse }) {
+  return (
+    <section className="v2-section" style={tint ? { background: 'var(--color-tint)' } : undefined}>
+      <div className={`v2-row${reverse ? ' v2-reverse' : ''}`}>
+        <div>
+          <div className="oo-skeleton v2-photo-square" style={{ maxWidth: 420, margin: '0 auto', borderRadius: 'var(--radius-md)' }} />
+        </div>
+        <div>
+          <div className="oo-skeleton" style={{ width: 160, height: 16, marginBottom: 'var(--sp-2)' }} />
+          <div className="oo-skeleton" style={{ width: 220, height: 32, marginBottom: 'var(--sp-3)' }} />
+          <div className="oo-skeleton" style={{ width: '90%', height: 14, marginBottom: 8 }} />
+          <div className="oo-skeleton" style={{ width: '70%', height: 14, marginBottom: 'var(--sp-4)' }} />
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sp-2)', marginBottom: 'var(--sp-5)' }}>
+            {[90, 110, 80, 100].map((w, i) => (
+              <div key={i} className="oo-skeleton" style={{ width: w, height: 30, borderRadius: 'var(--radius-pill)' }} />
+            ))}
+          </div>
+          <div className="oo-skeleton" style={{ width: 200, height: 48, borderRadius: 'var(--radius-sm)' }} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ProductSection({ eyebrow, heading, intro, media, highlights, usage, shopHref, shopLabel, reverse, tint }) {
   return (
     <section className="v2-section" style={tint ? { background: 'var(--color-tint)' } : undefined}>
@@ -87,12 +111,14 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
 
 export default function Home2() {
   const [products, setProducts] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     api
       .get('/products')
       .then((res) => setProducts(res.data))
-      .catch(() => setProducts([]));
+      .catch(() => setProducts([]))
+      .finally(() => setLoading(false));
   }, []);
 
   const vco = products?.find((p) => p.category.slug === 'coconut-oil');
@@ -125,7 +151,8 @@ export default function Home2() {
         </div>
       </section>
 
-      {vco && (
+      {loading && <ProductSectionSkeleton tint />}
+      {!loading && vco && (
         <ProductSection
           eyebrow={vco.script_eyebrow}
           heading="Virgin Coconut Oil"
@@ -139,7 +166,8 @@ export default function Home2() {
         />
       )}
 
-      {syrup && (
+      {loading && <ProductSectionSkeleton reverse />}
+      {!loading && syrup && (
         <ProductSection
           eyebrow={syrup.script_eyebrow}
           heading="Coconut Syrup"
@@ -153,7 +181,8 @@ export default function Home2() {
         />
       )}
 
-      {soap && (
+      {loading && <ProductSectionSkeleton tint />}
+      {!loading && soap && (
         <ProductSection
           eyebrow={soap.script_eyebrow}
           heading="Coconut Oil Soap"
