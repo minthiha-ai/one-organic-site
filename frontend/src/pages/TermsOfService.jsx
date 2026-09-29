@@ -2,10 +2,10 @@ import LegalPage from '../components/LegalPage.jsx';
 
 export default function TermsOfService() {
   return (
-    <LegalPage eyebrow="Legal" title="Terms of Service" lastUpdated="September 20, 2026">
+    <LegalPage eyebrow="Legal" title="Terms of Service" lastUpdated="September 30, 2026">
       <p>
-        These Terms of Service govern your use of one-organic.com and any purchase you make
-        through it, operated by One Organic (Thailand) Co., Ltd.
+        These Terms of Service govern your use of one-organic.com, operated by One Organic
+        (Thailand) Co., Ltd.
       </p>
 
       <h2>Products</h2>
@@ -14,36 +14,13 @@ export default function TermsOfService() {
         product pages. Product images are representative; actual packaging may vary slightly.
       </p>
 
-      <h2>Orders and pricing</h2>
+      <h2>Purchases</h2>
       <p>
-        All prices are listed in Thai Baht (THB) and include applicable taxes unless stated
-        otherwise. Prices are subject to change without notice, but the price you're charged is
-        the price shown at the time you complete checkout. Placing an order is an offer to
-        purchase, not a guaranteed acceptance — we may decline or cancel an order (for example,
-        if an item turns out to be out of stock, or if there's a pricing error), and if we do,
-        you won't be charged, or you'll be refunded in full.
-      </p>
-
-      <h2>Payment</h2>
-      <p>
-        We accept credit/debit card and PromptPay (processed securely via Xendit), and Cash on
-        Delivery. For Cash on Delivery orders, payment is collected in cash at the time of
-        delivery.
-      </p>
-
-      <h2>Shipping</h2>
-      <p>
-        Orders are shipped via Kerry Express through our courier partner SHIPPOP. Shipping cost
-        is calculated at checkout based on your delivery address and order weight. Estimated
-        delivery times are provided at checkout but are not guaranteed — delays caused by the
-        courier are outside our control.
-      </p>
-
-      <h2>Cancellations</h2>
-      <p>
-        Customers may cancel any time before their order status changes to "Packed" (i.e. before
-        a shipping label has been generated). To cancel, email{' '}
-        <a href="mailto:min@one-organic.com">min@one-organic.com</a> with the order number.
+        Purchases are made through our official Shopee store, not directly on this site — each
+        product page links to its Shopee listing. Your order, pricing, payment, shipping, and
+        any cancellation are governed by Shopee's own terms and policies, not by this document.
+        Prices shown on this site are for reference; the price and terms in effect at the time
+        you order are the ones on the Shopee listing itself.
       </p>
 
       <h2>Intellectual property</h2>
