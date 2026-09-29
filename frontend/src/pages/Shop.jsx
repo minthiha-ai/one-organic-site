@@ -75,7 +75,10 @@ export default function Shop() {
         );
         setRows(flattened);
       })
-      .catch((err) => setError(err.message))
+      .catch((err) => {
+        console.error('Failed to load shop catalog:', err);
+        setError(err.message);
+      })
       .finally(() => setLoading(false));
   }, []);
 

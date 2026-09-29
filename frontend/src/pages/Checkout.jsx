@@ -45,10 +45,11 @@ export default function Checkout() {
     api
       .get('/shipping-rate')
       .then((res) => setShippingRate(res.data.rate))
-      .catch(() => {
+      .catch((err) => {
         // Left null — the summary just omits the shipping line rather than
         // guessing a number; the actual charge is still correct either way
         // since that comes from the server at order-creation time.
+        console.error('Failed to load shipping rate:', err);
       });
   }, []);
 
@@ -70,8 +71,9 @@ export default function Checkout() {
         const defaultAddress = res.data.find((a) => a.is_default) ?? res.data[0];
         if (defaultAddress) setSelectedAddressId(defaultAddress.id);
       })
-      .catch(() => {
+      .catch((err) => {
         // Non-fatal — checkout still works with manual address entry.
+        console.error('Failed to load saved addresses:', err);
       });
   }, [isAuthenticated]);
 

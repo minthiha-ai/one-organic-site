@@ -39,6 +39,7 @@ export default function ProductDetail() {
         setSelectedVariantId(initial?.id ?? null);
       })
       .catch((err) => {
+        console.error('Failed to load product:', err);
         if (err instanceof ApiError && err.status === 404) {
           setNotFound(true);
         }
