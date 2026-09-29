@@ -28,22 +28,71 @@ function ProductPhoto({ src, alt, ratio = '1 / 1' }) {
   );
 }
 
-function SoapGrid({ variants, ratio = '1 / 1' }) {
+// Each variant's own first two `highlights` are what's actually specific to
+// it (the rest — No SLS, Handcrafted, etc. — are identical across all four,
+// already covered by SoapSection's shared intro), paired with its skin_type.
+// Phrased into a sentence here; nothing added beyond what those fields say.
+const soapDifferentiator = {
+  'Just Coconut Oil': 'Heavy-duty daily cleansing and antibacterial — best for oily to normal skin.',
+  'With Castor Oil': 'Hydrates and soothes while detoxifying — best for normal to dry skin.',
+  'With Shea Butter': 'Hydrates and soothes with anti-inflammatory shea butter — best for dry to normal skin.',
+  'With Charcoal Powder': 'Deeply detoxifying, draws out impurities — best for oily to normal skin.',
+};
+
+function SoapVariantCard({ variant, ratio }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--sp-2)', maxWidth: 420, margin: '0 auto' }}>
-      {variants.map((v) => (
-        <a
-          key={v.id}
-          href={`/product/coconut-oil-soap?variant=${v.id}`}
-          style={{ textDecoration: 'none', color: 'inherit' }}
+    <a
+      href={`/product/coconut-oil-soap?variant=${variant.id}`}
+      style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+    >
+      <div className="v2-panel v2-hover-lift" style={{ aspectRatio: ratio }}>
+        <img src={soapImageByLabel[variant.option_label]} alt={`Coconut Oil Soap — ${variant.option_label}`} className="v2-contain" />
+      </div>
+      <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 14, margin: '10px 0 4px', color: 'var(--color-text)' }}>
+        {variant.option_label}
+      </p>
+      <p className="v2-meta" style={{ lineHeight: 1.5 }}>
+        {soapDifferentiator[variant.option_label]}
+      </p>
+    </a>
+  );
+}
+
+function SoapSection({ soap }) {
+  return (
+    <section className="v2-section" style={{ background: 'var(--color-tint)' }}>
+      <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', textAlign: 'center' }}>
+        <p className="v2-script" style={{ marginBottom: 'var(--sp-1)' }}>{soap.script_eyebrow}</p>
+        <h2 className="v2-h2" style={{ marginBottom: 'var(--sp-3)' }}>Coconut Oil Soap</h2>
+        <p className="v2-intro" style={{ marginBottom: 'var(--sp-5)', maxWidth: 480, marginLeft: 'auto', marginRight: 'auto' }}>
+          Handcrafted from 100% organic cold-pressed virgin coconut oil — no SLS, no SLES, no sulphates, no preservatives, no fragrances.
+        </p>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+            gap: 'var(--sp-4) var(--sp-3)',
+            textAlign: 'left',
+            marginBottom: 'var(--sp-5)',
+          }}
         >
-          <div className="v2-panel v2-hover-lift" style={{ aspectRatio: ratio }}>
-            <img src={soapImageByLabel[v.option_label]} alt={`Coconut Oil Soap — ${v.option_label}`} className="v2-contain" />
-          </div>
-          <p className="v2-meta" style={{ textAlign: 'center', marginTop: 8 }}>{v.option_label}</p>
-        </a>
-      ))}
-    </div>
+          {soap.variants.map((v) => (
+            <SoapVariantCard key={v.id} variant={v} ratio="3 / 2" />
+          ))}
+        </div>
+
+        <p className="v2-eyebrow" style={{ marginBottom: 'var(--sp-2)' }}>Ways to use</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 'var(--sp-2)' }}>
+          {soap.default_variant.usage_items.map(({ icon, label }) => (
+            <span key={label} className="v2-tag">
+              <i className={`ti ${icon}`} aria-hidden="true" />
+              {label}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -179,18 +228,7 @@ export default function Home2() {
       )}
 
       {loading && <ProductSectionSkeleton tint />}
-      {!loading && soap && (
-        <ProductSection
-          eyebrow={soap.script_eyebrow}
-          heading="Coconut Oil Soap"
-          intro="Handcrafted from 100% organic cold-pressed virgin coconut oil — no SLS, no SLES, no sulphates, no preservatives, no fragrances, in four variants."
-          media={<SoapGrid variants={soap.variants} ratio="3 / 2" />}
-          usage={soap.default_variant.usage_items}
-          shopHref="/shop?category=bath-body"
-          shopLabel="Shop Coconut Oil Soap"
-          tint
-        />
-      )}
+      {!loading && soap && <SoapSection soap={soap} />}
 
       {/* Cert strip */}
       <section className="v2-section-tight" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: 'var(--sp-5)', maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>
