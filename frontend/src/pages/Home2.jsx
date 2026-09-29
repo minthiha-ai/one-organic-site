@@ -20,6 +20,24 @@ const soapImageByLabel = {
   'With Charcoal Powder': soapCharcoalV2,
 };
 
+// `highlights` comes back from the API as plain strings (no icon field, unlike
+// `usage_items`), so pairing one to a Tabler icon has to happen client-side.
+// Keyed by exact label text — covers every highlight currently returned for
+// VCO and Syrup; a label not in this map falls back to a generic check icon.
+const highlightIcon = {
+  'Low Moisture & High Purity': 'droplet-off',
+  'Fast Absorption Into Skin': 'bolt',
+  'High MC': 'atom',
+  'High Lauric Acid': 'flask',
+  'Cold Pressed': 'temperature-minus',
+  'Centrifuge Extraction': 'rotate-clockwise',
+  'Gluten Free': 'wheat-off',
+  Vegan: 'leaf',
+  'Low Glycemic Index: 35': 'trending-down',
+  'High in Minerals': 'diamond',
+  'Mild Sweet Taste': 'candy',
+};
+
 function ProductPhoto({ src, alt, ratio = '1 / 1' }) {
   return (
     <div className="v2-panel" style={{ aspectRatio: ratio, maxWidth: 420, margin: '0 auto' }}>
@@ -135,7 +153,10 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
               <p className="v2-eyebrow" style={{ marginBottom: 'var(--sp-2)' }}>Highlights</p>
               <div className="v2-tag-row" style={{ marginBottom: 'var(--sp-4)' }}>
                 {highlights.map((h) => (
-                  <span key={h} className="v2-tag">{h}</span>
+                  <span key={h} className="v2-tag">
+                    <i className={`ti ti-${highlightIcon[h] ?? 'circle-check'}`} aria-hidden="true" />
+                    {h}
+                  </span>
                 ))}
               </div>
             </>
@@ -234,16 +255,16 @@ export default function Home2() {
       {!loading && soap && <SoapSection soap={soap} />}
 
       {/* Cert strip */}
-      <section className="v2-section-tight" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: 'var(--sp-5)', maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+      <section className="v2-section-tight v2-cert-strip">
+        <span className="v2-cert-item">
           <img src={usdaSeal} alt="USDA Organic certified" style={{ height: 46, width: 'auto' }} />
           <span className="v2-meta">USDA Organic certified</span>
         </span>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+        <span className="v2-cert-item">
           <img src={euSeal} alt="EU Organic certified" style={{ height: 36, width: 'auto', borderRadius: 3 }} />
           <span className="v2-meta">EU Organic certified</span>
         </span>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-2)' }}>
+        <span className="v2-cert-item">
           <i className="ti ti-recycle" style={{ fontSize: 46, color: 'var(--color-accent)' }} aria-hidden="true" />
           <span className="v2-meta">Recycle or reuse</span>
         </span>

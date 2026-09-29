@@ -265,7 +265,7 @@
 .v2-tag {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 6px;
   font-family: var(--font-sans);
   font-size: 13px;
@@ -309,6 +309,45 @@
        row-stretch only equalizes height within a row, not across rows. */
     height: 50px;
     white-space: normal;
-    text-align: center;
+    text-align: left;
+  }
+}
+
+/* Cert strip: icon + label pairs, each a different width (USDA seal 46px,
+   EU seal 54px, recycle glyph 46px at their current, unequal sizes — not
+   meant to match each other). On desktop this stays a single centered flex
+   row. Below 768px (same breakpoint as the rest of this file) it becomes a
+   2-column grid with a fixed 56px icon column (wide enough for the widest
+   icon, the EU seal) so every icon's left edge lines up on one vertical
+   line and every label's left edge lines up on a second, regardless of how
+   wide each individual icon actually is. */
+.v2-cert-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--sp-5);
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+}
+.v2-cert-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+@media (max-width: 767px) {
+  .v2-cert-strip {
+    display: grid;
+    grid-template-columns: 56px auto;
+    align-items: center;
+    row-gap: var(--sp-3);
+    column-gap: var(--sp-2);
+  }
+  .v2-cert-item {
+    display: contents;
+  }
+  .v2-cert-item img,
+  .v2-cert-item i {
+    justify-self: start;
   }
 }
