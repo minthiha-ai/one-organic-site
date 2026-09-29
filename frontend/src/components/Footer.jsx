@@ -43,18 +43,11 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
             </p>
           </div>
 
-          <div style={{ flex: '1 1 140px' }}>
-            <p className="v2-footer-label" style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Shop</p>
-            <Link to={homeTo} style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Home</Link>
-            <Link to={shopTo} style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>All Products</Link>
-            <Link to="/cart" style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Cart</Link>
-          </div>
-
           <div style={{ flex: '1 1 160px' }}>
             <p className="v2-footer-label" style={{ ...headingStyle, color: 'var(--color-accent-light)' }}>Company</p>
             <Link to="/contact" style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Contact</Link>
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', margin: 0 }}>
-              min@one-organic.com
+              hello@one-organic.com
             </p>
           </div>
 
@@ -118,11 +111,6 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           }}
         >
           <span>© 2026 One Organic (Thailand) Co., Ltd.</span>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
-            <Link to="/privacy-policy" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy Policy</Link>
-            <Link to="/terms-of-service" style={{ color: 'inherit', textDecoration: 'none' }}>Terms of Service</Link>
-            <Link to="/refund-policy" style={{ color: 'inherit', textDecoration: 'none' }}>Refund Policy</Link>
-          </div>
           <span>one-organic.com</span>
         </div>
       </div>
