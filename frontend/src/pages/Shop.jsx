@@ -163,7 +163,7 @@ export default function Shop() {
 
       {loading && (
         <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '32px var(--gutter) 48px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '32px 24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '32px 24px' }}>
             {Array.from({ length: 8 }, (_, i) => (
               <CatalogCardSkeleton key={i} />
             ))}

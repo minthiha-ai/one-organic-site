@@ -40,23 +40,38 @@ class CatalogSeeder extends Seeder
     {
         $this->frontendImages = base_path('../frontend/src/assets/images');
 
-        $coconutOil = Category::updateOrCreate(
-            ['slug' => 'coconut-oil'],
-            ['name' => 'Coconut Oil', 'sort_order' => 1]
-        );
+        // 26.09.29: merged the old "Coconut Oil" and "Coconut Syrup"
+        // categories into one "Food" category. Renaming the coconut-oil row
+        // in place (same PK) keeps the Virgin Coconut Oil product's existing
+        // category_id valid for free; the coconut-syrup row's product(s) get
+        // reassigned to $food before that row is deleted (category_id is
+        // restrictOnDelete, so delete-before-reassign would fail) — an
+        // orphaned empty category would otherwise still show up as an empty
+        // tab via GET /api/categories. The if/else makes this safe on a
+        // fresh database that never had a coconut-oil row to rename.
+        $food = Category::where('slug', 'coconut-oil')->first();
+        if ($food) {
+            $food->update(['name' => 'Food', 'slug' => 'food', 'sort_order' => 1]);
+        } else {
+            $food = Category::updateOrCreate(
+                ['slug' => 'food'],
+                ['name' => 'Food', 'sort_order' => 1]
+            );
+        }
 
-        $coconutSyrup = Category::updateOrCreate(
-            ['slug' => 'coconut-syrup'],
-            ['name' => 'Coconut Syrup', 'sort_order' => 2]
-        );
+        $staleSyrupCategory = Category::where('slug', 'coconut-syrup')->first();
+        if ($staleSyrupCategory && $staleSyrupCategory->id !== $food->id) {
+            Product::where('category_id', $staleSyrupCategory->id)->update(['category_id' => $food->id]);
+            $staleSyrupCategory->delete();
+        }
 
         $bathAndBody = Category::updateOrCreate(
             ['slug' => 'bath-body'],
             ['name' => 'Bath & Body', 'sort_order' => 3]
         );
 
-        $this->seedVirginCoconutOil($coconutOil);
-        $this->seedCoconutSyrup($coconutSyrup);
+        $this->seedVirginCoconutOil($food);
+        $this->seedCoconutSyrup($food);
         $this->seedCoconutOilSoap($bathAndBody);
     }
 

@@ -15,7 +15,13 @@ const OUT_PATH = join(ROOT, 'src/data/homepageProducts.json');
 // from the response, the homepage would silently lose a whole section
 // exactly like the incident that motivated this change, so that counts as
 // a build failure too, not just an unreachable API or a malformed response.
-const REQUIRED_CATEGORY_SLUGS = ['coconut-oil', 'coconut-syrup', 'bath-body'];
+//
+// VCO and Syrup are checked by their own product slug rather than category
+// slug — as of 26.09.29 (CatalogSeeder) they share one "Food" category, so
+// category alone can't distinguish them; Home2.jsx looks them up the same
+// way. Soap still has its own dedicated category.
+const REQUIRED_PRODUCT_SLUGS = ['virgin-coconut-oil', 'coconut-syrup'];
+const REQUIRED_CATEGORY_SLUGS = ['bath-body'];
 
 function loadDotEnvIfPresent(path) {
   if (!existsSync(path)) return;
@@ -69,11 +75,16 @@ export async function fetchHomepageProducts() {
     );
   }
 
-  const foundSlugs = products.map((p) => p?.category?.slug);
-  const missing = REQUIRED_CATEGORY_SLUGS.filter((slug) => !foundSlugs.includes(slug));
-  if (missing.length > 0) {
+  const foundProductSlugs = products.map((p) => p?.slug);
+  const missingProducts = REQUIRED_PRODUCT_SLUGS.filter((slug) => !foundProductSlugs.includes(slug));
+  const foundCategorySlugs = products.map((p) => p?.category?.slug);
+  const missingCategories = REQUIRED_CATEGORY_SLUGS.filter((slug) => !foundCategorySlugs.includes(slug));
+
+  if (missingProducts.length > 0 || missingCategories.length > 0) {
     throw new Error(
-      `Fetched ${products.length} product(s) from ${url} but missing homepage categories: ${missing.join(', ')}. Found: ${foundSlugs.join(', ') || '(none)'}.`
+      `Fetched ${products.length} product(s) from ${url} but the homepage is missing: ` +
+        `${[...missingProducts.map((s) => `product "${s}"`), ...missingCategories.map((s) => `category "${s}"`)].join(', ')}. ` +
+        `Found products: ${foundProductSlugs.join(', ') || '(none)'}; categories: ${foundCategorySlugs.join(', ') || '(none)'}.`
     );
   }
 

@@ -88,7 +88,7 @@ function SoapSection({ soap }) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
             gap: 'var(--sp-4) var(--sp-3)',
             textAlign: 'left',
             marginBottom: 'var(--sp-5)',
@@ -155,10 +155,15 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
 export default function Home2() {
   // homepageProducts is a build-time snapshot (scripts/fetch-products.mjs,
   // wired into vite.config.js) that already failed the build if any of
-  // these three categories were missing, so no loading/error state is
-  // needed here the way a runtime fetch would require.
-  const vco = homepageProducts.find((p) => p.category.slug === 'coconut-oil');
-  const syrup = homepageProducts.find((p) => p.category.slug === 'coconut-syrup');
+  // these three products/categories were missing, so no loading/error
+  // state is needed here the way a runtime fetch would require.
+  //
+  // VCO and Syrup are looked up by their own product slug, not category
+  // slug — as of 26.09.29 they share one "Food" category (CatalogSeeder),
+  // so category alone no longer distinguishes them. Soap still has its own
+  // dedicated category, so that lookup is unaffected.
+  const vco = homepageProducts.find((p) => p.slug === 'virgin-coconut-oil');
+  const syrup = homepageProducts.find((p) => p.slug === 'coconut-syrup');
   const soap = homepageProducts.find((p) => p.category.slug === 'bath-body');
 
   return (
@@ -193,7 +198,7 @@ export default function Home2() {
         media={<ProductPhoto src={vcoJarsV2} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" ratio="3 / 2" />}
         highlights={vco.default_variant.highlights}
         usage={vco.default_variant.usage_items}
-        shopHref="/shop?category=coconut-oil"
+        shopHref="/shop?category=food"
         shopLabel="Shop Virgin Coconut Oil"
         tint
       />
@@ -205,7 +210,7 @@ export default function Home2() {
         media={<ProductPhoto src={syrupV2} alt="Jar of Coconut Flower Syrup" ratio="3 / 3" />}
         highlights={syrup.default_variant.highlights}
         usage={syrup.default_variant.usage_items}
-        shopHref="/shop?category=coconut-syrup"
+        shopHref="/shop?category=food"
         shopLabel="Shop Coconut Syrup"
         reverse
       />
