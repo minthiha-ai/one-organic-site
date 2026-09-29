@@ -20,15 +20,15 @@ const soapImageByLabel = {
   'With Charcoal Powder': soapCharcoalV2,
 };
 
-function ProductPhoto({ src, alt }) {
+function ProductPhoto({ src, alt, ratio = '1 / 1' }) {
   return (
-    <div className="v2-panel v2-photo-square" style={{ maxWidth: 420, margin: '0 auto' }}>
-      <img src={src} alt={alt} className="v2-cover" />
+    <div className="v2-panel" style={{ aspectRatio: ratio, maxWidth: 420, margin: '0 auto' }}>
+      <img src={src} alt={alt} className="v2-contain" />
     </div>
   );
 }
 
-function SoapGrid({ variants }) {
+function SoapGrid({ variants, ratio = '1 / 1' }) {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--sp-2)', maxWidth: 420, margin: '0 auto' }}>
       {variants.map((v) => (
@@ -37,8 +37,8 @@ function SoapGrid({ variants }) {
           href={`/product/coconut-oil-soap?variant=${v.id}`}
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
-          <div className="v2-panel v2-photo-square v2-hover-lift">
-            <img src={soapImageByLabel[v.option_label]} alt={`Coconut Oil Soap — ${v.option_label}`} className="v2-cover" />
+          <div className="v2-panel v2-hover-lift" style={{ aspectRatio: ratio }}>
+            <img src={soapImageByLabel[v.option_label]} alt={`Coconut Oil Soap — ${v.option_label}`} className="v2-contain" />
           </div>
           <p className="v2-meta" style={{ textAlign: 'center', marginTop: 8 }}>{v.option_label}</p>
         </a>
@@ -101,8 +101,6 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
               </span>
             ))}
           </div>
-
-          <a href={shopHref} className="v2-btn">{shopLabel} →</a>
         </div>
       </div>
     </section>
@@ -136,7 +134,6 @@ export default function Home2() {
             <p className="v2-intro" style={{ marginBottom: 'var(--sp-5)', maxWidth: 460 }}>
               It is a simple truth that the health of our Earth, and its People, are interwoven and inseparable.
             </p>
-            <a href="/shop" className="v2-btn">Shop the collection →</a>
           </div>
           <div
             className="v2-photo-portrait"
@@ -157,7 +154,7 @@ export default function Home2() {
           eyebrow={vco.script_eyebrow}
           heading="Virgin Coconut Oil"
           intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid — fast-absorbing, gluten free, and vegan."
-          media={<ProductPhoto src={vcoJarsV2} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" />}
+          media={<ProductPhoto src={vcoJarsV2} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" ratio="3 / 2" />}
           highlights={vco.default_variant.highlights}
           usage={vco.default_variant.usage_items}
           shopHref="/shop?category=coconut-oil"
@@ -172,7 +169,7 @@ export default function Home2() {
           eyebrow={syrup.script_eyebrow}
           heading="Coconut Syrup"
           intro="Low glycemic index, high in minerals, and mildly sweet — gluten free and vegan."
-          media={<ProductPhoto src={syrupV2} alt="Jar of Coconut Flower Syrup" />}
+          media={<ProductPhoto src={syrupV2} alt="Jar of Coconut Flower Syrup" ratio="3 / 5" />}
           highlights={syrup.default_variant.highlights}
           usage={syrup.default_variant.usage_items}
           shopHref="/shop?category=coconut-syrup"
@@ -187,7 +184,7 @@ export default function Home2() {
           eyebrow={soap.script_eyebrow}
           heading="Coconut Oil Soap"
           intro="Handcrafted from 100% organic cold-pressed virgin coconut oil — no SLS, no SLES, no sulphates, no preservatives, no fragrances, in four variants."
-          media={<SoapGrid variants={soap.variants} />}
+          media={<SoapGrid variants={soap.variants} ratio="3 / 2" />}
           usage={soap.default_variant.usage_items}
           shopHref="/shop?category=bath-body"
           shopLabel="Shop Coconut Oil Soap"
