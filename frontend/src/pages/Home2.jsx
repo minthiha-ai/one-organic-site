@@ -83,7 +83,7 @@ function SoapSection({ soap }) {
         </div>
 
         <p className="v2-eyebrow" style={{ marginBottom: 'var(--sp-2)' }}>Ways to use</p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 'var(--sp-2)' }}>
+        <div className="v2-tag-row" style={{ justifyContent: 'center' }}>
           {soap.default_variant.usage_items.map(({ icon, label }) => (
             <span key={label} className="v2-tag">
               <i className={`ti ${icon}`} aria-hidden="true" />
@@ -133,7 +133,7 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
           {highlights && (
             <>
               <p className="v2-eyebrow" style={{ marginBottom: 'var(--sp-2)' }}>Highlights</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sp-2)', marginBottom: 'var(--sp-4)' }}>
+              <div className="v2-tag-row" style={{ marginBottom: 'var(--sp-4)' }}>
                 {highlights.map((h) => (
                   <span key={h} className="v2-tag">{h}</span>
                 ))}
@@ -142,7 +142,7 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
           )}
 
           <p className="v2-eyebrow" style={{ marginBottom: 'var(--sp-2)' }}>Ways to use</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sp-2)', marginBottom: 'var(--sp-5)' }}>
+          <div className="v2-tag-row" style={{ marginBottom: 'var(--sp-5)' }}>
             {usage.map(({ icon, label }) => (
               <span key={label} className="v2-tag">
                 <i className={`ti ${icon}`} aria-hidden="true" />

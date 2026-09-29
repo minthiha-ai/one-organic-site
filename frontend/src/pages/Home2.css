@@ -286,3 +286,25 @@
   font-size: 15px;
   color: var(--color-accent);
 }
+
+/* Tag groups: fixed 2-up grid on mobile so uniform min-width doesn't force
+   1-per-row at narrow widths; reverts to the single-row, no-wrap, uniform-
+   width layout at 768px — the same breakpoint used everywhere else in this
+   file (.v2-h1, .v2-section, etc.) rather than a new one. */
+.v2-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+@media (max-width: 767px) {
+  .v2-tag-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .v2-tag-row .v2-tag {
+    min-width: 0;
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+}
