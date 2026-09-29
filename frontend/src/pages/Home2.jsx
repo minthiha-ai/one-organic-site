@@ -4,16 +4,45 @@ import { api } from '../lib/api.js';
 import {
   heroCoconut,
   brandStoryPhoto,
-  vcoJars,
-  syrupJar,
-  soapPlain,
+  vcoJarsV2,
+  syrupV2,
+  soapJustCoconutV2,
+  soapCastorV2,
+  soapSheaV2,
+  soapCharcoalV2,
 } from '../assets/images/index.js';
 import { usdaSeal, euSeal } from '../assets/brand/index.js';
 
+const soapImageByLabel = {
+  'Just Coconut Oil': soapJustCoconutV2,
+  'With Castor Oil': soapCastorV2,
+  'With Shea Butter': soapSheaV2,
+  'With Charcoal Powder': soapCharcoalV2,
+};
+
 function ProductPhoto({ src, alt }) {
   return (
-    <div className="v2-panel v2-photo-square">
+    <div className="v2-panel v2-photo-square" style={{ maxWidth: 420, margin: '0 auto' }}>
       <img src={src} alt={alt} className="v2-cover" />
+    </div>
+  );
+}
+
+function SoapGrid({ variants }) {
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--sp-2)', maxWidth: 420, margin: '0 auto' }}>
+      {variants.map((v) => (
+        <a
+          key={v.id}
+          href={`/product/coconut-oil-soap?variant=${v.id}`}
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <div className="v2-panel v2-photo-square v2-hover-lift">
+            <img src={soapImageByLabel[v.option_label]} alt={`Coconut Oil Soap — ${v.option_label}`} className="v2-cover" />
+          </div>
+          <p className="v2-meta" style={{ textAlign: 'center', marginTop: 8 }}>{v.option_label}</p>
+        </a>
+      ))}
     </div>
   );
 }
@@ -28,12 +57,16 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
           <h2 className="v2-h2" style={{ marginBottom: 'var(--sp-3)' }}>{heading}</h2>
           <p className="v2-intro" style={{ marginBottom: 'var(--sp-4)', maxWidth: 480 }}>{intro}</p>
 
-          <p className="v2-eyebrow" style={{ marginBottom: 'var(--sp-2)' }}>Highlights</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sp-2)', marginBottom: 'var(--sp-4)' }}>
-            {highlights.map((h) => (
-              <span key={h} className="v2-tag">{h}</span>
-            ))}
-          </div>
+          {highlights && (
+            <>
+              <p className="v2-eyebrow" style={{ marginBottom: 'var(--sp-2)' }}>Highlights</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sp-2)', marginBottom: 'var(--sp-4)' }}>
+                {highlights.map((h) => (
+                  <span key={h} className="v2-tag">{h}</span>
+                ))}
+              </div>
+            </>
+          )}
 
           <p className="v2-eyebrow" style={{ marginBottom: 'var(--sp-2)' }}>Ways to use</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sp-2)', marginBottom: 'var(--sp-5)' }}>
@@ -79,7 +112,10 @@ export default function Home2() {
             </p>
             <a href="/shop" className="v2-btn">Shop the collection →</a>
           </div>
-          <div className="v2-photo-portrait" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', boxShadow: '0 20px 48px rgba(62,62,63,0.16)' }}>
+          <div
+            className="v2-photo-portrait"
+            style={{ maxWidth: 420, margin: '0 auto', borderRadius: 'var(--radius-md)', overflow: 'hidden', boxShadow: '0 20px 48px rgba(62,62,63,0.16)' }}
+          >
             <img
               src={heroCoconut}
               alt="A freshly husked coconut resting on stone, palm trees in the background"
@@ -94,7 +130,7 @@ export default function Home2() {
           eyebrow={vco.script_eyebrow}
           heading="Virgin Coconut Oil"
           intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid — fast-absorbing, gluten free, and vegan."
-          media={<ProductPhoto src={vcoJars} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" />}
+          media={<ProductPhoto src={vcoJarsV2} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" />}
           highlights={vco.default_variant.highlights}
           usage={vco.default_variant.usage_items}
           shopHref="/shop?category=coconut-oil"
@@ -108,7 +144,7 @@ export default function Home2() {
           eyebrow={syrup.script_eyebrow}
           heading="Coconut Syrup"
           intro="Low glycemic index, high in minerals, and mildly sweet — gluten free and vegan."
-          media={<ProductPhoto src={syrupJar} alt="Jar of Coconut Flower Syrup" />}
+          media={<ProductPhoto src={syrupV2} alt="Jar of Coconut Flower Syrup" />}
           highlights={syrup.default_variant.highlights}
           usage={syrup.default_variant.usage_items}
           shopHref="/shop?category=coconut-syrup"
@@ -121,9 +157,8 @@ export default function Home2() {
         <ProductSection
           eyebrow={soap.script_eyebrow}
           heading="Coconut Oil Soap"
-          intro="Handcrafted from 100% organic cold-pressed virgin coconut oil — no SLS, no SLES, no sulphates, no preservatives, no fragrances."
-          media={<ProductPhoto src={soapPlain} alt="Coconut Oil Soap Bar box and bar" />}
-          highlights={soap.default_variant.highlights}
+          intro="Handcrafted from 100% organic cold-pressed virgin coconut oil — no SLS, no SLES, no sulphates, no preservatives, no fragrances, in four variants."
+          media={<SoapGrid variants={soap.variants} />}
           usage={soap.default_variant.usage_items}
           shopHref="/shop?category=bath-body"
           shopLabel="Shop Coconut Oil Soap"
@@ -147,7 +182,7 @@ export default function Home2() {
         </span>
       </section>
 
-      {/* Commitment banner — full-bleed, prepped for real lifestyle photography */}
+      {/* Commitment banner — full-bleed brand photography */}
       <section className="v2-photo-wide" style={{ position: 'relative', minHeight: 360 }}>
         <img
           src={brandStoryPhoto}
@@ -172,18 +207,6 @@ export default function Home2() {
               Let&rsquo;s work together to build a healthy and sustainable tomorrow.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* Mission band */}
-      <section className="v2-section" style={{ background: 'var(--color-dark-band)', color: 'var(--color-dark-band-text)', textAlign: 'center' }}>
-        <div style={{ maxWidth: 560, margin: '0 auto' }}>
-          <i className="ti ti-recycle" style={{ fontSize: 30, color: 'var(--color-accent-light)' }} aria-hidden="true" />
-          <h2 className="v2-h3" style={{ margin: 'var(--sp-3) 0' }}>Care for Environment. Care for Community.</h2>
-          <p className="v2-body" style={{ color: 'var(--color-dark-band-text-secondary)', margin: '0 auto', maxWidth: 460 }}>
-            Together, we can make a meaningful impact on our environment and our communities by simply making
-            thoughtful decisions on what we consume.
-          </p>
         </div>
       </section>
     </>
