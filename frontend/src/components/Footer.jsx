@@ -29,10 +29,14 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
         <img
           src={footerCareForEnvironment}
           alt="Illustration of a tree, birds, a recycling symbol, and a family celebrating outdoors, captioned Care for Environment, Care for Community"
-          style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }}
+          style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto', marginBottom: -2 }}
         />
       )}
 
+      {/* Overlaps the image above by 2px (its marginBottom: -2) — the
+          browser's downscale of the image introduces a 1px lighter-gray
+          resampling artifact right at its bottom edge; this dark band
+          paints over it since it comes after in normal flow. */}
       <div style={{ background: 'var(--color-dark-band)', color: 'var(--color-dark-band-text)' }}>
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '40px var(--gutter) 24px' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32 }}>
