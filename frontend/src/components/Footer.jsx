@@ -39,7 +39,7 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           <div style={{ flex: '2 1 220px' }}>
             <img src={logoDark} alt="One Organic" style={{ height: 26, width: 'auto', display: 'block', margin: '0 0 12px' }} />
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', lineHeight: 1.6, margin: 0, maxWidth: 280 }}>
-              Organic coconut oil, syrup, and soap — cold-pressed and handcrafted in small batches.
+              Organic coconut oil, syrup, and soap. Cold-pressed and handcrafted in small batches.
             </p>
           </div>
 

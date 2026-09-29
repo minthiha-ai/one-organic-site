@@ -51,10 +51,10 @@ function ProductPhoto({ src, alt, ratio = '1 / 1' }) {
 // already covered by SoapSection's shared intro), paired with its skin_type.
 // Phrased into a sentence here; nothing added beyond what those fields say.
 const soapDifferentiator = {
-  'Just Coconut Oil': 'Heavy-duty daily cleansing and antibacterial — best for oily to normal skin.',
-  'With Castor Oil': 'Hydrates and soothes while detoxifying — best for normal to dry skin.',
-  'With Shea Butter': 'Hydrates and soothes with anti-inflammatory shea butter — best for dry to normal skin.',
-  'With Charcoal Powder': 'Deeply detoxifying, draws out impurities — best for oily to normal skin.',
+  'Just Coconut Oil': 'Heavy-duty daily cleansing and antibacterial. Best for oily to normal skin.',
+  'With Castor Oil': 'Hydrates and soothes while detoxifying. Best for normal to dry skin.',
+  'With Shea Butter': 'Hydrates and soothes with anti-inflammatory shea butter. Best for dry to normal skin.',
+  'With Charcoal Powder': 'Deeply detoxifying, draws out impurities. Best for oily to normal skin.',
 };
 
 function SoapVariantCard({ variant, ratio }) {
@@ -64,7 +64,7 @@ function SoapVariantCard({ variant, ratio }) {
       style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
     >
       <div className="v2-panel v2-hover-lift" style={{ aspectRatio: ratio }}>
-        <img src={soapImageByLabel[variant.option_label]} alt={`Coconut Oil Soap — ${variant.option_label}`} className="v2-contain" />
+        <img src={soapImageByLabel[variant.option_label]} alt={`Coconut Oil Soap, ${variant.option_label}`} className="v2-contain" />
       </div>
       <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 14, margin: '10px 0 4px', color: 'var(--color-text)' }}>
         {variant.option_label}
@@ -83,7 +83,7 @@ function SoapSection({ soap }) {
         <p className="v2-script" style={{ marginBottom: 'var(--sp-1)' }}>{soap.script_eyebrow}</p>
         <h2 className="v2-h2" style={{ marginBottom: 'var(--sp-3)' }}>Coconut Oil Soap</h2>
         <p className="v2-intro" style={{ marginBottom: 'var(--sp-5)', maxWidth: 480, marginLeft: 'auto', marginRight: 'auto' }}>
-          Handcrafted from 100% organic cold-pressed virgin coconut oil — no SLS, no SLES, no sulphates, no preservatives, no fragrances.
+          Handcrafted from 100% organic cold-pressed virgin coconut oil. No SLS, no SLES, no sulphates, no preservatives, no fragrances.
         </p>
 
         <div
@@ -226,7 +226,7 @@ export default function Home2() {
         <ProductSection
           eyebrow={vco.script_eyebrow}
           heading="Virgin Coconut Oil"
-          intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid — fast-absorbing, gluten free, and vegan."
+          intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid. Fast-absorbing, gluten free, and vegan."
           media={<ProductPhoto src={vcoJarsV2} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" ratio="3 / 2" />}
           highlights={vco.default_variant.highlights}
           usage={vco.default_variant.usage_items}
@@ -241,7 +241,7 @@ export default function Home2() {
         <ProductSection
           eyebrow={syrup.script_eyebrow}
           heading="Coconut Syrup"
-          intro="Low glycemic index, high in minerals, and mildly sweet — gluten free and vegan."
+          intro="Low glycemic index, high in minerals, and mildly sweet. Gluten free and vegan."
           media={<ProductPhoto src={syrupV2} alt="Jar of Coconut Flower Syrup" ratio="3 / 3" />}
           highlights={syrup.default_variant.highlights}
           usage={syrup.default_variant.usage_items}
