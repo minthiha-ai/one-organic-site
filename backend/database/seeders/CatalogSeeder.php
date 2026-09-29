@@ -77,6 +77,10 @@ class CatalogSeeder extends Seeder
 
     protected function seedVirginCoconutOil(Category $category): void
     {
+        // All three sizes are variations on one single Shopee listing, so
+        // the same URL goes on the product and on every variant.
+        $shopeeUrl = 'https://shopee.co.th/organic-virgin-coconut-oil-by-one-organic-125-450-900-i.710448046.24240988538';
+
         $product = Product::updateOrCreate(
             ['slug' => 'virgin-coconut-oil'],
             [
@@ -84,6 +88,7 @@ class CatalogSeeder extends Seeder
                 'name' => 'Virgin Coconut Oil',
                 'script_eyebrow' => "one of earth's greatest gifts to mankind",
                 'tagline' => "Earth's greatest gift to mankind",
+                'shopee_url' => $shopeeUrl,
                 'sort_order' => 1,
             ]
         );
@@ -116,6 +121,7 @@ class CatalogSeeder extends Seeder
             'sku' => 'OO-VCO-450',
             'option_label' => '450ml',
             'price' => 390.00,
+            'shopee_url' => $shopeeUrl,
             'wholesale_price' => 273.00,
             'barcode' => '0730945251648',
             'fda_registration_number' => $vcoFdaNumber,
@@ -135,6 +141,7 @@ class CatalogSeeder extends Seeder
             'sku' => 'OO-VCO-900',
             'option_label' => '900ml',
             'price' => 650.00,
+            'shopee_url' => $shopeeUrl,
             'wholesale_price' => 455.00,
             'barcode' => '0730945251662',
             'fda_registration_number' => $vcoFdaNumber,
@@ -153,6 +160,7 @@ class CatalogSeeder extends Seeder
             'sku' => 'OO-VCO-125',
             'option_label' => '125ml',
             'price' => 180.00,
+            'shopee_url' => $shopeeUrl,
             'wholesale_price' => 126.00,
             'barcode' => '0730945251655',
             'fda_registration_number' => $vcoFdaNumber,
@@ -170,6 +178,10 @@ class CatalogSeeder extends Seeder
 
     protected function seedCoconutSyrup(Category $category): void
     {
+        // One variant, so the same single-listing URL goes on the product
+        // and the variant.
+        $shopeeUrl = 'https://shopee.co.th/coconut-syrup-by-one-organic-600-i.710448046.26776444274';
+
         $product = Product::updateOrCreate(
             ['slug' => 'coconut-syrup'],
             [
@@ -177,6 +189,7 @@ class CatalogSeeder extends Seeder
                 'name' => 'Coconut Syrup',
                 'script_eyebrow' => 'one of the most nutritious sugars',
                 'tagline' => 'One of the most nutritious sugars',
+                'shopee_url' => $shopeeUrl,
                 'sort_order' => 2,
             ]
         );
@@ -185,6 +198,7 @@ class CatalogSeeder extends Seeder
             'sku' => 'OO-SYR-600',
             'option_label' => '600g',
             'price' => 290.00,
+            'shopee_url' => $shopeeUrl,
             'wholesale_price' => 203.00,
             'barcode' => '0730945251679',
             'fda_registration_number' => 'อย 70-2-01450-6-0116',
@@ -229,6 +243,7 @@ class CatalogSeeder extends Seeder
             'sku' => 'OO-SOAP-PLAIN',
             'option_label' => 'Just Coconut Oil',
             'price' => 150.00,
+            'shopee_url' => 'https://shopee.co.th/coconut-oil-soap-bar-just-coconut-oil-100-i.710448046.54251412870',
             'wholesale_price' => 105.00,
             'barcode' => '0730945252133',
             'cosmetic_declaration_number' => '12-1-6800027486',
@@ -252,6 +267,7 @@ class CatalogSeeder extends Seeder
             'sku' => 'OO-SOAP-CASTOR',
             'option_label' => 'With Castor Oil',
             'price' => 180.00,
+            'shopee_url' => 'https://shopee.co.th/coconut-oil-soap-bar-with-castor-oil-i.710448046.51551417932',
             'wholesale_price' => 126.00,
             'barcode' => '0730945252140',
             'cosmetic_declaration_number' => '12-1-6800027484',
@@ -274,6 +290,7 @@ class CatalogSeeder extends Seeder
             'sku' => 'OO-SOAP-SHEA',
             'option_label' => 'With Shea Butter',
             'price' => 180.00,
+            'shopee_url' => 'https://shopee.co.th/coconut-oil-soap-bar-with-shea-butter-100-i.710448046.48668481257',
             'wholesale_price' => 126.00,
             'barcode' => '0730945252157',
             'cosmetic_declaration_number' => '12-1-6900015948',
@@ -296,6 +313,7 @@ class CatalogSeeder extends Seeder
             'sku' => 'OO-SOAP-CHARCOAL',
             'option_label' => 'With Charcoal Powder',
             'price' => 180.00,
+            'shopee_url' => 'https://shopee.co.th/coconut-oil-soap-bar-with-charcoal-powder-100-i.710448046.53668447065',
             'wholesale_price' => 126.00,
             'barcode' => '0730945252164',
             'cosmetic_declaration_number' => '12-1-6900015961',
