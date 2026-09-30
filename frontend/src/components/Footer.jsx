@@ -39,15 +39,15 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           paints over it since it comes after in normal flow. */}
       <div style={{ background: 'var(--color-dark-band)', color: 'var(--color-dark-band-text)' }}>
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '40px var(--gutter) 24px' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32 }}>
-          <div style={{ flex: '2 1 220px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: 32 }}>
+          <div style={{ flex: '0 1 auto', maxWidth: 320 }}>
             <img src={logoDark} alt="One Organic" style={{ height: 26, width: 'auto', display: 'block', margin: '0 0 12px' }} />
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', lineHeight: 1.6, margin: 0, maxWidth: 280 }}>
               Organic coconut oil, syrup, and soap. Cold-pressed and handcrafted in small batches.
             </p>
           </div>
 
-          <div style={{ flex: '1 1 160px' }}>
+          <div style={{ flex: '0 1 auto' }}>
             {/* Hardcoded, not var(--color-accent-light): that shared token
                 differs between the homepage's v2 scope and the site-wide
                 default, and this footer should look the same everywhere —
