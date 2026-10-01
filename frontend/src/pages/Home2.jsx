@@ -60,7 +60,7 @@ function SoapVariantCard({ variant, ratio }) {
   return (
     <a
       href={`/product/coconut-oil-soap?variant=${variant.id}`}
-      style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+      style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}
     >
       <div className="v2-panel v2-hover-lift" style={{ aspectRatio: ratio }}>
         <img src={soapImageByLabel[variant.option_label]} alt={`Coconut Oil Soap, ${variant.option_label}`} className="v2-contain" />
@@ -68,7 +68,10 @@ function SoapVariantCard({ variant, ratio }) {
       <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 14, margin: '10px 0 4px', color: 'var(--color-text)' }}>
         {variant.option_label}
       </p>
-      <p className="v2-meta" style={{ lineHeight: 1.5 }}>
+      {/* flex: 1 lets this paragraph's box absorb the slack between a
+          2-line and 3-line description, so the pill row below lands at the
+          same height in every card regardless of how much the text wraps. */}
+      <p className="v2-meta" style={{ lineHeight: 1.5, flex: 1 }}>
         {soapDifferentiator[variant.option_label]}
       </p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 6 }}>
