@@ -93,9 +93,9 @@ function SoapSection({ soap }) {
         </p>
 
         <div
+          className="v2-soap-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 220px))',
             gap: 'var(--sp-4) var(--sp-3)',
             textAlign: 'left',
             marginBottom: 'var(--sp-5)',

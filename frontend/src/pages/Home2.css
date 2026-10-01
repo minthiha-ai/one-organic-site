@@ -272,6 +272,20 @@
   }
 }
 
+/* Soap grid: exactly 4 variants, so a fixed column count (not auto-fill/
+   auto-fit with a minmax cap) keeps all four flush and evenly sized across
+   the row at every width. auto-fill was creating more tracks than there
+   were cards on wide screens, leaving an empty track (dead space) on the
+   right and capping each card at 220px instead of letting them grow. */
+.v2-soap-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 900px) {
+  .v2-soap-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* Tags */
 /* min-width measured from the longest real label on the homepage —
    "Oil Pulling For Oral Health" (VCO Ways to Use) — rendered at 212px
