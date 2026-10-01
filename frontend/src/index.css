@@ -31,6 +31,17 @@ textarea {
   transition: box-shadow 0.15s ease;
 }
 
+/* Caps a catalog card's width inside its auto-fit grid track so a
+   sparsely-filled row (e.g. 1 item left after filtering) doesn't stretch
+   that card across the full row. Only applied from the tablet breakpoint
+   up — below it the grid is already a natural single-column mobile list,
+   where a full-width card is the normal, expected look. */
+@media (min-width: 768px) {
+  .oo-catalog-card {
+    max-width: 260px;
+  }
+}
+
 .oo-product-card:hover {
   box-shadow: 0 2px 10px rgba(62, 62, 63, 0.12);
 }

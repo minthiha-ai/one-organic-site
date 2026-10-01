@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function CatalogCard({ image, alt, name, price, to }) {
   return (
-    <Link to={to} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+    <Link to={to} className="oo-catalog-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
       <div style={{ height: 'var(--card-img-height)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <img src={image} alt={alt} style={{ maxWidth: '85%', maxHeight: '85%', objectFit: 'contain' }} />
       </div>

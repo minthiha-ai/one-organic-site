@@ -1,6 +1,6 @@
 export default function CatalogCardSkeleton() {
   return (
-    <div>
+    <div className="oo-catalog-card">
       <div className="oo-skeleton" style={{ height: 'var(--card-img-height)' }} />
       <div
         style={{
