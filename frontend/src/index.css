@@ -31,25 +31,19 @@ textarea {
   transition: box-shadow 0.15s ease;
 }
 
-/* Footer's Company and Shop columns: grid (not flex) so each one's own
-   column width comes from the widest line across both the content row and
-   the copyright row below it — "one-organic.com" (explicitly placed in
-   column 3) lines up under "Shop" the same way "Company"/email line up in
-   column 2, regardless of how long any of those strings are. */
+/* Footer's Company column: grid (not flex) so its own column width comes
+   from the widest line across both the content row and the copyright row
+   below it — "one-organic.com" lines up under "Company"/email on the same
+   left edge regardless of how long either string is. */
 .oo-footer-grid {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   column-gap: 32px;
   row-gap: 24px;
 }
 @media (max-width: 639px) {
   .oo-footer-grid {
     grid-template-columns: 1fr;
-  }
-}
-@media (min-width: 640px) {
-  .oo-footer-url {
-    grid-column: 3;
   }
 }
 
