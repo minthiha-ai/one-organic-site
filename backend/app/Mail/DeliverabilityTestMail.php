@@ -10,10 +10,12 @@ use Illuminate\Queue\SerializesModels;
 
 /**
  * One-off Mailable for Phase 0.5.4's actual gate: does a real send from
- * min@one-organic.com via authenticated SMTP land in the inbox, or spam,
- * at Gmail/Outlook? Dispatched only via `php artisan mail:test`. Not used
- * by any real feature — order confirmation (Phase 1.2) gets its own
- * Mailable once this infrastructure is confirmed working.
+ * the production SMTP mailbox (hello@one-organic.com, as of 26.10.02 —
+ * originally min@one-organic.com) via authenticated SMTP land in the
+ * inbox, or spam, at Gmail/Outlook? Dispatched only via
+ * `php artisan mail:test`. Not used by any real feature — order
+ * confirmation (Phase 1.2) gets its own Mailable once this infrastructure
+ * is confirmed working.
  */
 class DeliverabilityTestMail extends Mailable
 {
