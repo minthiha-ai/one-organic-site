@@ -31,6 +31,23 @@ textarea {
   transition: box-shadow 0.15s ease;
 }
 
+/* Footer's right-hand column: grid (not flex) so the "Company" block and
+   "one-organic.com" below it share one auto-sized column — the browser
+   picks that column's width from the widest line across BOTH rows (the
+   email address), so their left edges always line up regardless of how
+   long either string is. */
+.oo-footer-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 32px;
+  row-gap: 24px;
+}
+@media (max-width: 639px) {
+  .oo-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Caps a catalog card's width inside its auto-fit grid track so a
    sparsely-filled row (e.g. 1 item left after filtering) doesn't stretch
    that card across the full row. Only applied from the tablet breakpoint

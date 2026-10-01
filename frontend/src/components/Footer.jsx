@@ -38,16 +38,24 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           resampling artifact right at its bottom edge; this dark band
           paints over it since it comes after in normal flow. */}
       <div style={{ background: 'var(--color-dark-band)', color: 'var(--color-dark-band-text)' }}>
-      <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '40px var(--gutter) 24px' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: 32 }}>
-          <div style={{ flex: '0 1 auto', maxWidth: 320 }}>
+        {/* One grid spans the content row, the divider, and the copyright
+            row so the "Company" column and "one-organic.com" below it
+            resolve to the same column width — and therefore the same left
+            edge — instead of each being sized independently to its own
+            (different-length) text, which is what made them look
+            misaligned before. */}
+        <div
+          className="oo-footer-grid"
+          style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '40px var(--gutter) 16px' }}
+        >
+          <div style={{ maxWidth: 320 }}>
             <img src={logoDark} alt="One Organic" style={{ height: 26, width: 'auto', display: 'block', margin: '0 0 12px' }} />
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', lineHeight: 1.6, margin: 0, maxWidth: 280 }}>
               Organic coconut oil, syrup, and soap. Cold-pressed and handcrafted in small batches.
             </p>
           </div>
 
-          <div style={{ flex: '0 1 auto' }}>
+          <div>
             {/* Hardcoded, not var(--color-accent-light): that shared token
                 differs between the homepage's v2 scope and the site-wide
                 default, and this footer should look the same everywhere —
@@ -58,28 +66,14 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
               hello@one-organic.com
             </p>
           </div>
-        </div>
-      </div>
 
-      <div style={{ borderTop: '0.5px solid rgba(247,241,231,0.15)' }}>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 16,
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            maxWidth: 'var(--page-max-width)',
-            margin: '0 auto',
-            padding: '16px var(--gutter)',
-            fontSize: 12,
-            color: 'var(--color-dark-band-text-secondary)',
-          }}
-        >
-          <span>© 2026 One Organic (Thailand) Co., Ltd.</span>
-          <span>one-organic.com</span>
+          <div style={{ gridColumn: '1 / -1', borderTop: '0.5px solid rgba(247,241,231,0.15)' }} />
+
+          <span style={{ fontSize: 12, color: 'var(--color-dark-band-text-secondary)' }}>
+            © 2026 One Organic (Thailand) Co., Ltd.
+          </span>
+          <span style={{ fontSize: 12, color: 'var(--color-dark-band-text-secondary)' }}>one-organic.com</span>
         </div>
-      </div>
       </div>
     </div>
   );
