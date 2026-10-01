@@ -69,9 +69,13 @@ export default function Contact() {
             <i className="ti ti-mail" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} aria-hidden="true" />
             hello@one-organic.com
           </p>
-          <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: 0 }}>
+          <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: 0, lineHeight: 1.6 }}>
             <i className="ti ti-map-pin" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} aria-hidden="true" />
-            Address to be provided
+            5/3 LaSalle Park Building B, G Floor
+            <br />
+            LaSalle 10 Soi, Sukhumvit 105 Road
+            <br />
+            Bangna, Bangkok 10260 Thailand
           </p>
         </div>
       </div>
