@@ -12,7 +12,7 @@ const linkStyle = {
 
 const headingStyle = {
   fontFamily: 'var(--font-label)',
-  fontSize: 10,
+  fontSize: 13,
   letterSpacing: '0.06em',
   textTransform: 'uppercase',
   color: 'var(--color-label)',
@@ -60,7 +60,7 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
                 differs between the homepage's v2 scope and the site-wide
                 default, and this footer should look the same everywhere —
                 #d4b99e is the homepage's value. */}
-            <p className="v2-footer-label" style={{ ...headingStyle, color: '#d4b99e' }}>Company</p>
+            <p style={{ ...headingStyle, color: '#d4b99e' }}>Company</p>
             <Link to="/contact" style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)' }}>Contact</Link>
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', margin: '0 0 12px' }}>
               hello@one-organic.com
