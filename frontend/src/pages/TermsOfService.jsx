@@ -43,7 +43,7 @@ export default function TermsOfService() {
       <p>
         One Organic (Thailand) Co., Ltd.
         <br />
-        <a href="mailto:min@one-organic.com">min@one-organic.com</a>
+        <a href="mailto:hello@one-organic.com">hello@one-organic.com</a>
       </p>
     </LegalPage>
   );

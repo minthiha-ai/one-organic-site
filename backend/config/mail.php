@@ -116,6 +116,6 @@ return [
     ],
 
     // Where the public Contact form's messages are delivered.
-    'contact_recipient' => env('MAIL_CONTACT_RECIPIENT', 'min@one-organic.com'),
+    'contact_recipient' => env('MAIL_CONTACT_RECIPIENT', 'hello@one-organic.com'),
 
 ];

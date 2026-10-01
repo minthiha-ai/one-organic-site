@@ -27,7 +27,7 @@ Payment received — we'll get this packed and shipped soon.
 Track your order
 </x-mail::button>
 
-Questions about your order? Just reply to this email or reach us at min@one-organic.com.
+Questions about your order? Just reply to this email or reach us at hello@one-organic.com.
 
 — One Organic
 </x-mail::message>

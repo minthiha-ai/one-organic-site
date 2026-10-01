@@ -67,7 +67,7 @@ export default function Contact() {
           <EyebrowLabel style={{ margin: '20px 0 12px' }}>Get in touch</EyebrowLabel>
           <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '0 0 8px' }}>
             <i className="ti ti-mail" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} aria-hidden="true" />
-            min@one-organic.com
+            hello@one-organic.com
           </p>
           <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: 0 }}>
             <i className="ti ti-map-pin" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} aria-hidden="true" />

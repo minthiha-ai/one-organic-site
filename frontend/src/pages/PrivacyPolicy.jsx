@@ -62,14 +62,14 @@ export default function PrivacyPolicy() {
         Under Thailand's Personal Data Protection Act (PDPA), you have the right to access,
         correct, or request deletion of your personal information, and to withdraw consent where
         applicable. To exercise any of these rights, contact us at{' '}
-        <a href="mailto:min@one-organic.com">min@one-organic.com</a>.
+        <a href="mailto:hello@one-organic.com">hello@one-organic.com</a>.
       </p>
 
       <h2>Contact</h2>
       <p>
         One Organic (Thailand) Co., Ltd.
         <br />
-        <a href="mailto:min@one-organic.com">min@one-organic.com</a>
+        <a href="mailto:hello@one-organic.com">hello@one-organic.com</a>
       </p>
     </LegalPage>
   );

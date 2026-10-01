@@ -15,7 +15,7 @@ export default function RefundPolicy() {
       <p>
         If an item you bought through our Shopee store arrives damaged, defective, or incorrect,
         you're welcome to also email us at{' '}
-        <a href="mailto:min@one-organic.com">min@one-organic.com</a> with your Shopee order
+        <a href="mailto:hello@one-organic.com">hello@one-organic.com</a> with your Shopee order
         number and a photo of the issue — we're happy to help alongside your Shopee return, but
         the actual return/refund is processed through Shopee.
       </p>
@@ -31,7 +31,7 @@ export default function RefundPolicy() {
       <p>
         One Organic (Thailand) Co., Ltd.
         <br />
-        <a href="mailto:min@one-organic.com">min@one-organic.com</a>
+        <a href="mailto:hello@one-organic.com">hello@one-organic.com</a>
       </p>
     </LegalPage>
   );

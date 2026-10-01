@@ -27,7 +27,7 @@ _Last confirmed against the actual codebase/deployment: 26.09.16 — see `../Pro
 - ✅ Frontend purchase flow is live end-to-end against the real production API: Shop → Product detail (real variant switcher, incl. soap technical details) → Cart (persisted, real quantities/totals) → Checkout (real guest orders, verified in-browser and cross-checked against the backend after each step)
 - ✅ Customer accounts: login/register, order history, order detail, saved addresses — all real, wired to the backend. Checkout now offers a saved address for logged-in customers; guest checkout unchanged.
 - ✅ Admin sales dashboard: revenue/order stats, orders-over-time chart, top products — live on `/admin`, verified against seeded test data
-- ✅ Contact form sends real email — recipient is `min@one-organic.com` for now (temporary, was `hello@`)
+- ✅ Contact form sends real email — recipient is `hello@one-organic.com`
 - ✅ Frontend deployed to Vercel, pointed at the production backend (not local Herd)
 - ✅ Backend deploys are automated: pushing to `master` with changes under `backend/` triggers `.github/workflows/deploy-backend.yml`, which SSHes into Bluehost and runs the pull/composer/migrate/cache-clear sequence — no manual SSH needed for routine backend updates
 - ✅ Production MySQL password rotated (was briefly exposed during initial setup)
