@@ -67,12 +67,22 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
             </p>
           </div>
 
+          <div>
+            <p className="v2-footer-label" style={{ ...headingStyle, color: '#d4b99e' }}>Shop</p>
+            <Link to={shopTo} style={{ ...linkStyle, color: 'var(--color-dark-band-text-secondary)', margin: 0 }}>View Products</Link>
+          </div>
+
           <div style={{ gridColumn: '1 / -1', borderTop: '0.5px solid rgba(247,241,231,0.15)' }} />
 
           <span style={{ fontSize: 12, color: 'var(--color-dark-band-text-secondary)' }}>
             © 2026 One Organic (Thailand) Co., Ltd.
           </span>
-          <span style={{ fontSize: 12, color: 'var(--color-dark-band-text-secondary)' }}>one-organic.com</span>
+          {/* oo-footer-url pins this to column 3 (under "Shop") only at the
+              3-column desktop breakpoint — a plain inline gridColumn: 3
+              would force that column to exist even in the 1-column mobile
+              layout, since an explicit placement always creates whatever
+              implicit columns it needs to be satisfied. */}
+          <span className="oo-footer-url" style={{ fontSize: 12, color: 'var(--color-dark-band-text-secondary)' }}>one-organic.com</span>
         </div>
       </div>
     </div>
