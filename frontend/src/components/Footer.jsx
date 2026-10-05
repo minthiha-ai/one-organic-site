@@ -73,9 +73,15 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
 
           <div style={{ gridColumn: '1 / -1', borderTop: '0.5px solid rgba(247,241,231,0.15)' }} />
 
-          <span style={{ fontSize: 12, color: 'var(--color-dark-band-text-secondary)' }}>
-            © 2026 One Organic (Thailand) Co., Ltd.
-          </span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', columnGap: 20, rowGap: 8, fontSize: 12, color: 'var(--color-dark-band-text-secondary)' }}>
+            <span>© 2026 One Organic (Thailand) Co., Ltd.</span>
+            {/* The only links to these pages on the live site — checkout, the
+                one other place that linked them, is unreachable now that
+                purchases happen on Shopee. */}
+            <Link to="/privacy-policy" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy Policy</Link>
+            <Link to="/terms-of-service" style={{ color: 'inherit', textDecoration: 'none' }}>Terms of Service</Link>
+            <Link to="/refund-policy" style={{ color: 'inherit', textDecoration: 'none' }}>Refund Policy</Link>
+          </div>
           <span style={{ fontSize: 12, color: 'var(--color-dark-band-text-secondary)' }}>one-organic.com</span>
         </div>
       </div>

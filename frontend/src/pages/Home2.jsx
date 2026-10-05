@@ -1,4 +1,7 @@
 import './Home2.css';
+import Seo from '../components/Seo.jsx';
+import { HOME_DESCRIPTION, HOME_TITLE } from '../lib/site.js';
+import { organizationJsonLd } from '../lib/structuredData.js';
 import homepageProducts from '../data/homepageProducts.json';
 import {
   heroCoconut,
@@ -178,6 +181,8 @@ export default function Home2() {
 
   return (
     <>
+      <Seo title={HOME_TITLE} description={HOME_DESCRIPTION} path="/" jsonLd={organizationJsonLd()} />
+
       {/* Hero */}
       <section className="v2-section" style={{ paddingBottom: 'var(--sp-6)' }}>
         <div className="v2-row">

@@ -2,7 +2,13 @@ import LegalPage from '../components/LegalPage.jsx';
 
 export default function RefundPolicy() {
   return (
-    <LegalPage eyebrow="Legal" title="Refund Policy" lastUpdated="September 30, 2026">
+    <LegalPage
+      eyebrow="Legal"
+      title="Refund Policy"
+      description="How refunds and returns work for One Organic products, including items bought through our Shopee store."
+      path="/refund-policy"
+      lastUpdated="September 30, 2026"
+    >
       <p>
         Purchases are currently made through our official Shopee store, not directly on this
         site. Returns and refunds for those orders are handled through Shopee's own return and

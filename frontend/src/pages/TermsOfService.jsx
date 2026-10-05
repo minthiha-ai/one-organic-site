@@ -2,7 +2,13 @@ import LegalPage from '../components/LegalPage.jsx';
 
 export default function TermsOfService() {
   return (
-    <LegalPage eyebrow="Legal" title="Terms of Service" lastUpdated="September 30, 2026">
+    <LegalPage
+      eyebrow="Legal"
+      title="Terms of Service"
+      description="The terms of service for using one-organic.com, operated by One Organic (Thailand) Co., Ltd."
+      path="/terms-of-service"
+      lastUpdated="September 30, 2026"
+    >
       <p>
         These Terms of Service govern your use of one-organic.com, operated by One Organic
         (Thailand) Co., Ltd.

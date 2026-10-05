@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { fetchHomepageProducts } from './scripts/fetch-products.mjs'
+import { buildLlmsTxt, buildSitemapXml } from './scripts/generate-seo-files.mjs'
 
 // Runs on every `vite`/`vite build` (dev and prod alike, whatever invokes
 // it — npm script, bare CLI, Vercel's build step) so the homepage's static
@@ -21,9 +24,26 @@ function homepageProductsSnapshotPlugin() {
   };
 }
 
+// Emits sitemap.xml and llms.txt into the build output from the product
+// snapshot written by the plugin above (which has already run by the time
+// generateBundle fires, and already aborted the build if the fetch failed).
+// Build-only: neither file is served by the dev server.
+function seoFilesPlugin() {
+  return {
+    name: 'seo-files',
+    apply: 'build',
+    generateBundle() {
+      const snapshotPath = fileURLToPath(new URL('./src/data/homepageProducts.json', import.meta.url));
+      const products = JSON.parse(readFileSync(snapshotPath, 'utf8'));
+      this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: buildSitemapXml(products) });
+      this.emitFile({ type: 'asset', fileName: 'llms.txt', source: buildLlmsTxt(products) });
+    },
+  };
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), homepageProductsSnapshotPlugin()],
+  plugins: [react(), homepageProductsSnapshotPlugin(), seoFilesPlugin()],
   server: {
     // Xendit's card Components require an HTTPS origin, so local testing
     // goes through an https tunnel (ngrok etc.) rather than localhost —

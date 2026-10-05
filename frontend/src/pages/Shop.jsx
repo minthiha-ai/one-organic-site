@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { api } from '../lib/api.js';
 import CatalogCard from '../components/CatalogCard.jsx';
 import CatalogCardSkeleton from '../components/CatalogCardSkeleton.jsx';
+import Seo from '../components/Seo.jsx';
 
 // Bands match the real THB pricing (฿150–650 across the catalog) resolved
 // in Phase 0.1 of the implementation plan — the old ฿10/20 bands were built
@@ -102,6 +103,12 @@ export default function Shop() {
 
   return (
     <div>
+      {/* Canonical is always bare /shop: ?category=food and the shop copies under the preview routes are the same page. */}
+      <Seo
+        title="Shop | One Organic"
+        description="Browse One Organic's organic virgin coconut oil, coconut flower syrup, and handcrafted coconut oil soap, with prices in Thai baht. Purchases are completed on Shopee."
+        path="/shop"
+      />
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '48px var(--gutter) 24px', textAlign: 'center' }}>
         <p style={{ fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-label)', margin: '0 0 10px' }}>
           The Collection

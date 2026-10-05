@@ -8,7 +8,10 @@ import PillTag from '../components/PillTag.jsx';
 import IconChip from '../components/IconChip.jsx';
 import SizeOption from '../components/SizeOption.jsx';
 import Button from '../components/Button.jsx';
+import Seo from '../components/Seo.jsx';
 import { api, ApiError } from '../lib/api.js';
+import { productPath, SITE_URL } from '../lib/site.js';
+import { productDescription, productJsonLd } from '../lib/structuredData.js';
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -67,8 +70,20 @@ export default function ProductDetail() {
 
   const shopeeUrl = variant.shopee_url || product.shopee_url || import.meta.env.VITE_SHOPEE_STORE_URL || null;
 
+  // Always resolves to the variant actually shown, so /product/x and
+  // /product/x?variant=<default id> declare the same canonical.
+  const canonicalPath = productPath(product.slug, variant.id);
+
   return (
     <>
+      <Seo
+        title={`${product.name} (${variant.option_label}) | One Organic`}
+        description={productDescription(product, variant)}
+        path={canonicalPath}
+        image={variant.image_url}
+        type="product"
+        jsonLd={productJsonLd(product, variant, `${SITE_URL}${canonicalPath}`)}
+      />
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', gap: 20, padding: '32px var(--gutter)', maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>
         <div style={{ flex: '1 1 var(--hero-img-width)', maxWidth: 420 }}>
           <div

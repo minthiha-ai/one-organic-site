@@ -2,7 +2,13 @@ import LegalPage from '../components/LegalPage.jsx';
 
 export default function PrivacyPolicy() {
   return (
-    <LegalPage eyebrow="Legal" title="Privacy Policy" lastUpdated="September 30, 2026">
+    <LegalPage
+      eyebrow="Legal"
+      title="Privacy Policy"
+      description="How One Organic (Thailand) Co., Ltd. collects, uses, and protects your personal information."
+      path="/privacy-policy"
+      lastUpdated="September 30, 2026"
+    >
       <p>
         One Organic (Thailand) Co., Ltd. ("One Organic," "we," "us") operates one-organic.com.
         This policy explains what personal information we collect, why, and what we do with it.

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# The private pages (login, account, cart, checkout, order pages) are kept
+# out of the index with a <meta name="robots" content="noindex"> tag instead
+# of a Disallow here — a crawler that's blocked from fetching a page never
+# sees its noindex tag, so a Disallow can leave the bare URL indexed.
+
+Sitemap: https://one-organic.com/sitemap.xml

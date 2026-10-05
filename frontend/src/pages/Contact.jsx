@@ -3,6 +3,7 @@ import ScriptText from '../components/ScriptText.jsx';
 import { FormField, TextAreaField } from '../components/FormField.jsx';
 import Button from '../components/Button.jsx';
 import EyebrowLabel from '../components/EyebrowLabel.jsx';
+import Seo from '../components/Seo.jsx';
 import { api, ApiError } from '../lib/api.js';
 
 export default function Contact() {
@@ -31,6 +32,11 @@ export default function Contact() {
 
   return (
     <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>
+      <Seo
+        title="Contact | One Organic"
+        description="Questions about our products, wholesale, or an order? Email hello@one-organic.com or write to us at LaSalle Park, Sukhumvit 105, Bangna, Bangkok."
+        path="/contact"
+      />
       <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
         <div style={{ padding: '32px var(--gutter) 8px' }}>
           <ScriptText size={20} style={{ margin: '0 0 4px' }}>say hello</ScriptText>

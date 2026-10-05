@@ -1,8 +1,10 @@
 import EyebrowLabel from './EyebrowLabel.jsx';
+import Seo from './Seo.jsx';
 
-export default function LegalPage({ eyebrow, title, lastUpdated, children }) {
+export default function LegalPage({ eyebrow, title, description, path, lastUpdated, children }) {
   return (
     <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>
+      <Seo title={`${title} | One Organic`} description={description} path={path} />
       <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
         <div style={{ padding: '32px var(--gutter) 8px' }}>
           <EyebrowLabel>{eyebrow}</EyebrowLabel>
