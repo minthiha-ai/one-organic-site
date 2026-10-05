@@ -66,7 +66,9 @@ export default function Shop() {
               product.category.slug === 'bath-body'
                 ? variant.option_label
                 : `${product.name} — ${variant.option_label}`,
-            image: variant.image_url,
+            // Cards render at ~250px, so they get the small copy; falls back
+            // to the full image for an API that predates thumb_url.
+            image: variant.thumb_url ?? variant.image_url,
             alt: `${product.name} — ${variant.option_label}`,
             price: variant.price,
             categoryName: product.category.name,
