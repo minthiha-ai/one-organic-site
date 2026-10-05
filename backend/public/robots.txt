@@ -1,2 +1,6 @@
 User-agent: *
-Disallow:
+# Only the admin login. Everything else on this host (/api, /storage) must
+# stay crawlable: Google fetches the storefront's product JSON and images
+# from here when it renders one-organic.com, and blocking them would break
+# how it sees the shop.
+Disallow: /admin
