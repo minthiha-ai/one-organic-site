@@ -20,6 +20,7 @@ class ProductVariantResource extends JsonResource
             'stock_quantity' => $this->stock_quantity,
             'is_default' => $this->is_default,
             'image_url' => $this->image_url,
+            'thumb_url' => $this->thumb_url,
             'tags' => $this->tags ?? [],
             'highlights' => $this->highlights ?? [],
             'usage_items' => $this->usage_items ?? [],

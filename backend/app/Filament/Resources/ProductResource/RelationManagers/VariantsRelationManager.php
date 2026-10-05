@@ -120,7 +120,7 @@ class VariantsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('option_label')
             ->columns([
-                Tables\Columns\ImageColumn::make('image_url')
+                Tables\Columns\ImageColumn::make('thumb_url')
                     ->label('Image'),
                 Tables\Columns\TextColumn::make('option_label')
                     ->label('Size / option'),
