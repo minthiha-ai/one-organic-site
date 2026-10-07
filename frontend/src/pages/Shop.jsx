@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { api } from '../lib/api.js';
+import { api, assetUrl } from '../lib/api.js';
 import CatalogCard from '../components/CatalogCard.jsx';
 import CatalogCardSkeleton from '../components/CatalogCardSkeleton.jsx';
 import Seo from '../components/Seo.jsx';
@@ -53,7 +53,7 @@ export default function Shop() {
   const [priceBucket, setPriceBucket] = useState('all');
 
   useEffect(() => {
-    Promise.all([api.get('/categories'), api.get('/products')])
+    Promise.all([api.getCatalog('/categories'), api.getCatalog('/products')])
       .then(([categoriesRes, productsRes]) => {
         setCategories(categoriesRes.data);
 
@@ -68,7 +68,7 @@ export default function Shop() {
                 : `${product.name} — ${variant.option_label}`,
             // Cards render at ~250px, so they get the small copy; falls back
             // to the full image for an API that predates thumb_url.
-            image: variant.thumb_url ?? variant.image_url,
+            image: assetUrl(variant.thumb_url ?? variant.image_url),
             alt: `${product.name} — ${variant.option_label}`,
             price: variant.price,
             categoryName: product.category.name,

@@ -9,7 +9,7 @@ import IconChip from '../components/IconChip.jsx';
 import SizeOption from '../components/SizeOption.jsx';
 import Button from '../components/Button.jsx';
 import Seo from '../components/Seo.jsx';
-import { api, ApiError } from '../lib/api.js';
+import { api, ApiError, assetUrl } from '../lib/api.js';
 import { productPath, SITE_URL } from '../lib/site.js';
 import { productDescription, productJsonLd } from '../lib/structuredData.js';
 
@@ -27,7 +27,7 @@ export default function ProductDetail() {
     setNotFound(false);
 
     api
-      .get(`/products/${slug}`)
+      .getCatalog(`/products/${slug}`)
       .then((res) => {
         setProduct(res.data);
         const requested = Number(searchParams.get('variant'));
@@ -99,7 +99,7 @@ export default function ProductDetail() {
           >
             {variant.image_url && (
               <img
-                src={variant.image_url}
+                src={assetUrl(variant.image_url)}
                 alt={`${product.name} — ${variant.option_label}`}
                 style={{ maxWidth: '75%', maxHeight: '75%', objectFit: 'contain' }}
               />

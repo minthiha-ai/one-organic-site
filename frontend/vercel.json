@@ -2,12 +2,36 @@
   "redirects": [
     {
       "source": "/:path(.*)",
-      "has": [{ "type": "host", "value": "www.one-organic.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.one-organic.com"
+        }
+      ],
       "destination": "https://one-organic.com/:path",
       "permanent": true
     }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/catalog-api/categories",
+      "destination": "https://api.one-organic.com/api/categories"
+    },
+    {
+      "source": "/catalog-api/products",
+      "destination": "https://api.one-organic.com/api/products"
+    },
+    {
+      "source": "/catalog-api/products/:slug",
+      "destination": "https://api.one-organic.com/api/products/:slug"
+    },
+    {
+      "source": "/catalog-storage/:path*",
+      "destination": "https://api.one-organic.com/storage/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
