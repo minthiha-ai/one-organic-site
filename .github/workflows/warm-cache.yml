@@ -1,0 +1,45 @@
+name: Warm Cache
+
+# After every production deploy on Vercel, fill the edge cache for the shop's
+# catalog and images (see frontend/api/warm.js for why that runs in Vercel's
+# Singapore region rather than here). Without this, the first visitor after
+# each deploy waits several seconds on the slow Bluehost API host.
+#
+# Vercel reports each deploy to GitHub as a deployment_status event.
+on:
+  deployment_status: {}
+  workflow_dispatch: {}
+
+jobs:
+  warm:
+    # A failed or preview deploy must not trigger a warm-up.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Warm the catalog cache
+        env:
+          EXPECTED_SHA: ${{ github.event.deployment.sha }}
+        run: |
+          # The production domain can still point at the previous deployment
+          # for a moment after Vercel reports success. The endpoint returns
+          # the commit it is running, so retry until it matches the deploy
+          # that triggered this run (a manual run accepts whatever is live).
+          for attempt in 1 2 3 4 5 6; do
+            code=$(curl -sS --max-time 90 -o warm.json -w '%{http_code}' https://one-organic.com/api/warm || echo 000)
+            sha=$(python3 -c "import json;print(json.load(open('warm.json')).get('deploymentSha') or '')" 2>/dev/null || true)
+            echo "attempt $attempt: HTTP $code, deployment ${sha:-unknown}"
+            if [ "$code" = "200" ] && { [ -z "$EXPECTED_SHA" ] || [ "$sha" = "$EXPECTED_SHA" ]; }; then
+              cat warm.json
+              exit 0
+            fi
+            sleep 20
+          done
+          echo "::warning::Cache warm-up did not complete cleanly"
+          cat warm.json || true
+          # A missed warm-up only costs the first visitor some seconds; it
+          # must never mark the deploy as failed.
+          exit 0
