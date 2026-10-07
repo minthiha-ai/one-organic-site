@@ -71,17 +71,29 @@ This requires **Node ^20.19 or >=22.12** (a Vite/rolldown dependency needs this 
 npm run build
 ```
 
-Output goes to `dist/`. Preview the production build locally with:
+Output goes to `dist/`. The build is three steps (see the `build` script):
 
-```bash
-npm run preview
-```
+1. `vite build` — the client bundle. It also fetches the live catalog from the API into `src/data/homepageProducts.json` (the snapshot the homepage, `/shop` and the product pages render from before the API answers).
+2. `vite build --ssr src/entry-server.jsx --outDir dist-ssr` — the same app as a server bundle.
+3. `node scripts/prerender.mjs` — renders each indexable page to static HTML (homepage, `/shop`, `/contact`, the three legal pages, every product and every variant) with its own title, description, canonical and JSON-LD, so crawlers and link-preview bots that don't run JavaScript see real content. The browser then hydrates that HTML and runs as a normal single-page app.
+
+Preview the production build locally with `npm run preview`. Note that it serves `index.html` (the prerendered homepage) for every route, unlike Vercel — to test the real routing, deploy a branch and use the preview URL.
 
 ## Deployment
 
-This is a client-side-routed React app, so the host needs to fall back to `index.html` for any path (otherwise direct links or refreshes on routes like `/shop` will 404). Both are already included:
+Hosted on Vercel, which builds with `npm run build` (set explicitly in `vercel.json`). `vercel.json` also holds:
 
-- **Vercel**: `vercel.json` (rewrite-all-to-index.html)
-- **Netlify**: `public/_redirects` (`/* /index.html 200`)
+- **Rewrites to the prerendered files.** The homepage is `dist/index.html`; every other prerendered page lives under `dist/prerendered/` and is reached through an explicit rewrite (product URLs also match on `?variant=N`). Anything without a rewrite — private pages like `/cart`, a typo'd URL, a product added since the last sync — is served `dist/app-shell.html`, the empty client-only shell, which renders in the browser exactly as before.
+- **`/catalog-api/*` and `/catalog-storage/*`**, proxied to the API host and cached at Vercel's edge (see `api/warm.js` and `.github/workflows/warm-cache.yml` for the warm-up that runs after each deploy).
 
-Deploy with whichever host you prefer — no extra config needed beyond connecting the repo.
+**When a product or variant is added or removed in the admin**, run
+
+```bash
+npm run sync:rewrites
+```
+
+and commit `vercel.json`. Until you do, the new page still works but is client-rendered, and `npm run build` prints a warning naming what is out of sync. A page whose rewrite is stale never 404s — the build writes the client-only shell to it.
+
+Prices and stock in the prerendered HTML are as of the last deploy; the browser replaces them with live values from the API right after load. A change made in the admin therefore reaches crawlers on the next deploy.
+
+The Netlify `public/_redirects` file predates this setup and does **not** work with it (it sends every path to `index.html`, the prerendered homepage). Don't deploy to Netlify without replacing it.
