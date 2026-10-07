@@ -24,6 +24,8 @@ export function assetUrl(url) {
 const TOKEN_KEY = 'one_organic_token';
 
 export function getToken() {
+  // No localStorage while prerendering on the server.
+  if (typeof localStorage === 'undefined') return null;
   return localStorage.getItem(TOKEN_KEY);
 }
 

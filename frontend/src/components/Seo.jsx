@@ -1,17 +1,15 @@
-import { useEffect } from 'react';
-import { SITE_NAME, SITE_URL } from '../lib/site.js';
+import { useContext, useEffect } from 'react';
+import { DEFAULT_OG_IMAGE, HOME_DESCRIPTION, HOME_TITLE, SITE_NAME, SITE_URL } from '../lib/site.js';
+import { SeoCollectorContext } from '../lib/prerender.js';
 
-// index.html's static tags, captured once at module load. Restored whenever
-// a <Seo> unmounts, so a route without its own <Seo> never inherits the
-// previous page's title/canonical/noindex.
-const defaults =
-  typeof document === 'undefined'
-    ? {}
-    : {
-        title: document.title,
-        description: document.head.querySelector('meta[name="description"]')?.getAttribute('content'),
-        ogImage: document.head.querySelector('meta[property="og:image"]')?.getAttribute('content'),
-      };
+// What a route with no <Seo> of its own should show — the same values as
+// index.html's static tags. Constants rather than read back from the DOM: a
+// prerendered page's tags are that page's own, not the site's defaults.
+const defaults = {
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
+  ogImage: DEFAULT_OG_IMAGE,
+};
 
 function setMeta(attr, key, content) {
   let el = document.head.querySelector(`meta[${attr}="${key}"]`);
@@ -48,6 +46,13 @@ function setCanonical(href) {
 export default function Seo({ title, description, path, image, type = 'website', noindex = false, jsonLd }) {
   const jsonLdString = jsonLd ? JSON.stringify(jsonLd) : null;
 
+  // While prerendering on the server effects don't run, so hand the page's
+  // head data to the prerender script, which writes it into the static HTML.
+  const collector = useContext(SeoCollectorContext);
+  if (collector) {
+    collector.current = { title, description: description ?? defaults.description, path, image: image ?? defaults.ogImage, type, noindex, jsonLd };
+  }
+
   useEffect(() => {
     const desc = description ?? defaults.description;
     const url = path ? `${SITE_URL}${path}` : null;
@@ -64,6 +69,10 @@ export default function Seo({ title, description, path, image, type = 'website',
       setMeta('property', 'og:url', url);
     }
     if (noindex) setMeta('name', 'robots', 'noindex, nofollow');
+
+    // A prerendered page already carries its JSON-LD (marked data-seo); take
+    // it over instead of adding a second copy.
+    document.head.querySelectorAll('script[data-seo="true"]').forEach((el) => el.remove());
 
     let script = null;
     if (jsonLdString) {

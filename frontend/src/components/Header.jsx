@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { logoLight } from '../assets/brand/index.js';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -10,7 +11,12 @@ const navLinkStyle = {
 export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switchLabel }) {
   const location = useLocation();
   const isLanding = location.pathname === homeTo;
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated: storedLogin } = useAuth();
+  // The prerendered HTML is always the logged-out header; reading the stored
+  // session on the very first render would not match it. Switch right after.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isAuthenticated = mounted && storedLogin;
 
   return (
     <div style={{ boxShadow: '0 2px 12px rgba(38,32,20,0.06)' }}>

@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
+# Internal copies the build writes for the host's rewrites (the prerendered
+# pages' source files and the client-only shell). Every real page is also
+# reachable at its own URL, so these would only be duplicates.
+Disallow: /prerendered/
+Disallow: /app-shell.html
 
 # The private pages (login, account, cart, checkout, order pages) are kept
 # out of the index with a <meta name="robots" content="noindex"> tag instead

@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { api, assetUrl } from '../lib/api.js';
 import CatalogCard from '../components/CatalogCard.jsx';
 import CatalogCardSkeleton from '../components/CatalogCardSkeleton.jsx';
+import { snapshotCategories, snapshotProducts } from '../lib/catalogSnapshot.js';
 import Seo from '../components/Seo.jsx';
 
 // Bands match the real THB pricing (฿150–650 across the catalog) resolved
@@ -39,44 +40,58 @@ function TextTab({ label, active, onClick }) {
   );
 }
 
+// Flatten product -> variants into one catalog row per sellable SKU,
+// matching the shop grid's existing per-size-card density.
+function toRows(products) {
+  return products.flatMap((product) =>
+    product.variants.map((variant) => ({
+      key: `${product.slug}-${variant.id}`,
+      name:
+        product.category.slug === 'bath-body'
+          ? variant.option_label
+          : `${product.name} — ${variant.option_label}`,
+      // Cards render at ~250px, so they get the small copy; falls back
+      // to the full image for an API that predates thumb_url.
+      image: assetUrl(variant.thumb_url ?? variant.image_url),
+      alt: `${product.name} — ${variant.option_label}`,
+      price: variant.price,
+      categoryName: product.category.name,
+      categorySlug: product.category.slug,
+      to: `/product/${product.slug}?variant=${variant.id}`,
+    }))
+  );
+}
+
 export default function Shop() {
   const [searchParams] = useSearchParams();
   const initialCategory = searchParams.get('category');
 
-  const [categories, setCategories] = useState([]);
-  const [rows, setRows] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Starts from the build-time catalog, so the prerendered HTML and the first
+  // client render are identical and real content shows immediately; the API
+  // fetch below then replaces it with live data (prices/stock edited since
+  // the last deploy).
+  const [categories, setCategories] = useState(snapshotCategories);
+  const [rows, setRows] = useState(() => toRows(snapshotProducts));
+  const [loading, setLoading] = useState(snapshotProducts.length === 0);
   const [error, setError] = useState(null);
 
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState(initialCategory ?? 'All');
+  // Always 'All' on the first render (a static file can't see ?category=);
+  // the effect below applies the URL's category right after hydration.
+  const [category, setCategory] = useState('All');
   const [priceBucket, setPriceBucket] = useState('all');
+
+  useEffect(() => {
+    if (initialCategory) setCategory(initialCategory);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     Promise.all([api.getCatalog('/categories'), api.getCatalog('/products')])
       .then(([categoriesRes, productsRes]) => {
         setCategories(categoriesRes.data);
-
-        // Flatten product -> variants into one catalog row per sellable SKU,
-        // matching the shop grid's existing per-size-card density.
-        const flattened = productsRes.data.flatMap((product) =>
-          product.variants.map((variant) => ({
-            key: `${product.slug}-${variant.id}`,
-            name:
-              product.category.slug === 'bath-body'
-                ? variant.option_label
-                : `${product.name} — ${variant.option_label}`,
-            // Cards render at ~250px, so they get the small copy; falls back
-            // to the full image for an API that predates thumb_url.
-            image: assetUrl(variant.thumb_url ?? variant.image_url),
-            alt: `${product.name} — ${variant.option_label}`,
-            price: variant.price,
-            categoryName: product.category.name,
-            categorySlug: product.category.slug,
-            to: `/product/${product.slug}?variant=${variant.id}`,
-          }))
-        );
-        setRows(flattened);
+        setRows(toRows(productsRes.data));
+        setError(null);
       })
       .catch((err) => {
         console.error('Failed to load shop catalog:', err);
@@ -180,7 +195,7 @@ export default function Shop() {
         </div>
       )}
 
-      {error && (
+      {error && rows.length === 0 && (
         <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '48px var(--gutter)', textAlign: 'center' }}>
           <p style={{ fontSize: 14, color: 'var(--color-secondary-text)', margin: 0 }}>
             Couldn&rsquo;t load the shop right now ({error}).
@@ -188,7 +203,7 @@ export default function Shop() {
         </div>
       )}
 
-      {!loading && !error && grouped.length === 0 && (
+      {!loading && !(error && rows.length === 0) && grouped.length === 0 && (
         <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '48px var(--gutter)', textAlign: 'center' }}>
           <p style={{ fontSize: 14, color: 'var(--color-secondary-text)', margin: 0 }}>No products match your search.</p>
         </div>

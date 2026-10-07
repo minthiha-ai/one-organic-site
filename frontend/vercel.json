@@ -1,4 +1,5 @@
 {
+  "buildCommand": "npm run build",
   "redirects": [
     {
       "source": "/:path(.*)",
@@ -30,8 +31,128 @@
       "destination": "https://api.one-organic.com/storage/:path*"
     },
     {
+      "source": "/product/virgin-coconut-oil",
+      "has": [
+        {
+          "type": "query",
+          "key": "variant",
+          "value": "^1$"
+        }
+      ],
+      "destination": "/prerendered/product/virgin-coconut-oil/1.html"
+    },
+    {
+      "source": "/product/virgin-coconut-oil",
+      "has": [
+        {
+          "type": "query",
+          "key": "variant",
+          "value": "^2$"
+        }
+      ],
+      "destination": "/prerendered/product/virgin-coconut-oil/2.html"
+    },
+    {
+      "source": "/product/virgin-coconut-oil",
+      "has": [
+        {
+          "type": "query",
+          "key": "variant",
+          "value": "^3$"
+        }
+      ],
+      "destination": "/prerendered/product/virgin-coconut-oil/3.html"
+    },
+    {
+      "source": "/product/virgin-coconut-oil",
+      "destination": "/prerendered/product/virgin-coconut-oil.html"
+    },
+    {
+      "source": "/product/coconut-syrup",
+      "has": [
+        {
+          "type": "query",
+          "key": "variant",
+          "value": "^4$"
+        }
+      ],
+      "destination": "/prerendered/product/coconut-syrup/4.html"
+    },
+    {
+      "source": "/product/coconut-syrup",
+      "destination": "/prerendered/product/coconut-syrup.html"
+    },
+    {
+      "source": "/product/coconut-oil-soap",
+      "has": [
+        {
+          "type": "query",
+          "key": "variant",
+          "value": "^5$"
+        }
+      ],
+      "destination": "/prerendered/product/coconut-oil-soap/5.html"
+    },
+    {
+      "source": "/product/coconut-oil-soap",
+      "has": [
+        {
+          "type": "query",
+          "key": "variant",
+          "value": "^6$"
+        }
+      ],
+      "destination": "/prerendered/product/coconut-oil-soap/6.html"
+    },
+    {
+      "source": "/product/coconut-oil-soap",
+      "has": [
+        {
+          "type": "query",
+          "key": "variant",
+          "value": "^7$"
+        }
+      ],
+      "destination": "/prerendered/product/coconut-oil-soap/7.html"
+    },
+    {
+      "source": "/product/coconut-oil-soap",
+      "has": [
+        {
+          "type": "query",
+          "key": "variant",
+          "value": "^8$"
+        }
+      ],
+      "destination": "/prerendered/product/coconut-oil-soap/8.html"
+    },
+    {
+      "source": "/product/coconut-oil-soap",
+      "destination": "/prerendered/product/coconut-oil-soap.html"
+    },
+    {
+      "source": "/shop",
+      "destination": "/prerendered/shop.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/prerendered/contact.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/prerendered/privacy-policy.html"
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "/prerendered/terms-of-service.html"
+    },
+    {
+      "source": "/refund-policy",
+      "destination": "/prerendered/refund-policy.html"
+    },
+    {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/app-shell.html"
     }
   ],
   "regions": [

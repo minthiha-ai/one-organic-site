@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams, useSearchParams, Navigate } from 'react-router-dom';
 import CertStrip from '../components/CertStrip.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
@@ -11,31 +11,65 @@ import Button from '../components/Button.jsx';
 import Seo from '../components/Seo.jsx';
 import { api, ApiError, assetUrl } from '../lib/api.js';
 import { productPath, SITE_URL } from '../lib/site.js';
+import { snapshotProduct } from '../lib/catalogSnapshot.js';
+import { hydrationVariantFor, PrerenderContext } from '../lib/prerender.js';
 import { productDescription, productJsonLd } from '../lib/structuredData.js';
+
+// The variant a product page opens on: the one the URL asks for, else the
+// product's default.
+function pickVariant(product, requestedId) {
+  return (
+    product.variants.find((v) => v.id === requestedId) ??
+    product.default_variant ??
+    product.variants[0] ??
+    null
+  );
+}
 
 export default function ProductDetail() {
   const { slug } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // First render = what the prerender produced for this route: the build-time
+  // snapshot of the product, on the variant the static HTML shows (on the
+  // server that comes from the prerender context, in the browser from the
+  // #root hint). It must not read ?variant= here — a static file can't see
+  // it — so that is applied in the effect below, straight after hydration.
+  const prerender = useContext(PrerenderContext);
+  const firstVariantId = (prerender?.slug === slug ? prerender.variantId : null) ?? hydrationVariantFor(slug);
+
+  const [product, setProduct] = useState(() => snapshotProduct(slug));
+  const [loading, setLoading] = useState(() => !snapshotProduct(slug));
   const [notFound, setNotFound] = useState(false);
-  const [selectedVariantId, setSelectedVariantId] = useState(null);
+  const [selectedVariantId, setSelectedVariantId] = useState(() => {
+    const snap = snapshotProduct(slug);
+    return snap ? (pickVariant(snap, firstVariantId)?.id ?? null) : null;
+  });
 
   useEffect(() => {
-    setLoading(true);
     setNotFound(false);
+    const requested = Number(searchParams.get('variant'));
+
+    // Show the snapshot copy right away (also when navigating from another
+    // product), then replace it with the live product below.
+    const snap = snapshotProduct(slug);
+    if (snap) {
+      setProduct(snap);
+      setSelectedVariantId(pickVariant(snap, requested)?.id ?? null);
+      setLoading(false);
+    } else {
+      setSelectedVariantId(null);
+      setLoading(true);
+    }
 
     api
       .getCatalog(`/products/${slug}`)
       .then((res) => {
         setProduct(res.data);
-        const requested = Number(searchParams.get('variant'));
-        const initial =
-          res.data.variants.find((v) => v.id === requested) ??
-          res.data.default_variant ??
-          res.data.variants[0];
-        setSelectedVariantId(initial?.id ?? null);
+        // Keep a variant the visitor already picked while this loaded.
+        setSelectedVariantId((current) =>
+          res.data.variants.some((v) => v.id === current) ? current : (pickVariant(res.data, requested)?.id ?? null)
+        );
       })
       .catch((err) => {
         console.error('Failed to load product:', err);

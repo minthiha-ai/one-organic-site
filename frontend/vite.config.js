@@ -11,9 +11,17 @@ import { buildLlmsTxt, buildSitemapXml } from './scripts/generate-seo-files.mjs'
 // stale and a bad fetch aborts the build instead of shipping an empty or
 // outdated catalog silently. See scripts/fetch-products.mjs.
 function homepageProductsSnapshotPlugin() {
+  let isSsrBuild = false;
   return {
     name: 'homepage-products-snapshot',
+    configResolved(config) {
+      isSsrBuild = Boolean(config.build.ssr);
+    },
     async buildStart() {
+      // The SSR build (src/entry-server.jsx, see `npm run build`) runs right
+      // after the client build and reads the snapshot that build just wrote;
+      // fetching it again would let the two bundles see different catalogs.
+      if (isSsrBuild) return;
       try {
         const { url, count, outPath } = await fetchHomepageProducts();
         console.log(`[homepage-products-snapshot] ${count} product(s) from ${url} -> ${outPath}`);
@@ -29,10 +37,15 @@ function homepageProductsSnapshotPlugin() {
 // generateBundle fires, and already aborted the build if the fetch failed).
 // Build-only: neither file is served by the dev server.
 function seoFilesPlugin() {
+  let isSsrBuild = false;
   return {
     name: 'seo-files',
     apply: 'build',
+    configResolved(config) {
+      isSsrBuild = Boolean(config.build.ssr);
+    },
     generateBundle() {
+      if (isSsrBuild) return;
       const snapshotPath = fileURLToPath(new URL('./src/data/homepageProducts.json', import.meta.url));
       const products = JSON.parse(readFileSync(snapshotPath, 'utf8'));
       this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: buildSitemapXml(products) });
