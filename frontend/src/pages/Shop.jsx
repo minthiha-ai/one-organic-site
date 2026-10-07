@@ -49,26 +49,29 @@ function volumeMl(label) {
 // Each product photo is a cutout that fills its own frame, so fitting every
 // photo into the same box makes a 125 ml and a 900 ml jar look alike (the
 // squat 125 ml even ends up the widest). For a product whose options are all
-// sized in ml, give each option a relative scale — jars of similar shape grow
-// with the cube root of their volume, so 125 / 450 / 900 ml come out at about
-// 52 / 79 / 100%. That agrees with the homepage's group photo of the three
-// jars (48 / 75 / 100%) and the shipping box heights (50 / 80 / 100%).
-// Anything else — a single size, grams, named options — returns null and is
-// drawn exactly as before.
-function imageScales(product) {
-  if (product.variants.length < 2) return null;
-  const volumes = product.variants.map((variant) => volumeMl(variant.option_label));
-  if (volumes.some((volume) => volume === null)) return null;
-  const largest = Math.max(...volumes);
-  return volumes.map((volume) => Math.cbrt(volume / largest));
+// sized in ml, this puts the options in order from smallest to biggest and
+// gives each a relative scale — jars of similar shape grow with the cube root
+// of their volume, so 125 / 450 / 900 ml come out at about 52 / 79 / 100%.
+// That agrees with the homepage's group photo of the three jars
+// (48 / 75 / 100%) and the shipping box heights (50 / 80 / 100%).
+// Anything else — a single size, grams, named options — keeps the order it
+// came in with and a null scale, and is drawn exactly as before.
+function sizedVariants(product) {
+  const entries = product.variants.map((variant) => ({ variant, volume: volumeMl(variant.option_label) }));
+  if (entries.length < 2 || entries.some((entry) => entry.volume === null)) {
+    return entries.map(({ variant }) => ({ variant, scale: null }));
+  }
+  const largest = Math.max(...entries.map((entry) => entry.volume));
+  return entries
+    .sort((x, y) => x.volume - y.volume)
+    .map(({ variant, volume }) => ({ variant, scale: Math.cbrt(volume / largest) }));
 }
 
 // Flatten product -> variants into one catalog row per sellable SKU,
 // matching the shop grid's existing per-size-card density.
 function toRows(products) {
   return products.flatMap((product) => {
-    const scales = imageScales(product);
-    return product.variants.map((variant, index) => ({
+    return sizedVariants(product).map(({ variant, scale }) => ({
       key: `${product.slug}-${variant.id}`,
       name:
         product.category.slug === 'bath-body'
@@ -82,7 +85,7 @@ function toRows(products) {
       categoryName: product.category.name,
       categorySlug: product.category.slug,
       to: `/product/${product.slug}?variant=${variant.id}`,
-      imageScale: scales ? scales[index] : null,
+      imageScale: scale,
     }));
   });
 }
