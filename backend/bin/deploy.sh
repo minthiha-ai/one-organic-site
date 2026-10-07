@@ -34,5 +34,8 @@ PHP_BIN=/usr/local/bin/php
 "$PHP_BIN" /opt/cpanel/composer/bin/composer install --no-dev --optimize-autoloader --no-interaction
 "$PHP_BIN" artisan migrate --force
 "$PHP_BIN" artisan filament:clear-cached-components
-"$PHP_BIN" artisan optimize:clear
+# Rebuild (not just clear) the config/route/event/view caches so requests
+# don't re-parse them on a slow shared host. Consequence: a later edit to
+# .env has no effect until `php artisan optimize` is re-run.
+"$PHP_BIN" artisan optimize
 echo "$(date -u +%FT%TZ): deploy complete"

@@ -33,7 +33,11 @@ return [
 
     'exposed_headers' => [],
 
-    'max_age' => 0,
+    // Browsers may reuse a preflight answer this long (Chrome caps it at 2h).
+    // At 0 every cross-origin call with a non-simple header (e.g. the
+    // Authorization header on logged-in requests) paid for a second round
+    // trip to this server first.
+    'max_age' => 7200,
 
     'supports_credentials' => false,
 

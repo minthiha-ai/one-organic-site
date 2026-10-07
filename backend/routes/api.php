@@ -11,12 +11,15 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ShippingRateController;
 use App\Http\Controllers\Api\Webhooks\ShippopWebhookController;
 use App\Http\Controllers\Api\Webhooks\XenditWebhookController;
+use App\Http\Middleware\PublicCatalogCache;
 use Illuminate\Support\Facades\Route;
 
-// Public catalog
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{product:slug}', [ProductController::class, 'show']);
+// Public catalog — cacheable by the storefront's CDN, see PublicCatalogCache.
+Route::middleware(PublicCatalogCache::class)->group(function () {
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products/{product:slug}', [ProductController::class, 'show']);
+});
 
 // Lets the checkout page show the real shipping fee before placing the
 // order — same rate CheckoutController itself charges.

@@ -23,3 +23,12 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# Uploaded product images. Media-library paths contain the media id, so a
+# replaced image gets a new URL — safe to let browsers and the storefront's
+# CDN keep these for 30 days instead of re-fetching from this slow host.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(webp|jpe?g|png|gif|svg)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+</IfModule>
