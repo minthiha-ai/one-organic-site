@@ -1,3 +1,5 @@
+import Icon from './Icon.jsx';
+
 export default function PaymentOption({ icon, label, value, checked = false, onChange }) {
   return (
     <label
@@ -20,7 +22,7 @@ export default function PaymentOption({ icon, label, value, checked = false, onC
         onChange={onChange}
         style={{ accentColor: 'var(--color-accent)' }}
       />
-      <i className={`ti ${icon}`} style={{ fontSize: 16, color: 'var(--color-accent)' }} aria-hidden="true" />
+      <Icon name={icon} style={{ fontSize: 16, color: 'var(--color-accent)' }} />
       <span style={{ fontSize: 13, color: 'var(--color-text)' }}>{label}</span>
     </label>
   );

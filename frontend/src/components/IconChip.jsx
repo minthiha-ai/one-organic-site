@@ -1,3 +1,5 @@
+import Icon from './Icon.jsx';
+
 export default function IconChip({ icon, children }) {
   return (
     <span
@@ -12,7 +14,7 @@ export default function IconChip({ icon, children }) {
         padding: '6px 12px',
       }}
     >
-      <i className={`ti ${icon}`} style={{ fontSize: 14, color: 'var(--color-accent)' }} aria-hidden="true" />
+      <Icon name={icon} style={{ fontSize: 14, color: 'var(--color-accent)' }} />
       {children}
     </span>
   );

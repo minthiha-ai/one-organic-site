@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { logoDark } from '../assets/brand/index.js';
 import { footerCareForEnvironment } from '../assets/images/index.js';
+import Icon from './Icon.jsx';
 
 const linkStyle = {
   display: 'block',
@@ -67,7 +68,7 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
             </p>
             <Link to={shopTo} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--color-accent)', textDecoration: 'none', fontSize: 13, fontWeight: 500 }}>
               Go to Shop
-              <i className="ti ti-arrow-right" style={{ fontSize: 14 }} aria-hidden="true" />
+              <Icon name="arrow-right" style={{ fontSize: 14 }} />
             </Link>
           </div>
 

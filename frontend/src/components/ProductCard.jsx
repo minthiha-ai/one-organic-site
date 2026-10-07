@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import PillTag from './PillTag.jsx';
+import Icon from './Icon.jsx';
 
 export default function ProductCard({ image, alt, name, tagline, price, tags, to, flex }) {
   return (
@@ -56,7 +57,7 @@ export default function ProductCard({ image, alt, name, tagline, price, tags, to
           ))}
         </div>
         <span style={{ fontSize: 12, color: 'var(--color-label)' }}>
-          Shop <i className="ti ti-arrow-right" style={{ fontSize: 12, verticalAlign: -1 }} aria-hidden="true" />
+          Shop <Icon name="arrow-right" style={{ fontSize: 12, verticalAlign: -1 }} />
         </span>
       </div>
     </Link>

@@ -10,6 +10,7 @@
     "dev": "vite",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "sync:rewrites": "node scripts/sync-vercel-rewrites.mjs",
+    "icons": "node scripts/add-icons.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

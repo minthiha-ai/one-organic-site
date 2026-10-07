@@ -5,6 +5,7 @@ import Button from '../components/Button.jsx';
 import EyebrowLabel from '../components/EyebrowLabel.jsx';
 import Seo from '../components/Seo.jsx';
 import { api, ApiError } from '../lib/api.js';
+import Icon from '../components/Icon.jsx';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -72,11 +73,11 @@ export default function Contact() {
         <div style={{ padding: '28px var(--gutter) 32px', marginTop: 16, borderTop: '0.5px solid var(--color-border)' }}>
           <EyebrowLabel style={{ margin: '20px 0 12px' }}>Get in touch</EyebrowLabel>
           <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '0 0 8px' }}>
-            <i className="ti ti-mail" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} aria-hidden="true" />
+            <Icon name="mail" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} />
             hello@one-organic.com
           </p>
           <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: 0, lineHeight: 1.6 }}>
-            <i className="ti ti-map-pin" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} aria-hidden="true" />
+            <Icon name="map-pin" style={{ color: 'var(--color-accent)', marginRight: 6, verticalAlign: -2 }} />
             5/3 LaSalle Park Building B, G Floor
             <br />
             LaSalle 10 Soi, Sukhumvit 105 Road

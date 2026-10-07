@@ -1,3 +1,5 @@
+import Icon from './Icon.jsx';
+
 export default function TrustBadge({ icon, children }) {
   return (
     <span
@@ -14,7 +16,7 @@ export default function TrustBadge({ icon, children }) {
         boxShadow: '0 3px 10px rgba(38,32,20,0.18)',
       }}
     >
-      <i className={`ti ${icon}`} style={{ fontSize: 13, color: 'var(--color-accent)' }} aria-hidden="true" />
+      <Icon name={icon} style={{ fontSize: 13, color: 'var(--color-accent)' }} />
       {children}
     </span>
   );

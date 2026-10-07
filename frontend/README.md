@@ -79,6 +79,14 @@ Output goes to `dist/`. The build is three steps (see the `build` script):
 
 Preview the production build locally with `npm run preview`. Note that it serves `index.html` (the prerendered homepage) for every route, unlike Vercel — to test the real routing, deploy a branch and use the preview URL.
 
+## Fonts and icons
+
+Neither is loaded from a third-party stylesheet — those blocked first paint (Lighthouse estimated ~4 s of delay on mobile).
+
+- **Fonts** are self-hosted: `src/assets/fonts.css` + `src/assets/fonts/*.woff2` (latin subset of Fredoka, Caveat, Inter, Archivo, Anton and Courier Prime, all SIL OFL), with `font-display: swap`. Add a weight or family there; text outside the latin range falls back to the next font in the stack.
+- **Icons** are inline SVG via `<Icon name="flame" />` (`src/components/Icon.jsx`), drawn from `src/assets/icons.json`. To use a new Tabler icon, run `npm run icons -- <name>` (the name without `ti-`) and commit the updated JSON.
+- Product "Ways to use" icons are typed into the admin as free text, so a name that isn't in `icons.json` still works: `<Icon>` renders it with the Tabler icon font, whose stylesheet is then fetched on demand (and only then). Prefer adding the icon to `icons.json` so it paints with the page.
+
 ## Deployment
 
 Hosted on Vercel, which builds with `npm run build` (set explicitly in `vercel.json`). `vercel.json` also holds:

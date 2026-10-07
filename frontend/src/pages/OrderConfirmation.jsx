@@ -8,6 +8,7 @@ import Button from '../components/Button.jsx';
 import PaymentOption from '../components/PaymentOption.jsx';
 import { api, ApiError } from '../lib/api.js';
 import { loadOrderEmail, storeOrderEmail } from '../lib/orderSession.js';
+import Icon from '../components/Icon.jsx';
 
 const POLL_INTERVAL_MS = 4000;
 
@@ -231,7 +232,7 @@ export default function OrderConfirmation() {
 
       {isPaid ? (
         <div style={{ textAlign: 'center', padding: '32px 0' }}>
-          <i className="ti ti-circle-check" style={{ fontSize: 40, color: 'var(--color-accent)' }} aria-hidden="true" />
+          <Icon name="circle-check" style={{ fontSize: 40, color: 'var(--color-accent)' }} />
           <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 22, fontWeight: 600, margin: '16px 0 8px' }}>Payment received</h1>
           <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '0 0 28px' }}>
             Total: ฿{order.total.toFixed(2)}. A confirmation has been sent to {order.guest_email}.
@@ -240,7 +241,7 @@ export default function OrderConfirmation() {
         </div>
       ) : isCod ? (
         <div style={{ textAlign: 'center', padding: '32px 0' }}>
-          <i className="ti ti-truck-delivery" style={{ fontSize: 40, color: 'var(--color-accent)' }} aria-hidden="true" />
+          <Icon name="truck-delivery" style={{ fontSize: 40, color: 'var(--color-accent)' }} />
           <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 22, fontWeight: 600, margin: '16px 0 8px' }}>Order placed</h1>
           <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '0 0 28px' }}>
             Total: ฿{order.total.toFixed(2)}, payable in cash when your order is delivered. A confirmation has been sent to{' '}

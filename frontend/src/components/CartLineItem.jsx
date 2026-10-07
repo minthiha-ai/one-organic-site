@@ -1,3 +1,5 @@
+import Icon from './Icon.jsx';
+
 export default function CartLineItem({ image, alt, name, variant, qty, price, onIncrement, onDecrement, onRemove }) {
   return (
     <div
@@ -43,7 +45,7 @@ export default function CartLineItem({ image, alt, name, variant, qty, price, on
           aria-label="Decrease quantity"
           style={{ background: 'none', border: 'none', padding: 2, cursor: 'pointer', display: 'flex' }}
         >
-          <i className="ti ti-minus" style={{ fontSize: 12, color: 'var(--color-secondary-text)' }} aria-hidden="true" />
+          <Icon name="minus" style={{ fontSize: 12, color: 'var(--color-secondary-text)' }} />
         </button>
         <span style={{ fontSize: 12, minWidth: 10, textAlign: 'center' }}>{qty}</span>
         <button
@@ -52,7 +54,7 @@ export default function CartLineItem({ image, alt, name, variant, qty, price, on
           aria-label="Increase quantity"
           style={{ background: 'none', border: 'none', padding: 2, cursor: 'pointer', display: 'flex' }}
         >
-          <i className="ti ti-plus" style={{ fontSize: 12, color: 'var(--color-secondary-text)' }} aria-hidden="true" />
+          <Icon name="plus" style={{ fontSize: 12, color: 'var(--color-secondary-text)' }} />
         </button>
       </div>
       <p style={{ fontSize: 13, fontWeight: 500, width: 60, textAlign: 'right', margin: 0 }}>฿{price}</p>
@@ -62,7 +64,7 @@ export default function CartLineItem({ image, alt, name, variant, qty, price, on
         aria-label="Remove item"
         style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer', display: 'flex' }}
       >
-        <i className="ti ti-trash" style={{ fontSize: 14, color: 'var(--color-muted)' }} aria-hidden="true" />
+        <Icon name="trash" style={{ fontSize: 14, color: 'var(--color-muted)' }} />
       </button>
     </div>
   );

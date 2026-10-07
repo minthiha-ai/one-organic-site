@@ -31,14 +31,12 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Caveat:wght@600&family=Inter:wght@400;500&family=Archivo:wght@500;600;700&family=Anton&family=Courier+Prime:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
-    />
+    <!--
+      No third-party stylesheets here on purpose: they blocked first paint
+      until they downloaded (Lighthouse estimated ~4s on mobile). Fonts are
+      self-hosted (src/assets/fonts.css, imported by src/main.jsx) and icons
+      are inline SVG (src/components/Icon.jsx).
+    -->
   </head>
   <body>
     <div id="root"></div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { logoLight } from '../assets/brand/index.js';
 import { useAuth } from '../context/AuthContext.jsx';
+import Icon from './Icon.jsx';
 
 const navLinkStyle = {
   color: 'var(--color-text)',
@@ -44,7 +45,7 @@ export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switc
                 <Link to="/contact" style={navLinkStyle}>Contact</Link>
                 {isAuthenticated ? (
                   <Link to="/account" style={{ textDecoration: 'none', lineHeight: 0, display: 'inline-flex' }}>
-                    <i className="ti ti-user-circle" style={{ fontSize: 18, color: 'var(--color-text)' }} aria-hidden="true" />
+                    <Icon name="user-circle" style={{ fontSize: 18, color: 'var(--color-text)' }} />
                   </Link>
                 ) : (
                   <Link to="/login" style={navLinkStyle}>Login</Link>

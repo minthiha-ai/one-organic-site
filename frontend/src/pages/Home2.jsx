@@ -14,6 +14,7 @@ import {
   soapCharcoalV2,
 } from '../assets/images/index.js';
 import { usdaSeal, euSeal } from '../assets/brand/index.js';
+import Icon from '../components/Icon.jsx';
 
 const soapImageByLabel = {
   'Just Coconut Oil': soapJustCoconutV2,
@@ -116,7 +117,7 @@ function SoapSection({ soap }) {
         <div className="v2-tag-row" style={{ justifyContent: 'center' }}>
           {soap.default_variant.usage_items.map(({ icon, label }) => (
             <span key={label} className="v2-tag">
-              <i className={`ti ${icon}`} aria-hidden="true" />
+              <Icon name={icon} />
               {label}
             </span>
           ))}
@@ -142,7 +143,7 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
               <div className="v2-tag-row" style={{ marginBottom: 'var(--sp-4)' }}>
                 {highlights.map((h) => (
                   <span key={h} className="v2-tag">
-                    <i className={`ti ti-${highlightIcon[h] ?? 'circle-check'}`} aria-hidden="true" />
+                    <Icon name={highlightIcon[h] ?? 'circle-check'} />
                     {h}
                   </span>
                 ))}
@@ -154,7 +155,7 @@ function ProductSection({ eyebrow, heading, intro, media, highlights, usage, sho
           <div className="v2-tag-row" style={{ marginBottom: 'var(--sp-5)' }}>
             {usage.map(({ icon, label }) => (
               <span key={label} className="v2-tag">
-                <i className={`ti ${icon}`} aria-hidden="true" />
+                <Icon name={icon} />
                 {label}
               </span>
             ))}
@@ -243,7 +244,7 @@ export default function Home2() {
           <span className="v2-meta">EU Organic certified</span>
         </span>
         <span className="v2-cert-item">
-          <i className="ti ti-recycle" style={{ fontSize: 46, color: 'var(--color-accent)' }} aria-hidden="true" />
+          <Icon name="recycle" style={{ fontSize: 46, color: 'var(--color-accent)' }} />
           <span className="v2-meta">Recycle or reuse</span>
         </span>
       </section>
