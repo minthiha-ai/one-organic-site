@@ -107,6 +107,14 @@ export default function ProductDetail() {
     setSearchParams({ variant: id }, { replace: true });
   }
 
+  // Registration numbers exactly as entered in the admin (copied from Shopee).
+  // Foods carry an FDA number, cosmetics (the soap) a notification number — a
+  // different scheme, so a different label. Nothing renders when neither is set.
+  const registrationRows = [
+    { label: 'FDA Reg. No. (อย.)', value: variant.fda_registration_number },
+    { label: 'Cosmetic Notification No. (เลขที่จดแจ้ง)', value: variant.cosmetic_declaration_number },
+  ].filter((row) => row.value);
+
   const shopeeUrl = variant.shopee_url || product.shopee_url || import.meta.env.VITE_SHOPEE_STORE_URL || null;
 
   // Always resolves to the variant actually shown, so /product/x and
@@ -278,6 +286,24 @@ export default function ProductDetail() {
                   </td>
                   <td style={{ padding: '8px 0', color: 'var(--color-text)' }}>{variant.ingredients}</td>
                 </tr>
+              </tbody>
+            </table>
+          </>
+        )}
+
+        {registrationRows.length > 0 && (
+          <>
+            <SectionHeading style={{ margin: '28px 0 8px' }}>Registration</SectionHeading>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+              <tbody>
+                {registrationRows.map(({ label, value }, i) => (
+                  <tr key={label} style={i > 0 ? { borderTop: '0.5px solid var(--color-border)' } : undefined}>
+                    <td style={{ padding: '8px 0', color: 'var(--color-label)', fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase', width: '40%', verticalAlign: 'top' }}>
+                      {label}
+                    </td>
+                    <td style={{ padding: '8px 0', color: 'var(--color-text)' }}>{value}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </>
