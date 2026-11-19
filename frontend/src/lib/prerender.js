@@ -24,8 +24,25 @@ export function beginHydration(rootEl) {
   hydrating = true;
 }
 
+// Called once the root pass has hydrated (src/components/HydrationDone.jsx).
+// That is NOT the end of hydration for a page whose content sits inside a
+// <Suspense> boundary (Layout wraps the routed page in one): React hydrates
+// dehydrated Suspense content in a later pass, after this has already run. So
+// when the prerender left a variant hint, keep it until the page that needs it
+// has consumed it (consumeHydrationHint below); clearing it here would make
+// that page's first render fall back to the default variant and mismatch the
+// server HTML (React error #418).
 export function endHydration() {
+  if (!hint?.slug) hydrating = false;
+}
+
+// Called by ProductDetail from an effect, i.e. after its first render has
+// committed against the server HTML. From then on the hint is stale: a later
+// in-app visit to the same product must use the URL, not the prerendered
+// variant.
+export function consumeHydrationHint() {
   hydrating = false;
+  hint = null;
 }
 
 // The variant the prerendered HTML for `slug` shows — only while hydrating, so
