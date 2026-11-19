@@ -6,6 +6,9 @@
   --color-card-bg: #FCFAF7;
   --color-text: #3e3e3f;
   --color-accent: #b2947c;
+  /* #b2947c is 2.72:1 on the page background, too faint for text. #87684f is 4.89:1 on --color-bg
+     and 4.52:1 on --color-tint (WCAG AA needs 4.5:1). */
+  --color-accent-text: #87684f;
   --color-accent-light: #d4b99e;
   --color-accent-wash: #EFE6D8;
   --color-tint: #F5F1EA;
@@ -138,7 +141,7 @@
 .v2-script {
   font-family: var(--font-script);
   font-size: 24px;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   margin: 0;
 }
 @media (min-width: 768px) {

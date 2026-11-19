@@ -60,7 +60,7 @@ export default function Contact() {
               <TextAreaField label="Message" name="message" placeholder="How can we help?" value={form.message} onChange={handleChange} required />
 
               {status === 'error' && (
-                <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>{errorMessage}</p>
+                <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: '0 0 12px' }}>{errorMessage}</p>
               )}
 
               <Button type="submit" disabled={status === 'sending'}>

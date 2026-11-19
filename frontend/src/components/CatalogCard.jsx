@@ -44,7 +44,7 @@ export default function CatalogCard({ image, alt, name, price, to, imageScale = 
         <span style={{ fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--color-text)' }}>
           {name}
         </span>
-        <span style={{ fontSize: 12, color: 'var(--color-accent)', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>
+        <span style={{ fontSize: 12, color: 'var(--color-accent-text)', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>
           ฿{price.toFixed(2)}
         </span>
       </div>

@@ -187,10 +187,10 @@ export default function ProductDetail() {
           )}
 
           {!variant.in_stock && (
-            <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>Out of stock</p>
+            <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: '0 0 12px' }}>Out of stock</p>
           )}
           {variant.in_stock && variant.stock_quantity <= 5 && (
-            <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>
+            <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: '0 0 12px' }}>
               Only {variant.stock_quantity} left
             </p>
           )}

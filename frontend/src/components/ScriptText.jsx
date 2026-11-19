@@ -1,4 +1,4 @@
-export default function ScriptText({ children, size = 20, color = 'var(--color-accent)', style }) {
+export default function ScriptText({ children, size = 20, color = 'var(--color-accent-text)', style }) {
   return (
     <p
       style={{

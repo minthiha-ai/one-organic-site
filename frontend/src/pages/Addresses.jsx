@@ -132,7 +132,7 @@ export default function Addresses() {
                       <p style={{ fontSize: 13, fontWeight: 500, margin: '0 0 4px' }}>
                         {address.label || address.recipient_name}
                         {address.is_default && (
-                          <span style={{ fontSize: 10, color: 'var(--color-accent)', border: '0.5px solid var(--color-accent)', borderRadius: 'var(--radius-pill)', padding: '2px 8px', marginLeft: 8 }}>
+                          <span style={{ fontSize: 10, color: 'var(--color-accent-text)', border: '0.5px solid var(--color-accent)', borderRadius: 'var(--radius-pill)', padding: '2px 8px', marginLeft: 8 }}>
                             Default
                           </span>
                         )}
@@ -144,7 +144,7 @@ export default function Addresses() {
                       </p>
                     </div>
                     <div style={{ display: 'flex', gap: 12, flexShrink: 0 }}>
-                      <button type="button" onClick={() => startEdit(address)} style={{ background: 'none', border: 'none', color: 'var(--color-accent)', fontSize: 12, cursor: 'pointer', padding: 0 }}>
+                      <button type="button" onClick={() => startEdit(address)} style={{ background: 'none', border: 'none', color: 'var(--color-accent-text)', fontSize: 12, cursor: 'pointer', padding: 0 }}>
                         Edit
                       </button>
                       <button type="button" onClick={() => handleDelete(address.id)} style={{ background: 'none', border: 'none', color: 'var(--color-secondary-text)', fontSize: 12, cursor: 'pointer', padding: 0 }}>
@@ -181,7 +181,7 @@ export default function Addresses() {
               </label>
 
               {errorMessage && (
-                <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>{errorMessage}</p>
+                <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: '0 0 12px' }}>{errorMessage}</p>
               )}
 
               <div style={{ display: 'flex', gap: 12 }}>

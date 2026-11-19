@@ -18,6 +18,9 @@
   --color-label: #6c5043;       /* buttons, "Shop ->" links, uppercase eyebrow/category labels */
   --color-muted: #796054;       /* footer text, secondary muted copy */
   --color-accent-light: #dba766; /* script accent text on the dark Brand story photo overlay */
+  /* Accent for TEXT on the light backgrounds: #9d5e10 is 4.99:1 on --color-bg and 4.61:1 on --color-tint
+     (WCAG AA needs 4.5:1). --color-accent itself is only 3.28:1, so keep it for borders and icons. */
+  --color-accent-text: #9d5e10;
 
   /* Card surface (slightly lighter than the tinted section background) */
   --color-card-bg: #FCFAF7;

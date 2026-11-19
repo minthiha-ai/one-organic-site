@@ -20,7 +20,7 @@ export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switc
   const isAuthenticated = mounted && storedLogin;
 
   return (
-    <div style={{ boxShadow: '0 2px 12px rgba(38,32,20,0.06)' }}>
+    <header style={{ boxShadow: '0 2px 12px rgba(38,32,20,0.06)' }}>
       <div
         style={{
           display: 'flex',
@@ -71,6 +71,6 @@ export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switc
           </div>
         )}
       </div>
-    </div>
+    </header>
   );
 }

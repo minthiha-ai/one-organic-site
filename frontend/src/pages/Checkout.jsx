@@ -254,7 +254,7 @@ export default function Checkout() {
       {errorMessage && (
         <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 var(--gutter) 8px' }}>
           <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto' }}>
-            <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: 0 }}>{errorMessage}</p>
+            <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: 0 }}>{errorMessage}</p>
           </div>
         </div>
       )}

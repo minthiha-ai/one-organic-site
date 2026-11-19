@@ -44,7 +44,7 @@ export default function Account() {
         </div>
 
         <div style={{ padding: '20px var(--gutter) 8px' }}>
-          <Link to="/account/addresses" style={{ fontSize: 13, color: 'var(--color-accent)' }}>Saved addresses →</Link>
+          <Link to="/account/addresses" style={{ fontSize: 13, color: 'var(--color-accent-text)' }}>Saved addresses →</Link>
         </div>
 
         <div style={{ padding: '20px var(--gutter) 48px' }}>

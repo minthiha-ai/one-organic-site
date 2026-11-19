@@ -39,7 +39,7 @@ export default function OrderDetail() {
     return (
       <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '64px var(--gutter)', textAlign: 'center' }}>
         <p style={{ fontSize: 14, color: 'var(--color-secondary-text)', margin: '0 0 16px' }}>Order not found.</p>
-        <Link to="/account" style={{ fontSize: 13, color: 'var(--color-accent)' }}>Back to your orders</Link>
+        <Link to="/account" style={{ fontSize: 13, color: 'var(--color-accent-text)' }}>Back to your orders</Link>
       </div>
     );
   }

@@ -25,7 +25,7 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
   const isHomepage = pathname === '/';
 
   return (
-    <div>
+    <footer>
       {isHomepage && (
         <img
           src={footerCareForEnvironment}
@@ -72,7 +72,7 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', margin: '0 0 12px' }}>
               hello@one-organic.com
             </p>
-            <Link to={shopTo} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--color-accent)', textDecoration: 'none', fontSize: 13, fontWeight: 500 }}>
+            <Link to={shopTo} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#d4b99e', textDecoration: 'none', fontSize: 13, fontWeight: 500 }}>
               Go to Shop
               <Icon name="arrow-right" style={{ fontSize: 14 }} />
             </Link>
@@ -92,6 +92,6 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           <span style={{ fontSize: 12, color: 'var(--color-dark-band-text-secondary)' }}>one-organic.com</span>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }

@@ -57,7 +57,7 @@ export default function Register() {
             <FormField label="Confirm password" type="password" name="password_confirmation" placeholder="••••••••" value={form.password_confirmation} onChange={updateField('password_confirmation')} required />
 
             {errorMessage && (
-              <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>{errorMessage}</p>
+              <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: '0 0 12px' }}>{errorMessage}</p>
             )}
 
             <Button type="submit" disabled={submitting}>
@@ -66,7 +66,7 @@ export default function Register() {
           </form>
 
           <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '20px 0 0' }}>
-            Already have an account? <Link to="/login" style={{ color: 'var(--color-accent)' }}>Log in</Link>
+            Already have an account? <Link to="/login" style={{ color: 'var(--color-accent-text)' }}>Log in</Link>
           </p>
         </div>
       </div>

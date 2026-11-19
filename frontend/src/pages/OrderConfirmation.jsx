@@ -214,7 +214,7 @@ export default function OrderConfirmation() {
         <p style={{ fontSize: 14, color: 'var(--color-secondary-text)', margin: '0 0 16px' }}>
           No order found with that number and email.
         </p>
-        <Link to="/shop" style={{ fontSize: 13, color: 'var(--color-accent)' }}>Back to shop</Link>
+        <Link to="/shop" style={{ fontSize: 13, color: 'var(--color-accent-text)' }}>Back to shop</Link>
       </div>
     );
   }
@@ -285,12 +285,12 @@ export default function OrderConfirmation() {
               ) : (
                 <>
                   {isExpiredQr && (
-                    <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>
+                    <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: '0 0 12px' }}>
                       That QR code expired. Generate a new one below.
                     </p>
                   )}
                   {payment?.method === 'promptpay' && lastAttemptFailed && (
-                    <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>
+                    <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: '0 0 12px' }}>
                       That attempt didn't go through. Please try again.
                     </p>
                   )}
@@ -314,12 +314,12 @@ export default function OrderConfirmation() {
               ) : (
                 <>
                   {isExpiredCard && (
-                    <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>
+                    <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: '0 0 12px' }}>
                       That session expired. Start again below.
                     </p>
                   )}
                   {payment?.method === 'card' && lastAttemptFailed && (
-                    <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>
+                    <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: '0 0 12px' }}>
                       That payment attempt didn't go through. Please try again.
                     </p>
                   )}
@@ -332,7 +332,7 @@ export default function OrderConfirmation() {
           )}
 
           {errorMessage && (
-            <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '12px 0 0' }}>{errorMessage}</p>
+            <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: '12px 0 0' }}>{errorMessage}</p>
           )}
         </>
       )}

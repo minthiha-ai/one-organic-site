@@ -54,7 +54,7 @@ export default function Login() {
             <FormField label="Password" type="password" name="password" placeholder="••••••••" value={form.password} onChange={updateField('password')} required />
 
             {errorMessage && (
-              <p style={{ fontSize: 12, color: 'var(--color-accent)', margin: '0 0 12px' }}>{errorMessage}</p>
+              <p style={{ fontSize: 12, color: 'var(--color-accent-text)', margin: '0 0 12px' }}>{errorMessage}</p>
             )}
 
             <Button type="submit" disabled={submitting}>
@@ -63,7 +63,7 @@ export default function Login() {
           </form>
 
           <p style={{ fontSize: 13, color: 'var(--color-secondary-text)', margin: '20px 0 0' }}>
-            New here? <Link to="/register" style={{ color: 'var(--color-accent)' }}>Create an account</Link>
+            New here? <Link to="/register" style={{ color: 'var(--color-accent-text)' }}>Create an account</Link>
           </p>
         </div>
       </div>

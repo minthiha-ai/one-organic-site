@@ -19,12 +19,12 @@ export default function Layout({ bgOverride, homeTo, shopTo, switchTo, switchLab
       }}
     >
       <Header homeTo={homeTo} shopTo={shopTo} switchTo={switchTo} switchLabel={switchLabel} />
-      <div style={{ flex: 1 }}>
+      <main style={{ flex: 1 }}>
         {/* Lazy pages (see App.jsx) suspend here, so the header and footer stay put. */}
         <Suspense fallback={null}>
           <Outlet />
         </Suspense>
-      </div>
+      </main>
       <Footer homeTo={homeTo} shopTo={shopTo} />
     </div>
   );

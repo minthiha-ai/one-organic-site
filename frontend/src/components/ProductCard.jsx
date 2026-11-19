@@ -40,7 +40,7 @@ export default function ProductCard({ image, alt, name, tagline, price, tags, to
             fontFamily: 'var(--font-heading)',
             fontStyle: 'italic',
             fontSize: 11,
-            color: 'var(--color-accent)',
+            color: 'var(--color-accent-text)',
             margin: '0 0 8px',
           }}
         >
