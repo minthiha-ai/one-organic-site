@@ -1,24 +1,32 @@
+import { lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
-import Home from './pages/Home.jsx';
 import Home2 from './pages/Home2.jsx';
 import Shop from './pages/Shop.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
-import Cart from './pages/Cart.jsx';
-import Checkout from './pages/Checkout.jsx';
-import OrderConfirmation from './pages/OrderConfirmation.jsx';
 import Contact from './pages/Contact.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import TermsOfService from './pages/TermsOfService.jsx';
 import RefundPolicy from './pages/RefundPolicy.jsx';
-import Login from './pages/Login.jsx';
-import Register from './pages/Register.jsx';
-import Account from './pages/Account.jsx';
-import OrderDetail from './pages/OrderDetail.jsx';
-import Addresses from './pages/Addresses.jsx';
 import RequireAuth, { GuestOnly } from './components/RequireAuth.jsx';
 import { NoIndex } from './components/Seo.jsx';
 import NotFound from './pages/NotFound.jsx';
+
+// Pages the build prerenders (home, shop, product, contact, policies, 404)
+// stay in the main bundle: renderToString can't wait for a lazy chunk. Every
+// other page is client-only (see CLIENT_ONLY_PATHS in
+// scripts/prerender-routes.mjs), so it loads on demand instead of weighing
+// down the static pages — OrderConfirmation alone pulls in the Xendit
+// components and the QR library. Layout supplies the <Suspense> boundary.
+const Home = lazy(() => import('./pages/Home.jsx'));
+const Cart = lazy(() => import('./pages/Cart.jsx'));
+const Checkout = lazy(() => import('./pages/Checkout.jsx'));
+const OrderConfirmation = lazy(() => import('./pages/OrderConfirmation.jsx'));
+const Login = lazy(() => import('./pages/Login.jsx'));
+const Register = lazy(() => import('./pages/Register.jsx'));
+const Account = lazy(() => import('./pages/Account.jsx'));
+const OrderDetail = lazy(() => import('./pages/OrderDetail.jsx'));
+const Addresses = lazy(() => import('./pages/Addresses.jsx'));
 
 // The route table on its own, so the prerender (src/entry-server.jsx) can
 // render it inside a StaticRouter while the browser uses BrowserRouter.

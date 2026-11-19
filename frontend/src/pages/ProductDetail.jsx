@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams, useSearchParams, Navigate } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import CertStrip from '../components/CertStrip.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import EyebrowLabel from '../components/EyebrowLabel.jsx';
@@ -9,6 +9,7 @@ import IconChip from '../components/IconChip.jsx';
 import SizeOption from '../components/SizeOption.jsx';
 import Button from '../components/Button.jsx';
 import Seo from '../components/Seo.jsx';
+import NotFound from './NotFound.jsx';
 import { api, ApiError, assetUrl } from '../lib/api.js';
 import { productPath, SITE_URL } from '../lib/site.js';
 import { snapshotProduct } from '../lib/catalogSnapshot.js';
@@ -83,8 +84,12 @@ export default function ProductDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
+  // Shown in place of the old JavaScript redirect to /shop, which looked like
+  // a soft 404 to crawlers. A product added since the last `sync:rewrites`
+  // is served the client-only shell with HTTP 200, so the status can't be a
+  // real 404 for a mistyped slug — this noindex page is the next best thing.
   if (notFound) {
-    return <Navigate to="/shop" replace />;
+    return <NotFound />;
   }
 
   if (loading || !product) {
