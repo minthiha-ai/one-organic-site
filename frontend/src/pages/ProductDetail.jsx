@@ -16,6 +16,7 @@ import { snapshotProduct } from '../lib/catalogSnapshot.js';
 import { consumeHydrationHint, hydrationVariantFor, PrerenderContext } from '../lib/prerender.js';
 import { productDescription, productJsonLd } from '../lib/structuredData.js';
 import { formatProductDescription } from '../lib/description.js';
+import { trackEvent } from '../lib/analytics.js';
 
 // The variant a product page opens on: the one the URL asks for, else the
 // product's default.
@@ -90,6 +91,20 @@ export default function ProductDetail() {
     // updates local state and the URL, it doesn't need a new fetch.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
+
+  // GA4 "view_item", once per product + variant shown. Must sit above the
+  // early returns below (hook order).
+  const viewedVariantId = product?.variants.find((v) => v.id === selectedVariantId)?.id ?? null;
+  useEffect(() => {
+    if (!product || viewedVariantId == null) return;
+    const v = product.variants.find((x) => x.id === viewedVariantId);
+    trackEvent('view_item', {
+      currency: 'THB',
+      value: v?.price,
+      items: [{ item_id: String(viewedVariantId), item_name: product.name, item_variant: v?.option_label }],
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product?.slug, viewedVariantId]);
 
   // Shown in place of the old JavaScript redirect to /shop, which looked like
   // a soft 404 to crawlers. A product added since the last `sync:rewrites`
@@ -208,6 +223,15 @@ export default function ProductDetail() {
           {variant.in_stock && shopeeUrl && (
             <a
               href={shopeeUrl}
+              onClick={() =>
+                trackEvent('shopee_click', {
+                  item_id: String(variant.id),
+                  item_name: product.name,
+                  item_variant: variant.option_label,
+                  value: variant.price,
+                  currency: 'THB',
+                })
+              }
               target="_blank"
               rel="noopener noreferrer"
               style={{

@@ -5,6 +5,7 @@ import { FormField } from '../components/FormField.jsx';
 import Button from '../components/Button.jsx';
 import { ApiError } from '../lib/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
+import { trackEvent } from '../lib/analytics.js';
 
 const emptyForm = { name: '', email: '', phone: '', password: '', password_confirmation: '' };
 
@@ -27,6 +28,7 @@ export default function Register() {
 
     try {
       await register(form);
+      trackEvent('sign_up', { method: 'email' });
       navigate('/account', { replace: true });
     } catch (err) {
       if (err instanceof ApiError) {

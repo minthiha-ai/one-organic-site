@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { logoDark, logoDark320 } from '../assets/brand/index.js';
 import { footerCareForEnvironment, footerCare1100 } from '../assets/images/index.js';
 import Icon from './Icon.jsx';
+import { analyticsEnabled, OPEN_COOKIE_SETTINGS } from '../lib/analytics.js';
 
 const linkStyle = {
   display: 'block',
@@ -88,6 +89,15 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
             <Link to="/privacy-policy" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy Policy</Link>
             <Link to="/terms-of-service" style={{ color: 'inherit', textDecoration: 'none' }}>Terms of Service</Link>
             <Link to="/refund-policy" style={{ color: 'inherit', textDecoration: 'none' }}>Refund Policy</Link>
+            {analyticsEnabled && (
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS))}
+                style={{ color: 'inherit', background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer' }}
+              >
+                Cookie settings
+              </button>
+            )}
           </div>
           <span style={{ fontSize: 12, color: 'var(--color-dark-band-text-secondary)' }}>one-organic.com</span>
         </div>
