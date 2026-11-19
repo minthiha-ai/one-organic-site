@@ -7,7 +7,7 @@ export default function PrivacyPolicy() {
       title="Privacy Policy"
       description="How One Organic (Thailand) Co., Ltd. collects, uses, and protects your personal information."
       path="/privacy-policy"
-      lastUpdated="September 30, 2026"
+      lastUpdated="November 19, 2026"
     >
       <p>
         One Organic (Thailand) Co., Ltd. ("One Organic," "we," "us") operates one-organic.com.
@@ -33,8 +33,22 @@ export default function PrivacyPolicy() {
         separate stored copy of contact form submissions beyond that email.
       </p>
       <p>
-        <strong>What we do not collect</strong>: we do not use cookies, and we do not run any
-        analytics or advertising tracking (e.g. Google Analytics, Facebook Pixel) on the site.
+        <strong>Analytics cookies (only if you accept)</strong>: when you first visit, a banner
+        asks whether you accept analytics cookies. If you accept, we use Google Analytics 4, a
+        service of Google, to count visits and see which pages and products are viewed, how
+        visitors arrive (for example from a search or a link), and when someone clicks through
+        to our Shopee store or submits the contact form. Google Analytics sets cookies in your
+        browser and receives your IP address and device and browser details; the data may be
+        processed on Google's servers outside Thailand. We do not send it your name, email
+        address, phone number, or the content of any form, and we do not use it for advertising
+        or ad personalization. If you decline, or do not answer, Google Analytics is not loaded
+        and no data is sent to Google. You can change your choice at any time with "Cookie
+        settings" in the footer.
+      </p>
+      <p>
+        <strong>What we do not collect</strong>: apart from the analytics above (only if you
+        accept), we do not use cookies, and we do not run any advertising tracking (e.g.
+        Facebook Pixel) on the site.
       </p>
       <p>
         <strong>Browser storage</strong>: if you're logged in, your session is kept in your
@@ -48,6 +62,10 @@ export default function PrivacyPolicy() {
           <strong>Shopee</strong> — when you buy through our Shopee store, your order, payment,
           and delivery information is handled directly by Shopee, under its own privacy policy,
           not this one.
+        </li>
+        <li>
+          <strong>Google</strong> — receives analytics data (see "Analytics cookies" above)
+          only if you accept the cookie banner, under Google's own privacy policy.
         </li>
         <li>
           <strong>Our email service provider</strong> — used to respond to messages you send us

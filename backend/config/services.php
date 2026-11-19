@@ -39,6 +39,13 @@ return [
         ],
     ],
 
+    // Admin "Analytics" page (App\Filament\Pages\Analytics). The Looker Studio
+    // embed URL for the GA4 report; blank shows setup steps instead.
+    'analytics' => [
+        'looker_embed_url' => env('ANALYTICS_EMBED_URL'),
+        'ga_url' => env('ANALYTICS_GA_URL'),
+    ],
+
     'xendit' => [
         'secret_key' => env('XENDIT_SECRET_KEY'),
         'webhook_verification_token' => env('XENDIT_WEBHOOK_VERIFICATION_TOKEN'),

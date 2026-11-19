@@ -6,6 +6,7 @@ import EyebrowLabel from '../components/EyebrowLabel.jsx';
 import Seo from '../components/Seo.jsx';
 import { api, ApiError } from '../lib/api.js';
 import Icon from '../components/Icon.jsx';
+import { trackEvent } from '../lib/analytics.js';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -25,6 +26,7 @@ export default function Contact() {
       await api.post('/contact', form, { auth: false });
       setForm({ name: '', email: '', message: '' });
       setStatus('sent');
+      trackEvent('contact_submit'); // no form contents are sent to analytics
     } catch (err) {
       setStatus('error');
       setErrorMessage(err instanceof ApiError ? err.message : 'Something went wrong. Please try again.');

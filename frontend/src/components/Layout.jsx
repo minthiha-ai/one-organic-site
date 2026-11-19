@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
+import Analytics from './Analytics.jsx';
 
 export default function Layout({ bgOverride, homeTo, shopTo, switchTo, switchLabel, themeOverride, className }) {
   return (
@@ -26,6 +27,7 @@ export default function Layout({ bgOverride, homeTo, shopTo, switchTo, switchLab
         </Suspense>
       </main>
       <Footer homeTo={homeTo} shopTo={shopTo} />
+      <Analytics />
     </div>
   );
 }
