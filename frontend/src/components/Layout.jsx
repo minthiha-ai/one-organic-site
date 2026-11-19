@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
@@ -19,7 +20,10 @@ export default function Layout({ bgOverride, homeTo, shopTo, switchTo, switchLab
     >
       <Header homeTo={homeTo} shopTo={shopTo} switchTo={switchTo} switchLabel={switchLabel} />
       <div style={{ flex: 1 }}>
-        <Outlet />
+        {/* Lazy pages (see App.jsx) suspend here, so the header and footer stay put. */}
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
       </div>
       <Footer homeTo={homeTo} shopTo={shopTo} />
     </div>
