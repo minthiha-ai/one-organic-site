@@ -18,9 +18,14 @@ class ProductVariant extends Model implements HasMedia
         'product_id',
         'sku',
         'option_label',
+        'name_th',
+        'description_th',
         'price',
         'compare_at_price',
         'shopee_url',
+        'shopee_item_id',
+        'shopee_model_id',
+        'shopee_attributes',
         'wholesale_price',
         'barcode',
         'fda_registration_number',
@@ -40,6 +45,7 @@ class ProductVariant extends Model implements HasMedia
         'skin_type',
         'moisturizing_strength',
         'ingredients',
+        'shelf_life_months',
         'is_active',
     ];
 
@@ -53,6 +59,7 @@ class ProductVariant extends Model implements HasMedia
         'highlights' => 'array',
         'usage_items' => 'array',
         'storage_instructions' => 'array',
+        'shopee_attributes' => 'array',
     ];
 
     public function product(): BelongsTo
