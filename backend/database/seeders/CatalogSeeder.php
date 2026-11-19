@@ -19,18 +19,22 @@ use Illuminate\Database\Seeder;
  * 25% trade-discount rate used in earlier documents.
  *
  * VCO and syrup carry an อย (fda_registration_number) — a food-product
- * registration shared across a whole product line's sizes. Soap carries
+ * registration (the oil's differs by size, see below). Soap carries
  * a เลขที่จดแจ้ง (cosmetic_declaration_number) instead — a different,
  * per-SKU registration scheme. Deliberately kept in separate columns,
  * not conflated.
  *
- * weight_grams/length_cm/width_cm/height_cm (Phase 1.1, added 26.09.19)
- * are ESTIMATES, not measurements — explicitly authorized by Stephen as
- * an interim placeholder for wiring up SHIPPOP rate lookups, pending real
- * numbers from the admin panel. VCO/syrup estimates are net content
- * weight (VCO ≈ 0.92 g/ml) plus a rough glass-jar tare weight; soap is
- * 100g content plus a light wrapper allowance. Do not treat these as
- * confirmed shipping weights.
+ * weight_grams/length_cm/width_cm/height_cm: updated 26.11.19 to the values
+ * entered on Shopee (the combined oil listing for the oil sizes). Shopee has
+ * no parcel size for soap (it stores 0x0x0 for unset), so the soap's
+ * 10x7x4 cm stays an estimate; its weight is Shopee's 100 g.
+ *
+ * Registration numbers are as typed on Shopee, without the "อย" prefix, and the
+ * oil has two (26.11.19, decision by Stephen): 77-2-00549-6-0035 on the 125 ml,
+ * 70-2-01450-6-0114 on the 450 ml and 900 ml.
+ *
+ * Shopee listing text, stock, Shopee ids and attributes are NOT seeded: they
+ * come from `php artisan shopee:import` (database/data/shopee_catalog_*.json).
  */
 class CatalogSeeder extends Seeder
 {
@@ -115,8 +119,6 @@ class CatalogSeeder extends Seeder
 
         $storage = ['Store in a cool, dry place.', 'Store away from sunlight.'];
 
-        $vcoFdaNumber = 'อย 70-2-01450-6-0114';
-
         $this->makeVariant($product, [
             'sku' => 'OO-VCO-450',
             'option_label' => '450ml',
@@ -124,11 +126,11 @@ class CatalogSeeder extends Seeder
             'shopee_url' => $shopeeUrl,
             'wholesale_price' => 273.00,
             'barcode' => '0730945251648',
-            'fda_registration_number' => $vcoFdaNumber,
-            'weight_grams' => 600, // ~414g oil (450ml * 0.92) + ~180g jar, estimated
-            'length_cm' => 9,
-            'width_cm' => 9,
-            'height_cm' => 16,
+            'fda_registration_number' => '70-2-01450-6-0114',
+            'weight_grams' => 800, // Shopee, 26.11.19
+            'length_cm' => 25,
+            'width_cm' => 17,
+            'height_cm' => 19,
             'sort_order' => 1,
             'is_default' => true,
             'tags' => ['Most Popular', 'Cold Pressed', 'Vegan & GF'],
@@ -144,11 +146,11 @@ class CatalogSeeder extends Seeder
             'shopee_url' => $shopeeUrl,
             'wholesale_price' => 455.00,
             'barcode' => '0730945251662',
-            'fda_registration_number' => $vcoFdaNumber,
-            'weight_grams' => 1150, // ~828g oil (900ml * 0.92) + ~320g jar, estimated
-            'length_cm' => 11,
-            'width_cm' => 11,
-            'height_cm' => 20,
+            'fda_registration_number' => '70-2-01450-6-0114',
+            'weight_grams' => 1500, // Shopee, 26.11.19
+            'length_cm' => 25,
+            'width_cm' => 17,
+            'height_cm' => 19,
             'sort_order' => 2,
             'tags' => ['Family Size', 'Cold Pressed', 'Vegan & GF'],
             'highlights' => $highlights,
@@ -163,11 +165,11 @@ class CatalogSeeder extends Seeder
             'shopee_url' => $shopeeUrl,
             'wholesale_price' => 126.00,
             'barcode' => '0730945251655',
-            'fda_registration_number' => $vcoFdaNumber,
-            'weight_grams' => 200, // ~115g oil (125ml * 0.92) + ~80g jar, estimated
-            'length_cm' => 7,
-            'width_cm' => 7,
-            'height_cm' => 10,
+            'fda_registration_number' => '77-2-00549-6-0035',
+            'weight_grams' => 500, // Shopee, 26.11.19
+            'length_cm' => 20,
+            'width_cm' => 14,
+            'height_cm' => 12,
             'sort_order' => 3,
             'tags' => ['Travel Size', 'Cold Pressed', 'Vegan & GF'],
             'highlights' => $highlights,
@@ -201,11 +203,11 @@ class CatalogSeeder extends Seeder
             'shopee_url' => $shopeeUrl,
             'wholesale_price' => 203.00,
             'barcode' => '0730945251679',
-            'fda_registration_number' => 'อย 70-2-01450-6-0116',
-            'weight_grams' => 830, // 600g content + ~230g jar, estimated
-            'length_cm' => 9,
-            'width_cm' => 9,
-            'height_cm' => 16,
+            'fda_registration_number' => '70-2-01450-6-0116',
+            'weight_grams' => 800, // Shopee, 26.11.19
+            'length_cm' => 25,
+            'width_cm' => 17,
+            'height_cm' => 9,
             'sort_order' => 1,
             'is_default' => true,
             'tags' => ['Low GI: 35', 'High in Minerals', 'Vegan & GF'],
@@ -247,7 +249,7 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 105.00,
             'barcode' => '0730945252133',
             'cosmetic_declaration_number' => '12-1-6800027486',
-            'weight_grams' => 120, // 100g bar + ~20g wrapper, estimated
+            'weight_grams' => 100, // Shopee, 26.11.19
             'length_cm' => 10,
             'width_cm' => 7,
             'height_cm' => 4,
@@ -271,7 +273,7 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 126.00,
             'barcode' => '0730945252140',
             'cosmetic_declaration_number' => '12-1-6800027484',
-            'weight_grams' => 120, // 100g bar + ~20g wrapper, estimated
+            'weight_grams' => 100, // Shopee, 26.11.19
             'length_cm' => 10,
             'width_cm' => 7,
             'height_cm' => 4,
@@ -294,7 +296,7 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 126.00,
             'barcode' => '0730945252157',
             'cosmetic_declaration_number' => '12-1-6900015948',
-            'weight_grams' => 120, // 100g bar + ~20g wrapper, estimated
+            'weight_grams' => 100, // Shopee, 26.11.19
             'length_cm' => 10,
             'width_cm' => 7,
             'height_cm' => 4,
@@ -317,7 +319,7 @@ class CatalogSeeder extends Seeder
             'wholesale_price' => 126.00,
             'barcode' => '0730945252164',
             'cosmetic_declaration_number' => '12-1-6900015961',
-            'weight_grams' => 120, // 100g bar + ~20g wrapper, estimated
+            'weight_grams' => 100, // Shopee, 26.11.19
             'length_cm' => 10,
             'width_cm' => 7,
             'height_cm' => 4,
