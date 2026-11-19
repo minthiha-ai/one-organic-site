@@ -36,6 +36,9 @@ class ProductResource extends Resource
                             ->required()
                             ->live(onBlur: true)
                             ->afterStateUpdated(fn (string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', str($state)->slug()) : null),
+                        Forms\Components\TextInput::make('name_th')
+                            ->label('Thai name')
+                            ->helperText('Shopee listing title when one listing covers the whole product (oil, syrup). Soaps keep theirs on each variant.'),
                         Forms\Components\TextInput::make('slug')
                             ->required()
                             ->unique(ignoreRecord: true),
@@ -45,6 +48,19 @@ class ProductResource extends Resource
                             ->helperText('Short marketing line, e.g. "Cold-pressed and centrifuge-extracted...".'),
                         Forms\Components\Textarea::make('description')
                             ->columnSpanFull(),
+                        Forms\Components\Textarea::make('description_th')
+                            ->label('Thai description')
+                            ->rows(14)
+                            ->helperText('Copied from the Shopee listing as written. Not shown on the website until it is reviewed.')
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('brand')
+                            ->helperText('As on Shopee, e.g. "Oneorganic(วันออร์แกนิค)".'),
+                        Forms\Components\TextInput::make('country_of_origin'),
+                        Forms\Components\TextInput::make('shopee_category_id')
+                            ->label('Shopee category ID')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('shopee_category_path')
+                            ->label('Shopee category'),
                         Forms\Components\TextInput::make('shopee_url')
                             ->label('Shopee URL')
                             ->url()
@@ -70,6 +86,8 @@ class ProductResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('brand')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('variants_count')
                     ->counts('variants')
                     ->label('Variants'),

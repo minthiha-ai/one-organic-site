@@ -15,11 +15,17 @@ class Product extends Model
     protected $fillable = [
         'category_id',
         'name',
+        'name_th',
         'slug',
         'script_eyebrow',
         'tagline',
         'description',
+        'description_th',
+        'brand',
+        'country_of_origin',
         'shopee_url',
+        'shopee_category_id',
+        'shopee_category_path',
         'sort_order',
         'is_active',
     ];

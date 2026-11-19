@@ -29,6 +29,9 @@ class ProductVariantResource extends JsonResource
             'skin_type' => $this->skin_type,
             'moisturizing_strength' => $this->moisturizing_strength,
             'ingredients' => $this->ingredients,
+            'shelf_life_months' => $this->shelf_life_months,
+            'fda_registration_number' => $this->fda_registration_number,
+            'cosmetic_declaration_number' => $this->cosmetic_declaration_number,
         ];
     }
 }

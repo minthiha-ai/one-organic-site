@@ -45,8 +45,8 @@ class VariantsRelationManager extends RelationManager
                         Forms\Components\TextInput::make('barcode')
                             ->unique(ignoreRecord: true),
                         Forms\Components\TextInput::make('fda_registration_number')
-                            ->label('อย number')
-                            ->helperText('Food products (VCO, syrup). Usually shared across a whole product line\'s sizes.'),
+                            ->label('อย / FDA Registration No.')
+                            ->helperText('Food products. Enter it as on Shopee, without "อย". It can differ by size (the oil has two numbers).'),
                         Forms\Components\TextInput::make('cosmetic_declaration_number')
                             ->label('เลขที่จดแจ้ง (Declaration No.)')
                             ->helperText('Cosmetic products (soap) — a different registration scheme from the อย number above.'),
@@ -54,7 +54,7 @@ class VariantsRelationManager extends RelationManager
                             ->label('Weight (g)')
                             ->numeric()
                             ->suffix('g')
-                            ->helperText('Packed weight (jar/bottle/wrapper included) — used for SHIPPOP rate lookups. Currently estimated pending real measurement.'),
+                            ->helperText('Packed weight in grams. Shopee shows kilograms: 0.75 kg = 750 g. Used for SHIPPOP rate lookups.'),
                         Forms\Components\TextInput::make('length_cm')
                             ->label('Length (cm)')
                             ->numeric()
@@ -67,6 +67,9 @@ class VariantsRelationManager extends RelationManager
                             ->label('Height (cm)')
                             ->numeric()
                             ->suffix('cm'),
+                        Forms\Components\TextInput::make('shelf_life_months')
+                            ->numeric()
+                            ->suffix('months'),
                         Forms\Components\TextInput::make('stock_quantity')
                             ->numeric()
                             ->required()
@@ -81,6 +84,36 @@ class VariantsRelationManager extends RelationManager
                             ->default(true),
                     ])
                     ->columns(2),
+
+                Forms\Components\Section::make('Shopee listing')
+                    ->description('Copied from Shopee on 26.11.19. The Thai text is kept as written and is not shown on the website yet.')
+                    ->schema([
+                        Forms\Components\TextInput::make('shopee_item_id')
+                            ->label('Shopee item ID')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('shopee_model_id')
+                            ->label('Shopee variation (model) ID')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('name_th')
+                            ->label('Thai listing title')
+                            ->helperText('Only for products with one Shopee listing per variant (the soaps); the oil and syrup keep theirs on the product.')
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('description_th')
+                            ->label('Thai description')
+                            ->rows(14)
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('shopee_attributes')
+                            ->label('Other Shopee attributes (JSON)')
+                            ->rows(8)
+                            ->helperText('Oil type, sugar type, packaging, storage condition, ingredient preference... as listed on Shopee.')
+                            ->rule('json')
+                            ->formatStateUsing(fn ($state) => is_array($state) ? json_encode($state, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) : $state)
+                            ->dehydrateStateUsing(fn ($state) => blank($state) ? null : json_decode($state, true))
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2)
+                    ->collapsible()
+                    ->collapsed(),
 
                 SpatieMediaLibraryFileUpload::make('image')
                     ->collection('image')
@@ -131,6 +164,19 @@ class VariantsRelationManager extends RelationManager
                     ->money('THB')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('barcode')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('fda_registration_number')
+                    ->label('อย / FDA No.')
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('cosmetic_declaration_number')
+                    ->label('Declaration No.')
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('shelf_life_months')
+                    ->label('Shelf life')
+                    ->suffix(' months')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('shopee_item_id')
+                    ->label('Shopee item')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('weight_grams')
                     ->label('Weight')

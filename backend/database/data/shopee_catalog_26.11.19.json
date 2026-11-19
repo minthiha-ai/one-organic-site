@@ -1,0 +1,492 @@
+{
+  "captured_on": "26.11.19",
+  "shop": "oneorganic.co.th (Shopee TH, shop id 710448046)",
+  "source": "Shopee Seller Centre > My Products > Mass Function > Mass Update (Basic, Sales, Shipping, Media info exports) plus the listing edit pages for the Specification attributes the exports do not include. Values are verbatim; nothing was rounded or translated.",
+  "units": "weight_kg in kilograms; length/width/height in cm (export column order: Length, Width, Height); price in THB",
+  "notes": [
+    "attributes for single-size oil listings (19528309479, 18628305356, 20228301454) were read from edit pages without expanding every hidden field",
+    "country_of_origin is only set on the plain soap listing; castor, shea and charcoal listings have it unset on Shopee",
+    "Bob's wrap listings have no attributes captured (not mapped to the website yet)"
+  ],
+  "listings": [
+    {
+      "shopee_item_id": "24240988538",
+      "role": "primary",
+      "product_slug": "virgin-coconut-oil",
+      "parent_sku": null,
+      "title": "น้ำมันมะพร้าวสกัดเย็น ออร์แกนิค Organic Virgin Coconut Oil วันออร์แกนิค One Organic 125/450/900 มล. ทานได้ ทาผิว ทาผม",
+      "description": "น้ำมันมะพร้าวสกัดเย็นออร์แกนิค Organic Virgin Coconut Oil ตรา วันออร์แกนิค (One Organic) \nไม่ผ่านกระบวนการใช้ความร้อนในทุกขั้นตอนการผลิต🥥\n\nน้ำมันมะพร้าวสกัดเย็น 100% ช่วยกระตุ้นกระบวนการเผาผลาญของร่างกาย ลดน้ำหนัก และเพิ่มไขมันอิ่มตัวอีกทั้งยังช่วยสร้างภูมิต้านทานให้กับร่างกาย เราคัดสรรวัตถุดิบซึ่ง เป็นเนื้อมะพร้าวสดจากมะพร้าวออร์แกนิคพันธุ์ดีปราศจากการตัดต่อพันธุกรรมไม่มีสารกันเสียจึงช่วยให้น้ำมันมะพร้าวของเรามีกรดลอริก(Lauric Acid) มากถึง50% กรดลอริกเมื่อร่างกายได้รับเข้าไปสามารถนำไปใช้ในกระบวนการสร้างภูมิคุ้มกันและยังช่วยขับสารพิษ( Detox) ออกจากร่างกายอักทั้งยังมีวิตามิน E สูง ซึ่งวิตามิน E นี้ให้ความชุ่มชื่นแก่ผิวและยังต้านอนุมูลอิสระและ น้ำมันมะพร้าวยังอุดมไปด้วย MCT ถึง 64% ที่ช่วยเร่งระบบการเผาผลาญได้ดีอีกด้วย🌴\n\n🍶แบบขวดโหลแก้วตักใช้สะดวก  รักษ์โลกสามารถทำความสะอาดและนำมาใช้ใหม่ได้เรื่อยๆ โดยไม่ต้องกังวลเรื่องรอยขีดข่วน สีซีดจาง หรือเปลี่ยนรูป🍶 \n\n✔ มี 3 ขนาด \n125 ml.\n450 ml. \n900 ml.\n\n📝 เลขที่อย. 77-2-00549-6-0035\n\n🏭 บริษัท วันออร์แกนิค จำกัด🏭 มุ่งเน้นใส่ใจทุกขั้นตอนตั้งแต่การคัดสรรเลือกวัตถุดิบที่ได้มาตรฐานตลอดจนการควบคุมกระบวนการผลิตและใส่ใจทุกขั้นจนถึงการจัดส่งถึงมือลูกค้า\n\nพร้อมทั้งเรายังได้รับการรับรองเครื่องหมายฮาลาล และได้รับมาตรฐานออร์แกนิคสากล EU, USDA และ JAS 🌍 \n\nน้ำมันมะพร้าวสกัดเย็น ตราวันออร์แกนิคของเรา แตกต่างยังไง?\n✔ กลิ่นหอมละมุน ไม่เหม็นหืน พิถีพิถันในทุกกระบวนการผลิต\n✔ รสชาติทานง่ายไม่ระคายเคืองคอ และสามารถนำไปประกอบอาหารได้หลากหลายเมนู\n✔ เนื้อมะพร้าวสดจาก สวนมะพร้าวออร์แกนิคพันธุ์ดี ที่ปราศจากการตัดต่อพันธุกรรม\n✔ ไม่มีสารกันเสีย\n✔ มีกรดลอริก(Lauric Acid) มากถึง50%\n✔ อุดมไปด้วย  MCT ถึง 64%\n✔ ซึมไว สามารถนำไปใช้บำรุงผิว ได้แบบไม่เหนียวเหนอหนะ\n \nประโยชน์ของน้ำมันมะพร้าวเย็น\n🥥ช่วยบำรุงสุขภาพ \n🥥ช่วยกระตุ้นการทำงานของสมอง\n🥥ต่อต้านสารอนุมูลอิสระ\n🥥 ช่วยเร่งระบบเผาผลาญ และ ควบคุมน้ำหนัก\n🥥 บำรุงผิวและดูแลเส้นผม\n🥥 ลดความเสี่ยงโรคหัวใจ หลอดเลือด และ เบาหวาน\n🥥 ช่วยเรื่องระบบขับถ่ายได้ดี\n🥥 ใช้กลั้วปาก (Oil Pulling Therapy)\n🥥 นำมาปรุงอาหาร\n\nวิธีการรับประทาน\n🥄ทานเพียวๆ 1-4 ช้อนโต๊ะ\n🥄ทานผสมกับเครื่องเดิมต่างๆ เช่น กาแฟ ชา หรือ น้ำผลไม้ปั่น\"\n\nการเก็บรักษา\n📌สามารถเก็บรักษาได้ถึง 2 ปี\n📌คำแนะนำ : ปิดฝาให้สนิทไม่สัมผัสกับอากาศ\n\nสามารถทักแชทสอบถามข้อมูลเพิ่มได้ ทางแอดมินจะรีบตอบกลับอย่างด่วนที่สุดค่ะ\nบริษัท วันออร์แกนิค จำกัด ขอบคุณสำหรับทุกการสนับสนุนค่ะ🙏🏼\nhttps://cf.shopee.co.th/file/th-11134208-7rasf-m5v9mrx3kruf17\nhttps://cf.shopee.co.th/file/th-11134208-7rasi-m5v9mrx3m6ev58\nhttps://cf.shopee.co.th/file/th-11134208-7rasm-m5sd2ayw48fqa0\nhttps://cf.shopee.co.th/file/th-11134208-7rasl-m5sd2ayw5n0605\nhttps://cf.shopee.co.th/file/th-11134208-7rasj-m5sd2ayw71km60",
+      "category_id": "100803",
+      "category_path": "Food & Beverages/Cooking Essentials/Oil",
+      "attributes": {
+        "brand": "Oneorganic(วันออร์แกนิค)",
+        "manufacturing_technique": "Machine Made",
+        "fda_registration_no": "77-2-00549-6-0035",
+        "ingredient": "100% virgin coconut oil",
+        "pack_size": "ML",
+        "country_of_origin": "Thailand",
+        "oil_type": "Coconut Oil",
+        "shelf_life": "24 Months"
+      },
+      "variations": [
+        {
+          "model_id": "233765054147",
+          "name": "450 ml.",
+          "variation_sku": null,
+          "price": 390,
+          "gtin": null,
+          "stock": 87,
+          "min_purchase_qty": 1,
+          "weight_kg": 0.8,
+          "length_cm": 25,
+          "width_cm": 17,
+          "height_cm": 19,
+          "maps_to_sku": "OO-VCO-450",
+          "fda_registration_no": "70-2-01450-6-0114"
+        },
+        {
+          "model_id": "233765054148",
+          "name": "900 ml.",
+          "variation_sku": null,
+          "price": 650,
+          "gtin": null,
+          "stock": 88,
+          "min_purchase_qty": null,
+          "weight_kg": 1.5,
+          "length_cm": 25,
+          "width_cm": 17,
+          "height_cm": 19,
+          "maps_to_sku": "OO-VCO-900",
+          "fda_registration_no": "70-2-01450-6-0114"
+        },
+        {
+          "model_id": "223765061278",
+          "name": "125 ml.",
+          "variation_sku": null,
+          "price": 180,
+          "gtin": null,
+          "stock": 89,
+          "min_purchase_qty": null,
+          "weight_kg": 0.5,
+          "length_cm": 20,
+          "width_cm": 14,
+          "height_cm": 12,
+          "maps_to_sku": "OO-VCO-125",
+          "fda_registration_no": "77-2-00549-6-0035"
+        }
+      ],
+      "image_urls": [
+        "https://cf.shopee.co.th/file/th-11134207-81ztf-muywh9atlvk6cb",
+        "https://cf.shopee.co.th/file/th-11134207-81ztq-mvn3fmlbltl6d7",
+        "https://cf.shopee.co.th/file/th-11134207-81ztc-mvn3g2zqcttzab",
+        "https://cf.shopee.co.th/file/th-11134207-81ztn-mvn3gdjuqxvm99",
+        "https://cf.shopee.co.th/file/th-11134207-81ztf-mvn3gn8vqney82",
+        "https://cf.shopee.co.th/file/th-11134207-7rasf-m5sevtj6lrj153",
+        "https://cf.shopee.co.th/file/th-11134207-7rasc-m5sevn69wquvff"
+      ]
+    },
+    {
+      "shopee_item_id": "26776444274",
+      "role": "primary",
+      "product_slug": "coconut-syrup",
+      "parent_sku": null,
+      "title": "น้ำตาลดอกมะพร้าว ไซรัป ออร์แกนิค Coconut Flower Syrup วันออร์แกนิค One Organic 600 มล.",
+      "description": "Coconut Syrup By One Organic น้ำตาลดอกมะพร้าวไซรับ ตรา วัน ออร์แกนิค\n\nCoconut Flower Syrup:\nOne of the Most Nutritious Sugars\n* ปราศจากกลูเตน\n* มังสวิรัติ\n* แร่ธาตุสูง \n* รสหวานอ่อนๆ\n* ค่าดัชนีน้ำตาลต่ำ : ค่าอยู่ที่ 35\n* Low GI (Glycemic Index): 35\n* Gluten Free\n* Vegan \n* High in Minerals\n* Mild Sweet Taste \n\nการใช้งาน:\n* ให้ความหวาน : สำหรับอาหาร, เบเกอรี่,เครื่องดื่ม\nUSAGE:\n*Use as a Sweetener: Beverages,Cooking, Baking\n* Bread Spread\n* Honey Alternative\n\nการเก็บรักษา:\n* แช่เย็นหลังจากเปิด\nSTORAGE:\n* Refrigerate After Opening\n\nการเก็บรักษา\n📌สามารถเก็บรักษาได้ถึง 2 ปี\n📌คำแนะนำ : ปิดฝาให้สนิทไม่สัมผัสกับอากาศ\n\nสามารถทักแชทสอบถามข้อมูลเพิ่มได้ ทางแอดมินจะรีบตอบกลับอย่างด่วนที่สุดค่ะ\nบริษัท วันออร์แกนิค จำกัด ขอบคุณสำหรับทุกการสนับสนุนค่ะ🙏🏼\n\n🏭 บริษัท วันออร์แกนิค จำกัด🏭 มุ่งเน้นใส่ใจทุกขั้นตอนตั้งแต่การคัดสรรเลือกวัตถุดิบที่ได้มาตรฐานตลอดจนการควบคุมกระบวนการผลิตและใส่ใจทุกขั้นจนถึงการจัดส่งถึงมือลูกค้า\n\nhttps://cf.shopee.co.th/file/th-11134208-7rasa-m6cdlkfj5jfh97\nhttps://cf.shopee.co.th/file/th-11134208-7rash-m6cdlkfj6xzx76\nhttps://cf.shopee.co.th/file/th-11134208-7rasa-m6cdlkfj9r4t8a\nhttps://cf.shopee.co.th/file/th-11134208-7rasa-m6l3u9d7y0on9e\nhttps://cf.shopee.co.th/file/th-11134208-7rasg-m6l3u9cxyf1xd1\nhttps://cf.shopee.co.th/file/th-11134208-7rasa-m6l3u9cydvat2d\nhttps://cf.shopee.co.th/file/th-11134208-7rase-m6l3u9cxyfav49\nhttps://cf.shopee.co.th/file/th-11134208-7rasa-m6l3u9ebwe7r54",
+      "category_id": "100805",
+      "category_path": "Food & Beverages/Cooking Essentials/Sugar",
+      "attributes": {
+        "brand": "Oneorganic(วันออร์แกนิค)",
+        "manufacturing_technique": "Machine Made",
+        "fda_registration_no": "70-2-01450-6-0116",
+        "quantity": "600",
+        "pack_size": "ML",
+        "packaging_type": "Glass Bottle",
+        "country_of_origin": "Thailand",
+        "sugar_type": "Coconut Flower",
+        "shelf_life": "24 Months"
+      },
+      "variations": [
+        {
+          "model_id": "118590642044",
+          "name": null,
+          "variation_sku": null,
+          "price": 290,
+          "gtin": null,
+          "stock": 4,
+          "min_purchase_qty": 1,
+          "weight_kg": 0.8,
+          "length_cm": 25,
+          "width_cm": 17,
+          "height_cm": 9,
+          "maps_to_sku": "OO-SYR-600"
+        }
+      ],
+      "image_urls": [
+        "https://cf.shopee.co.th/file/th-11134207-81zte-mtockln9io7470",
+        "https://cf.shopee.co.th/file/th-11134207-7rasj-m9j1m3fg3rdsf8",
+        "https://cf.shopee.co.th/file/th-11134207-7ras9-m6l3swfbn6zz24",
+        "https://cf.shopee.co.th/file/th-11134207-7rask-m6l3swfblskg7f",
+        "https://cf.shopee.co.th/file/th-11134207-7rasj-m6l3swfblsfjfe",
+        "https://cf.shopee.co.th/file/th-11134207-7rasg-m6l3swfbkdv380",
+        "https://cf.shopee.co.th/file/th-11134207-7rasf-m6l3swfbke00de",
+        "https://cf.shopee.co.th/file/th-11134207-7rasa-m6cdeh70nvaib5"
+      ]
+    },
+    {
+      "shopee_item_id": "54251412870",
+      "role": "primary",
+      "product_slug": "coconut-oil-soap",
+      "parent_sku": null,
+      "title": "สบู่ก้อนน้ำมันมะพร้าว 100% Coconut Oil Soap Bar วันออร์แกนิค One Organic 100 กรัม",
+      "description": "COCONUT OIL SOAP BAR _ JUST COCONUT OIL\nสบู่ก้อนจากน้ำมันมะพร้าว\n\nบริสุทธิ์ อ่อนโยน และอ่อนนุ่ม —เพื่อผิวของคุณและสิ่งแวดล้อม\n\nสบู่ก้อนนี้ผลิตจาก\nน้ำมันมะพร้าวออร์แกนิกบริสุทธิ์\n100% ช่วยทำความสะอาดผิวอย่างอ่อนโยน พร้อมบำรุงล้ำลึก ให้ผิวรู้สึกนุ่ม ชุ่มชื้น\nและสดชื่นหลังอาบน้ำทุกครั้ง\nอุดมด้วยกรดไขมันธรรมชาติที่ช่วยรักษาสมดุลความชุ่มชื้นของผิวได้อย่างเป็นธรรมชาติ\n\n•ปราศจากซัลเฟต (SLS/ SLES) – ซัลเฟตเป็นสารสร้างฟองสังเคราะห์ที่อาจทำให้ผิวสูญเสียความชุ่มชื้นและเกิดการระคายเคืองไม่เติมน้ำหอมสังเคราะห์\n•ไม่ผสมน้ำหอม มีเพียงกลิ่นหอมอ่อน ๆ จากน้ำมันธรรมชาติไม่ใส่วัตถุกันเสีย \n•ผลิตจากส่วนผสมธรรมชาติ ปราศจากสารกันเสียเคมี\n\nหมาะสำหรับ: ทุกสภาพผิว\n*********************************************************************************\nCOCONUT OIL SOAP BAR _ JUST COCONUT OIL\nPure,gentle, and kind — for your skin and for the environment.\n\nMade with 100% pure organic coconut oil, this soap bar gently cleanses while deeply\nnourishing your skin. Rich in natural fatty acids, it helps maintain skin’s\nnatural moisture barrier, leaving it soft, smooth, and refreshed after every\nwash. \n\n•No Sulphates (SLS / SLES) – Sulphates are synthetic foaming agents that can strip\nthe skin’s natural moisture and cause dryness or irritation.\n\n•No Added Fragrances – Free from synthetic perfumes; only the natural scent of pure oils.\n\n•No Preservatives – Made fresh from natural ingredients, without chemical preservatives.\n\nIdeal for: All skin types\n\n\n\n",
+      "category_id": "102003",
+      "category_path": "Beauty/Bath & Body Care/Body Wash & Soap",
+      "attributes": {
+        "brand": "Oneorganic(วันออร์แกนิค)",
+        "fda_registration_no": "12-1-6800027486",
+        "shelf_life": "24 Months",
+        "storage_condition": "Normal",
+        "pack_size": "ML",
+        "country_of_origin": "Thailand",
+        "ingredient_preference": [
+          "Fragrance Free",
+          "Naturally Derived",
+          "Organic",
+          "Sulfate-free"
+        ]
+      },
+      "variations": [
+        {
+          "model_id": "330130189397",
+          "name": null,
+          "variation_sku": null,
+          "price": 150,
+          "gtin": null,
+          "stock": 500,
+          "min_purchase_qty": 1,
+          "weight_kg": 0.1,
+          "length_cm": 0,
+          "width_cm": 0,
+          "height_cm": 0,
+          "maps_to_sku": "OO-SOAP-PLAIN"
+        }
+      ],
+      "image_urls": [
+        "https://cf.shopee.co.th/file/th-11134207-81ztg-mtkvcb6ta77l9f",
+        "https://cf.shopee.co.th/file/th-11134207-81ztm-mv0qp02y8lc1cf"
+      ]
+    },
+    {
+      "shopee_item_id": "51551417932",
+      "role": "primary",
+      "product_slug": "coconut-oil-soap",
+      "parent_sku": null,
+      "title": "สบู่ก้อนน้ำมันมะพร้าว น้ำมันละหุ่ง Coconut Oil Soap Bar วันออร์แกนิค One Organic 100 กรัม",
+      "description": "COCONUT OIL SOAP BAR WITH CASTOR OIL\nสบู่ก้อนจากน้ำมันมะพร้าวผสมน้ำมันละหุ่ง\n\nบริสุทธิ์ อ่อนโยน และอ่อนนุ่ม —เพื่อผิวของคุณและสิ่งแวดล้อม\n\nสบู่ก้อนที่ผสานคุณค่าจาก น้ำมันมะพร้าว และ น้ำมันละหุ่ง มอบฟองเนื้อละเอียดเนียนนุ่ม\nทำความสะอาดผิวได้อย่างล้ำลึก พร้อมบำรุงให้ผิวนุ่มชุ่มชื้นไม่แห้งตึง น้ำมันมะพร้าวช่วยให้ผิวสะอาดและอ่อนนุ่ม\nในขณะที่น้ำมันละหุ่งช่วยเก็บกักความชุ่มชื้นและเพิ่มความเรียบเนียนอย่างเป็นธรรมชาติ\n\n•ปราศจากซัลเฟต (SLS/ SLES) – ซัลเฟตเป็นสารสร้างฟองสังเคราะห์ที่อาจทำให้ผิวสูญเสียความชุ่มชื้นและเกิดการระคายเคืองไม่เติมน้ำหอมสังเคราะห์\n\n•ไม่ผสมน้ำหอม มีเพียงกลิ่นหอมอ่อน ๆ จากน้ำมันธรรมชาติไม่ใส่วัตถุกันเสีย \n\n•ผลิตจากส่วนผสมธรรมชาติ ปราศจากสารกันเสียเคมี\n\nหมาะสำหรับ:ผิวธรรมดาถึงผิวแห้ง\n********************************************************************************************\nCOCONUT OIL SOAP BAR WITH CASTOR OIL\nPure,gentle, and kind — for your skin and for the environment.\n\nA luxurious blend of coconut oil and castor oil that delivers an extra-creamy lather and a silky-smooth cleansing experience. Coconut oil purifies and hydrates, while castor oil enhances moisture retention and adds natural conditioning power.\n\n•No Sulphates (SLS / SLES) – Sulphates are synthetic foaming agents that can strip the skin’s natural moisture and cause dryness or irritation.\n\n•No Added Fragrances – Free from synthetic perfumes; only the natural scent of pure oils.\n\n•No Preservatives – Made fresh from natural ingredients, without chemical preservatives.\n\nIdeal for: Normal to dry skin\n\n\n\n",
+      "category_id": "102003",
+      "category_path": "Beauty/Bath & Body Care/Body Wash & Soap",
+      "attributes": {
+        "brand": "Oneorganic(วันออร์แกนิค)",
+        "fda_registration_no": "12-1-6800027484",
+        "shelf_life": "24 Months",
+        "storage_condition": "Normal",
+        "pack_size": "ML",
+        "ingredient_preference": [
+          "Fragrance Free",
+          "Naturally Derived",
+          "Organic",
+          "Sulfate-free"
+        ]
+      },
+      "variations": [
+        {
+          "model_id": "287158038474",
+          "name": null,
+          "variation_sku": null,
+          "price": 180,
+          "gtin": null,
+          "stock": 499,
+          "min_purchase_qty": 1,
+          "weight_kg": 0.1,
+          "length_cm": 0,
+          "width_cm": 0,
+          "height_cm": 0,
+          "maps_to_sku": "OO-SOAP-CASTOR"
+        }
+      ],
+      "image_urls": [
+        "https://cf.shopee.co.th/file/th-11134207-81zth-mtkv5798u80006",
+        "https://cf.shopee.co.th/file/th-11134207-81ztp-mv0qptdnpj44cb"
+      ]
+    },
+    {
+      "shopee_item_id": "48668481257",
+      "role": "primary",
+      "product_slug": "coconut-oil-soap",
+      "parent_sku": null,
+      "title": "สบู่ก้อนน้ำมันมะพร้าว ผสมเชียบัตเตอร์ Coconut Oil Soap Bar วันออร์แกนิค One Organic 100 กรัม",
+      "description": "COCONUT OIL SOAP BAR WITH SHEA BUTTER\n\nสบู่ก้อนจากน้ำมันมะพร้าวผสมชีบัตเตอร์\n\nบริสุทธิ์ อ่อนโยน และชุ่มชื้น —เพื่อผิวของคุณและสิ่งแวดล้อม\n\n\nสบู่ก้อนที่ผสานคุณค่าจาก น้ำมันมะพร้าว และ ชีบัตเตอร์ มอบฟองเนื้อละเอียดเนียนนุ่ม\n\nทำความสะอาดผิวได้อย่างล้ำลึก พร้อมบำรุงให้ผิวนุ่มชุ่มชื้นไม่แห้งตึง น้ำมันมะพร้าวช่วยให้ผิวสะอาดและอ่อนนุ่ม\n\nในขณะที่ชีบัตเตอร์ช่วยฟื้นบำรุงผิวแห้งกร้านให้นุ่มชุ่มชื้นอย่างล้ำลึกและเป็นธรรมชาติ\n\n\nปราศจากซัลเฟต (SLS/ SLES) – ซัลเฟตเป็นสารสร้างฟองสังเคราะห์ที่อาจทำให้ผิวสูญเสียความชุ่มชื้นและเกิดการระคายเคืองไม่เติมน้ำหอมสังเคราะห์\n\n\nไม่ผสมน้ำหอม มีเพียงกลิ่นหอมอ่อน ๆ จากน้ำมันธรรมชาติไม่ใส่วัตถุกันเสีย\n\n\nผลิตจากส่วนผสมธรรมชาติ ปราศจากสารกันเสียเคมี\n\n\nหมาะสำหรับ:ผิวแห้งถึงผิวแห้งมาก\n********************************************************************************************\nCOCONUT OIL SOAP BAR WITH SHEA BUTTER\n\nPure, gentle, and deeply moisturizing — for your skin and for the environment.\n\nA nourishing blend of coconut oil and shea butter that delivers a rich, creamy lather and deep hydration. Coconut oil purifies and softens the skin, while shea butter deeply nourishes and restores dry, rough skin, leaving it soft and supple.\n\n\nNo Sulphates (SLS / SLES) – Sulphates are synthetic foaming agents that can strip the skin's natural moisture and cause dryness or irritation.\n\n\nNo Added Fragrances – Free from synthetic perfumes; only the natural scent of pure oils.\n\n\nNo Preservatives – Made fresh from natural ingredients, without chemical preservatives.\n\n\nIdeal for: Dry to very dry skin\n",
+      "category_id": "102003",
+      "category_path": "Beauty/Bath & Body Care/Body Wash & Soap",
+      "attributes": {
+        "brand": "Oneorganic(วันออร์แกนิค)",
+        "fda_registration_no": "12-1-6900015948",
+        "shelf_life": "24 Months",
+        "storage_condition": "Normal",
+        "pack_size": "ML",
+        "ingredient_preference": [
+          "Fragrance Free",
+          "Naturally Derived",
+          "Organic",
+          "Sulfate-free"
+        ]
+      },
+      "variations": [
+        {
+          "model_id": "331550308309",
+          "name": null,
+          "variation_sku": null,
+          "price": 180,
+          "gtin": null,
+          "stock": 500,
+          "min_purchase_qty": 1,
+          "weight_kg": 0.1,
+          "length_cm": 0,
+          "width_cm": 0,
+          "height_cm": 0,
+          "maps_to_sku": "OO-SOAP-SHEA"
+        }
+      ],
+      "image_urls": [
+        "https://cf.shopee.co.th/file/th-11134207-81ztj-mtkw67vijjlt4b",
+        "https://cf.shopee.co.th/file/th-11134207-81ztf-muzuy7hbk0sq5a"
+      ]
+    },
+    {
+      "shopee_item_id": "53668447065",
+      "role": "primary",
+      "product_slug": "coconut-oil-soap",
+      "parent_sku": null,
+      "title": "สบู่ก้อนน้ำมันมะพร้าว ผงถ่านชาร์โคล Coconut Oil Soap Bar วันออร์แกนิค One Organic 100 กรัม",
+      "description": "COCONUT OIL SOAP BAR WITH CHARCOAL POWDER\n\nสบู่ก้อนจากน้ำมันมะพร้าวผสมผงถ่าน\n\nบริสุทธิ์ อ่อนโยน และสะอาดล้ำลึก —เพื่อผิวของคุณและสิ่งแวดล้อม\n\n\nสบู่ก้อนที่ผสานคุณค่าจาก น้ำมันมะพร้าว และ ผงถ่าน มอบฟองเนื้อละเอียดเนียนนุ่ม\n\nทำความสะอาดผิวได้อย่างล้ำลึก ช่วยดูดซับสิ่งสกปรกและความมันส่วนเกิน น้ำมันมะพร้าวช่วยให้ผิวสะอาดและอ่อนนุ่ม\n\nในขณะที่ผงถ่านช่วยขจัดสิ่งอุดตันในรูขุมขนและมอบความสดชื่นให้ผิวอย่างเป็นธรรมชาติ\n\n\nปราศจากซัลเฟต (SLS/ SLES) – ซัลเฟตเป็นสารสร้างฟองสังเคราะห์ที่อาจทำให้ผิวสูญเสียความชุ่มชื้นและเกิดการระคายเคืองไม่เติมน้ำหอมสังเคราะห์\n\n\nไม่ผสมน้ำหอม มีเพียงกลิ่นหอมอ่อน ๆ จากน้ำมันธรรมชาติไม่ใส่วัตถุกันเสีย\n\n\nผลิตจากส่วนผสมธรรมชาติ ปราศจากสารกันเสียเคมี\n\n\nหมาะสำหรับ:ผิวมันถึงผิวผสม\n\n********************************************************************************************\n\nCOCONUT OIL SOAP BAR WITH CHARCOAL POWDER\n\nPure, gentle, and deeply cleansing — for your skin and for the environment.\n\nA powerful blend of coconut oil and charcoal powder that delivers a rich, creamy lather and a deep-cleansing experience. Coconut oil purifies and softens the skin, while charcoal powder draws out impurities and excess oil, leaving pores feeling clear and refreshed.\n\n\nNo Sulphates (SLS / SLES) – Sulphates are synthetic foaming agents that can strip the skin's natural moisture and cause dryness or irritation.\n\n\nNo Added Fragrances – Free from synthetic perfumes; only the natural scent of pure oils.\n\n\nNo Preservatives – Made fresh from natural ingredients, without chemical preservatives.\n\n\nIdeal for: Oily to combination skin",
+      "category_id": "102003",
+      "category_path": "Beauty/Bath & Body Care/Body Wash & Soap",
+      "attributes": {
+        "brand": "Oneorganic(วันออร์แกนิค)",
+        "fda_registration_no": "12-1-6900015961",
+        "shelf_life": "24 Months",
+        "storage_condition": "Normal",
+        "pack_size": "ML",
+        "ingredient_preference": [
+          "Fragrance Free",
+          "Naturally Derived",
+          "Organic",
+          "Sulfate-free"
+        ]
+      },
+      "variations": [
+        {
+          "model_id": "391550256675",
+          "name": null,
+          "variation_sku": null,
+          "price": 180,
+          "gtin": null,
+          "stock": 500,
+          "min_purchase_qty": 1,
+          "weight_kg": 0.1,
+          "length_cm": 0,
+          "width_cm": 0,
+          "height_cm": 0,
+          "maps_to_sku": "OO-SOAP-CHARCOAL"
+        }
+      ],
+      "image_urls": [
+        "https://cf.shopee.co.th/file/th-11134207-81ztk-mtkve14totfk51",
+        "https://cf.shopee.co.th/file/th-11134207-81ztg-mv0q4cuwb3sx65"
+      ]
+    },
+    {
+      "shopee_item_id": "19528309479",
+      "role": "reference_duplicate_of_24240988538",
+      "product_slug": null,
+      "parent_sku": "200",
+      "title": "น้ำมันมะพร้าวสกัดเย็น ออร์แกนิค 125 มล. Organic Virgin Coconut Oil วันออร์แกนิค One Organic ขวดแก้ว",
+      "description": "น้ำมันมะพร้าวสกัดเย็นออร์แกนิค Organic Virgin Coconut Oil ตรา วันออร์แกนิค (One Organic) ไม่ผ่านกระบวนการใช้ความร้อนในทุกขั้นตอนการผลิต🥥\n\nน้ำมันมะพร้าวสกัดเย็น100% ช่วยกระตุ้นกระบวนการเผาผลาญของร่างกาย ลดน้ำหนัก และเพิ่มไขมันอิ่มตัวอีกทั้งยังช่วยสร้างภูมิต้านทานให้กับร่างกาย เราคัดสรรวัตถุดิบซึ่ง เป็นเนื้อมะพร้าวสดจากมะพร้าวออร์แกนิคพันธุ์ดีปราศจากการตัดต่อพันธุกรรมไม่มีสารกันเสียจึงช่วยให้น้ำมันมะพร้าวของเรามีกรดลอริก(Lauric Acid) มากถึง50% กรดลอริกเมื่อร่างกายได้รับเข้าไปสามารถนำไปใช้ในกระบวนการสร้างภูมิคุ้มกันและยังช่วยขับสารพิษ( Detox) ออกจากร่างกายอักทั้งยังมีวิตามิน E สูง ซึ่งวิตามิน E นี้ให้ความชุ่มชื่นแก่ผิวและยังต้านอนุมูลอิสระและ น้ำมันมะพร้าวยังอุดมไปด้วย MCT ถึง 64% ที่ช่วยเร่งระบบการเผาผลาญได้ดีอีกด้วย🌴\n\n🍶แบบขวดโหลแก้วตักใช้สะดวก  รักษ์โลกสามารถทำความสะอาดและนำมาใช้ใหม่ได้เรื่อยๆ โดยไม่ต้องกังวลเรื่องรอยขีดข่วน สีซีดจาง หรือเปลี่ยนรูป🍶 \n✔ ขนาด 125 ml. \n\n📝 เลขที่อย. 77-2-00549-6-0035\n\n🏭 บริษัท วันออร์แกนิค จำกัด🏭 มุ่งเน้นใส่ใจทุกขั้นตอนตั้งแต่การคัดสรรเลือกวัตถุดิบที่ได้มาตรฐานตลอดจนการควบคุมกระบวนการผลิตและใส่ใจทุกขั้นจนถึงการจัดส่งถึงมือลูกค้า\n\nพร้อมทั้งเรายังได้รับการรับรองเครื่องหมายฮาลาล และได้รับมาตรฐานออร์แกนิคสากล EU, USDA และ JAS 🌍 \n\nน้ำมันมะพร้าวสกัดเย็น ตราวันออร์แกนิคของเรา แตกต่างยังไง?\n✔ กลิ่นหอมละมุน ไม่เหม็นหืน พิถีพิถันในทุกกระบวนการผลิต\n✔ รสชาติทานง่ายไม่ระคายเคืองคอ และสามารถนำไปประกอบอาหารได้หลากหลายเมนู\n✔ เนื้อมะพร้าวสดจาก สวนมะพร้าวออร์แกนิคพันธุ์ดี ที่ปราศจากการตัดต่อพันธุกรรม\n✔ ไม่มีสารกันเสีย\n✔ มีกรดลอริก(Lauric Acid) มากถึง50%\n✔ อุดมไปด้วย  MCT ถึง 64%\n✔ ซึมไว สามารถนำไปใช้บำรุงผิว ได้แบบไม่เหนียวเหนอหนะ\n \nประโยชน์ของน้ำมันมะพร้าวเย็น\n🥥ช่วยบำรุงสุขภาพ \n🥥ช่วยกระตุ้นการทำงานของสมอง\n🥥ต่อต้านสารอนุมูลอิสระ\n🥥 ช่วยเร่งระบบเผาผลาญ และ ควบคุมน้ำหนัก\n🥥 บำรุงผิวและดูแลเส้นผม\n🥥 ลดความเสี่ยงโรคหัวใจ หลอดเลือด และ เบาหวาน\n🥥 ช่วยเรื่องระบบขับถ่ายได้ดี\n🥥 ใช้กลั้วปาก (Oil Pulling Therapy)\n🥥 นำมาปรุงอาหาร\n\nวิธีการรับประทาน\n🥄ทานเพียวๆ 1-4 ช้อนโต๊ะ\n🥄ทานผสมกับเครื่องเดิมต่างๆ เช่น กาแฟ ชา หรือ น้ำผลไม้ปั่น\"\n\nการเก็บรักษา\n📌สามารถเก็บรักษาได้ถึง 2 ปี\n📌คำแนะนำ : ปิดฝาให้สนิทไม่สัมผัสกับอากาศ\n\nสามารถทักแชทสอบถามข้อมูลเพิ่มได้ ทางแอดมินจะรีบตอบกลับอย่างด่วนที่สุดค่ะ\nบริษัท วันออร์แกนิค จำกัด ขอบคุณสำหรับทุกการสนับสนุนค่ะ🙏🏼🙏🏼🙏🏼",
+      "category_id": "100803",
+      "category_path": "Food & Beverages/Cooking Essentials/Oil",
+      "attributes": {
+        "fda_registration_no": "7720054960035",
+        "ingredient": "100% virgin coconut oil",
+        "volume": "125ml",
+        "weight": "500g",
+        "parent_sku": "200"
+      },
+      "variations": [
+        {
+          "model_id": "163848413469",
+          "name": null,
+          "variation_sku": null,
+          "price": 180,
+          "gtin": null,
+          "stock": 41,
+          "min_purchase_qty": 0,
+          "weight_kg": 0.5,
+          "length_cm": 11,
+          "width_cm": 11,
+          "height_cm": 12,
+          "maps_to_sku": null
+        }
+      ],
+      "image_urls": [
+        "https://cf.shopee.co.th/file/th-11134207-81ztg-muywda707x8j84",
+        "https://cf.shopee.co.th/file/th-11134207-81ztd-muywdny87q4j72",
+        "https://cf.shopee.co.th/file/th-11134207-7rash-m9j1ji2spmnlc2",
+        "https://cf.shopee.co.th/file/th-11134207-7qul9-lexrw2u9xpt9fa",
+        "https://cf.shopee.co.th/file/th-11134207-7quky-lexrw2u9wb2p25",
+        "https://cf.shopee.co.th/file/th-11134207-7rask-m94h5mxdnyvj4f",
+        "https://cf.shopee.co.th/file/th-11134207-7rasm-m94h5mxdmkb3ed"
+      ]
+    },
+    {
+      "shopee_item_id": "18628305356",
+      "role": "reference_duplicate_of_24240988538",
+      "product_slug": null,
+      "parent_sku": "200",
+      "title": "น้ำมันมะพร้าวสกัดเย็น ออร์แกนิค 450 มล. Organic Virgin Coconut Oil วันออร์แกนิค One Organic ขวดแก้ว",
+      "description": "น้ำมันมะพร้าวสกัดเย็นออร์แกนิค Organic Virgin Coconut Oil ตรา วันออร์แกนิค (One Organic) ไม่ผ่านกระบวนการใช้ความร้อนในทุกขั้นตอนการผลิต🥥\n\nน้ำมันมะพร้าวสกัดเย็น100% ช่วยกระตุ้นกระบวนการเผาผลาญของร่างกาย ลดน้ำหนัก และเพิ่มไขมันอิ่มตัวอีกทั้งยังช่วยสร้างภูมิต้านทานให้กับร่างกาย เราคัดสรรวัตถุดิบซึ่ง เป็นเนื้อมะพร้าวสดจากมะพร้าวออร์แกนิคพันธุ์ดีปราศจากการตัดต่อพันธุกรรมไม่มีสารกันเสียจึงช่วยให้น้ำมันมะพร้าวของเรามีกรดลอริก(Lauric Acid) มากถึง50% กรดลอริกเมื่อร่างกายได้รับเข้าไปสามารถนำไปใช้ในกระบวนการสร้างภูมิคุ้มกันและยังช่วยขับสารพิษ( Detox) ออกจากร่างกายอักทั้งยังมีวิตามิน E สูง ซึ่งวิตามิน E นี้ให้ความชุ่มชื่นแก่ผิวและยังต้านอนุมูลอิสระและ น้ำมันมะพร้าวยังอุดมไปด้วย MCT ถึง 64% ที่ช่วยเร่งระบบการเผาผลาญได้ดีอีกด้วย🌴\n\n🍶แบบขวดโหลแก้วตักใช้สะดวก  รักษ์โลกสามารถทำความสะอาดและนำมาใช้ใหม่ได้เรื่อยๆ โดยไม่ต้องกังวลเรื่องรอยขีดข่วน สีซีดจาง หรือเปลี่ยนรูป🍶 \n✔ ขนาด 450 ml. \n\n📝 เลขที่อย. 77-2-00549-6-0035\n\n🏭 บริษัท วันออร์แกนิค จำกัด🏭 มุ่งเน้นใส่ใจทุกขั้นตอนตั้งแต่การคัดสรรเลือกวัตถุดิบที่ได้มาตรฐานตลอดจนการควบคุมกระบวนการผลิตและใส่ใจทุกขั้นจนถึงการจัดส่งถึงมือลูกค้า\n\nพร้อมทั้งเรายังได้รับการรับรองเครื่องหมายฮาลาล และได้รับมาตรฐานออร์แกนิคสากล EU, USDA และ JAS 🌍 \n\nน้ำมันมะพร้าวสกัดเย็น ตราวันออร์แกนิคของเรา แตกต่างยังไง?\n✔ กลิ่นหอมละมุน ไม่เหม็นหืน พิถีพิถันในทุกกระบวนการผลิต\n✔ รสชาติทานง่ายไม่ระคายเคืองคอ และสามารถนำไปประกอบอาหารได้หลากหลายเมนู\n✔ เนื้อมะพร้าวสดจาก สวนมะพร้าวออร์แกนิคพันธุ์ดี ที่ปราศจากการตัดต่อพันธุกรรม\n✔ ไม่มีสารกันเสีย\n✔ มีกรดลอริก(Lauric Acid) มากถึง50%\n✔ อุดมไปด้วย  MCT ถึง 64%\n✔ ซึมไว สามารถนำไปใช้บำรุงผิว ได้แบบไม่เหนียวเหนอหนะ\n \nประโยชน์ของน้ำมันมะพร้าวเย็น\n🥥ช่วยบำรุงสุขภาพ \n🥥ช่วยกระตุ้นการทำงานของสมอง\n🥥ต่อต้านสารอนุมูลอิสระ\n🥥 ช่วยเร่งระบบเผาผลาญ และ ควบคุมน้ำหนัก\n🥥 บำรุงผิวและดูแลเส้นผม\n🥥 ลดความเสี่ยงโรคหัวใจ หลอดเลือด และ เบาหวาน\n🥥 ช่วยเรื่องระบบขับถ่ายได้ดี\n🥥 ใช้กลั้วปาก (Oil Pulling Therapy)\n🥥 นำมาปรุงอาหาร\n\nวิธีการรับประทาน\n🥄ทานเพียวๆ 1-4 ช้อนโต๊ะ\n🥄ทานผสมกับเครื่องเดิมต่างๆ เช่น กาแฟ ชา หรือ น้ำผลไม้ปั่น\"\n\nการเก็บรักษา\n📌สามารถเก็บรักษาได้ถึง 2 ปี\n📌คำแนะนำ : ปิดฝาให้สนิทไม่สัมผัสกับอากาศ\n\nสามารถทักแชทสอบถามข้อมูลเพิ่มได้ ทางแอดมินจะรีบตอบกลับอย่างด่วนที่สุดค่ะ\nบริษัท วันออร์แกนิค จำกัด ขอบคุณสำหรับทุกการสนับสนุนค่ะ🙏🏼🙏🏼🙏🏼\n",
+      "category_id": "100803",
+      "category_path": "Food & Beverages/Cooking Essentials/Oil",
+      "attributes": {
+        "fda_registration_no": "70-2-01450-6-0114",
+        "ingredient": "100% virgin coconut oil",
+        "parent_sku": "200"
+      },
+      "variations": [
+        {
+          "model_id": "181465116304",
+          "name": null,
+          "variation_sku": null,
+          "price": 390,
+          "gtin": null,
+          "stock": 18,
+          "min_purchase_qty": 0,
+          "weight_kg": 0.75,
+          "length_cm": 12,
+          "width_cm": 12,
+          "height_cm": 18,
+          "maps_to_sku": null
+        }
+      ],
+      "image_urls": [
+        "https://cf.shopee.co.th/file/th-11134207-81zti-muyweb0ee22p53",
+        "https://cf.shopee.co.th/file/th-11134207-81ztd-muyweb0gt5acc1",
+        "https://cf.shopee.co.th/file/th-11134207-7rasf-m9j1k72c593j02",
+        "https://cf.shopee.co.th/file/th-11134207-7rask-m94h5mxdnyvj4f",
+        "https://cf.shopee.co.th/file/th-11134207-7rasm-m94h5mxdmkb3ed",
+        "https://cf.shopee.co.th/file/th-11134207-7qul7-lexrw2ua4qhd12",
+        "https://cf.shopee.co.th/file/th-11134207-7qukw-lexrw2ua1xch6a"
+      ]
+    },
+    {
+      "shopee_item_id": "20228301454",
+      "role": "reference_duplicate_of_24240988538",
+      "product_slug": null,
+      "parent_sku": "200",
+      "title": "น้ำมันมะพร้าวสกัดเย็น ออร์แกนิค 900 มล. Organic Virgin Coconut Oil วันออร์แกนิค One Organic ขวดแก้ว",
+      "description": "น้ำมันมะพร้าวสกัดเย็นออร์แกนิค Organic Virgin Coconut Oil ตรา วันออร์แกนิค (One Organic) \nไม่ผ่านกระบวนการใช้ความร้อนในทุกขั้นตอนการผลิต🥥\n\nน้ำมันมะพร้าวสกัดเย็น 100% ช่วยกระตุ้นกระบวนการเผาผลาญของร่างกาย ลดน้ำหนัก และเพิ่มไขมันอิ่มตัวอีกทั้งยังช่วยสร้างภูมิต้านทานให้กับร่างกาย เราคัดสรรวัตถุดิบซึ่ง เป็นเนื้อมะพร้าวสดจากมะพร้าวออร์แกนิคพันธุ์ดีปราศจากการตัดต่อพันธุกรรมไม่มีสารกันเสียจึงช่วยให้น้ำมันมะพร้าวของเรามีกรดลอริก(Lauric Acid) มากถึง50% กรดลอริกเมื่อร่างกายได้รับเข้าไปสามารถนำไปใช้ในกระบวนการสร้างภูมิคุ้มกันและยังช่วยขับสารพิษ( Detox) ออกจากร่างกายอักทั้งยังมีวิตามิน E สูง ซึ่งวิตามิน E นี้ให้ความชุ่มชื่นแก่ผิวและยังต้านอนุมูลอิสระและ น้ำมันมะพร้าวยังอุดมไปด้วย MCT ถึง 64% ที่ช่วยเร่งระบบการเผาผลาญได้ดีอีกด้วย🌴\n\n🍶แบบขวดโหลแก้วตักใช้สะดวก  รักษ์โลกสามารถทำความสะอาดและนำมาใช้ใหม่ได้เรื่อยๆ โดยไม่ต้องกังวลเรื่องรอยขีดข่วน สีซีดจาง หรือเปลี่ยนรูป🍶 \n✔ ขนาด 900 ml. \n\n📝 เลขที่อย. 77-2-00549-6-0035\n\n🏭 บริษัท วันออร์แกนิค จำกัด🏭 มุ่งเน้นใส่ใจทุกขั้นตอนตั้งแต่การคัดสรรเลือกวัตถุดิบที่ได้มาตรฐานตลอดจนการควบคุมกระบวนการผลิตและใส่ใจทุกขั้นจนถึงการจัดส่งถึงมือลูกค้า\n\nพร้อมทั้งเรายังได้รับการรับรองเครื่องหมายฮาลาล และได้รับมาตรฐานออร์แกนิคสากล EU, USDA และ JAS 🌍 \n\nน้ำมันมะพร้าวสกัดเย็น ตราวันออร์แกนิคของเรา แตกต่างยังไง?\n✔ กลิ่นหอมละมุน ไม่เหม็นหืน พิถีพิถันในทุกกระบวนการผลิต\n✔ รสชาติทานง่ายไม่ระคายเคืองคอ และสามารถนำไปประกอบอาหารได้หลากหลายเมนู\n✔ เนื้อมะพร้าวสดจาก สวนมะพร้าวออร์แกนิคพันธุ์ดี ที่ปราศจากการตัดต่อพันธุกรรม\n✔ ไม่มีสารกันเสีย\n✔ มีกรดลอริก(Lauric Acid) มากถึง50%\n✔ อุดมไปด้วย  MCT ถึง 64%\n✔ ซึมไว สามารถนำไปใช้บำรุงผิว ได้แบบไม่เหนียวเหนอหนะ\n \nประโยชน์ของน้ำมันมะพร้าวเย็น\n🥥ช่วยบำรุงสุขภาพ \n🥥ช่วยกระตุ้นการทำงานของสมอง\n🥥ต่อต้านสารอนุมูลอิสระ\n🥥 ช่วยเร่งระบบเผาผลาญ และ ควบคุมน้ำหนัก\n🥥 บำรุงผิวและดูแลเส้นผม\n🥥 ลดความเสี่ยงโรคหัวใจ หลอดเลือด และ เบาหวาน\n🥥 ช่วยเรื่องระบบขับถ่ายได้ดี\n🥥 ใช้กลั้วปาก (Oil Pulling Therapy)\n🥥 นำมาปรุงอาหาร\n\nวิธีการรับประทาน\n🥄ทานเพียวๆ 1-4 ช้อนโต๊ะ\n🥄ทานผสมกับเครื่องเดิมต่างๆ เช่น กาแฟ ชา หรือ น้ำผลไม้ปั่น\"\n\nการเก็บรักษา\n📌สามารถเก็บรักษาได้ถึง 2 ปี\n📌คำแนะนำ : ปิดฝาให้สนิทไม่สัมผัสกับอากาศ\n\nสามารถทักแชทสอบถามข้อมูลเพิ่มได้ ทางแอดมินจะรีบตอบกลับอย่างด่วนที่สุดค่ะ\nบริษัท วันออร์แกนิค จำกัด ขอบคุณสำหรับทุกการสนับสนุนค่ะ🙏🏼\nhttps://cf.shopee.co.th/file/th-11134208-7ras8-m5v9mrx3nkzbcd\nhttps://cf.shopee.co.th/file/th-11134208-7rask-m5v9mrx3ozjr92\nhttps://cf.shopee.co.th/file/th-11134208-7rasm-m5sd2ayw48fqa0\nhttps://cf.shopee.co.th/file/th-11134208-7rasl-m5sd2ayw5n0605\nhttps://cf.shopee.co.th/file/th-11134208-7rasj-m5sd2ayw71km60",
+      "category_id": "100803",
+      "category_path": "Food & Beverages/Cooking Essentials/Oil",
+      "attributes": {
+        "fda_registration_no": "70-2-01450-6-0114",
+        "ingredient": "100% organic virgin coconut oil",
+        "parent_sku": "200"
+      },
+      "variations": [
+        {
+          "model_id": "211465196705",
+          "name": null,
+          "variation_sku": null,
+          "price": 650,
+          "gtin": null,
+          "stock": 75,
+          "min_purchase_qty": 0,
+          "weight_kg": 2.0,
+          "length_cm": 12,
+          "width_cm": 14,
+          "height_cm": 24,
+          "maps_to_sku": null
+        }
+      ],
+      "image_urls": [
+        "https://cf.shopee.co.th/file/th-11134207-81ztm-muywgep2kwlie4",
+        "https://cf.shopee.co.th/file/th-11134207-81ztf-muywgeoz2hhfa0",
+        "https://cf.shopee.co.th/file/th-11134207-7rasd-m9j1npzcf4dq65",
+        "https://cf.shopee.co.th/file/th-11134207-7rasm-m94h5mxdmkb3ed",
+        "https://cf.shopee.co.th/file/th-11134207-7rask-m94h5mxdnyvj4f",
+        "https://cf.shopee.co.th/file/th-11134207-7rasf-m9j1qo4v2qr5ca"
+      ]
+    },
+    {
+      "shopee_item_id": "56571752500",
+      "role": "not_on_website_pending_decision",
+      "product_slug": null,
+      "parent_sku": null,
+      "title": "Bob's ฟิล์มถนอมอาหารย่อยสลายได้ พลาสติกแรปห่ออาหาร 300mm x 600m หนา 10 ไมครอน Biodegradable Cling Wrap",
+      "description": "Bob's Biodegradable Cling Wrap ฟิล์มถนอมอาหารย่อยสลายได้\n\nฟิล์มห่ออาหารคุณภาพสำหรับธุรกิจอาหาร (Food Service) ผลิตจากพลาสติกที่ผ่านการพัฒนาสูตรพิเศษให้สามารถย่อยสลายได้ตามธรรมชาติ ด้วยสารเติมแต่งที่ช่วยดึงดูดจุลินทรีย์ให้เข้ามาย่อยสลายพลาสติกจนกลายเป็นปุ๋ยธรรมชาติ (ฮิวมัส) น้ำ ก๊าซคาร์บอนไดออกไซด์ และผลิตภัณฑ์ธรรมชาติอื่น ๆ สามารถย่อยสลายได้ทั้งในสภาพแวดล้อมที่มีออกซิเจน (ดิน) และไม่มีออกซิเจน (ทะเล) โดยใช้เวลาเพียง 3-5 ปี เมื่อเทียบกับพลาสติกทั่วไปที่ต้องใช้เวลาหลายร้อยปีจึงจะย่อยสลาย\n\nคุณสมบัติเด่น\n✅ ย่อยสลายได้ตามธรรมชาติ (Biodegradable)\n✅ ย่อยสลายกลายเป็นปุ๋ยได้ (Compostable)\n✅ รีไซเคิลได้ (Recyclable)\n✅ มีใบมีดแบบเลื่อน ตัดง่าย ปลอดภัย (Sliding Blade Lock)\n\nมีให้เลือก 2 ขนาด\n- 300mm x 600m หนา 10 ไมครอน\n- 450mm x 600m หนา 10 ไมครอน\n(1 ม้วนต่อ 1 กล่อง อายุการเก็บรักษา 2 ปี)\n\nจัดจำหน่ายโดย One Organic (Thailand) Co., Ltd. กรุงเทพฯ\n\n---\n\nBob's Biodegradable Cling Wrap\n\nFood-service grade cling film made with a specially formulated plastic that biodegrades naturally. Special additives attract microbes that break the film down into humus, water, carbon dioxide, and other natural by-products. It biodegrades in both aerobic (soil) and anaerobic (marine) environments, taking just 3-5 years, compared to the hundreds of years regular, untreated plastic takes to break down.\n\nKey features\n✅ Biodegradable\n✅ Compostable\n✅ Recyclable\n✅ Sliding blade lock for easy, safe cutting\n\nAvailable in 2 sizes\n- 300mm x 600m, 10 micron thickness\n- 450mm x 600m, 10 micron thickness\n(1 roll per box, 2-year shelf life)\n\nDistributed by One Organic (Thailand) Co., Ltd., Bangkok, Thailand",
+      "category_id": "101221",
+      "category_path": "Home & Living/Kitchenware/Cling Wrap",
+      "attributes": {},
+      "variations": [
+        {
+          "model_id": "386743767279",
+          "name": null,
+          "variation_sku": null,
+          "price": 600,
+          "gtin": "0673926001002",
+          "stock": 30,
+          "min_purchase_qty": 1,
+          "weight_kg": 2.9,
+          "length_cm": 14,
+          "width_cm": 37,
+          "height_cm": 14,
+          "maps_to_sku": null
+        }
+      ],
+      "image_urls": [
+        "https://cf.shopee.co.th/file/th-11134207-81ztj-mvmthol4lgqwd6",
+        "https://cf.shopee.co.th/file/th-11134207-81ztj-mvlwynano6x43c"
+      ]
+    },
+    {
+      "shopee_item_id": "40386842945",
+      "role": "not_on_website_pending_decision",
+      "product_slug": null,
+      "parent_sku": null,
+      "title": "Bob's ฟิล์มถนอมอาหารย่อยสลายได้ พลาสติกแรปห่ออาหาร 450mm x 600m หนา 10 ไมครอน Biodegradable Cling Wrap",
+      "description": "Bob's Biodegradable Cling Wrap ฟิล์มถนอมอาหารย่อยสลายได้\n\nฟิล์มห่ออาหารคุณภาพสำหรับธุรกิจอาหาร (Food Service) ผลิตจากพลาสติกที่ผ่านการพัฒนาสูตรพิเศษให้สามารถย่อยสลายได้ตามธรรมชาติ ด้วยสารเติมแต่งที่ช่วยดึงดูดจุลินทรีย์ให้เข้ามาย่อยสลายพลาสติกจนกลายเป็นปุ๋ยธรรมชาติ (ฮิวมัส) น้ำ ก๊าซคาร์บอนไดออกไซด์ และผลิตภัณฑ์ธรรมชาติอื่น ๆ สามารถย่อยสลายได้ทั้งในสภาพแวดล้อมที่มีออกซิเจน (ดิน) และไม่มีออกซิเจน (ทะเล) โดยใช้เวลาเพียง 3-5 ปี เมื่อเทียบกับพลาสติกทั่วไปที่ต้องใช้เวลาหลายร้อยปีจึงจะย่อยสลาย\n\nคุณสมบัติเด่น\n✅ ย่อยสลายได้ตามธรรมชาติ (Biodegradable)\n✅ ย่อยสลายกลายเป็นปุ๋ยได้ (Compostable)\n✅ รีไซเคิลได้ (Recyclable)\n✅ มีใบมีดแบบเลื่อน ตัดง่าย ปลอดภัย (Sliding Blade Lock)\n\nมีให้เลือก 2 ขนาด\n- 300mm x 600m หนา 10 ไมครอน\n- 450mm x 600m หนา 10 ไมครอน\n(1 ม้วนต่อ 1 กล่อง อายุการเก็บรักษา 2 ปี)\n\nจัดจำหน่ายโดย One Organic (Thailand) Co., Ltd. กรุงเทพฯ\n\n---\n\nBob's Biodegradable Cling Wrap\n\nFood-service grade cling film made with a specially formulated plastic that biodegrades naturally. Special additives attract microbes that break the film down into humus, water, carbon dioxide, and other natural by-products. It biodegrades in both aerobic (soil) and anaerobic (marine) environments, taking just 3-5 years, compared to the hundreds of years regular, untreated plastic takes to break down.\n\nKey features\n✅ Biodegradable\n✅ Compostable\n✅ Recyclable\n✅ Sliding blade lock for easy, safe cutting\n\nAvailable in 2 sizes\n- 300mm x 600m, 10 micron thickness\n- 450mm x 600m, 10 micron thickness\n(1 roll per box, 2-year shelf life)\n\nDistributed by One Organic (Thailand) Co., Ltd., Bangkok, Thailand",
+      "category_id": "101221",
+      "category_path": "Home & Living/Kitchenware/Cling Wrap",
+      "attributes": {},
+      "variations": [
+        {
+          "model_id": "366743697311",
+          "name": null,
+          "variation_sku": null,
+          "price": 750,
+          "gtin": null,
+          "stock": 30,
+          "min_purchase_qty": 1,
+          "weight_kg": 4.24,
+          "length_cm": 14,
+          "width_cm": 52,
+          "height_cm": 14,
+          "maps_to_sku": null
+        }
+      ],
+      "image_urls": [
+        "https://cf.shopee.co.th/file/th-11134207-81zte-mvlwybwp6hol42",
+        "https://cf.shopee.co.th/file/th-11134207-81ztj-mvlwynano6x43c"
+      ]
+    }
+  ]
+}
