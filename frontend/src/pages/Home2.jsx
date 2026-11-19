@@ -44,7 +44,7 @@ const highlightIcon = {
 function ProductPhoto({ src, alt, ratio = '1 / 1' }) {
   return (
     <div className="v2-panel" style={{ aspectRatio: ratio, margin: '0 auto' }}>
-      <img src={src} alt={alt} className="v2-contain" />
+      <img src={src} alt={alt} className="v2-contain" loading="lazy" decoding="async" />
     </div>
   );
 }
@@ -67,7 +67,7 @@ function SoapVariantCard({ variant, ratio }) {
       style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}
     >
       <div className="v2-panel v2-hover-lift" style={{ aspectRatio: ratio }}>
-        <img src={soapImageByLabel[variant.option_label]} alt={`Coconut Oil Soap, ${variant.option_label}`} className="v2-contain" />
+        <img src={soapImageByLabel[variant.option_label]} alt={`Coconut Oil Soap, ${variant.option_label}`} className="v2-contain" loading="lazy" decoding="async" />
       </div>
       <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 14, margin: '10px 0 4px', color: 'var(--color-text)' }}>
         {variant.option_label}
@@ -202,6 +202,7 @@ export default function Home2() {
               src={heroCoconut}
               alt="A freshly husked coconut resting on stone, palm trees in the background"
               className="v2-cover"
+              fetchPriority="high"
             />
           </div>
         </div>
@@ -236,11 +237,11 @@ export default function Home2() {
       {/* Cert strip */}
       <section className="v2-section-tight v2-cert-strip">
         <span className="v2-cert-item">
-          <img src={usdaSeal} alt="USDA Organic certified" style={{ height: 46, width: 'auto' }} />
+          <img src={usdaSeal} alt="USDA Organic certified" style={{ height: 46, width: 'auto' }} loading="lazy" decoding="async" />
           <span className="v2-meta">USDA Organic certified</span>
         </span>
         <span className="v2-cert-item">
-          <img src={euSeal} alt="EU Organic certified" style={{ height: 36, width: 'auto', borderRadius: 3 }} />
+          <img src={euSeal} alt="EU Organic certified" style={{ height: 36, width: 'auto', borderRadius: 3 }} loading="lazy" decoding="async" />
           <span className="v2-meta">EU Organic certified</span>
         </span>
         <span className="v2-cert-item">
@@ -256,6 +257,8 @@ export default function Home2() {
           alt="Sunlight filtering through a coconut palm frond"
           className="v2-cover"
           style={{ position: 'absolute', inset: 0 }}
+          loading="lazy"
+          decoding="async"
         />
         <div
           style={{
