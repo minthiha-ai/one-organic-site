@@ -26,6 +26,14 @@ export function getConsent() {
   }
 }
 
+// Pages that are private per visitor (order numbers in the URL, account data):
+// never reported, even with consent.
+const PRIVATE_PREFIXES = ['/account', '/order/', '/checkout', '/cart', '/login', '/register'];
+
+export function isPrivatePath(path) {
+  return PRIVATE_PREFIXES.some((p) => path === p || path.startsWith(p.endsWith('/') ? p : `${p}/`));
+}
+
 export function onConsentChange(fn) {
   listeners.add(fn);
   return () => listeners.delete(fn);
@@ -40,13 +48,25 @@ function loadGa() {
     window.dataLayer.push(arguments); // GA requires `arguments`, not a spread array
   };
   window.gtag('js', new Date());
-  // Page views are sent by hand on every route change (single-page app).
   // No ad features: no ad personalisation, no Google signals.
-  window.gtag('config', GA_ID, {
+  //
+  // Page views: GA4 sends its own page_view whenever this config runs (every
+  // full page load, and when a visitor accepts the banner) — verified against
+  // the live stream: "Page loads" in enhanced measurement is locked on and
+  // send_page_view:false does not stop it. So we send ours only for in-site
+  // route changes (see Analytics.jsx); sending one here as well counted every
+  // landing page twice. Because that automatic hit can't be skipped, a private
+  // page (order numbers in the URL) is reported under a generic URL instead.
+  const params = {
     send_page_view: false,
     allow_google_signals: false,
     allow_ad_personalization_signals: false,
-  });
+  };
+  if (isPrivatePath(window.location.pathname)) {
+    params.page_location = `${window.location.origin}/private-page`;
+    params.page_title = 'Private page';
+  }
+  window.gtag('config', GA_ID, params);
 
   const s = document.createElement('script');
   s.async = true;

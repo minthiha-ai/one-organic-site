@@ -1,29 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   analyticsEnabled,
   getConsent,
   initAnalytics,
+  isPrivatePath,
   onConsentChange,
   OPEN_COOKIE_SETTINGS,
   setConsent,
   trackPageView,
 } from '../lib/analytics.js';
 
-// Pages that are private per visitor: never reported, even with consent.
-const PRIVATE_PREFIXES = ['/account', '/order/', '/checkout', '/cart', '/login', '/register'];
-
-function isPrivate(path) {
-  return PRIVATE_PREFIXES.some((p) => path === p || path.startsWith(p.endsWith('/') ? p : `${p}/`));
-}
-
-// Mounted once in Layout. Sends a page view on every route change (once the
-// visitor has accepted) and shows the consent banner until they choose.
+// Mounted once in Layout. Sends a page view for every in-site route change
+// (once the visitor has accepted) and shows the consent banner until they
+// choose. The first view of a page load is sent by GA4 itself when it loads
+// (see loadGa in lib/analytics.js), so it is deliberately not sent here.
 // Renders nothing on the server, so the prerendered HTML is unaffected.
 export default function Analytics() {
   const location = useLocation();
   const [choice, setChoice] = useState('pending'); // 'pending' until mounted
   const [open, setOpen] = useState(false);
+  const lastPath = useRef(null);
 
   useEffect(() => {
     if (!analyticsEnabled) return undefined;
@@ -32,9 +29,6 @@ export default function Analytics() {
     const offConsent = onConsentChange((granted) => {
       setChoice(granted ? 'granted' : 'denied');
       setOpen(false);
-      if (granted && !isPrivate(window.location.pathname)) {
-        trackPageView(window.location.pathname + window.location.search);
-      }
     });
     const reopen = () => setOpen(true);
     window.addEventListener(OPEN_COOKIE_SETTINGS, reopen);
@@ -45,12 +39,19 @@ export default function Analytics() {
   }, []);
 
   useEffect(() => {
-    if (!analyticsEnabled || isPrivate(location.pathname)) return;
-    // The script tag may not have executed yet on the very first page; the
-    // queued gtag() calls are flushed by GA once it loads.
+    if (!analyticsEnabled) return;
+    // First run = the page load itself: GA4 reports that one. Later runs are
+    // in-site navigations, which GA4 cannot see (enhanced measurement's
+    // history-change option is off), so we report them.
     // Keyed on the path only: pages like the product page rewrite ?variant=
     // after load, which must not count as a second view. The full URL (with
     // any utm_ tags) is still sent, so campaign attribution works.
+    if (lastPath.current === null || lastPath.current === location.pathname) {
+      lastPath.current = location.pathname;
+      return;
+    }
+    lastPath.current = location.pathname;
+    if (isPrivatePath(location.pathname)) return;
     trackPageView(location.pathname + window.location.search);
   }, [location.pathname]);
 
