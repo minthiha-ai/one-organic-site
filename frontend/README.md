@@ -91,7 +91,9 @@ Neither is loaded from a third-party stylesheet — those blocked first paint (L
 
 Hosted on Vercel, which builds with `npm run build` (set explicitly in `vercel.json`). `vercel.json` also holds:
 
-- **Rewrites to the prerendered files.** The homepage is `dist/index.html`; every other prerendered page lives under `dist/prerendered/` and is reached through an explicit rewrite (product URLs also match on `?variant=N`). Anything without a rewrite — private pages like `/cart`, a typo'd URL, a product added since the last sync — is served `dist/app-shell.html`, the empty client-only shell, which renders in the browser exactly as before.
+- **Rewrites to the prerendered files.** The homepage is `dist/index.html`; every other prerendered page lives under `dist/prerendered/` and is reached through an explicit rewrite (product URLs also match on `?variant=N`).
+- **Client-only routes.** Private pages (`/cart`, `/checkout`, `/login`, `/register`, `/account…`, `/order/…`), the design previews, and `/product/:slug` for a product added since the last sync are served `dist/app-shell.html`, the empty client-only shell. The private ones also get an `X-Robots-Tag: noindex, nofollow` response header, so crawlers that don't run JavaScript see it.
+- **Real 404s.** There is deliberately **no catch-all rewrite**. A URL that matches nothing gets `dist/404.html` with HTTP status 404 (a `noindex` page, so search engines drop it rather than treating it as a soft 404). `trailingSlash: false` redirects `/shop/` to `/shop`.
 - **`/catalog-api/*` and `/catalog-storage/*`**, proxied to the API host and cached at Vercel's edge (see `api/warm.js` and `.github/workflows/warm-cache.yml` for the warm-up that runs after each deploy).
 
 **When a product or variant is added or removed in the admin**, run
@@ -101,6 +103,8 @@ npm run sync:rewrites
 ```
 
 and commit `vercel.json`. Until you do, the new page still works but is client-rendered, and `npm run build` prints a warning naming what is out of sync. A page whose rewrite is stale never 404s — the build writes the client-only shell to it.
+
+**When you add a route to `src/App.jsx`**, add its path to `CLIENT_ONLY_PATHS` (or `STATIC_PATHS` if it should be prerendered) in `scripts/prerender-routes.mjs` and run `npm run sync:rewrites`. Without a catch-all an unlisted route would 404 in production, so `npm run build` fails if one is missing.
 
 Prices and stock in the prerendered HTML are as of the last deploy; the browser replaces them with live values from the API right after load. A change made in the admin therefore reaches crawlers on the next deploy.
 
