@@ -34,7 +34,7 @@ export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switc
         }}
       >
         <Link to={homeTo} style={{ display: 'flex', alignItems: 'center', lineHeight: 0 }}>
-          <img src={logoLight} alt="One Organic" style={{ height: 30, width: 'auto', display: 'block' }} />
+          <img src={logoLight} alt="One Organic" width={480} height={124} style={{ height: 30, width: 'auto', display: 'block' }} />
         </Link>
 
         {(!isLanding || switchTo) && (

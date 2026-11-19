@@ -21,11 +21,11 @@ export default function CertStrip({ showRecycle = true }) {
       }}
     >
       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-        <img src={usdaSeal} alt="USDA Organic certified" style={{ height: 34, width: 'auto' }} />
+        <img src={usdaSeal} alt="USDA Organic certified" width={160} height={160} style={{ height: 34, width: 'auto' }} />
         USDA Organic certified
       </span>
       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-        <img src={euSeal} alt="EU Organic certified" style={{ height: 22, width: 'auto', borderRadius: 3 }} />
+        <img src={euSeal} alt="EU Organic certified" width={204} height={136} style={{ height: 22, width: 'auto', borderRadius: 3 }} />
         EU Organic certified
       </span>
       {showRecycle && <CertBadge icon="ti-recycle">Recycle or reuse</CertBadge>}

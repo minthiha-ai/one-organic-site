@@ -1,5 +1,14 @@
 export { default as heroCoconut } from './hero-coconut-on-stone.webp';
 export { default as brandStoryPhoto } from './palm-leaf-sunlight.webp';
+
+// Smaller copies of the three large photos, paired with the originals in a
+// srcSet so phones download the small file (see Home2.jsx and Footer.jsx).
+// Same pictures, resized with Lanczos: 800w/1000w from the 1000w/1600w originals,
+// and 1100w (lossy, q85) from the 2200w lossless footer art.
+export { default as heroCoconut800 } from './hero-coconut-on-stone-800w.webp';
+export { default as brandStoryPhoto1000 } from './palm-leaf-sunlight-1000w.webp';
+export { default as footerCare1100 } from './footer-care-for-environment-community-1100w.webp';
+
 export { default as vcoJars } from './virgin-coconut-oil-jars.png';
 export { default as syrupJar } from './coconut-syrup-jar.png';
 export { default as soapPlain } from './coconut-oil-soap.jpg';

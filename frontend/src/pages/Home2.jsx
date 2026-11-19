@@ -5,7 +5,9 @@ import { organizationJsonLd } from '../lib/structuredData.js';
 import homepageProducts from '../data/homepageProducts.json';
 import {
   heroCoconut,
+  heroCoconut800,
   brandStoryPhoto,
+  brandStoryPhoto1000,
   vcoJarsV2,
   syrupV2,
   soapJustCoconutV2,
@@ -41,10 +43,10 @@ const highlightIcon = {
   'Mild Sweet Taste': 'candy',
 };
 
-function ProductPhoto({ src, alt, ratio = '1 / 1' }) {
+function ProductPhoto({ src, alt, width, height, ratio = '1 / 1' }) {
   return (
     <div className="v2-panel" style={{ aspectRatio: ratio, margin: '0 auto' }}>
-      <img src={src} alt={alt} className="v2-contain" loading="lazy" decoding="async" />
+      <img src={src} alt={alt} width={width} height={height} className="v2-contain" loading="lazy" decoding="async" />
     </div>
   );
 }
@@ -67,7 +69,7 @@ function SoapVariantCard({ variant, ratio }) {
       style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}
     >
       <div className="v2-panel v2-hover-lift" style={{ aspectRatio: ratio }}>
-        <img src={soapImageByLabel[variant.option_label]} alt={`Coconut Oil Soap, ${variant.option_label}`} className="v2-contain" loading="lazy" decoding="async" />
+        <img src={soapImageByLabel[variant.option_label]} alt={`Coconut Oil Soap, ${variant.option_label}`} width={600} height={400} className="v2-contain" loading="lazy" decoding="async" />
       </div>
       <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 14, margin: '10px 0 4px', color: 'var(--color-text)' }}>
         {variant.option_label}
@@ -200,6 +202,10 @@ export default function Home2() {
           >
             <img
               src={heroCoconut}
+              srcSet={`${heroCoconut800} 800w, ${heroCoconut} 1000w`}
+              sizes="(max-width: 600px) 90vw, 560px"
+              width={1000}
+              height={1250}
               alt="A freshly husked coconut resting on stone, palm trees in the background"
               className="v2-cover"
               fetchPriority="high"
@@ -212,7 +218,7 @@ export default function Home2() {
         eyebrow={vco.script_eyebrow}
         heading="Virgin Coconut Oil"
         intro="Cold-pressed and centrifuge-extracted, with low moisture, high purity, and high lauric acid. Fast-absorbing, gluten free, and vegan."
-        media={<ProductPhoto src={vcoJarsV2} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" ratio="3 / 2" />}
+        media={<ProductPhoto src={vcoJarsV2} width={591} height={415} alt="900ml, 450ml, and 125ml glass jars of Virgin Coconut Oil" ratio="3 / 2" />}
         highlights={vco.default_variant.highlights}
         usage={vco.default_variant.usage_items}
         shopHref="/shop?category=food"
@@ -224,7 +230,7 @@ export default function Home2() {
         eyebrow={syrup.script_eyebrow}
         heading="Coconut Syrup"
         intro="Low glycemic index, high in minerals, and mildly sweet. Gluten free and vegan."
-        media={<ProductPhoto src={syrupV2} alt="Jar of Coconut Flower Syrup" ratio="3 / 3" />}
+        media={<ProductPhoto src={syrupV2} width={472} height={771} alt="Jar of Coconut Flower Syrup" ratio="3 / 3" />}
         highlights={syrup.default_variant.highlights}
         usage={syrup.default_variant.usage_items}
         shopHref="/shop?category=food"
@@ -237,11 +243,11 @@ export default function Home2() {
       {/* Cert strip */}
       <section className="v2-section-tight v2-cert-strip">
         <span className="v2-cert-item">
-          <img src={usdaSeal} alt="USDA Organic certified" style={{ height: 46, width: 'auto' }} loading="lazy" decoding="async" />
+          <img src={usdaSeal} alt="USDA Organic certified" width={160} height={160} style={{ height: 46, width: 'auto' }} loading="lazy" decoding="async" />
           <span className="v2-meta">USDA Organic certified</span>
         </span>
         <span className="v2-cert-item">
-          <img src={euSeal} alt="EU Organic certified" style={{ height: 36, width: 'auto', borderRadius: 3 }} loading="lazy" decoding="async" />
+          <img src={euSeal} alt="EU Organic certified" width={204} height={136} style={{ height: 36, width: 'auto', borderRadius: 3 }} loading="lazy" decoding="async" />
           <span className="v2-meta">EU Organic certified</span>
         </span>
         <span className="v2-cert-item">
@@ -254,6 +260,10 @@ export default function Home2() {
       <section className="v2-photo-wide" style={{ position: 'relative', height: 260, width: '100%', overflow: 'hidden', marginBottom: 'var(--sp-6)' }}>
         <img
           src={brandStoryPhoto}
+          srcSet={`${brandStoryPhoto1000} 1000w, ${brandStoryPhoto} 1600w`}
+          sizes="100vw"
+          width={1600}
+          height={1064}
           alt="Sunlight filtering through a coconut palm frond"
           className="v2-cover"
           style={{ position: 'absolute', inset: 0 }}

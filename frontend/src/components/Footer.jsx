@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { logoDark } from '../assets/brand/index.js';
-import { footerCareForEnvironment } from '../assets/images/index.js';
+import { footerCareForEnvironment, footerCare1100 } from '../assets/images/index.js';
 import Icon from './Icon.jsx';
 
 const linkStyle = {
@@ -29,6 +29,8 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
       {isHomepage && (
         <img
           src={footerCareForEnvironment}
+          srcSet={`${footerCare1100} 1100w, ${footerCareForEnvironment} 2200w`}
+          sizes="100vw"
           alt="Illustration of a tree, birds, a recycling symbol, and a family celebrating outdoors, captioned Care for Environment, Care for Community"
           width={2200}
           height={923}
@@ -54,7 +56,7 @@ export default function Footer({ homeTo = '/', shopTo = '/shop' }) {
           style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '40px var(--gutter) 16px' }}
         >
           <div style={{ maxWidth: 320 }}>
-            <img src={logoDark} alt="One Organic" loading="lazy" decoding="async" style={{ height: 26, width: 'auto', display: 'block', margin: '0 0 12px' }} />
+            <img src={logoDark} alt="One Organic" width={480} height={127} loading="lazy" decoding="async" style={{ height: 26, width: 'auto', display: 'block', margin: '0 0 12px' }} />
             <p style={{ fontSize: 13, color: 'var(--color-dark-band-text-secondary)', lineHeight: 1.6, margin: 0, maxWidth: 280 }}>
               Organic coconut oil, syrup, and soap. Cold-pressed and handcrafted in small batches.
             </p>
