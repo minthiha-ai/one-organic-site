@@ -15,6 +15,7 @@ import { productPath, SITE_URL } from '../lib/site.js';
 import { snapshotProduct } from '../lib/catalogSnapshot.js';
 import { consumeHydrationHint, hydrationVariantFor, PrerenderContext } from '../lib/prerender.js';
 import { productDescription, productJsonLd } from '../lib/structuredData.js';
+import { formatProductDescription } from '../lib/description.js';
 
 // The variant a product page opens on: the one the URL asks for, else the
 // product's default.
@@ -120,6 +121,10 @@ export default function ProductDetail() {
     { label: 'FDA Reg. No. (อย.)', value: variant.fda_registration_number },
     { label: 'Cosmetic Notification No. (เลขที่จดแจ้ง)', value: variant.cosmetic_declaration_number },
   ].filter((row) => row.value);
+
+  // The admin's English description, as written (see lib/description.js). Only
+  // some products have one; the section is simply absent for the others.
+  const aboutText = formatProductDescription(product.description);
 
   const shopeeUrl = variant.shopee_url || product.shopee_url || import.meta.env.VITE_SHOPEE_STORE_URL || null;
 
@@ -237,6 +242,15 @@ export default function ProductDetail() {
           padding: '32px var(--gutter)',
         }}
       >
+        {aboutText && (
+          <>
+            <SectionHeading style={{ margin: '0 0 16px' }}>About this product</SectionHeading>
+            <div style={{ whiteSpace: 'pre-line', fontSize: 14, lineHeight: 1.7, color: 'var(--color-text)', maxWidth: '68ch', marginBottom: 28 }}>
+              {aboutText}
+            </div>
+          </>
+        )}
+
         <SectionHeading style={{ margin: '0 0 16px' }}>Highlights</SectionHeading>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 28 }}>
           {variant.highlights.map((h) => (
