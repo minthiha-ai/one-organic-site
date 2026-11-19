@@ -44,7 +44,7 @@ This repo was restructured from a single-app layout (frontend files at repo root
 
 **Current status (2026-09-17): deploys are pull-based via cron, not push-triggered.** Bluehost is blocking inbound SSH from GitHub Actions' runner IPs at the network edge — connections reset during the SSH key exchange itself, before authentication is even attempted. Confirmed it isn't cPanel's own IP Blocker (empty) and CSF isn't exposed on this shared-hosting plan, so it's happening upstream of anything visible in cPanel. Open with Bluehost support; unresolved as of this writing.
 
-**Routine deploys:** `backend/bin/deploy.sh`, run every few minutes by a Bluehost cron job (`cPanel → Cron Jobs`). It `git pull`s from GitHub itself — outbound only, using the server's own existing `~/.ssh/github_deploy_key` — and only runs composer/migrate/cache-clear if that pull actually moved `HEAD`. A lockfile (`~/deploy.lock`) prevents overlapping runs. Deploy history lives in whatever log file the cron entry redirects to (e.g. `~/deploy.log`) — there's no more per-push GitHub Actions run to check, so nothing pings you if a deploy fails; check the log directly.
+**Routine deploys:** `backend/bin/deploy.sh`, run every few minutes by a Bluehost cron job (`cPanel → Cron Jobs`). It `git pull`s from GitHub itself — outbound only, using the server's own existing `~/.ssh/github_deploy_key` — and deploys whenever `HEAD` differs from the last commit that deployed *successfully* (recorded in `~/deploy.last-deployed`, written only after every step finishes). So a deploy that fails part-way is retried on the next run rather than skipped; before 26.11.19 it only compared `HEAD` before and after the pull, and a failure after the pull was silently never retried. A lockfile (`~/deploy.lock`) prevents overlapping runs. Deploy history lives in whatever log file the cron entry redirects to (e.g. `~/deploy.log`) — there's no more per-push GitHub Actions run to check, so nothing pings you if a deploy fails; check the log directly.
 
 **Manual/fallback deploy:** `.github/workflows/deploy-backend.yml` still exists but is `workflow_dispatch`-only now (no more auto-trigger on push, since it can't reach the server). Trigger it by hand from the Actions tab — useful once the firewall issue clears, or to force an inbound-SSH deploy attempt without waiting for cron.
 
@@ -55,7 +55,7 @@ Two separate, narrowly-scoped SSH keys, deliberately kept apart from any persona
 
 If either key is ever compromised, only that one narrow capability needs revoking — not a personal credential.
 
-The deploy steps themselves, in order (same in both paths): `git pull origin master` → `composer install --no-dev --optimize-autoloader` (called via its absolute path, `/opt/cpanel/composer/bin/composer` — non-interactive SSH/cron sessions on Bluehost's jailshell don't source the profile script that puts `composer` on `PATH`) → `php artisan migrate --force` → `php artisan filament:clear-cached-components` → `php artisan optimize:clear`.
+The deploy steps themselves, in order (same in both paths): `git pull origin master` → `composer install --no-dev --optimize-autoloader` (only when `composer.json`/`composer.lock` changed since the last deploy; the script looks for composer in `PATH`, `/opt/cpanel/composer/bin`, `~/bin` and `~/composer.phar` and stops with an error if it is needed but missing — on 26.11.19 the rebuilt server had no composer at all) → `php artisan migrate --force` → `php artisan filament:clear-cached-components` → `php artisan optimize`.
 
 ## Payments (Xendit)
 
