@@ -151,7 +151,59 @@
       "destination": "/prerendered/refund-policy.html"
     },
     {
-      "source": "/(.*)",
+      "source": "/cart",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/checkout",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/order/:orderNumber",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/login",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/register",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/account",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/account/orders/:orderNumber",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/account/addresses",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/product/:slug",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/v2",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/preview-white",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/preview-white/shop",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/preview-cream",
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/preview-cream/shop",
       "destination": "/app-shell.html"
     }
   ],
@@ -162,5 +214,124 @@
     "api/warm.js": {
       "maxDuration": 60
     }
-  }
+  },
+  "headers": [
+    {
+      "source": "/cart",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/checkout",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/order/:orderNumber",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/login",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/register",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/account",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/account/orders/:orderNumber",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/account/addresses",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/v2",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/preview-white",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/preview-white/shop",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/preview-cream",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/preview-cream/shop",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ]
 }

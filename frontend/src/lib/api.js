@@ -25,7 +25,7 @@ const TOKEN_KEY = 'one_organic_token';
 
 export function getToken() {
   // No localStorage while prerendering on the server.
-  if (typeof localStorage === 'undefined') return null;
+  if (typeof localStorage === 'undefined' || typeof localStorage.getItem !== 'function') return null;
   return localStorage.getItem(TOKEN_KEY);
 }
 

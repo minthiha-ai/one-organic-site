@@ -6,7 +6,11 @@
 // Layout it produces in dist/:
 //   index.html                        the homepage, prerendered
 //   app-shell.html                    the untouched client-only shell — what
-//                                     any URL without its own file is served
+//                                     private pages and not-yet-synced
+//                                     products are served
+//   404.html                          the "page not found" page; Vercel serves
+//                                     it, with a 404 status, for any URL that
+//                                     matches no rewrite
 //   prerendered/<page>.html           /shop, /contact, the legal pages
 //   prerendered/product/<slug>.html   a product page on its default variant
 //   prerendered/product/<slug>/<id>.html   ...and on each variant
@@ -18,7 +22,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { SITE_URL } from '../src/lib/site.js';
-import { isPrerenderRewrite, prerenderPages, prerenderRewrites } from './prerender-routes.mjs';
+import { NOINDEX_PATHS, isPrerenderRewrite, prerenderPages, prerenderRewrites, uncoveredRoutes } from './prerender-routes.mjs';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const DIST = join(ROOT, 'dist');
@@ -90,6 +94,16 @@ const products = JSON.parse(readFileSync(join(ROOT, 'src/data/homepageProducts.j
 // is what vercel.json's catch-all serves for every unprerendered URL.
 writeOut('app-shell.html', template);
 
+// Real 404s: every URL no rewrite matches is answered with this file and a
+// 404 status (there is no catch-all rewrite). Rendered at a URL that only the
+// router's `*` route matches, so the browser hydrates it at whatever bad URL
+// was requested and renders the same thing.
+{
+  const { html: appHtml, seo } = render('/page-not-found', null);
+  if (!seo?.noindex) throw new Error('the 404 page must render a noindex <Seo>');
+  writeOut('404.html', applyBody(applyHead(template, seo), appHtml, null));
+}
+
 const written = new Set();
 const failures = [];
 
@@ -109,9 +123,28 @@ for (const page of prerenderPages(products)) {
   written.add(page.file);
 }
 
+// Without a catch-all, a route added to App.jsx but not to vercel.json would
+// be a 404 in production. Fail the build instead of shipping that.
+const config = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
+const appSource = readFileSync(join(ROOT, 'src/App.jsx'), 'utf8');
+const uncovered = uncoveredRoutes(appSource, products);
+if (uncovered.length > 0) {
+  throw new Error(
+    `src/App.jsx declares route(s) that no rewrite covers, so they would 404 in production: ${uncovered.join(', ')}. ` +
+      'Add them to CLIENT_ONLY_PATHS (or STATIC_PATHS) in scripts/prerender-routes.mjs and run `npm run sync:rewrites`.'
+  );
+}
+if (config.rewrites.some((r) => r.source === '/(.*)')) {
+  throw new Error('vercel.json still has a catch-all `/(.*)` rewrite, which would answer 200 for unknown URLs. Run `npm run sync:rewrites`.');
+}
+const headerSources = new Set((config.headers ?? []).filter((h) => h.headers.some((x) => x.key === 'X-Robots-Tag')).map((h) => h.source));
+const missingNoindex = NOINDEX_PATHS.filter((path) => !headerSources.has(path));
+if (missingNoindex.length > 0) {
+  throw new Error(`vercel.json has no X-Robots-Tag noindex header for: ${missingNoindex.join(', ')}. Run \`npm run sync:rewrites\`.`);
+}
+
 // Rewrites in vercel.json for pages this build no longer produces (a product
 // or variant deleted since vercel.json was last synced) get the shell too.
-const config = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
 const configured = config.rewrites.filter(isPrerenderRewrite);
 for (const rewrite of configured) {
   const file = rewrite.destination.replace(/^\//, '');
