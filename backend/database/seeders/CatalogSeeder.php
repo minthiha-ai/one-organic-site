@@ -29,9 +29,10 @@ use Illuminate\Database\Seeder;
  * no parcel size for soap (it stores 0x0x0 for unset), so the soap's
  * 10x7x4 cm stays an estimate; its weight is Shopee's 100 g.
  *
- * Registration numbers are as typed on Shopee, without the "อย" prefix, and the
- * oil has two (26.11.19, decision by Stephen): 77-2-00549-6-0035 on the 125 ml,
- * 70-2-01450-6-0114 on the 450 ml and 900 ml.
+ * Registration numbers are as typed on Shopee, without the "อย" prefix. The
+ * oil has ONE number for all three sizes, 77-2-00549-6-0035 (Stephen, 26.11.19:
+ * first two numbers by size, then this single one). The price list's older
+ * 70-2-01450-6-0114 is no longer used for the oil.
  *
  * Shopee listing text, stock, Shopee ids and attributes are NOT seeded: they
  * come from `php artisan shopee:import` (database/data/shopee_catalog_*.json).
@@ -126,7 +127,7 @@ class CatalogSeeder extends Seeder
             'shopee_url' => $shopeeUrl,
             'wholesale_price' => 273.00,
             'barcode' => '0730945251648',
-            'fda_registration_number' => '70-2-01450-6-0114',
+            'fda_registration_number' => '77-2-00549-6-0035',
             'weight_grams' => 800, // Shopee, 26.11.19
             'length_cm' => 25,
             'width_cm' => 17,
@@ -146,7 +147,7 @@ class CatalogSeeder extends Seeder
             'shopee_url' => $shopeeUrl,
             'wholesale_price' => 455.00,
             'barcode' => '0730945251662',
-            'fda_registration_number' => '70-2-01450-6-0114',
+            'fda_registration_number' => '77-2-00549-6-0035',
             'weight_grams' => 1500, // Shopee, 26.11.19
             'length_cm' => 25,
             'width_cm' => 17,
