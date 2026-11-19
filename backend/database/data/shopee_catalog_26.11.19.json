@@ -41,8 +41,7 @@
           "length_cm": 25,
           "width_cm": 17,
           "height_cm": 19,
-          "maps_to_sku": "OO-VCO-450",
-          "fda_registration_no": "70-2-01450-6-0114"
+          "maps_to_sku": "OO-VCO-450"
         },
         {
           "model_id": "233765054148",
@@ -56,8 +55,7 @@
           "length_cm": 25,
           "width_cm": 17,
           "height_cm": 19,
-          "maps_to_sku": "OO-VCO-900",
-          "fda_registration_no": "70-2-01450-6-0114"
+          "maps_to_sku": "OO-VCO-900"
         },
         {
           "model_id": "223765061278",
@@ -71,8 +69,7 @@
           "length_cm": 20,
           "width_cm": 14,
           "height_cm": 12,
-          "maps_to_sku": "OO-VCO-125",
-          "fda_registration_no": "77-2-00549-6-0035"
+          "maps_to_sku": "OO-VCO-125"
         }
       ],
       "image_urls": [

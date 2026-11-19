@@ -72,11 +72,11 @@ class ImportShopeeCatalogTest extends TestCase
         $this->assertSame('Thailand', $oil->country_of_origin);
         $this->assertSame(100803, $oil->shopee_category_id);
 
-        // Two FDA numbers, one per size, as on Shopee.
+        // One FDA number for every oil size (Stephen, 26.11.19), as the combined listing has it.
         $oil125 = ProductVariant::where('sku', 'OO-VCO-125')->first();
-        $this->assertSame('77-2-00549-6-0035', $oil125->fda_registration_number);
-        $this->assertSame('70-2-01450-6-0114', ProductVariant::where('sku', 'OO-VCO-450')->value('fda_registration_number'));
-        $this->assertSame('70-2-01450-6-0114', ProductVariant::where('sku', 'OO-VCO-900')->value('fda_registration_number'));
+        foreach (['OO-VCO-125', 'OO-VCO-450', 'OO-VCO-900'] as $sku) {
+            $this->assertSame('77-2-00549-6-0035', ProductVariant::where('sku', $sku)->value('fda_registration_number'), $sku);
+        }
 
         // Stock, weight (kg -> g), parcel size (Length, Width, Height) and ids from the combined listing.
         $this->assertSame(89, $oil125->stock_quantity);
