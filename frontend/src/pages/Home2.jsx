@@ -243,11 +243,11 @@ export default function Home2() {
       {/* Cert strip */}
       <section className="v2-section-tight v2-cert-strip">
         <span className="v2-cert-item">
-          <img src={usdaSeal} alt="USDA Organic certified" width={160} height={160} style={{ height: 46, width: 'auto' }} loading="lazy" decoding="async" />
+          <img src={usdaSeal} alt="USDA Organic certified" width={120} height={120} style={{ height: 46, width: 'auto' }} loading="lazy" decoding="async" />
           <span className="v2-meta">USDA Organic certified</span>
         </span>
         <span className="v2-cert-item">
-          <img src={euSeal} alt="EU Organic certified" width={204} height={136} style={{ height: 36, width: 'auto', borderRadius: 3 }} loading="lazy" decoding="async" />
+          <img src={euSeal} alt="EU Organic certified" width={150} height={100} style={{ height: 36, width: 'auto', borderRadius: 3 }} loading="lazy" decoding="async" />
           <span className="v2-meta">EU Organic certified</span>
         </span>
         <span className="v2-cert-item">

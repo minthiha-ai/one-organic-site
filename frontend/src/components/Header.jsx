@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { logoLight } from '../assets/brand/index.js';
+import { logoLight, logoLight320 } from '../assets/brand/index.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import Icon from './Icon.jsx';
 
@@ -34,7 +34,7 @@ export default function Header({ homeTo = '/', shopTo = '/shop', switchTo, switc
         }}
       >
         <Link to={homeTo} style={{ display: 'flex', alignItems: 'center', lineHeight: 0 }}>
-          <img src={logoLight} alt="One Organic" width={480} height={124} style={{ height: 30, width: 'auto', display: 'block' }} />
+          <img src={logoLight} srcSet={`${logoLight320} 320w, ${logoLight} 480w`} sizes="116px" alt="One Organic" width={480} height={124} style={{ height: 30, width: 'auto', display: 'block' }} />
         </Link>
 
         {(!isLanding || switchTo) && (
