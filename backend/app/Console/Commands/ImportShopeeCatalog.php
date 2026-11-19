@@ -191,13 +191,31 @@ class ImportShopeeCatalog extends Command
     protected function same($old, $new): bool
     {
         if (is_array($new) || is_array($old)) {
-            return $old === $new || json_encode($old) === json_encode($new);
+            return json_encode($this->canonical($old)) === json_encode($this->canonical($new));
         }
         if (is_numeric($old) && is_numeric($new)) {
             return (float) $old === (float) $new;
         }
 
         return $old === $new;
+    }
+
+    /**
+     * MySQL's JSON type re-sorts object keys when it stores them, so the block
+     * read back is the same data in a different key order. Compare objects
+     * regardless of key order (lists keep their order, it is meaningful).
+     */
+    protected function canonical($value)
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+        $value = array_map(fn ($item) => $this->canonical($item), $value);
+        if (! array_is_list($value)) {
+            ksort($value);
+        }
+
+        return $value;
     }
 
     protected function printPlan(array $plan): void

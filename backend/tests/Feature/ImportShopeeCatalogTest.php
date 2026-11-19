@@ -137,6 +137,23 @@ class ImportShopeeCatalogTest extends TestCase
         $this->artisan('shopee:import')->expectsOutputToContain('0 change(s)')->assertSuccessful();
     }
 
+    /** MySQL re-sorts JSON object keys on storage; that must not look like a difference. */
+    public function test_json_key_order_changes_made_by_the_database_are_not_differences(): void
+    {
+        $this->seedCatalog();
+        $this->artisan('shopee:import --commit')->assertSuccessful();
+
+        // What MySQL does: same data, keys re-sorted (shortest first, then alphabetical).
+        foreach (ProductVariant::whereNotNull('shopee_attributes')->get() as $variant) {
+            $attrs = $variant->shopee_attributes;
+            uksort($attrs, fn ($a, $b) => [strlen($a), $a] <=> [strlen($b), $b]);
+            \Illuminate\Support\Facades\DB::table('product_variants')->where('id', $variant->id)->update(['shopee_attributes' => json_encode($attrs)]);
+        }
+
+        $this->artisan('shopee:import')->expectsOutputToContain('0 change(s)')->assertSuccessful();
+        $this->artisan('shopee:import --commit')->expectsOutputToContain('0 differences')->assertSuccessful();
+    }
+
     public function test_a_missing_sku_aborts_without_writing_anything(): void
     {
         $this->seedCatalog();
