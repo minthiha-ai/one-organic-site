@@ -13,7 +13,7 @@ import NotFound from './NotFound.jsx';
 import { api, ApiError, assetUrl } from '../lib/api.js';
 import { productPath, SITE_URL } from '../lib/site.js';
 import { snapshotProduct } from '../lib/catalogSnapshot.js';
-import { hydrationVariantFor, PrerenderContext } from '../lib/prerender.js';
+import { consumeHydrationHint, hydrationVariantFor, PrerenderContext } from '../lib/prerender.js';
 import { productDescription, productJsonLd } from '../lib/structuredData.js';
 
 // The variant a product page opens on: the one the URL asks for, else the
@@ -46,6 +46,12 @@ export default function ProductDetail() {
     const snap = snapshotProduct(slug);
     return snap ? (pickVariant(snap, firstVariantId)?.id ?? null) : null;
   });
+
+  // The first render above has now committed against the server HTML, so the
+  // prerender's variant hint has done its job (see src/lib/prerender.js).
+  useEffect(() => {
+    consumeHydrationHint();
+  }, []);
 
   useEffect(() => {
     setNotFound(false);
